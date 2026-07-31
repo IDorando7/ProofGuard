@@ -1,0 +1,14 @@
+[
+  {
+    "category": "access_control",
+    "contract": "src/VulnerableToken.sol",
+    "function": "mint",
+    "root_cause_keywords": [
+      "missing authorization",
+      "public mint",
+      "unprotected"
+    ],
+    "severity": "High"
+  }
+]
+

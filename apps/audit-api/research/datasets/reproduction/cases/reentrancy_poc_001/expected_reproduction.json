@@ -1,0 +1,10 @@
+{
+  "case_id": "reentrancy_poc_001",
+  "expected_status": "reproduced",
+  "expected_test_name": "testReentrantWithdraw",
+  "finding_category": "reentrancy",
+  "notes": [
+    "PoC should pass and demonstrate reentrant withdraw behavior."
+  ]
+}
+

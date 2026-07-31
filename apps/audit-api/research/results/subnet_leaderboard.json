@@ -1,0 +1,181 @@
+{
+  "benchmark_version": "week_6_subnet_benchmark_v0",
+  "categories": [
+    {
+      "category": "access_control",
+      "nodes": [
+        {
+          "accepted_unique_submissions": 12,
+          "category_score": 1.0,
+          "experience_confidence": 1.0,
+          "finalized_submissions": 12,
+          "membership_status": "expert",
+          "node_id": "node_access_expert",
+          "position": 1,
+          "production_assignments": 2,
+          "reward_points": "2258.928571",
+          "shadow_assignments": 0
+        },
+        {
+          "accepted_unique_submissions": 7,
+          "category_score": 0.8395,
+          "experience_confidence": 0.7,
+          "finalized_submissions": 7,
+          "membership_status": "active",
+          "node_id": "node_access_active",
+          "position": 2,
+          "production_assignments": 2,
+          "reward_points": "2053.571429",
+          "shadow_assignments": 0
+        },
+        {
+          "accepted_unique_submissions": 6,
+          "category_score": 0.788,
+          "experience_confidence": 0.6,
+          "finalized_submissions": 6,
+          "membership_status": "active",
+          "node_id": "node_multi_category",
+          "position": 3,
+          "production_assignments": 2,
+          "reward_points": "0.000000",
+          "shadow_assignments": 0
+        },
+        {
+          "accepted_unique_submissions": 4,
+          "category_score": 0.688,
+          "experience_confidence": 0.4,
+          "finalized_submissions": 4,
+          "membership_status": "probation",
+          "node_id": "node_probation_explorer",
+          "position": 4,
+          "production_assignments": 0,
+          "reward_points": "1687.500000",
+          "shadow_assignments": 2
+        },
+        {
+          "accepted_unique_submissions": 1,
+          "category_score": 0.472999,
+          "experience_confidence": 0.7,
+          "finalized_submissions": 7,
+          "membership_status": "probation",
+          "node_id": "node_access_weak",
+          "position": 5,
+          "production_assignments": 0,
+          "reward_points": "0.000000",
+          "shadow_assignments": 1
+        },
+        {
+          "accepted_unique_submissions": 0,
+          "category_score": 0.0,
+          "experience_confidence": 0.0,
+          "finalized_submissions": 0,
+          "membership_status": "candidate",
+          "node_id": "node_new_candidate",
+          "position": 6,
+          "production_assignments": 0,
+          "reward_points": "0.000000",
+          "shadow_assignments": 1
+        },
+        {
+          "accepted_unique_submissions": 10,
+          "category_score": 0.854545,
+          "experience_confidence": 1.0,
+          "finalized_submissions": 11,
+          "membership_status": "suspended",
+          "node_id": "node_unsafe",
+          "position": 7,
+          "production_assignments": 0,
+          "reward_points": "0.000000",
+          "shadow_assignments": 0
+        },
+        {
+          "accepted_unique_submissions": 0,
+          "category_score": 0.0,
+          "experience_confidence": 0.0,
+          "finalized_submissions": 0,
+          "membership_status": "suspended",
+          "node_id": "node_banned_control",
+          "position": 8,
+          "production_assignments": 0,
+          "reward_points": "0.000000",
+          "shadow_assignments": 0
+        },
+        {
+          "accepted_unique_submissions": 0,
+          "category_score": 0.0,
+          "experience_confidence": 0.0,
+          "finalized_submissions": 0,
+          "membership_status": "removed",
+          "node_id": "node_removed_control",
+          "position": 9,
+          "production_assignments": 0,
+          "reward_points": "0.000000",
+          "shadow_assignments": 0
+        }
+      ],
+      "subnet_id": "subnet_access_control"
+    },
+    {
+      "category": "reentrancy",
+      "nodes": [
+        {
+          "accepted_unique_submissions": 12,
+          "category_score": 1.0,
+          "experience_confidence": 1.0,
+          "finalized_submissions": 12,
+          "membership_status": "expert",
+          "node_id": "node_reentrancy_expert",
+          "position": 1,
+          "production_assignments": 1,
+          "reward_points": "4000.000000",
+          "shadow_assignments": 0
+        },
+        {
+          "accepted_unique_submissions": 1,
+          "category_score": 0.475999,
+          "experience_confidence": 0.6,
+          "finalized_submissions": 6,
+          "membership_status": "probation",
+          "node_id": "node_multi_category",
+          "position": 2,
+          "production_assignments": 0,
+          "reward_points": "0.000000",
+          "shadow_assignments": 1
+        },
+        {
+          "accepted_unique_submissions": 0,
+          "category_score": 0.238999,
+          "experience_confidence": 0.6,
+          "finalized_submissions": 6,
+          "membership_status": "candidate",
+          "node_id": "node_reentrancy_weak",
+          "position": 3,
+          "production_assignments": 0,
+          "reward_points": "0.000000",
+          "shadow_assignments": 0
+        }
+      ],
+      "subnet_id": "subnet_reentrancy"
+    }
+  ],
+  "membership_distribution": {
+    "active": 2,
+    "candidate": 2,
+    "expert": 2,
+    "probation": 3,
+    "removed": 1,
+    "suspended": 2
+  },
+  "report_only_position": true,
+  "score_snapshot": {
+    "node_access_active.access_control": 0.8395,
+    "node_access_expert.access_control": 1.0,
+    "node_access_weak.access_control": 0.472999,
+    "node_multi_category.access_control": 0.788,
+    "node_multi_category.reentrancy": 0.475999,
+    "node_probation_explorer.access_control": 0.688,
+    "node_reentrancy_expert.reentrancy": 1.0,
+    "node_reentrancy_weak.reentrancy": 0.238999,
+    "node_unsafe.access_control": 0.854545
+  }
+}

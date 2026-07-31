@@ -1,0 +1,16 @@
+{
+  "case_id": "inactive_node_rejected_001",
+  "description": "An inactive agent node is rejected before any SubmissionRecord is created.",
+  "project_id": "inactive_node_rejected_001",
+  "reward_pool": 1000.0,
+  "node": {
+    "node_type": "agent",
+    "display_name": "inactive-access-agent",
+    "operator_id": "synthetic_operator_inactive",
+    "supported_categories": ["access_control"],
+    "initial_status": "inactive"
+  },
+  "finding_ids": ["finding_inactive_001"],
+  "steps": ["create_node", "change_node_status", "create_submission"],
+  "idempotency": []
+}

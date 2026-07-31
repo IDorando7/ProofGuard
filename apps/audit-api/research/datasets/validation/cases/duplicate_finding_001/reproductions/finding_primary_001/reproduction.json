@@ -1,0 +1,16 @@
+{
+  "reproduction_id": "repro_primary_001",
+  "project_id": "duplicate_finding_001",
+  "finding_id": "finding_primary_001",
+  "status": "reproduced",
+  "poc_file": "test/PoC_AccessControl.t.sol",
+  "test_name": "testUnauthorizedSetTreasury",
+  "command": ["forge", "test", "--match-test", "testUnauthorizedSetTreasury"],
+  "stdout": "test passed",
+  "stderr": "",
+  "duration_ms": 100,
+  "error_message": null,
+  "safety_notes": [],
+  "created_at": "2026-07-10T00:00:00Z",
+  "updated_at": "2026-07-10T00:00:00Z"
+}

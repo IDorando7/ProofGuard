@@ -1,0 +1,22 @@
+[
+  {
+    "finding_id": "finding_medium_001",
+    "project_id": "accepted_medium_value_001",
+    "title": "Reentrant withdrawal ordering issue",
+    "category": "reentrancy",
+    "severity": "Medium",
+    "confidence": 0.75,
+    "contracts": ["src/Vault.sol"],
+    "functions": [],
+    "root_cause": "No lock",
+    "attack_path": "Call it",
+    "impact": "Losses",
+    "conditions": null,
+    "reproduction_steps": [],
+    "poc_type": "none",
+    "poc_file": null,
+    "recommended_fix": "Use lock",
+    "status": "candidate",
+    "agent_name": "synthetic_reentrancy_agent"
+  }
+]

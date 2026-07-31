@@ -1,0 +1,74 @@
+{
+  "implemented": [
+    "Protocol Specification v0",
+    "Node Identity and Registry v0",
+    "Finding Submission Protocol v0",
+    "Contribution Scoring Engine v0",
+    "Reputation Engine v0",
+    "Reward Simulator v0",
+    "Penalty Event v0",
+    "Synthetic protocol benchmark"
+  ],
+  "limitations": [
+    "The benchmark is synthetic and small.",
+    "The coordinator remains centralized.",
+    "Node identities are off-chain UUID records.",
+    "Public-key ownership is not verified.",
+    "Reputation is global rather than category-specific.",
+    "Category subnets are not implemented.",
+    "Protocol points have no monetary value.",
+    "Validator consensus and disputes are not implemented.",
+    "No Sybil-resistance mechanism is active."
+  ],
+  "metrics": {
+    "accuracy": 1.0,
+    "failed_cases": 0,
+    "idempotency_checks_passed": 9,
+    "pass_rate": 1.0,
+    "passed_cases": 7,
+    "penalty_events_created": 1,
+    "reward_events_created": 5,
+    "total_cases": 7
+  },
+  "next_week_focus": [
+    "Category-specific node performance",
+    "Subnet registry",
+    "Per-category reputation",
+    "Subnet membership rules",
+    "Subnet routing",
+    "Exploration slots for new nodes",
+    "Category-specific reward allocation",
+    "Subnet benchmark"
+  ],
+  "protocol_flow": [
+    "Register node",
+    "Submit existing finding",
+    "Calculate contribution score",
+    "Process reputation",
+    "Create reward cycle",
+    "Calculate allocations",
+    "Finalize reward events",
+    "Record unsafe penalties"
+  ],
+  "protocol_invariants_verified": [
+    "Inactive nodes cannot submit findings.",
+    "Only accepted and reproduced findings are reward eligible.",
+    "Duplicate findings receive no reward.",
+    "Out-of-scope findings receive no reward.",
+    "Unsafe findings receive no reward.",
+    "Unsafe findings may create PenaltyEvent records.",
+    "Reputation changes only once per submission.",
+    "Reward cycles finalize idempotently.",
+    "Protocol points have no monetary value."
+  ],
+  "security_properties": [
+    "No PoCs are executed by the protocol benchmark.",
+    "No Docker or forge commands are executed.",
+    "No external subprocess commands are executed.",
+    "No private keys or wallets are used.",
+    "No blockchain operation occurs.",
+    "No real stake is slashed."
+  ],
+  "theme": "Protocol and Incentive Layer v0",
+  "week": "Week 5"
+}

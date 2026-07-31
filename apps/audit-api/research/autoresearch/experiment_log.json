@@ -1,0 +1,11 @@
+[
+  {
+    "experiment_id": "c7a99150-d4d8-4d15-b4ce-67f531e0f4a8",
+    "agent": "access_control",
+    "description": "baseline Week 2.5 smoke test",
+    "old_score": 10,
+    "new_score": 10,
+    "accepted": true,
+    "timestamp": "2026-07-06T08:38:23.082053+00:00"
+  }
+]

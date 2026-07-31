@@ -1,0 +1,27 @@
+{
+  "title": "Potential reentrancy in withdraw",
+  "category": "reentrancy",
+  "severity": "High",
+  "confidence": 0.8,
+  "contracts": [
+    "src/VulnerableVault.sol"
+  ],
+  "functions": [
+    "withdraw"
+  ],
+  "root_cause": "The withdraw function sends ETH before clearing balance.",
+  "attack_path": "An attacker reenters withdraw from receive before balance is set to zero.",
+  "impact": "The attacker can withdraw more ETH than their recorded balance.",
+  "conditions": null,
+  "reproduction_steps": [
+    "Run testReentrantWithdraw"
+  ],
+  "poc_type": "foundry",
+  "poc_file": "test/PoC.t.sol",
+  "recommended_fix": "Apply checks-effects-interactions or nonReentrant.",
+  "status": "candidate",
+  "agent_name": "reentrancy_agent",
+  "finding_id": "reentrancy_poc_001_finding",
+  "project_id": "reentrancy_poc_001"
+}
+

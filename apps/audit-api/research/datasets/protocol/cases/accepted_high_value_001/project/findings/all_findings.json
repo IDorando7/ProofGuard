@@ -1,0 +1,22 @@
+[
+  {
+    "finding_id": "finding_high_001",
+    "project_id": "accepted_high_value_001",
+    "title": "Unauthorized treasury destination update",
+    "category": "access_control",
+    "severity": "High",
+    "confidence": 0.9,
+    "contracts": ["src/Treasury.sol"],
+    "functions": ["setTreasury"],
+    "root_cause": "The privileged treasury setter is missing an authorization check.",
+    "attack_path": "An untrusted caller invokes setTreasury and redirects protocol funds.",
+    "impact": "The attacker can redirect synthetic treasury assets to an arbitrary destination.",
+    "conditions": "The setter is externally callable.",
+    "reproduction_steps": [],
+    "poc_type": "none",
+    "poc_file": null,
+    "recommended_fix": "Require an authorized governance role before updating the treasury destination.",
+    "status": "candidate",
+    "agent_name": "synthetic_access_control_agent"
+  }
+]

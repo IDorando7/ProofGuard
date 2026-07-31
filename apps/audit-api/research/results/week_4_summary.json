@@ -1,0 +1,50 @@
+{
+  "week": "Week 4",
+  "theme": "Validator Layer v0",
+  "implemented": [
+    "ValidationDecision schema and storage",
+    "Scope Validator",
+    "Deduplication Engine v0",
+    "Severity Normalizer v0",
+    "Validator Pipeline v0",
+    "Validation API",
+    "Final Audit Report v0",
+    "Synthetic validation benchmark"
+  ],
+  "metrics": {
+    "total_validation_cases": 7,
+    "passed_cases": 7,
+    "failed_cases": 0,
+    "accuracy": 1.0,
+    "accepted_count": 2,
+    "duplicate_count": 1,
+    "out_of_scope_count": 1,
+    "insufficient_evidence_count": 1,
+    "unsafe_poc_count": 1,
+    "unsupported_count": 1,
+    "needs_review_count": 1
+  },
+  "validator_decision_rules": [
+    "Accepted requires in-scope finding, non-duplicate status, and reproduced evidence.",
+    "Out-of-scope findings are rejected before reproduction status is considered.",
+    "Duplicate findings are marked separately and not counted as new accepted issues.",
+    "Failed reproduction maps to insufficient_evidence.",
+    "Rejected unsafe PoC maps to unsafe_poc.",
+    "Unsupported reproduction maps to unsupported.",
+    "Missing reproduction maps to needs_review."
+  ],
+  "limitations": [
+    "Benchmark is synthetic and small.",
+    "Validator is deterministic and heuristic-based.",
+    "Severity normalization does not replace human review.",
+    "No decentralized validator subnet is active yet.",
+    "No token reward or staking mechanism is implemented yet."
+  ],
+  "next_week_focus": [
+    "Protocol/reward model specification",
+    "Node identity and reputation design",
+    "Validator scoring and slashing rules",
+    "Better benchmark coverage",
+    "Optional real dataset integration"
+  ]
+}

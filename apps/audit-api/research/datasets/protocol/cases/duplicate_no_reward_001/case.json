@@ -1,0 +1,24 @@
+{
+  "case_id": "duplicate_no_reward_001",
+  "description": "A validation-confirmed duplicate is scored at zero and receives no reward or penalty event.",
+  "project_id": "duplicate_no_reward_001",
+  "reward_pool": 1000.0,
+  "node": {
+    "node_type": "agent",
+    "display_name": "duplicate-access-agent",
+    "operator_id": "synthetic_operator_duplicate",
+    "supported_categories": ["access_control"],
+    "initial_status": "active"
+  },
+  "finding_ids": ["finding_duplicate_001"],
+  "steps": [
+    "create_node",
+    "create_submission",
+    "calculate_contribution",
+    "process_reputation",
+    "create_reward_cycle",
+    "calculate_reward_cycle",
+    "finalize_reward_cycle"
+  ],
+  "idempotency": ["reputation"]
+}

@@ -1,0 +1,36 @@
+{
+  "access_control": {
+    "actual_findings": 2,
+    "duplicate_count": 0,
+    "expected_findings": 2,
+    "f1_score": 1.0,
+    "false_negatives": 0,
+    "false_positives": 0,
+    "negative_cases": 1,
+    "out_of_scope_findings": 0,
+    "positive_cases": 2,
+    "precision": 1.0,
+    "recall": 1.0,
+    "schema_invalid_findings": 0,
+    "score": 10,
+    "total_cases": 3,
+    "true_positives": 2
+  },
+  "reentrancy": {
+    "actual_findings": 2,
+    "duplicate_count": 0,
+    "expected_findings": 2,
+    "f1_score": 1.0,
+    "false_negatives": 0,
+    "false_positives": 0,
+    "negative_cases": 1,
+    "out_of_scope_findings": 0,
+    "positive_cases": 2,
+    "precision": 1.0,
+    "recall": 1.0,
+    "schema_invalid_findings": 0,
+    "score": 10,
+    "total_cases": 3,
+    "true_positives": 2
+  }
+}

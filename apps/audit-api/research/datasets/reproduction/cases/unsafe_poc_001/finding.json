@@ -1,0 +1,27 @@
+{
+  "title": "Unsafe synthetic PoC",
+  "category": "other",
+  "severity": "Informational",
+  "confidence": 0.5,
+  "contracts": [
+    "src/Dummy.sol"
+  ],
+  "functions": [
+    "value"
+  ],
+  "root_cause": "This benchmark intentionally includes unsafe FFI usage.",
+  "attack_path": "Safety preflight should reject the PoC before sandbox execution.",
+  "impact": "Unsafe PoC should not execute.",
+  "conditions": null,
+  "reproduction_steps": [
+    "Run safety preflight"
+  ],
+  "poc_type": "foundry",
+  "poc_file": "test/PoC.t.sol",
+  "recommended_fix": "Remove FFI usage from the PoC.",
+  "status": "candidate",
+  "agent_name": "mock_agent",
+  "finding_id": "unsafe_poc_001_finding",
+  "project_id": "unsafe_poc_001"
+}
+

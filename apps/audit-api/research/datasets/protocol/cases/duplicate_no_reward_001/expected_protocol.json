@@ -1,0 +1,17 @@
+{
+  "case_id": "duplicate_no_reward_001",
+  "expected": {
+    "submission_created": true,
+    "contribution_eligibility": "ineligible",
+    "expected_contribution_score": 0.0,
+    "reputation_direction": "decrease",
+    "expected_event_type": "duplicate_finding",
+    "expected_reputation_delta": -0.01,
+    "reward_eligible": false,
+    "reward_amount_rule": "zero",
+    "penalty_created": false,
+    "expected_submission_status": "duplicate",
+    "expected_statistics": {"total_submissions": 1, "duplicate_submissions": 1}
+  },
+  "notes": ["Duplicate reward denial is not financial slashing."]
+}

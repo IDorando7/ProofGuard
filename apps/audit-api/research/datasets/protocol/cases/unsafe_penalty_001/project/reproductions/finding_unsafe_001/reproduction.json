@@ -1,0 +1,16 @@
+{
+  "reproduction_id": "repro_unsafe_001",
+  "finding_id": "finding_unsafe_001",
+  "project_id": "unsafe_penalty_001",
+  "status": "rejected_unsafe",
+  "poc_file": null,
+  "test_name": null,
+  "command": null,
+  "stdout": null,
+  "stderr": null,
+  "duration_ms": 0,
+  "error_message": "Static unsafe classification; execution was not attempted.",
+  "safety_notes": ["Synthetic unsafe status fixture; no artifact content is stored."],
+  "created_at": "2026-07-16T00:00:00Z",
+  "updated_at": "2026-07-16T00:00:00Z"
+}

@@ -1,0 +1,22 @@
+[
+  {
+    "finding_id": "finding_inactive_001",
+    "project_id": "inactive_node_rejected_001",
+    "title": "Valid-looking finding from inactive node",
+    "category": "access_control",
+    "severity": "High",
+    "confidence": 0.8,
+    "contracts": ["src/Treasury.sol"],
+    "functions": ["setTreasury"],
+    "root_cause": "The synthetic setter lacks an authorization check.",
+    "attack_path": "An untrusted caller attempts to update the treasury destination.",
+    "impact": "The synthetic destination could be changed without authorization.",
+    "conditions": null,
+    "reproduction_steps": [],
+    "poc_type": "none",
+    "poc_file": null,
+    "recommended_fix": "Require the authorized role before changing the destination.",
+    "status": "candidate",
+    "agent_name": "synthetic_access_control_agent"
+  }
+]

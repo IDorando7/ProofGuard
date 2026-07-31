@@ -1,0 +1,14 @@
+[
+  {
+    "category": "reentrancy",
+    "contract": "src/VulnerableWithdraw.sol",
+    "function": "withdraw",
+    "root_cause_keywords": [
+      "external call before state update",
+      "checks-effects-interactions",
+      "reentrancy"
+    ],
+    "severity": "High"
+  }
+]
+

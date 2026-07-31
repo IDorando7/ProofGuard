@@ -1,0 +1,27 @@
+{
+  "title": "Missing access control on setTreasury",
+  "category": "access_control",
+  "severity": "High",
+  "confidence": 0.8,
+  "contracts": [
+    "src/VulnerableTreasury.sol"
+  ],
+  "functions": [
+    "setTreasury"
+  ],
+  "root_cause": "The setTreasury function has no authorization check.",
+  "attack_path": "An attacker calls setTreasury directly.",
+  "impact": "The attacker can change the protocol treasury address.",
+  "conditions": null,
+  "reproduction_steps": [
+    "Run testUnauthorizedSetTreasury"
+  ],
+  "poc_type": "foundry",
+  "poc_file": "test/PoC.t.sol",
+  "recommended_fix": "Restrict setTreasury with onlyOwner or role-based authorization.",
+  "status": "candidate",
+  "agent_name": "access_control_agent",
+  "finding_id": "access_control_poc_001_finding",
+  "project_id": "access_control_poc_001"
+}
+

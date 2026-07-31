@@ -1,0 +1,9 @@
+{
+  "case_id": "unsafe_poc_001",
+  "expected_statuses": {
+    "finding_unsafe_poc_001": "unsafe_poc"
+  },
+  "notes": [
+    "PoC was rejected by safety checks."
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "case_id": "unsafe_penalty_001",
+  "expected": {
+    "submission_created": true,
+    "contribution_eligibility": "ineligible",
+    "expected_contribution_score": 0.0,
+    "reputation_direction": "decrease",
+    "expected_event_type": "unsafe_submission",
+    "expected_reputation_delta": -0.08,
+    "reward_eligible": false,
+    "reward_amount_rule": "zero",
+    "penalty_created": true,
+    "expected_penalty_reason": "unsafe_submission",
+    "expected_penalty_points": 25.0,
+    "expected_simulated_stake_loss": 0.0,
+    "expected_executed_onchain": false,
+    "expected_human_review": true,
+    "expected_submission_status": "penalized",
+    "expected_statistics": {"total_submissions": 1, "unsafe_submissions": 1}
+  }
+}

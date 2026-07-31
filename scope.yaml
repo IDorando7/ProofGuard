@@ -1,0 +1,48 @@
+project_name: TestifyAiToken
+language: Solidity
+framework: Foundry
+chain: Sepolia
+commit_hash: "main"
+
+contracts_in_scope:
+
+  - src/TAIEngine.sol
+  - src/TestifyAiCoin.sol
+
+contracts_out_of_scope:
+
+  - tests/
+  - scripts/
+  - lib/
+  - README.md
+
+assets_at_risk:
+
+  - EURC backing deposited in TAIEngine vault
+  - total supply backing invariant for TAI
+  - student TAI reward balances
+  - redeem flow funds
+  - owner-controlled mint and burn permissions
+
+attack_categories:
+
+  - access_control
+  - reentrancy
+  - accounting
+  - dos
+  - other
+
+known_issues:
+
+  - "The project intentionally uses an owner/backend-controlled reward distribution model."
+  - "TAIEngine is expected to control minting and burning of TestifyAiCoin."
+  - "Redeem is designed around signed off-chain authorization."
+  - "The token is intended to be backed by EURC, not algorithmically priced."
+
+forbidden_actions:
+
+  - mainnet exploit
+  - private key extraction
+  - social engineering
+  - attacking deployed Sepolia contracts
+  - interacting with real user funds

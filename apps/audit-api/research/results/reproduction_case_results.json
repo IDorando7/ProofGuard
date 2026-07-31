@@ -1,0 +1,79 @@
+{
+  "cases": [
+    {
+      "case_id": "access_control_poc_001",
+      "expected_status": "reproduced",
+      "actual_status": "reproduced",
+      "passed": true,
+      "foundry_project": true,
+      "preflight_passed": true,
+      "sandbox_used": false,
+      "mock_sandbox": true,
+      "duration_ms": 0,
+      "safety_issues_count": 0,
+      "safety_high_or_critical_count": 0,
+      "execution_mode": "mock_sandbox",
+      "failure_reason": null,
+      "notes": [
+        "PoC should pass and demonstrate unauthorized setTreasury."
+      ]
+    },
+    {
+      "case_id": "reentrancy_poc_001",
+      "expected_status": "reproduced",
+      "actual_status": "reproduced",
+      "passed": true,
+      "foundry_project": true,
+      "preflight_passed": true,
+      "sandbox_used": false,
+      "mock_sandbox": true,
+      "duration_ms": 0,
+      "safety_issues_count": 0,
+      "safety_high_or_critical_count": 0,
+      "execution_mode": "mock_sandbox",
+      "failure_reason": null,
+      "notes": [
+        "PoC should pass and demonstrate reentrant withdraw behavior."
+      ]
+    },
+    {
+      "case_id": "unsafe_poc_001",
+      "expected_status": "rejected_unsafe",
+      "actual_status": "rejected_unsafe",
+      "passed": true,
+      "foundry_project": true,
+      "preflight_passed": false,
+      "sandbox_used": false,
+      "mock_sandbox": true,
+      "duration_ms": 0,
+      "safety_issues_count": 3,
+      "safety_high_or_critical_count": 3,
+      "execution_mode": "not_executed",
+      "failure_reason": "Safety preflight failed.",
+      "notes": [
+        "Safety Preflight should reject this PoC because it uses FFI.",
+        "FFI_ENABLED: foundry.toml enables FFI, which is unsafe for reproduction preflight.",
+        "UNSAFE_CHEATCODE: PoC contains direct ffi usage.",
+        "UNSAFE_CHEATCODE: PoC contains unsafe Foundry cheatcode vm.ffi."
+      ]
+    },
+    {
+      "case_id": "unsupported_non_foundry_001",
+      "expected_status": "unsupported",
+      "actual_status": "unsupported",
+      "passed": true,
+      "foundry_project": false,
+      "preflight_passed": null,
+      "sandbox_used": false,
+      "mock_sandbox": true,
+      "duration_ms": 0,
+      "safety_issues_count": 0,
+      "safety_high_or_critical_count": 0,
+      "execution_mode": "not_executed",
+      "failure_reason": "Project is not Foundry-compatible.",
+      "notes": [
+        "Project is missing foundry.toml and should be unsupported."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+.env
+*.pem
+*.key
+id_rsa
+id_ed25519
+.ssh
+node_modules
+.git
+__pycache__
+**/__pycache__/
+**pycache**
+.pytest_cache
+data/
+reports/
+findings/
+reproductions/

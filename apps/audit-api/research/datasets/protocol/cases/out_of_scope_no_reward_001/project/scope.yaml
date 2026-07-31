@@ -1,0 +1,11 @@
+project_name: Out Of Scope No Reward Synthetic Case
+language: Solidity
+framework: Foundry
+contracts_in_scope:
+  - src/InScope.sol
+contracts_out_of_scope:
+  - src/OutOfScope.sol
+attack_categories:
+  - access_control
+assets_at_risk:
+  - synthetic in-scope assets

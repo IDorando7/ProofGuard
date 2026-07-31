@@ -1,0 +1,9 @@
+{
+  "case_id": "needs_review_no_reproduction_001",
+  "expected_statuses": {
+    "finding_needs_review_001": "needs_review"
+  },
+  "notes": [
+    "No reproduction result exists for the finding."
+  ]
+}

@@ -1,0 +1,8 @@
+project_name: Unsupported Case
+contracts_in_scope:
+  - src/CrossChainBridge.sol
+contracts_out_of_scope: []
+attack_categories:
+  - cross_chain
+assets_at_risk:
+  - bridge funds

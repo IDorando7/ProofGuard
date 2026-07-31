@@ -1,0 +1,16 @@
+{
+  "reproduction_id": "repro_inactive_001",
+  "finding_id": "finding_inactive_001",
+  "project_id": "inactive_node_rejected_001",
+  "status": "reproduced",
+  "poc_file": null,
+  "test_name": null,
+  "command": null,
+  "stdout": null,
+  "stderr": null,
+  "duration_ms": 1,
+  "error_message": null,
+  "safety_notes": ["Static fixture unused because submission is rejected."],
+  "created_at": "2026-07-16T00:00:00Z",
+  "updated_at": "2026-07-16T00:00:00Z"
+}

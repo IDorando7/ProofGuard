@@ -1,0 +1,11 @@
+project_name: Accepted Medium Value Synthetic Case
+language: Solidity
+framework: Foundry
+contracts_in_scope:
+  - src/Vault.sol
+contracts_out_of_scope:
+  - test/
+attack_categories:
+  - reentrancy
+assets_at_risk:
+  - synthetic vault balances

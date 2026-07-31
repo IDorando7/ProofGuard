@@ -1,0 +1,16 @@
+project_name: AccessControlBenchmarkNegative001
+language: Solidity
+framework: Foundry
+chain: Ethereum
+commit_hash: "synthetic-access-negative-001"
+contracts_in_scope:
+  - src/ProtectedVault.sol
+contracts_out_of_scope: []
+assets_at_risk:
+  - protocol treasury
+attack_categories:
+  - access_control
+known_issues: []
+forbidden_actions:
+  - real exploit execution
+

@@ -1,0 +1,10 @@
+{
+  "case_id": "unsafe_poc_001",
+  "expected_status": "rejected_unsafe",
+  "expected_test_name": "testUnsafeFfi",
+  "finding_category": "other",
+  "notes": [
+    "Safety Preflight should reject this PoC because it uses FFI."
+  ]
+}
+

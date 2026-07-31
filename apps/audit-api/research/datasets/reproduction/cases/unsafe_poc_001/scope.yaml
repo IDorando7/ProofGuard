@@ -1,0 +1,16 @@
+project_name: UnsafePoCBenchmark001
+language: Solidity
+framework: Foundry
+chain: Ethereum
+commit_hash: "synthetic-reproduction-unsafe-001"
+contracts_in_scope:
+  - src/Dummy.sol
+contracts_out_of_scope: []
+assets_at_risk:
+  - none
+attack_categories:
+  - other
+known_issues: []
+forbidden_actions:
+  - ffi
+

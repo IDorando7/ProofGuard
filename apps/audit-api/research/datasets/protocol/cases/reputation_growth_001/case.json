@@ -1,0 +1,24 @@
+{
+  "case_id": "reputation_growth_001",
+  "description": "Three distinct accepted contributions grow one node's reputation gradually and exactly once each.",
+  "project_id": "reputation_growth_001",
+  "reward_pool": 1200.0,
+  "node": {
+    "node_type": "agent",
+    "display_name": "growth-access-agent",
+    "operator_id": "synthetic_operator_growth",
+    "supported_categories": ["access_control"],
+    "initial_status": "active"
+  },
+  "finding_ids": ["finding_growth_001", "finding_growth_002", "finding_growth_003"],
+  "steps": [
+    "create_node",
+    "create_submission",
+    "calculate_contribution",
+    "process_reputation",
+    "create_reward_cycle",
+    "calculate_reward_cycle",
+    "finalize_reward_cycle"
+  ],
+  "idempotency": ["reputation"]
+}

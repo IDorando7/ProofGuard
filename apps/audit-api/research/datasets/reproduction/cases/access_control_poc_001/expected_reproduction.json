@@ -1,0 +1,10 @@
+{
+  "case_id": "access_control_poc_001",
+  "expected_status": "reproduced",
+  "expected_test_name": "testUnauthorizedSetTreasury",
+  "finding_category": "access_control",
+  "notes": [
+    "PoC should pass and demonstrate unauthorized setTreasury."
+  ]
+}
+

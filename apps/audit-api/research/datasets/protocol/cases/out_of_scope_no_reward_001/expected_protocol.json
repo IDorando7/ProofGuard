@@ -1,0 +1,16 @@
+{
+  "case_id": "out_of_scope_no_reward_001",
+  "expected": {
+    "submission_created": true,
+    "contribution_eligibility": "ineligible",
+    "expected_contribution_score": 0.0,
+    "reputation_direction": "decrease",
+    "expected_event_type": "out_of_scope_finding",
+    "expected_reputation_delta": -0.02,
+    "reward_eligible": false,
+    "reward_amount_rule": "zero",
+    "penalty_created": false,
+    "expected_submission_status": "out_of_scope",
+    "expected_statistics": {"total_submissions": 1, "out_of_scope_submissions": 1}
+  }
+}

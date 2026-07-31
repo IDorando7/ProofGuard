@@ -1,0 +1,9 @@
+{
+  "case_id": "accepted_reproduced_001",
+  "expected_statuses": {
+    "finding_accepted_001": "accepted"
+  },
+  "notes": [
+    "Finding is in scope, unique, and reproduced."
+  ]
+}

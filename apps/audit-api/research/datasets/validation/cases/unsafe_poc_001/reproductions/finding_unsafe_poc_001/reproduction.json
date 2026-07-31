@@ -1,0 +1,16 @@
+{
+  "reproduction_id": "repro_unsafe_001",
+  "project_id": "unsafe_poc_001",
+  "finding_id": "finding_unsafe_poc_001",
+  "status": "rejected_unsafe",
+  "poc_file": "test/PoC_Unsafe.t.sol",
+  "test_name": "testUnsafeFfi",
+  "command": ["forge", "test", "--match-test", "testUnsafeFfi"],
+  "stdout": null,
+  "stderr": null,
+  "duration_ms": null,
+  "error_message": "Safety preflight failed",
+  "safety_notes": ["FFI_ENABLED: ffi is enabled"],
+  "created_at": "2026-07-10T00:00:00Z",
+  "updated_at": "2026-07-10T00:00:00Z"
+}

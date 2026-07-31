@@ -1,0 +1,20 @@
+{
+  "case_id": "reputation_growth_001",
+  "expected": {
+    "submission_created": true,
+    "expected_submission_count": 3,
+    "distinct_finding_hashes": true,
+    "contribution_eligibility": "eligible",
+    "minimum_contribution_score": 90.0,
+    "reputation_direction": "increase",
+    "expected_event_type": "accepted_contribution",
+    "expected_reputation_delta": 0.06,
+    "expected_reputation_event_count": 3,
+    "expected_final_reputation": 0.68,
+    "reward_eligible": true,
+    "reward_amount_rule": "positive",
+    "penalty_created": false,
+    "expected_submission_status": "rewarded",
+    "expected_statistics": {"total_submissions": 3, "accepted_submissions": 3}
+  }
+}

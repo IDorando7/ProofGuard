@@ -1,0 +1,9 @@
+{
+  "case_id": "unsupported_001",
+  "expected_statuses": {
+    "finding_unsupported_001": "unsupported"
+  },
+  "notes": [
+    "Project or finding type is unsupported by the current reproduction layer."
+  ]
+}

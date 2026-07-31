@@ -1,0 +1,21 @@
+{
+  "agent": "reentrancy",
+  "cases": [
+    {
+      "case_id": "reentrancy_001",
+      "description": "Withdraw performs external call before balance update",
+      "expected_positive": true
+    },
+    {
+      "case_id": "reentrancy_002",
+      "description": "Reward claim transfers before clearing rewards",
+      "expected_positive": true
+    },
+    {
+      "case_id": "reentrancy_negative_001",
+      "description": "State is updated before transfer and nonReentrant is used",
+      "expected_positive": false
+    }
+  ]
+}
+

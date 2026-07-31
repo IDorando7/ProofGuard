@@ -1,0 +1,102 @@
+{
+  "access_control": [
+    {
+      "actual_findings": 1,
+      "case_id": "access_001",
+      "duplicate_count": 0,
+      "expected_findings": 1,
+      "f1_score": 1.0,
+      "false_negatives": 0,
+      "false_positives": 0,
+      "out_of_scope_findings": 0,
+      "positive_case": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "schema_invalid_findings": 0,
+      "score": 5,
+      "true_positives": 1
+    },
+    {
+      "actual_findings": 1,
+      "case_id": "access_002",
+      "duplicate_count": 0,
+      "expected_findings": 1,
+      "f1_score": 1.0,
+      "false_negatives": 0,
+      "false_positives": 0,
+      "out_of_scope_findings": 0,
+      "positive_case": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "schema_invalid_findings": 0,
+      "score": 5,
+      "true_positives": 1
+    },
+    {
+      "actual_findings": 0,
+      "case_id": "access_negative_001",
+      "duplicate_count": 0,
+      "expected_findings": 0,
+      "f1_score": 0.0,
+      "false_negatives": 0,
+      "false_positives": 0,
+      "out_of_scope_findings": 0,
+      "positive_case": false,
+      "precision": 0.0,
+      "recall": 1.0,
+      "schema_invalid_findings": 0,
+      "score": 0,
+      "true_positives": 0
+    }
+  ],
+  "reentrancy": [
+    {
+      "actual_findings": 1,
+      "case_id": "reentrancy_001",
+      "duplicate_count": 0,
+      "expected_findings": 1,
+      "f1_score": 1.0,
+      "false_negatives": 0,
+      "false_positives": 0,
+      "out_of_scope_findings": 0,
+      "positive_case": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "schema_invalid_findings": 0,
+      "score": 5,
+      "true_positives": 1
+    },
+    {
+      "actual_findings": 1,
+      "case_id": "reentrancy_002",
+      "duplicate_count": 0,
+      "expected_findings": 1,
+      "f1_score": 1.0,
+      "false_negatives": 0,
+      "false_positives": 0,
+      "out_of_scope_findings": 0,
+      "positive_case": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "schema_invalid_findings": 0,
+      "score": 5,
+      "true_positives": 1
+    },
+    {
+      "actual_findings": 0,
+      "case_id": "reentrancy_negative_001",
+      "duplicate_count": 0,
+      "expected_findings": 0,
+      "f1_score": 0.0,
+      "false_negatives": 0,
+      "false_positives": 0,
+      "out_of_scope_findings": 0,
+      "positive_case": false,
+      "precision": 0.0,
+      "recall": 1.0,
+      "schema_invalid_findings": 0,
+      "score": 0,
+      "true_positives": 0
+    }
+  ]
+}

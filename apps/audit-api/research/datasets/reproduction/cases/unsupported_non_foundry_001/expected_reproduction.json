@@ -1,0 +1,10 @@
+{
+  "case_id": "unsupported_non_foundry_001",
+  "expected_status": "unsupported",
+  "expected_test_name": null,
+  "finding_category": "other",
+  "notes": [
+    "Project is missing foundry.toml and should be unsupported."
+  ]
+}
+

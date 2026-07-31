@@ -1,0 +1,17 @@
+{
+  "case_id": "accepted_high_value_001",
+  "expected": {
+    "submission_created": true,
+    "contribution_eligibility": "eligible",
+    "minimum_contribution_score": 90.0,
+    "expected_contribution_score": 100.0,
+    "reputation_direction": "increase",
+    "expected_event_type": "accepted_contribution",
+    "expected_reputation_delta": 0.06,
+    "reward_eligible": true,
+    "reward_amount_rule": "positive",
+    "penalty_created": false,
+    "expected_submission_status": "rewarded",
+    "expected_statistics": {"total_submissions": 1, "accepted_submissions": 1}
+  }
+}

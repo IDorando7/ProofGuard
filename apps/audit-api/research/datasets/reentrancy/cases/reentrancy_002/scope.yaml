@@ -1,0 +1,16 @@
+project_name: ReentrancyBenchmark002
+language: Solidity
+framework: Foundry
+chain: Ethereum
+commit_hash: "synthetic-reentrancy-002"
+contracts_in_scope:
+  - src/VulnerableRewards.sol
+contracts_out_of_scope: []
+assets_at_risk:
+  - reward pool
+attack_categories:
+  - reentrancy
+known_issues: []
+forbidden_actions:
+  - real exploit execution
+

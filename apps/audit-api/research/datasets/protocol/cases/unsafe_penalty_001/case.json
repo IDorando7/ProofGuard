@@ -1,0 +1,25 @@
+{
+  "case_id": "unsafe_penalty_001",
+  "description": "Unsafe reproduction is denied reward and records a reviewable off-chain penalty event.",
+  "project_id": "unsafe_penalty_001",
+  "reward_pool": 1000.0,
+  "node": {
+    "node_type": "agent",
+    "display_name": "unsafe-reentrancy-agent",
+    "operator_id": "synthetic_operator_unsafe",
+    "supported_categories": ["reentrancy"],
+    "initial_status": "active"
+  },
+  "finding_ids": ["finding_unsafe_001"],
+  "steps": [
+    "create_node",
+    "create_submission",
+    "calculate_contribution",
+    "process_reputation",
+    "create_reward_cycle",
+    "calculate_reward_cycle",
+    "finalize_reward_cycle",
+    "process_penalty"
+  ],
+  "idempotency": ["penalty"]
+}

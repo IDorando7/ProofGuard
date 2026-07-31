@@ -1,0 +1,18 @@
+{
+  "case_id": "accepted_medium_value_001",
+  "expected": {
+    "submission_created": true,
+    "contribution_eligibility": "eligible",
+    "minimum_contribution_score": 75.0,
+    "maximum_contribution_score": 89.999999,
+    "expected_contribution_score": 82.0,
+    "reputation_direction": "increase",
+    "expected_event_type": "accepted_contribution",
+    "expected_reputation_delta": 0.04,
+    "reward_eligible": true,
+    "reward_amount_rule": "positive",
+    "penalty_created": false,
+    "expected_submission_status": "rewarded",
+    "expected_statistics": {"total_submissions": 1, "accepted_submissions": 1}
+  }
+}

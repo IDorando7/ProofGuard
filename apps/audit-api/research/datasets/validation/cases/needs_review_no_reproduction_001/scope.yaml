@@ -1,0 +1,8 @@
+project_name: Needs Review No Reproduction Case
+contracts_in_scope:
+  - src/Vault.sol
+contracts_out_of_scope: []
+attack_categories:
+  - access_control
+assets_at_risk:
+  - user balances

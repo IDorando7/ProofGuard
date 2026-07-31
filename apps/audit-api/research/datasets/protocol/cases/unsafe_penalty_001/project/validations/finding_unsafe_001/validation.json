@@ -1,0 +1,25 @@
+{
+  "project_id": "unsafe_penalty_001",
+  "finding_id": "finding_unsafe_001",
+  "status": "unsafe_poc",
+  "confidence": 1.0,
+  "reason": "Static safety outcome classified the reproduction as unsafe.",
+  "evidence": {
+    "has_finding": true,
+    "has_reproduction": true,
+    "reproduction_status": "rejected_unsafe",
+    "has_poc_file": false,
+    "has_stdout": false,
+    "has_stderr": false,
+    "in_scope": true,
+    "is_duplicate": false,
+    "duplicate_of": null,
+    "original_severity": "High",
+    "normalized_severity": "High",
+    "notes": ["Synthetic fixture decision; no code was executed."]
+  },
+  "validator_name": "synthetic_fixture_validator",
+  "validation_id": "validation_unsafe_001",
+  "created_at": "2026-07-16T00:00:00Z",
+  "updated_at": "2026-07-16T00:00:00Z"
+}

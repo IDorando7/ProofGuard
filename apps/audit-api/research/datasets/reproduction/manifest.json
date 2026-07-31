@@ -1,0 +1,27 @@
+{
+  "dataset": "week_3_reproduction_synthetic",
+  "description": "Synthetic reproduction benchmark for sandboxed PoC execution.",
+  "cases": [
+    {
+      "case_id": "access_control_poc_001",
+      "path": "cases/access_control_poc_001",
+      "expected_status": "reproduced"
+    },
+    {
+      "case_id": "reentrancy_poc_001",
+      "path": "cases/reentrancy_poc_001",
+      "expected_status": "reproduced"
+    },
+    {
+      "case_id": "unsafe_poc_001",
+      "path": "cases/unsafe_poc_001",
+      "expected_status": "rejected_unsafe"
+    },
+    {
+      "case_id": "unsupported_non_foundry_001",
+      "path": "cases/unsupported_non_foundry_001",
+      "expected_status": "unsupported"
+    }
+  ]
+}
+

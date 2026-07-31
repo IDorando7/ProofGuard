@@ -1,0 +1,987 @@
+{
+  "benchmark_version": "week_6_subnet_benchmark_v0",
+  "cases": [
+    {
+      "actual_behavior": [
+        "Production nodes: node_access_expert, node_access_active, node_multi_category"
+      ],
+      "assertions": [
+        {
+          "actual": "expert",
+          "assertion_id": "access_expert_membership",
+          "description": "The strongest access-control node is an expert.",
+          "details": null,
+          "expected": "expert",
+          "passed": true
+        },
+        {
+          "actual": 1.0,
+          "assertion_id": "access_expert_threshold",
+          "description": "The expert score satisfies the production expert threshold.",
+          "details": null,
+          "expected": ">=0.8",
+          "passed": true
+        },
+        {
+          "actual": "ranked",
+          "assertion_id": "access_expert_ranked",
+          "description": "The expert uses ranked selection.",
+          "details": null,
+          "expected": "ranked",
+          "passed": true
+        },
+        {
+          "actual": "production",
+          "assertion_id": "access_expert_production",
+          "description": "The expert uses production mode.",
+          "details": null,
+          "expected": "production",
+          "passed": true
+        },
+        {
+          "actual": "production",
+          "assertion_id": "access_active_production",
+          "description": "The qualified active node also receives production.",
+          "details": null,
+          "expected": "production",
+          "passed": true
+        },
+        {
+          "actual": false,
+          "assertion_id": "access_weak_not_production",
+          "description": "The weak access-control node is not selected for production.",
+          "details": null,
+          "expected": false,
+          "passed": true
+        },
+        {
+          "actual": true,
+          "assertion_id": "access_selection_reasons",
+          "description": "Every selected access-control node has reasons.",
+          "details": null,
+          "expected": true,
+          "passed": true
+        },
+        {
+          "actual": true,
+          "assertion_id": "access_assignment_identity",
+          "description": "All assignments use exactly the access-control subnet.",
+          "details": null,
+          "expected": true,
+          "passed": true
+        }
+      ],
+      "case_id": "best_access_control_selected",
+      "completed_at": "2026-07-30T12:00:00Z",
+      "description": "Verify that the strongest qualified access-control nodes receive ranked production assignments.",
+      "duration_ms": 0,
+      "errors": [],
+      "expected_behavior": [
+        "Qualified expert and active nodes receive production; weak nodes do not."
+      ],
+      "metrics": {
+        "expert_score": 1.0,
+        "production_assignments": 3,
+        "shadow_assignments": 2
+      },
+      "node_ids": [
+        "node_access_expert",
+        "node_access_active",
+        "node_access_weak"
+      ],
+      "passed": true,
+      "phase": "routing",
+      "project_ids": [
+        "benchmark_access_project"
+      ],
+      "service_operations": [
+        "Subnet Membership Manager refresh",
+        "Subnet Router calculation and finalization"
+      ],
+      "setup_summary": [
+        "Active access-control subnet with expert, active, and developing members."
+      ],
+      "started_at": "2026-07-30T12:00:00Z",
+      "subnet_ids": [
+        "subnet_access_control"
+      ],
+      "title": "Best access-control nodes are selected",
+      "warnings": []
+    },
+    {
+      "actual_behavior": [
+        "The expert was selected; the shortage stayed explicit and partial."
+      ],
+      "assertions": [
+        {
+          "actual": true,
+          "assertion_id": "weak_re_performance_exists",
+          "description": "The weak node has real reentrancy performance.",
+          "details": null,
+          "expected": true,
+          "passed": true
+        },
+        {
+          "actual": 0.238999,
+          "assertion_id": "weak_re_score_valid",
+          "description": "The weak node has a bounded score.",
+          "details": null,
+          "expected": "0..1",
+          "passed": true
+        },
+        {
+          "actual": true,
+          "assertion_id": "weak_re_not_core",
+          "description": "The weak membership is not active or expert.",
+          "details": null,
+          "expected": true,
+          "passed": true
+        },
+        {
+          "actual": false,
+          "assertion_id": "weak_re_not_ranked",
+          "description": "The weak node has no ranked assignment.",
+          "details": null,
+          "expected": false,
+          "passed": true
+        },
+        {
+          "actual": false,
+          "assertion_id": "weak_re_not_production",
+          "description": "The weak node has no production assignment.",
+          "details": null,
+          "expected": false,
+          "passed": true
+        },
+        {
+          "actual": true,
+          "assertion_id": "re_expert_selected",
+          "description": "The reentrancy expert receives production.",
+          "details": null,
+          "expected": true,
+          "passed": true
+        },
+        {
+          "actual": false,
+          "assertion_id": "re_partial_safe",
+          "description": "A production shortage remains partial instead of promoting a weak node.",
+          "details": null,
+          "expected": false,
+          "passed": true
+        }
+      ],
+      "case_id": "weak_reentrancy_not_selected",
+      "completed_at": "2026-07-30T12:00:00Z",
+      "description": "Verify that weak category history cannot become a ranked production fallback.",
+      "duration_ms": 0,
+      "errors": [],
+      "expected_behavior": [
+        "Weak membership is never an unsafe production fallback."
+      ],
+      "metrics": {
+        "ranked_selected": 1,
+        "requested": 5,
+        "weak_score": 0.238999
+      },
+      "node_ids": [
+        "node_reentrancy_expert",
+        "node_reentrancy_weak"
+      ],
+      "passed": true,
+      "phase": "routing",
+      "project_ids": [
+        "benchmark_multicategory_project"
+      ],
+      "service_operations": [
+        "Category performance and scoring",
+        "Membership refresh",
+        "Multi-category routing"
+      ],
+      "setup_summary": [
+        "One expert and weak developing reentrancy histories."
+      ],
+      "started_at": "2026-07-30T12:00:00Z",
+      "subnet_ids": [
+        "subnet_reentrancy"
+      ],
+      "title": "Weak reentrancy node is not selected",
+      "warnings": []
+    },
+    {
+      "actual_behavior": [
+        "Shadow nodes: node_probation_explorer, node_access_weak"
+      ],
+      "assertions": [
+        {
+          "actual": "candidate",
+          "assertion_id": "candidate_membership",
+          "description": "The new node remains candidate.",
+          "details": null,
+          "expected": "candidate",
+          "passed": true
+        },
+        {
+          "actual": "probation",
+          "assertion_id": "probation_membership",
+          "description": "The developing node is probation.",
+          "details": null,
+          "expected": "probation",
+          "passed": true
+        },
+        {
+          "actual": false,
+          "assertion_id": "developing_not_ranked",
+          "description": "Neither developing node receives ranked production.",
+          "details": null,
+          "expected": false,
+          "passed": true
+        },
+        {
+          "actual": true,
+          "assertion_id": "shadow_exploration_present",
+          "description": "At least one candidate/probation node receives exploration shadow.",
+          "details": null,
+          "expected": true,
+          "passed": true
+        },
+        {
+          "actual": true,
+          "assertion_id": "production_remains_core",
+          "description": "Production assignments remain active/expert.",
+          "details": null,
+          "expected": true,
+          "passed": true
+        },
+        {
+          "actual": true,
+          "assertion_id": "exploration_reasons",
+          "description": "Exploration reasons are present.",
+          "details": null,
+          "expected": true,
+          "passed": true
+        },
+        {
+          "actual": true,
+          "assertion_id": "qualification_null",
+          "description": "Qualification references remain null in v0.",
+          "details": null,
+          "expected": true,
+          "passed": true
+        },
+        {
+          "actual": [
+            "candidate",
+            "probation"
+          ],
+          "assertion_id": "selection_no_promotion",
+          "description": "Routing does not promote candidate or probation membership.",
+          "details": null,
+          "expected": [
+            "candidate",
+            "probation"
+          ],
+          "passed": true
+        },
+        {
+          "actual": 2,
+          "assertion_id": "shadow_usage_once",
+          "description": "Each shadow assignment creates one finalized usage event.",
+          "details": null,
+          "expected": 2,
+          "passed": true
+        },
+        {
+          "actual": true,
+          "assertion_id": "routing_finalize_idempotent",
+          "description": "Repeated access-route finalization does not duplicate usage.",
+          "details": null,
+          "expected": true,
+          "passed": true
+        }
+      ],
+      "case_id": "new_node_exploration",
+      "completed_at": "2026-07-30T12:00:00Z",
+      "description": "Verify candidate and probation exploration without production authority or promotion.",
+      "duration_ms": 0,
+      "errors": [],
+      "expected_behavior": [
+        "Developing nodes receive deterministic shadow-only opportunities."
+      ],
+      "metrics": {
+        "exploration_assignments": 2,
+        "first_explorer": "node_probation_explorer"
+      },
+      "node_ids": [
+        "node_new_candidate",
+        "node_probation_explorer"
+      ],
+      "passed": true,
+      "phase": "routing",
+      "project_ids": [
+        "benchmark_access_project"
+      ],
+      "service_operations": [
+        "Production Subnet Router calculation",
+        "Idempotent routing finalization"
+      ],
+      "setup_summary": [
+        "Exploration ratio 0.40 with both candidate and probation members."
+      ],
+      "started_at": "2026-07-30T12:00:00Z",
+      "subnet_ids": [
+        "subnet_access_control"
+      ],
+      "title": "Developing nodes receive shadow exploration",
+      "warnings": []
+    },
+    {
+      "actual_behavior": [
+        "The node is suspended and absent from assignments, usage, and rewards."
+      ],
+      "assertions": [
+        {
+          "actual": 1,
+          "assertion_id": "unsafe_event_found",
+          "description": "A recent applied unsafe event is present.",
+          "details": null,
+          "expected": 1,
+          "passed": true
+        },
+        {
+          "actual": "suspended",
+          "assertion_id": "unsafe_suspended",
+          "description": "Unsafe membership is suspended.",
+          "details": null,
+          "expected": "suspended",
+          "passed": true
+        },
+        {
+          "actual": true,
+          "assertion_id": "unsafe_reason",
+          "description": "Suspension explains the recent unsafe event.",
+          "details": null,
+          "expected": true,
+          "passed": true
+        },
+        {
+          "actual": true,
+          "assertion_id": "score_does_not_override",
+          "description": "A calculated score cannot override suspension.",
+          "details": null,
+          "expected": true,
+          "passed": true
+        },
+        {
+          "actual": false,
+          "assertion_id": "unsafe_no_assignment",
+          "description": "Unsafe node receives neither production nor shadow work.",
+          "details": null,
+          "expected": false,
+          "passed": true
+        },
+        {
+          "actual": 0,
+          "assertion_id": "unsafe_no_usage",
+          "description": "Unsafe node receives no routing usage event.",
+          "details": null,
+          "expected": 0,
+          "passed": true
+        },
+        {
+          "actual": 0,
+          "assertion_id": "unsafe_no_reward",
+          "description": "Unsafe node receives no subnet reward event.",
+          "details": null,
+          "expected": 0,
+          "passed": true
+        },
+        {
+          "actual": true,
+          "assertion_id": "unsafe_hysteresis_blocked",
+          "description": "Safety override wins independently of previous core status.",
+          "details": null,
+          "expected": true,
+          "passed": true
+        },
+        {
+          "actual": false,
+          "assertion_id": "banned_node_excluded",
+          "description": "The banned-node control receives no production or shadow assignment.",
+          "details": null,
+          "expected": false,
+          "passed": true
+        },
+        {
+          "actual": false,
+          "assertion_id": "removed_member_excluded",
+          "description": "The removed-member control receives no production or shadow assignment.",
+          "details": null,
+          "expected": false,
+          "passed": true
+        },
+        {
+          "actual": 0,
+          "assertion_id": "blocked_controls_no_usage_or_reward",
+          "description": "Banned and removed controls create no usage or reward event.",
+          "details": null,
+          "expected": 0,
+          "passed": true
+        }
+      ],
+      "case_id": "unsafe_node_suspended",
+      "completed_at": "2026-07-30T12:00:00Z",
+      "description": "Verify that a recent unsafe event overrides history, score, and routing eligibility.",
+      "duration_ms": 0,
+      "errors": [],
+      "expected_behavior": [
+        "Unsafe participation is suspended regardless of score."
+      ],
+      "metrics": {
+        "category_score": 0.854545,
+        "unsafe_events": 1
+      },
+      "node_ids": [
+        "node_unsafe",
+        "node_banned_control",
+        "node_removed_control"
+      ],
+      "passed": true,
+      "phase": "membership_and_routing",
+      "project_ids": [
+        "benchmark_history_project",
+        "benchmark_access_project",
+        "benchmark_multicategory_project"
+      ],
+      "service_operations": [
+        "Week 5 reputation processing",
+        "Membership safety override",
+        "Routing exclusion"
+      ],
+      "setup_summary": [
+        "Strong accepted history plus one applied unsafe event at the fixed evaluation time."
+      ],
+      "started_at": "2026-07-30T12:00:00Z",
+      "subnet_ids": [
+        "subnet_access_control"
+      ],
+      "title": "Unsafe node is suspended",
+      "warnings": []
+    },
+    {
+      "actual_behavior": [
+        "The node is production-eligible only in access control."
+      ],
+      "assertions": [
+        {
+          "actual": 2,
+          "assertion_id": "two_performance_records",
+          "description": "Separate performance records exist.",
+          "details": null,
+          "expected": 2,
+          "passed": true
+        },
+        {
+          "actual": true,
+          "assertion_id": "source_lists_disjoint",
+          "description": "Category source event lists are disjoint.",
+          "details": null,
+          "expected": true,
+          "passed": true
+        },
+        {
+          "actual": 6,
+          "assertion_id": "accepted_access_isolated",
+          "description": "Access accepted history stays in access control.",
+          "details": null,
+          "expected": 6,
+          "passed": true
+        },
+        {
+          "actual": 0,
+          "assertion_id": "invalid_re_isolated",
+          "description": "Reentrancy invalid outcomes do not reduce access counters.",
+          "details": null,
+          "expected": 0,
+          "passed": true
+        },
+        {
+          "actual": true,
+          "assertion_id": "two_score_records",
+          "description": "Separate category scores exist.",
+          "details": null,
+          "expected": true,
+          "passed": true
+        },
+        {
+          "actual": 0.312001,
+          "assertion_id": "access_materially_higher",
+          "description": "Access score is materially higher.",
+          "details": null,
+          "expected": "> reentrancy by 0.20",
+          "passed": true
+        },
+        {
+          "actual": true,
+          "assertion_id": "access_core_membership",
+          "description": "Access membership is production eligible.",
+          "details": null,
+          "expected": true,
+          "passed": true
+        },
+        {
+          "actual": true,
+          "assertion_id": "re_nonproduction_membership",
+          "description": "Reentrancy membership is non-production.",
+          "details": null,
+          "expected": true,
+          "passed": true
+        },
+        {
+          "actual": true,
+          "assertion_id": "access_route_can_select",
+          "description": "Access routing selects the multi-category node for production.",
+          "details": null,
+          "expected": true,
+          "passed": true
+        },
+        {
+          "actual": false,
+          "assertion_id": "re_route_cannot_borrow",
+          "description": "Reentrancy cannot borrow the access score for production.",
+          "details": null,
+          "expected": false,
+          "passed": true
+        }
+      ],
+      "case_id": "category_score_isolation",
+      "completed_at": "2026-07-30T12:00:00Z",
+      "description": "Verify that one node can be strong in access control and weak in reentrancy.",
+      "duration_ms": 0,
+      "errors": [],
+      "expected_behavior": [
+        "Access-control strength cannot confer reentrancy production authority."
+      ],
+      "metrics": {
+        "access_events": 6,
+        "access_score": 0.788,
+        "reentrancy_events": 6,
+        "reentrancy_score": 0.475999
+      },
+      "node_ids": [
+        "node_multi_category"
+      ],
+      "passed": true,
+      "phase": "aggregation_scoring_membership_routing",
+      "project_ids": [
+        "benchmark_history_project",
+        "benchmark_multicategory_project"
+      ],
+      "service_operations": [
+        "Category Performance rebuild",
+        "Category Score rebuild",
+        "Membership refresh",
+        "Router"
+      ],
+      "setup_summary": [
+        "One node with six accepted access-control outcomes and mostly invalid reentrancy outcomes."
+      ],
+      "started_at": "2026-07-30T12:00:00Z",
+      "subnet_ids": [
+        "subnet_access_control",
+        "subnet_reentrancy"
+      ],
+      "title": "Category scores remain isolated",
+      "warnings": []
+    },
+    {
+      "actual_behavior": [
+        "Both category results are present with isolated assignments."
+      ],
+      "assertions": [
+        {
+          "actual": [
+            "access_control",
+            "reentrancy"
+          ],
+          "assertion_id": "two_requested_categories",
+          "description": "Both scope categories are routed.",
+          "details": null,
+          "expected": [
+            "access_control",
+            "reentrancy"
+          ],
+          "passed": true
+        },
+        {
+          "actual": "subnet_access_control",
+          "assertion_id": "access_subnet",
+          "description": "Access control uses its exact subnet.",
+          "details": null,
+          "expected": "subnet_access_control",
+          "passed": true
+        },
+        {
+          "actual": "subnet_reentrancy",
+          "assertion_id": "reentrancy_subnet",
+          "description": "Reentrancy uses its exact subnet.",
+          "details": null,
+          "expected": "subnet_reentrancy",
+          "passed": true
+        },
+        {
+          "actual": true,
+          "assertion_id": "assignments_separated",
+          "description": "Each category result contains only matching assignments.",
+          "details": null,
+          "expected": true,
+          "passed": true
+        },
+        {
+          "actual": true,
+          "assertion_id": "assignment_subnet_match",
+          "description": "Every assignment references its category subnet.",
+          "details": null,
+          "expected": true,
+          "passed": true
+        },
+        {
+          "actual": true,
+          "assertion_id": "assignment_membership_match",
+          "description": "Every selected node has matching category membership.",
+          "details": null,
+          "expected": true,
+          "passed": true
+        },
+        {
+          "actual": true,
+          "assertion_id": "assignment_supported_category",
+          "description": "Every selected node declares the exact assignment category.",
+          "details": null,
+          "expected": true,
+          "passed": true
+        },
+        {
+          "actual": true,
+          "assertion_id": "multi_node_modes",
+          "description": "The multi-category node can differ by category.",
+          "details": null,
+          "expected": true,
+          "passed": true
+        },
+        {
+          "actual": true,
+          "assertion_id": "category_score_snapshot_match",
+          "description": "Assignments use their exact category score snapshots.",
+          "details": null,
+          "expected": true,
+          "passed": true
+        },
+        {
+          "actual": 7,
+          "assertion_id": "routing_total",
+          "description": "Routing total equals category totals.",
+          "details": null,
+          "expected": 7,
+          "passed": true
+        },
+        {
+          "actual": 7,
+          "assertion_id": "usage_total_once",
+          "description": "Finalization creates one usage event per assignment.",
+          "details": null,
+          "expected": 7,
+          "passed": true
+        },
+        {
+          "actual": true,
+          "assertion_id": "multi_finalize_idempotent",
+          "description": "Repeated multi-route finalization does not duplicate usage.",
+          "details": null,
+          "expected": true,
+          "passed": true
+        }
+      ],
+      "case_id": "multi_category_routing",
+      "completed_at": "2026-07-30T12:00:00Z",
+      "description": "Verify independent access-control and reentrancy routing for one project.",
+      "duration_ms": 0,
+      "errors": [],
+      "expected_behavior": [
+        "Each category routes only through its own subnet and snapshots."
+      ],
+      "metrics": {
+        "production": 4,
+        "shadow": 3,
+        "total_assignments": 7
+      },
+      "node_ids": [
+        "node_access_active",
+        "node_access_expert",
+        "node_multi_category",
+        "node_new_candidate",
+        "node_probation_explorer",
+        "node_reentrancy_expert"
+      ],
+      "passed": true,
+      "phase": "routing",
+      "project_ids": [
+        "benchmark_multicategory_project"
+      ],
+      "service_operations": [
+        "Production multi-category route calculation and finalization"
+      ],
+      "setup_summary": [
+        "One scope manifest declaring access control and reentrancy."
+      ],
+      "started_at": "2026-07-30T12:00:00Z",
+      "subnet_ids": [
+        "subnet_access_control",
+        "subnet_reentrancy"
+      ],
+      "title": "Multi-category project uses separate subnets",
+      "warnings": []
+    },
+    {
+      "actual_behavior": [
+        "Expert, active, probation, and reentrancy-expert contributions were allocated; invalid and candidate contributions were excluded."
+      ],
+      "assertions": [
+        {
+          "actual": "10000.000000",
+          "assertion_id": "category_pool_total",
+          "description": "Category pools equal the project pool.",
+          "details": null,
+          "expected": "10000.000000",
+          "passed": true
+        },
+        {
+          "actual": "6000.000000",
+          "assertion_id": "access_pool",
+          "description": "The 3/5 access-control pool is exact.",
+          "details": null,
+          "expected": "6000.000000",
+          "passed": true
+        },
+        {
+          "actual": "4000.000000",
+          "assertion_id": "reentrancy_pool",
+          "description": "The 2/5 reentrancy pool is exact.",
+          "details": null,
+          "expected": "4000.000000",
+          "passed": true
+        },
+        {
+          "actual": true,
+          "assertion_id": "allocation_category_isolation",
+          "description": "Every allocation stays in its submission category.",
+          "details": null,
+          "expected": true,
+          "passed": true
+        },
+        {
+          "actual": "1.10",
+          "assertion_id": "expert_multiplier",
+          "description": "Expert production uses multiplier 1.10.",
+          "details": null,
+          "expected": "1.10",
+          "passed": true
+        },
+        {
+          "actual": "1.00",
+          "assertion_id": "active_multiplier",
+          "description": "Active production uses multiplier 1.00.",
+          "details": null,
+          "expected": "1.00",
+          "passed": true
+        },
+        {
+          "actual": "0.90",
+          "assertion_id": "probation_multiplier",
+          "description": "Probation shadow uses multiplier 0.90.",
+          "details": null,
+          "expected": "0.90",
+          "passed": true
+        },
+        {
+          "actual": null,
+          "assertion_id": "candidate_no_allocation",
+          "description": "Candidate shadow receives no allocation.",
+          "details": null,
+          "expected": null,
+          "passed": true
+        },
+        {
+          "actual": true,
+          "assertion_id": "candidate_exclusion_reason",
+          "description": "Candidate exclusion is explicit.",
+          "details": null,
+          "expected": true,
+          "passed": true
+        },
+        {
+          "actual": null,
+          "assertion_id": "duplicate_no_allocation",
+          "description": "Duplicate contribution receives no allocation.",
+          "details": null,
+          "expected": null,
+          "passed": true
+        },
+        {
+          "actual": true,
+          "assertion_id": "invalid_outcomes_excluded",
+          "description": "Out-of-scope and non-reproduced contributions receive no allocation.",
+          "details": null,
+          "expected": true,
+          "passed": true
+        },
+        {
+          "actual": false,
+          "assertion_id": "unlinked_no_reward",
+          "description": "An unlinked accepted submission receives no subnet reward.",
+          "details": null,
+          "expected": false,
+          "passed": true
+        },
+        {
+          "actual": true,
+          "assertion_id": "routing_score_snapshot",
+          "description": "Category multiplier inputs use the routing-time score snapshot.",
+          "details": null,
+          "expected": true,
+          "passed": true
+        },
+        {
+          "actual": true,
+          "assertion_id": "raw_weights_schema_validated",
+          "description": "Production allocation models validate stored raw weights.",
+          "details": null,
+          "expected": true,
+          "passed": true
+        },
+        {
+          "actual": true,
+          "assertion_id": "category_conservation",
+          "description": "Every category exactly conserves its pool.",
+          "details": null,
+          "expected": true,
+          "passed": true
+        },
+        {
+          "actual": "10000.000000",
+          "assertion_id": "cycle_conservation",
+          "description": "Distributed plus undistributed equals total pool.",
+          "details": null,
+          "expected": "10000.000000",
+          "passed": true
+        },
+        {
+          "actual": 4,
+          "assertion_id": "immutable_events",
+          "description": "Finalization creates one event per eligible allocation.",
+          "details": null,
+          "expected": 4,
+          "passed": true
+        },
+        {
+          "actual": 4,
+          "assertion_id": "unique_rewarded_submission",
+          "description": "No submission is rewarded twice.",
+          "details": null,
+          "expected": 4,
+          "passed": true
+        },
+        {
+          "actual": true,
+          "assertion_id": "reward_create_idempotent",
+          "description": "Repeated reward-cycle creation returns the same cycle.",
+          "details": null,
+          "expected": true,
+          "passed": true
+        },
+        {
+          "actual": true,
+          "assertion_id": "reward_calculate_idempotent",
+          "description": "Repeated unchanged calculation returns the same allocations.",
+          "details": null,
+          "expected": true,
+          "passed": true
+        },
+        {
+          "actual": true,
+          "assertion_id": "reward_finalize_idempotent",
+          "description": "Repeated finalization creates no duplicate event.",
+          "details": null,
+          "expected": true,
+          "passed": true
+        },
+        {
+          "actual": true,
+          "assertion_id": "reward_sources_immutable",
+          "description": "Reward finalization does not mutate source records.",
+          "details": null,
+          "expected": true,
+          "passed": true
+        },
+        {
+          "actual": false,
+          "assertion_id": "unsafe_no_reward_allocation",
+          "description": "Unsafe node has no allocation.",
+          "details": null,
+          "expected": false,
+          "passed": true
+        },
+        {
+          "actual": true,
+          "assertion_id": "deterministic_replay",
+          "description": "A complete isolated replay produces identical normalized logical output.",
+          "details": null,
+          "expected": true,
+          "passed": true
+        }
+      ],
+      "case_id": "subnet_reward_distribution",
+      "completed_at": "2026-07-30T12:00:00Z",
+      "description": "Verify eligibility, multipliers, proportional allocation, exact conservation, and immutable finalization.",
+      "duration_ms": 0,
+      "errors": [],
+      "expected_behavior": [
+        "Only eligible category-linked contributions share their own category pool."
+      ],
+      "metrics": {
+        "distributed_points": "10000.000000",
+        "eligible_allocations": 4,
+        "excluded_submissions": 4,
+        "reward_events": 4,
+        "undistributed_points": "0.000000"
+      },
+      "node_ids": [
+        "node_access_active",
+        "node_access_expert",
+        "node_multi_category",
+        "node_new_candidate",
+        "node_probation_explorer",
+        "node_reentrancy_expert"
+      ],
+      "passed": true,
+      "phase": "reward_allocation",
+      "project_ids": [
+        "benchmark_multicategory_project"
+      ],
+      "service_operations": [
+        "Routed submissions",
+        "Reward cycle create/calculate/finalize",
+        "Repeated finalization"
+      ],
+      "setup_summary": [
+        "Finalized multi-category route and 10,000.000000 simulated protocol-point pool."
+      ],
+      "started_at": "2026-07-30T12:00:00Z",
+      "subnet_ids": [
+        "subnet_access_control",
+        "subnet_reentrancy"
+      ],
+      "title": "Subnet rewards stay category isolated",
+      "warnings": []
+    }
+  ]
+}

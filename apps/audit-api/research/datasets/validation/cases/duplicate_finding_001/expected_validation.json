@@ -1,0 +1,10 @@
+{
+  "case_id": "duplicate_finding_001",
+  "expected_statuses": {
+    "finding_primary_001": "accepted",
+    "finding_duplicate_001": "duplicate"
+  },
+  "notes": [
+    "Duplicate engine should classify the second finding as duplicate."
+  ]
+}

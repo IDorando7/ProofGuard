@@ -1,0 +1,6 @@
+[profile.default]
+src = "src"
+test = "test"
+ffi = false
+fs_permissions = []
+

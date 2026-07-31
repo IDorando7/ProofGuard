@@ -1,0 +1,34 @@
+[
+  {
+    "finding_id": "finding_primary_001",
+    "project_id": "duplicate_finding_001",
+    "title": "Unauthorized treasury update",
+    "category": "access_control",
+    "severity": "High",
+    "confidence": 0.8,
+    "contracts": ["src/VulnerableTreasury.sol"],
+    "functions": ["setTreasury"],
+    "root_cause": "Missing onlyOwner check on setTreasury.",
+    "attack_path": "Attacker calls setTreasury directly.",
+    "impact": "Unauthorized privileged action affecting treasury funds.",
+    "recommended_fix": "Add onlyOwner authorization to setTreasury.",
+    "status": "candidate",
+    "agent_name": "access_control_agent"
+  },
+  {
+    "finding_id": "finding_duplicate_001",
+    "project_id": "duplicate_finding_001",
+    "title": "Unauthorized treasury update",
+    "category": "access_control",
+    "severity": "High",
+    "confidence": 0.82,
+    "contracts": ["src/VulnerableTreasury.sol"],
+    "functions": ["setTreasury"],
+    "root_cause": "Missing onlyOwner check on setTreasury.",
+    "attack_path": "Attacker calls setTreasury directly.",
+    "impact": "Unauthorized privileged action affecting treasury funds.",
+    "recommended_fix": "Add onlyOwner authorization to setTreasury.",
+    "status": "candidate",
+    "agent_name": "access_control_agent"
+  }
+]

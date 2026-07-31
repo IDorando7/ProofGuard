@@ -1,0 +1,16 @@
+{
+  "reproduction_id": "repro_growth_002",
+  "finding_id": "finding_growth_002",
+  "project_id": "reputation_growth_001",
+  "status": "reproduced",
+  "poc_file": null,
+  "test_name": null,
+  "command": null,
+  "stdout": null,
+  "stderr": null,
+  "duration_ms": 1,
+  "error_message": null,
+  "safety_notes": ["Static synthetic outcome; no code was executed."],
+  "created_at": "2026-07-16T00:00:00Z",
+  "updated_at": "2026-07-16T00:00:00Z"
+}

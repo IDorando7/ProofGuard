@@ -1,0 +1,9 @@
+{
+  "case_id": "out_of_scope_001",
+  "expected_statuses": {
+    "finding_oos_001": "out_of_scope"
+  },
+  "notes": [
+    "Finding targets a contract outside the declared project scope."
+  ]
+}

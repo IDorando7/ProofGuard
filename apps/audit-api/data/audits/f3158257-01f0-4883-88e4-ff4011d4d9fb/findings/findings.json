@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Missing access control on treasury setter",
+    "category": "access_control",
+    "severity": "High",
+    "confidence": 0.8,
+    "contracts": [
+      "src/Vault.sol"
+    ],
+    "functions": [
+      "setTreasury"
+    ],
+    "root_cause": "missing onlyOwner authorization",
+    "attack_path": "attacker calls setTreasury directly",
+    "impact": "unauthorized privileged action can change treasury",
+    "conditions": null,
+    "reproduction_steps": [],
+    "poc_type": "none",
+    "poc_file": null,
+    "recommended_fix": "Add onlyOwner.",
+    "status": "candidate",
+    "agent_name": "access_control_agent",
+    "finding_id": "finding-1",
+    "project_id": "f3158257-01f0-4883-88e4-ff4011d4d9fb"
+  }
+]

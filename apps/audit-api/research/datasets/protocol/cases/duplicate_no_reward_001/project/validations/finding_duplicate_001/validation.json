@@ -1,0 +1,25 @@
+{
+  "project_id": "duplicate_no_reward_001",
+  "finding_id": "finding_duplicate_001",
+  "status": "duplicate",
+  "confidence": 1.0,
+  "reason": "Static synthetic duplicate decision.",
+  "evidence": {
+    "has_finding": true,
+    "has_reproduction": true,
+    "reproduction_status": "reproduced",
+    "has_poc_file": false,
+    "has_stdout": false,
+    "has_stderr": false,
+    "in_scope": true,
+    "is_duplicate": true,
+    "duplicate_of": "canonical_finding_access_001",
+    "original_severity": "High",
+    "normalized_severity": "High",
+    "notes": ["Synthetic fixture decision."]
+  },
+  "validator_name": "synthetic_fixture_validator",
+  "validation_id": "validation_duplicate_001",
+  "created_at": "2026-07-16T00:00:00Z",
+  "updated_at": "2026-07-16T00:00:00Z"
+}

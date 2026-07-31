@@ -1,0 +1,77 @@
+{
+  "benchmark_passed": true,
+  "benchmark_version": "week_6_subnet_benchmark_v0",
+  "categories": [
+    "access_control",
+    "reentrancy"
+  ],
+  "category_count": 2,
+  "completed_at": "2026-07-30T12:00:00Z",
+  "deterministic_replay_passed": true,
+  "failed_assertions": 0,
+  "failed_case_ids": [],
+  "failed_cases": 0,
+  "generated_files": [
+    "subnet_case_results.json",
+    "subnet_leaderboard.json",
+    "week_6_summary.json",
+    "week_6_report.md"
+  ],
+  "idempotency_checks": {
+    "category_performance_rebuild": true,
+    "category_score_rebuild": true,
+    "membership_refresh_access_control": true,
+    "membership_refresh_reentrancy": true,
+    "reward_calculation": true,
+    "reward_cycle_creation": true,
+    "reward_finalization": true,
+    "reward_source_immutability": true,
+    "routing_calculation_benchmark_access_project": true,
+    "routing_calculation_benchmark_multicategory_project": true,
+    "routing_finalization_benchmark_access_project": true,
+    "routing_finalization_benchmark_multicategory_project": true,
+    "subnet_bootstrap": true
+  },
+  "known_limitations": [
+    "The benchmark uses a small synthetic network and a centralized coordinator.",
+    "Membership and routing policy thresholds are v0 policy choices, not economic guarantees.",
+    "Shadow exploration does not yet evaluate candidate output or guarantee waiting-time fairness.",
+    "No private rotating qualification benchmark or benchmark-leakage protection exists.",
+    "No Sybil resistance, operator diversity, assignment lease, load balancing, or remote execution exists.",
+    "Protocol points are simulated accounting units with no monetary value."
+  ],
+  "membership_distribution": {
+    "active": 2,
+    "candidate": 2,
+    "expert": 2,
+    "probation": 3,
+    "removed": 1,
+    "suspended": 2
+  },
+  "node_count": 11,
+  "pass_rate": 1.0,
+  "passed_assertions": 82,
+  "passed_cases": 7,
+  "project_count": 3,
+  "protocol_version": "protocol_v0",
+  "reward_cycle_count": 1,
+  "reward_distribution": {
+    "eligible_allocations": 4,
+    "excluded_submissions": 4,
+    "reward_events": 4
+  },
+  "reward_event_count": 4,
+  "routing_assignment_count": 12,
+  "routing_count": 2,
+  "routing_distribution": {
+    "production_assignments": 7,
+    "shadow_assignments": 5
+  },
+  "started_at": "2026-07-30T12:00:00Z",
+  "total_assertions": 82,
+  "total_cases": 7,
+  "total_distributed_points": "10000.000000",
+  "total_simulated_pool_points": "10000.000000",
+  "total_undistributed_points": "0.000000",
+  "week": 6
+}

@@ -1,0 +1,22 @@
+[
+  {
+    "finding_id": "finding_unsafe_001",
+    "project_id": "unsafe_penalty_001",
+    "title": "Unsafe reproduction artifact for vault callback",
+    "category": "reentrancy",
+    "severity": "High",
+    "confidence": 0.7,
+    "contracts": ["src/Vault.sol"],
+    "functions": ["withdraw"],
+    "root_cause": "The submitted evidence was classified as unsafe before execution.",
+    "attack_path": "The static safety fixture records a prohibited reproduction attempt.",
+    "impact": "Unsafe evidence must be denied execution and protocol reward.",
+    "conditions": null,
+    "reproduction_steps": [],
+    "poc_type": "none",
+    "poc_file": null,
+    "recommended_fix": "Provide a safe minimal reproduction suitable for isolated review.",
+    "status": "candidate",
+    "agent_name": "synthetic_reentrancy_agent"
+  }
+]

@@ -1,0 +1,9 @@
+{
+  "case_id": "insufficient_evidence_001",
+  "expected_statuses": {
+    "finding_failed_repro_001": "insufficient_evidence"
+  },
+  "notes": [
+    "Reproduction ran but did not reproduce the issue."
+  ]
+}

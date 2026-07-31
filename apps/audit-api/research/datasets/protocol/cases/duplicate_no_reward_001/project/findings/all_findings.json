@@ -1,0 +1,22 @@
+[
+  {
+    "finding_id": "finding_duplicate_001",
+    "project_id": "duplicate_no_reward_001",
+    "title": "Previously reported treasury authorization issue",
+    "category": "access_control",
+    "severity": "High",
+    "confidence": 0.8,
+    "contracts": ["src/Treasury.sol"],
+    "functions": ["setTreasury"],
+    "root_cause": "The treasury setter lacks the required authorization check.",
+    "attack_path": "An arbitrary caller can redirect the configured treasury destination.",
+    "impact": "Synthetic treasury funds can be redirected by an unauthorized caller.",
+    "conditions": null,
+    "reproduction_steps": [],
+    "poc_type": "none",
+    "poc_file": null,
+    "recommended_fix": "Restrict the setter to the authorized governance role.",
+    "status": "candidate",
+    "agent_name": "synthetic_access_control_agent"
+  }
+]

@@ -1,0 +1,41 @@
+{
+  "dataset": "week_4_validation_synthetic",
+  "description": "Synthetic validation benchmark for Validator Pipeline v0.",
+  "cases": [
+    {
+      "case_id": "accepted_reproduced_001",
+      "path": "cases/accepted_reproduced_001",
+      "expected_primary_status": "accepted"
+    },
+    {
+      "case_id": "duplicate_finding_001",
+      "path": "cases/duplicate_finding_001",
+      "expected_primary_status": "duplicate"
+    },
+    {
+      "case_id": "out_of_scope_001",
+      "path": "cases/out_of_scope_001",
+      "expected_primary_status": "out_of_scope"
+    },
+    {
+      "case_id": "insufficient_evidence_001",
+      "path": "cases/insufficient_evidence_001",
+      "expected_primary_status": "insufficient_evidence"
+    },
+    {
+      "case_id": "unsafe_poc_001",
+      "path": "cases/unsafe_poc_001",
+      "expected_primary_status": "unsafe_poc"
+    },
+    {
+      "case_id": "unsupported_001",
+      "path": "cases/unsupported_001",
+      "expected_primary_status": "unsupported"
+    },
+    {
+      "case_id": "needs_review_no_reproduction_001",
+      "path": "cases/needs_review_no_reproduction_001",
+      "expected_primary_status": "needs_review"
+    }
+  ]
+}

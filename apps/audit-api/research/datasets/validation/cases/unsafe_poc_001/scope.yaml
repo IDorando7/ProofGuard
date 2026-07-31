@@ -1,0 +1,8 @@
+project_name: Unsafe PoC Case
+contracts_in_scope:
+  - src/Vault.sol
+contracts_out_of_scope: []
+attack_categories:
+  - reentrancy
+assets_at_risk:
+  - vault funds

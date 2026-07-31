@@ -1,0 +1,16 @@
+{
+  "total_cases": 7,
+  "passed_cases": 7,
+  "failed_cases": 0,
+  "total_findings": 8,
+  "matched_findings": 8,
+  "mismatched_findings": 0,
+  "accepted_count": 2,
+  "duplicate_count": 1,
+  "out_of_scope_count": 1,
+  "insufficient_evidence_count": 1,
+  "unsafe_poc_count": 1,
+  "unsupported_count": 1,
+  "needs_review_count": 1,
+  "accuracy": 1.0
+}

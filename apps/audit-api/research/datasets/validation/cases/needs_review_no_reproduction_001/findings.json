@@ -1,0 +1,18 @@
+[
+  {
+    "finding_id": "finding_needs_review_001",
+    "project_id": "needs_review_no_reproduction_001",
+    "title": "Missing role check requires review",
+    "category": "access_control",
+    "severity": "Medium",
+    "confidence": 0.7,
+    "contracts": ["src/Vault.sol"],
+    "functions": ["setLimit"],
+    "root_cause": "Missing role check on configuration function.",
+    "attack_path": "Caller may update the limit directly.",
+    "impact": "Potential configuration misuse.",
+    "recommended_fix": "Add role-based authorization.",
+    "status": "candidate",
+    "agent_name": "access_control_agent"
+  }
+]

@@ -1,0 +1,16 @@
+{
+  "reproduction_id": "repro_failed_001",
+  "project_id": "insufficient_evidence_001",
+  "finding_id": "finding_failed_repro_001",
+  "status": "failed",
+  "poc_file": "test/PoC_Reentrancy.t.sol",
+  "test_name": "testReentrantWithdraw",
+  "command": ["forge", "test", "--match-test", "testReentrantWithdraw"],
+  "stdout": "test failed to reproduce",
+  "stderr": "",
+  "duration_ms": 100,
+  "error_message": null,
+  "safety_notes": [],
+  "created_at": "2026-07-10T00:00:00Z",
+  "updated_at": "2026-07-10T00:00:00Z"
+}

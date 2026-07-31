@@ -1,0 +1,25 @@
+{
+  "title": "Unsupported non-Foundry project",
+  "category": "other",
+  "severity": "Informational",
+  "confidence": 0.5,
+  "contracts": [
+    "src/PlainContract.sol"
+  ],
+  "functions": [
+    "value"
+  ],
+  "root_cause": "This benchmark intentionally omits foundry.toml.",
+  "attack_path": "Foundry detection should mark the case unsupported.",
+  "impact": "Reproduction should not be attempted.",
+  "conditions": null,
+  "reproduction_steps": [],
+  "poc_type": "none",
+  "poc_file": null,
+  "recommended_fix": "Add a supported Foundry project layout before reproduction.",
+  "status": "candidate",
+  "agent_name": "mock_agent",
+  "finding_id": "unsupported_non_foundry_001_finding",
+  "project_id": "unsupported_non_foundry_001"
+}
+

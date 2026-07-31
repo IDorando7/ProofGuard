@@ -1,0 +1,118 @@
+{
+  "cases": [
+    {
+      "case_id": "accepted_reproduced_001",
+      "expected_statuses": {
+        "finding_accepted_001": "accepted"
+      },
+      "actual_statuses": {
+        "finding_accepted_001": "accepted"
+      },
+      "passed": true,
+      "total_findings": 1,
+      "matched_findings": 1,
+      "mismatched_findings": 0,
+      "notes": [
+        "Finding is in scope, unique, and reproduced."
+      ]
+    },
+    {
+      "case_id": "duplicate_finding_001",
+      "expected_statuses": {
+        "finding_primary_001": "accepted",
+        "finding_duplicate_001": "duplicate"
+      },
+      "actual_statuses": {
+        "finding_primary_001": "accepted",
+        "finding_duplicate_001": "duplicate"
+      },
+      "passed": true,
+      "total_findings": 2,
+      "matched_findings": 2,
+      "mismatched_findings": 0,
+      "notes": [
+        "Duplicate engine should classify the second finding as duplicate."
+      ]
+    },
+    {
+      "case_id": "out_of_scope_001",
+      "expected_statuses": {
+        "finding_oos_001": "out_of_scope"
+      },
+      "actual_statuses": {
+        "finding_oos_001": "out_of_scope"
+      },
+      "passed": true,
+      "total_findings": 1,
+      "matched_findings": 1,
+      "mismatched_findings": 0,
+      "notes": [
+        "Finding targets a contract outside the declared project scope."
+      ]
+    },
+    {
+      "case_id": "insufficient_evidence_001",
+      "expected_statuses": {
+        "finding_failed_repro_001": "insufficient_evidence"
+      },
+      "actual_statuses": {
+        "finding_failed_repro_001": "insufficient_evidence"
+      },
+      "passed": true,
+      "total_findings": 1,
+      "matched_findings": 1,
+      "mismatched_findings": 0,
+      "notes": [
+        "Reproduction ran but did not reproduce the issue."
+      ]
+    },
+    {
+      "case_id": "unsafe_poc_001",
+      "expected_statuses": {
+        "finding_unsafe_poc_001": "unsafe_poc"
+      },
+      "actual_statuses": {
+        "finding_unsafe_poc_001": "unsafe_poc"
+      },
+      "passed": true,
+      "total_findings": 1,
+      "matched_findings": 1,
+      "mismatched_findings": 0,
+      "notes": [
+        "PoC was rejected by safety checks."
+      ]
+    },
+    {
+      "case_id": "unsupported_001",
+      "expected_statuses": {
+        "finding_unsupported_001": "unsupported"
+      },
+      "actual_statuses": {
+        "finding_unsupported_001": "unsupported"
+      },
+      "passed": true,
+      "total_findings": 1,
+      "matched_findings": 1,
+      "mismatched_findings": 0,
+      "notes": [
+        "Project or finding type is unsupported by the current reproduction layer."
+      ]
+    },
+    {
+      "case_id": "needs_review_no_reproduction_001",
+      "expected_statuses": {
+        "finding_needs_review_001": "needs_review"
+      },
+      "actual_statuses": {
+        "finding_needs_review_001": "needs_review"
+      },
+      "passed": true,
+      "total_findings": 1,
+      "matched_findings": 1,
+      "mismatched_findings": 0,
+      "notes": [
+        "No reproduction result exists for the finding."
+      ]
+    }
+  ]
+}

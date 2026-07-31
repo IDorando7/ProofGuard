@@ -1,0 +1,11 @@
+project_name: Inactive Node Rejected Synthetic Case
+language: Solidity
+framework: Foundry
+contracts_in_scope:
+  - src/Treasury.sol
+contracts_out_of_scope:
+  - test/
+attack_categories:
+  - access_control
+assets_at_risk:
+  - synthetic treasury funds

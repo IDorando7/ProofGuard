@@ -1,0 +1,13 @@
+project_name: Accepted Reproduced Case
+contracts_in_scope:
+  - src/VulnerableTreasury.sol
+contracts_out_of_scope:
+  - test/
+  - script/
+  - lib/
+attack_categories:
+  - access_control
+  - reentrancy
+assets_at_risk:
+  - treasury funds
+  - user balances

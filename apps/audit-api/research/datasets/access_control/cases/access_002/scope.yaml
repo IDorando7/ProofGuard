@@ -1,0 +1,16 @@
+project_name: AccessControlBenchmark002
+language: Solidity
+framework: Foundry
+chain: Ethereum
+commit_hash: "synthetic-access-002"
+contracts_in_scope:
+  - src/VulnerableToken.sol
+contracts_out_of_scope: []
+assets_at_risk:
+  - token supply
+attack_categories:
+  - access_control
+known_issues: []
+forbidden_actions:
+  - real exploit execution
+

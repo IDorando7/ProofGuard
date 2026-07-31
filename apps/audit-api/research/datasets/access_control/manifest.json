@@ -1,0 +1,21 @@
+{
+  "agent": "access_control",
+  "cases": [
+    {
+      "case_id": "access_001",
+      "description": "Unprotected admin treasury setter",
+      "expected_positive": true
+    },
+    {
+      "case_id": "access_002",
+      "description": "Public mint function without authorization",
+      "expected_positive": true
+    },
+    {
+      "case_id": "access_negative_001",
+      "description": "Privileged setter protected with onlyOwner",
+      "expected_positive": false
+    }
+  ]
+}
+

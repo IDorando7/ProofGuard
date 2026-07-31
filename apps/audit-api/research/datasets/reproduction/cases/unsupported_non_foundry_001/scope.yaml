@@ -1,0 +1,16 @@
+project_name: UnsupportedNonFoundryBenchmark001
+language: Solidity
+framework: Unknown
+chain: Ethereum
+commit_hash: "synthetic-reproduction-unsupported-001"
+contracts_in_scope:
+  - src/PlainContract.sol
+contracts_out_of_scope: []
+assets_at_risk:
+  - none
+attack_categories:
+  - other
+known_issues: []
+forbidden_actions:
+  - real exploit execution
+

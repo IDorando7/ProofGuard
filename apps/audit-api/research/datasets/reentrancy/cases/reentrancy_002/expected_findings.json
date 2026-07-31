@@ -1,0 +1,14 @@
+[
+  {
+    "category": "reentrancy",
+    "contract": "src/VulnerableRewards.sol",
+    "function": "claim",
+    "root_cause_keywords": [
+      "external transfer before state update",
+      "unsafe external transfer",
+      "reentrancy"
+    ],
+    "severity": "High"
+  }
+]
+

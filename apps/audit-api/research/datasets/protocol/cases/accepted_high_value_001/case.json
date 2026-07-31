@@ -1,0 +1,24 @@
+{
+  "case_id": "accepted_high_value_001",
+  "description": "Accepted High contribution receives positive reputation and a simulated reward.",
+  "project_id": "accepted_high_value_001",
+  "reward_pool": 1000.0,
+  "node": {
+    "node_type": "agent",
+    "display_name": "high-value-access-agent",
+    "operator_id": "synthetic_operator_high",
+    "supported_categories": ["access_control"],
+    "initial_status": "active"
+  },
+  "finding_ids": ["finding_high_001"],
+  "steps": [
+    "create_node",
+    "create_submission",
+    "calculate_contribution",
+    "process_reputation",
+    "create_reward_cycle",
+    "calculate_reward_cycle",
+    "finalize_reward_cycle"
+  ],
+  "idempotency": ["reputation", "reward_calculation", "reward_finalization", "duplicate_submission"]
+}

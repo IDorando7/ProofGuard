@@ -1,0 +1,24 @@
+{
+  "case_id": "out_of_scope_no_reward_001",
+  "description": "An out-of-scope finding can be submitted but cannot earn a reward.",
+  "project_id": "out_of_scope_no_reward_001",
+  "reward_pool": 1000.0,
+  "node": {
+    "node_type": "agent",
+    "display_name": "out-of-scope-access-agent",
+    "operator_id": "synthetic_operator_scope",
+    "supported_categories": ["access_control"],
+    "initial_status": "active"
+  },
+  "finding_ids": ["finding_out_of_scope_001"],
+  "steps": [
+    "create_node",
+    "create_submission",
+    "calculate_contribution",
+    "process_reputation",
+    "create_reward_cycle",
+    "calculate_reward_cycle",
+    "finalize_reward_cycle"
+  ],
+  "idempotency": []
+}

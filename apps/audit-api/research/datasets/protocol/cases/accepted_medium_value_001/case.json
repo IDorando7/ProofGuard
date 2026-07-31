@@ -1,0 +1,24 @@
+{
+  "case_id": "accepted_medium_value_001",
+  "description": "Accepted Medium contribution remains eligible but has lower contribution value than the High case.",
+  "project_id": "accepted_medium_value_001",
+  "reward_pool": 1000.0,
+  "node": {
+    "node_type": "agent",
+    "display_name": "medium-value-reentrancy-agent",
+    "operator_id": "synthetic_operator_medium",
+    "supported_categories": ["reentrancy"],
+    "initial_status": "active"
+  },
+  "finding_ids": ["finding_medium_001"],
+  "steps": [
+    "create_node",
+    "create_submission",
+    "calculate_contribution",
+    "process_reputation",
+    "create_reward_cycle",
+    "calculate_reward_cycle",
+    "finalize_reward_cycle"
+  ],
+  "idempotency": []
+}

@@ -1,0 +1,42 @@
+{
+  "dataset": "week_5_protocol_synthetic",
+  "version": "1.0",
+  "description": "Synthetic end-to-end benchmark for ProofGuard Protocol and Incentive Layer v0.",
+  "cases": [
+    {
+      "case_id": "accepted_high_value_001",
+      "path": "cases/accepted_high_value_001",
+      "expected_primary_result": "rewarded"
+    },
+    {
+      "case_id": "accepted_medium_value_001",
+      "path": "cases/accepted_medium_value_001",
+      "expected_primary_result": "rewarded"
+    },
+    {
+      "case_id": "duplicate_no_reward_001",
+      "path": "cases/duplicate_no_reward_001",
+      "expected_primary_result": "no_reward"
+    },
+    {
+      "case_id": "out_of_scope_no_reward_001",
+      "path": "cases/out_of_scope_no_reward_001",
+      "expected_primary_result": "no_reward"
+    },
+    {
+      "case_id": "unsafe_penalty_001",
+      "path": "cases/unsafe_penalty_001",
+      "expected_primary_result": "penalized"
+    },
+    {
+      "case_id": "inactive_node_rejected_001",
+      "path": "cases/inactive_node_rejected_001",
+      "expected_primary_result": "submission_rejected"
+    },
+    {
+      "case_id": "reputation_growth_001",
+      "path": "cases/reputation_growth_001",
+      "expected_primary_result": "reputation_growth"
+    }
+  ]
+}

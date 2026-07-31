@@ -1,0 +1,1373 @@
+{
+  "cases": [
+    {
+      "actual": {
+        "contribution_eligibilities": [
+          "eligible"
+        ],
+        "contribution_scores": [
+          100.0
+        ],
+        "eligible_reward_allocations": 1,
+        "finding_hashes": [
+          "b788b1d9a03bcbd9f0f010446c3c06b11a5c795b38f1b079030a624aa15a0c72"
+        ],
+        "idempotency_checks": 4,
+        "idempotency_checks_passed": 4,
+        "node_statistics": {
+          "accepted_submissions": 1,
+          "duplicate_submissions": 0,
+          "out_of_scope_submissions": 0,
+          "rejected_submissions": 0,
+          "total_submissions": 1,
+          "unsafe_submissions": 0
+        },
+        "node_status": "active",
+        "penalty_created": false,
+        "reputation_after": 0.56,
+        "reputation_before": 0.5,
+        "reputation_deltas": [
+          0.06
+        ],
+        "reputation_event_count": 1,
+        "reputation_event_types": [
+          "accepted_contribution"
+        ],
+        "reward_amounts": [
+          1000.0
+        ],
+        "reward_cycle_pool": 1000.0,
+        "reward_cycle_total_allocated": 1000.0,
+        "reward_unit": "protocol_points",
+        "submission_count": 1,
+        "submission_created": true,
+        "submission_rejected": false,
+        "submission_statuses": [
+          "rewarded"
+        ]
+      },
+      "case_id": "accepted_high_value_001",
+      "checks": [
+        {
+          "actual": true,
+          "expected": true,
+          "name": "submission_created",
+          "passed": true
+        },
+        {
+          "actual": [
+            "eligible"
+          ],
+          "expected": "eligible",
+          "name": "contribution_eligibility",
+          "passed": true
+        },
+        {
+          "actual": [
+            100.0
+          ],
+          "expected": 100.0,
+          "name": "contribution_score_exact",
+          "passed": true
+        },
+        {
+          "actual": [
+            100.0
+          ],
+          "expected": ">= 90.0",
+          "name": "contribution_score_minimum",
+          "passed": true
+        },
+        {
+          "actual": [
+            "accepted_contribution"
+          ],
+          "expected": "accepted_contribution",
+          "name": "reputation_event_type",
+          "passed": true
+        },
+        {
+          "actual": [
+            0.06
+          ],
+          "expected": 0.06,
+          "name": "reputation_delta",
+          "passed": true
+        },
+        {
+          "actual": "increase",
+          "expected": "increase",
+          "name": "reputation_direction",
+          "passed": true
+        },
+        {
+          "actual": 1,
+          "expected": true,
+          "name": "reward_eligibility",
+          "passed": true
+        },
+        {
+          "actual": [
+            1000.0
+          ],
+          "expected": "all > 0",
+          "name": "reward_amount_positive",
+          "passed": true
+        },
+        {
+          "actual": false,
+          "expected": false,
+          "name": "penalty_created",
+          "passed": true
+        },
+        {
+          "actual": [
+            "rewarded"
+          ],
+          "expected": "rewarded",
+          "name": "submission_status",
+          "passed": true
+        },
+        {
+          "actual": 1,
+          "expected": 1,
+          "name": "statistics_total_submissions",
+          "passed": true
+        },
+        {
+          "actual": 1,
+          "expected": 1,
+          "name": "statistics_accepted_submissions",
+          "passed": true
+        },
+        {
+          "actual": 4,
+          "expected": 4,
+          "name": "idempotency_checks",
+          "passed": true
+        }
+      ],
+      "description": "Accepted High contribution receives positive reputation and a simulated reward.",
+      "errors": [],
+      "expected": {
+        "contribution_eligibility": "eligible",
+        "expected_contribution_score": 100.0,
+        "expected_event_type": "accepted_contribution",
+        "expected_reputation_delta": 0.06,
+        "expected_statistics": {
+          "accepted_submissions": 1,
+          "total_submissions": 1
+        },
+        "expected_submission_status": "rewarded",
+        "minimum_contribution_score": 90.0,
+        "penalty_created": false,
+        "reputation_direction": "increase",
+        "reward_amount_rule": "positive",
+        "reward_eligible": true,
+        "submission_created": true
+      },
+      "metrics": {
+        "eligible_contributions": 1,
+        "idempotency_checks": 4,
+        "idempotency_checks_passed": 4,
+        "ineligible_contributions": 0,
+        "negative_reputation_events": 0,
+        "penalty_events_created": 0,
+        "pending_contributions": 0,
+        "positive_reputation_events": 1,
+        "protocol_points_distributed": 1000.0,
+        "reputation_events_created": 1,
+        "reward_cycles_created": 1,
+        "reward_cycles_finalized": 1,
+        "reward_events_created": 1,
+        "submissions_attempted": 1,
+        "submissions_created": 1,
+        "submissions_rejected": 0,
+        "zero_delta_reputation_events": 0,
+        "zero_reward_submissions": 0
+      },
+      "notes": [],
+      "passed": true,
+      "steps": {
+        "contribution_calculated": true,
+        "node_created": true,
+        "penalty_processed": false,
+        "reputation_processed": true,
+        "reward_cycle_finalized": true,
+        "submission_created": true
+      }
+    },
+    {
+      "actual": {
+        "contribution_eligibilities": [
+          "eligible"
+        ],
+        "contribution_scores": [
+          82.0
+        ],
+        "eligible_reward_allocations": 1,
+        "finding_hashes": [
+          "995d1a8b7b9d8ab9ecfdedb9d264d5fb3ef02974f66b70377e8f150b2ac709f1"
+        ],
+        "idempotency_checks": 0,
+        "idempotency_checks_passed": 0,
+        "node_statistics": {
+          "accepted_submissions": 1,
+          "duplicate_submissions": 0,
+          "out_of_scope_submissions": 0,
+          "rejected_submissions": 0,
+          "total_submissions": 1,
+          "unsafe_submissions": 0
+        },
+        "node_status": "active",
+        "penalty_created": false,
+        "reputation_after": 0.54,
+        "reputation_before": 0.5,
+        "reputation_deltas": [
+          0.04
+        ],
+        "reputation_event_count": 1,
+        "reputation_event_types": [
+          "accepted_contribution"
+        ],
+        "reward_amounts": [
+          1000.0
+        ],
+        "reward_cycle_pool": 1000.0,
+        "reward_cycle_total_allocated": 1000.0,
+        "reward_unit": "protocol_points",
+        "submission_count": 1,
+        "submission_created": true,
+        "submission_rejected": false,
+        "submission_statuses": [
+          "rewarded"
+        ]
+      },
+      "case_id": "accepted_medium_value_001",
+      "checks": [
+        {
+          "actual": true,
+          "expected": true,
+          "name": "submission_created",
+          "passed": true
+        },
+        {
+          "actual": [
+            "eligible"
+          ],
+          "expected": "eligible",
+          "name": "contribution_eligibility",
+          "passed": true
+        },
+        {
+          "actual": [
+            82.0
+          ],
+          "expected": 82.0,
+          "name": "contribution_score_exact",
+          "passed": true
+        },
+        {
+          "actual": [
+            82.0
+          ],
+          "expected": ">= 75.0",
+          "name": "contribution_score_minimum",
+          "passed": true
+        },
+        {
+          "actual": [
+            82.0
+          ],
+          "expected": "<= 89.999999",
+          "name": "contribution_score_maximum",
+          "passed": true
+        },
+        {
+          "actual": [
+            "accepted_contribution"
+          ],
+          "expected": "accepted_contribution",
+          "name": "reputation_event_type",
+          "passed": true
+        },
+        {
+          "actual": [
+            0.04
+          ],
+          "expected": 0.04,
+          "name": "reputation_delta",
+          "passed": true
+        },
+        {
+          "actual": "increase",
+          "expected": "increase",
+          "name": "reputation_direction",
+          "passed": true
+        },
+        {
+          "actual": 1,
+          "expected": true,
+          "name": "reward_eligibility",
+          "passed": true
+        },
+        {
+          "actual": [
+            1000.0
+          ],
+          "expected": "all > 0",
+          "name": "reward_amount_positive",
+          "passed": true
+        },
+        {
+          "actual": false,
+          "expected": false,
+          "name": "penalty_created",
+          "passed": true
+        },
+        {
+          "actual": [
+            "rewarded"
+          ],
+          "expected": "rewarded",
+          "name": "submission_status",
+          "passed": true
+        },
+        {
+          "actual": 1,
+          "expected": 1,
+          "name": "statistics_total_submissions",
+          "passed": true
+        },
+        {
+          "actual": 1,
+          "expected": 1,
+          "name": "statistics_accepted_submissions",
+          "passed": true
+        }
+      ],
+      "description": "Accepted Medium contribution remains eligible but has lower contribution value than the High case.",
+      "errors": [],
+      "expected": {
+        "contribution_eligibility": "eligible",
+        "expected_contribution_score": 82.0,
+        "expected_event_type": "accepted_contribution",
+        "expected_reputation_delta": 0.04,
+        "expected_statistics": {
+          "accepted_submissions": 1,
+          "total_submissions": 1
+        },
+        "expected_submission_status": "rewarded",
+        "maximum_contribution_score": 89.999999,
+        "minimum_contribution_score": 75.0,
+        "penalty_created": false,
+        "reputation_direction": "increase",
+        "reward_amount_rule": "positive",
+        "reward_eligible": true,
+        "submission_created": true
+      },
+      "metrics": {
+        "eligible_contributions": 1,
+        "idempotency_checks": 0,
+        "idempotency_checks_passed": 0,
+        "ineligible_contributions": 0,
+        "negative_reputation_events": 0,
+        "penalty_events_created": 0,
+        "pending_contributions": 0,
+        "positive_reputation_events": 1,
+        "protocol_points_distributed": 1000.0,
+        "reputation_events_created": 1,
+        "reward_cycles_created": 1,
+        "reward_cycles_finalized": 1,
+        "reward_events_created": 1,
+        "submissions_attempted": 1,
+        "submissions_created": 1,
+        "submissions_rejected": 0,
+        "zero_delta_reputation_events": 0,
+        "zero_reward_submissions": 0
+      },
+      "notes": [],
+      "passed": true,
+      "steps": {
+        "contribution_calculated": true,
+        "node_created": true,
+        "penalty_processed": false,
+        "reputation_processed": true,
+        "reward_cycle_finalized": true,
+        "submission_created": true
+      }
+    },
+    {
+      "actual": {
+        "contribution_eligibilities": [
+          "ineligible"
+        ],
+        "contribution_scores": [
+          0.0
+        ],
+        "eligible_reward_allocations": 0,
+        "finding_hashes": [
+          "7759747211e7aecdd9b7f3fe5dad2b64276358775f5756404cef3473f9b467f4"
+        ],
+        "idempotency_checks": 1,
+        "idempotency_checks_passed": 1,
+        "node_statistics": {
+          "accepted_submissions": 0,
+          "duplicate_submissions": 1,
+          "out_of_scope_submissions": 0,
+          "rejected_submissions": 0,
+          "total_submissions": 1,
+          "unsafe_submissions": 0
+        },
+        "node_status": "active",
+        "penalty_created": false,
+        "reputation_after": 0.49,
+        "reputation_before": 0.5,
+        "reputation_deltas": [
+          -0.01
+        ],
+        "reputation_event_count": 1,
+        "reputation_event_types": [
+          "duplicate_finding"
+        ],
+        "reward_amounts": [
+          0.0
+        ],
+        "reward_cycle_pool": 1000.0,
+        "reward_cycle_total_allocated": 0.0,
+        "reward_unit": "protocol_points",
+        "submission_count": 1,
+        "submission_created": true,
+        "submission_rejected": false,
+        "submission_statuses": [
+          "duplicate"
+        ]
+      },
+      "case_id": "duplicate_no_reward_001",
+      "checks": [
+        {
+          "actual": true,
+          "expected": true,
+          "name": "submission_created",
+          "passed": true
+        },
+        {
+          "actual": [
+            "ineligible"
+          ],
+          "expected": "ineligible",
+          "name": "contribution_eligibility",
+          "passed": true
+        },
+        {
+          "actual": [
+            0.0
+          ],
+          "expected": 0.0,
+          "name": "contribution_score_exact",
+          "passed": true
+        },
+        {
+          "actual": [
+            "duplicate_finding"
+          ],
+          "expected": "duplicate_finding",
+          "name": "reputation_event_type",
+          "passed": true
+        },
+        {
+          "actual": [
+            -0.01
+          ],
+          "expected": -0.01,
+          "name": "reputation_delta",
+          "passed": true
+        },
+        {
+          "actual": "decrease",
+          "expected": "decrease",
+          "name": "reputation_direction",
+          "passed": true
+        },
+        {
+          "actual": 0,
+          "expected": false,
+          "name": "reward_eligibility",
+          "passed": true
+        },
+        {
+          "actual": 0.0,
+          "expected": 0,
+          "name": "reward_amount_zero",
+          "passed": true
+        },
+        {
+          "actual": false,
+          "expected": false,
+          "name": "penalty_created",
+          "passed": true
+        },
+        {
+          "actual": [
+            "duplicate"
+          ],
+          "expected": "duplicate",
+          "name": "submission_status",
+          "passed": true
+        },
+        {
+          "actual": 1,
+          "expected": 1,
+          "name": "statistics_total_submissions",
+          "passed": true
+        },
+        {
+          "actual": 1,
+          "expected": 1,
+          "name": "statistics_duplicate_submissions",
+          "passed": true
+        },
+        {
+          "actual": 1,
+          "expected": 1,
+          "name": "idempotency_checks",
+          "passed": true
+        }
+      ],
+      "description": "A validation-confirmed duplicate is scored at zero and receives no reward or penalty event.",
+      "errors": [],
+      "expected": {
+        "contribution_eligibility": "ineligible",
+        "expected_contribution_score": 0.0,
+        "expected_event_type": "duplicate_finding",
+        "expected_reputation_delta": -0.01,
+        "expected_statistics": {
+          "duplicate_submissions": 1,
+          "total_submissions": 1
+        },
+        "expected_submission_status": "duplicate",
+        "penalty_created": false,
+        "reputation_direction": "decrease",
+        "reward_amount_rule": "zero",
+        "reward_eligible": false,
+        "submission_created": true
+      },
+      "metrics": {
+        "eligible_contributions": 0,
+        "idempotency_checks": 1,
+        "idempotency_checks_passed": 1,
+        "ineligible_contributions": 1,
+        "negative_reputation_events": 1,
+        "penalty_events_created": 0,
+        "pending_contributions": 0,
+        "positive_reputation_events": 0,
+        "protocol_points_distributed": 0.0,
+        "reputation_events_created": 1,
+        "reward_cycles_created": 1,
+        "reward_cycles_finalized": 1,
+        "reward_events_created": 0,
+        "submissions_attempted": 1,
+        "submissions_created": 1,
+        "submissions_rejected": 0,
+        "zero_delta_reputation_events": 0,
+        "zero_reward_submissions": 1
+      },
+      "notes": [
+        "Duplicate reward denial is not financial slashing."
+      ],
+      "passed": true,
+      "steps": {
+        "contribution_calculated": true,
+        "node_created": true,
+        "penalty_processed": false,
+        "reputation_processed": true,
+        "reward_cycle_finalized": true,
+        "submission_created": true
+      }
+    },
+    {
+      "actual": {
+        "contribution_eligibilities": [
+          "ineligible"
+        ],
+        "contribution_scores": [
+          0.0
+        ],
+        "eligible_reward_allocations": 0,
+        "finding_hashes": [
+          "5ec46a346e2e1972adb4e11ad1177c5a7842c7788ab954d9e366d7317e724d95"
+        ],
+        "idempotency_checks": 0,
+        "idempotency_checks_passed": 0,
+        "node_statistics": {
+          "accepted_submissions": 0,
+          "duplicate_submissions": 0,
+          "out_of_scope_submissions": 1,
+          "rejected_submissions": 0,
+          "total_submissions": 1,
+          "unsafe_submissions": 0
+        },
+        "node_status": "active",
+        "penalty_created": false,
+        "reputation_after": 0.48,
+        "reputation_before": 0.5,
+        "reputation_deltas": [
+          -0.02
+        ],
+        "reputation_event_count": 1,
+        "reputation_event_types": [
+          "out_of_scope_finding"
+        ],
+        "reward_amounts": [
+          0.0
+        ],
+        "reward_cycle_pool": 1000.0,
+        "reward_cycle_total_allocated": 0.0,
+        "reward_unit": "protocol_points",
+        "submission_count": 1,
+        "submission_created": true,
+        "submission_rejected": false,
+        "submission_statuses": [
+          "out_of_scope"
+        ]
+      },
+      "case_id": "out_of_scope_no_reward_001",
+      "checks": [
+        {
+          "actual": true,
+          "expected": true,
+          "name": "submission_created",
+          "passed": true
+        },
+        {
+          "actual": [
+            "ineligible"
+          ],
+          "expected": "ineligible",
+          "name": "contribution_eligibility",
+          "passed": true
+        },
+        {
+          "actual": [
+            0.0
+          ],
+          "expected": 0.0,
+          "name": "contribution_score_exact",
+          "passed": true
+        },
+        {
+          "actual": [
+            "out_of_scope_finding"
+          ],
+          "expected": "out_of_scope_finding",
+          "name": "reputation_event_type",
+          "passed": true
+        },
+        {
+          "actual": [
+            -0.02
+          ],
+          "expected": -0.02,
+          "name": "reputation_delta",
+          "passed": true
+        },
+        {
+          "actual": "decrease",
+          "expected": "decrease",
+          "name": "reputation_direction",
+          "passed": true
+        },
+        {
+          "actual": 0,
+          "expected": false,
+          "name": "reward_eligibility",
+          "passed": true
+        },
+        {
+          "actual": 0.0,
+          "expected": 0,
+          "name": "reward_amount_zero",
+          "passed": true
+        },
+        {
+          "actual": false,
+          "expected": false,
+          "name": "penalty_created",
+          "passed": true
+        },
+        {
+          "actual": [
+            "out_of_scope"
+          ],
+          "expected": "out_of_scope",
+          "name": "submission_status",
+          "passed": true
+        },
+        {
+          "actual": 1,
+          "expected": 1,
+          "name": "statistics_total_submissions",
+          "passed": true
+        },
+        {
+          "actual": 1,
+          "expected": 1,
+          "name": "statistics_out_of_scope_submissions",
+          "passed": true
+        }
+      ],
+      "description": "An out-of-scope finding can be submitted but cannot earn a reward.",
+      "errors": [],
+      "expected": {
+        "contribution_eligibility": "ineligible",
+        "expected_contribution_score": 0.0,
+        "expected_event_type": "out_of_scope_finding",
+        "expected_reputation_delta": -0.02,
+        "expected_statistics": {
+          "out_of_scope_submissions": 1,
+          "total_submissions": 1
+        },
+        "expected_submission_status": "out_of_scope",
+        "penalty_created": false,
+        "reputation_direction": "decrease",
+        "reward_amount_rule": "zero",
+        "reward_eligible": false,
+        "submission_created": true
+      },
+      "metrics": {
+        "eligible_contributions": 0,
+        "idempotency_checks": 0,
+        "idempotency_checks_passed": 0,
+        "ineligible_contributions": 1,
+        "negative_reputation_events": 1,
+        "penalty_events_created": 0,
+        "pending_contributions": 0,
+        "positive_reputation_events": 0,
+        "protocol_points_distributed": 0.0,
+        "reputation_events_created": 1,
+        "reward_cycles_created": 1,
+        "reward_cycles_finalized": 1,
+        "reward_events_created": 0,
+        "submissions_attempted": 1,
+        "submissions_created": 1,
+        "submissions_rejected": 0,
+        "zero_delta_reputation_events": 0,
+        "zero_reward_submissions": 1
+      },
+      "notes": [],
+      "passed": true,
+      "steps": {
+        "contribution_calculated": true,
+        "node_created": true,
+        "penalty_processed": false,
+        "reputation_processed": true,
+        "reward_cycle_finalized": true,
+        "submission_created": true
+      }
+    },
+    {
+      "actual": {
+        "contribution_eligibilities": [
+          "ineligible"
+        ],
+        "contribution_scores": [
+          0.0
+        ],
+        "eligible_reward_allocations": 0,
+        "executed_onchain": false,
+        "finding_hashes": [
+          "937e19a827d6d5bee6fcfea9c5bcc8a5d2de3b89d31ab84ac1c69c2040899f36"
+        ],
+        "idempotency_checks": 1,
+        "idempotency_checks_passed": 1,
+        "node_statistics": {
+          "accepted_submissions": 0,
+          "duplicate_submissions": 0,
+          "out_of_scope_submissions": 0,
+          "rejected_submissions": 0,
+          "total_submissions": 1,
+          "unsafe_submissions": 1
+        },
+        "node_status": "active",
+        "penalty_created": true,
+        "penalty_reason": "unsafe_submission",
+        "protocol_penalty_points": 25.0,
+        "reputation_after": 0.42,
+        "reputation_before": 0.5,
+        "reputation_deltas": [
+          -0.08
+        ],
+        "reputation_event_count": 1,
+        "reputation_event_types": [
+          "unsafe_submission"
+        ],
+        "requires_human_review": true,
+        "reward_amounts": [
+          0.0
+        ],
+        "reward_cycle_pool": 1000.0,
+        "reward_cycle_total_allocated": 0.0,
+        "reward_unit": "protocol_points",
+        "simulated_stake_loss": 0.0,
+        "submission_count": 1,
+        "submission_created": true,
+        "submission_rejected": false,
+        "submission_statuses": [
+          "penalized"
+        ]
+      },
+      "case_id": "unsafe_penalty_001",
+      "checks": [
+        {
+          "actual": true,
+          "expected": true,
+          "name": "submission_created",
+          "passed": true
+        },
+        {
+          "actual": [
+            "ineligible"
+          ],
+          "expected": "ineligible",
+          "name": "contribution_eligibility",
+          "passed": true
+        },
+        {
+          "actual": [
+            0.0
+          ],
+          "expected": 0.0,
+          "name": "contribution_score_exact",
+          "passed": true
+        },
+        {
+          "actual": [
+            "unsafe_submission"
+          ],
+          "expected": "unsafe_submission",
+          "name": "reputation_event_type",
+          "passed": true
+        },
+        {
+          "actual": [
+            -0.08
+          ],
+          "expected": -0.08,
+          "name": "reputation_delta",
+          "passed": true
+        },
+        {
+          "actual": "decrease",
+          "expected": "decrease",
+          "name": "reputation_direction",
+          "passed": true
+        },
+        {
+          "actual": 0,
+          "expected": false,
+          "name": "reward_eligibility",
+          "passed": true
+        },
+        {
+          "actual": 0.0,
+          "expected": 0,
+          "name": "reward_amount_zero",
+          "passed": true
+        },
+        {
+          "actual": true,
+          "expected": true,
+          "name": "penalty_created",
+          "passed": true
+        },
+        {
+          "actual": "unsafe_submission",
+          "expected": "unsafe_submission",
+          "name": "penalty_reason",
+          "passed": true
+        },
+        {
+          "actual": 25.0,
+          "expected": 25.0,
+          "name": "protocol_penalty_points",
+          "passed": true
+        },
+        {
+          "actual": 0.0,
+          "expected": 0.0,
+          "name": "simulated_stake_loss",
+          "passed": true
+        },
+        {
+          "actual": false,
+          "expected": false,
+          "name": "executed_onchain",
+          "passed": true
+        },
+        {
+          "actual": true,
+          "expected": true,
+          "name": "requires_human_review",
+          "passed": true
+        },
+        {
+          "actual": [
+            "penalized"
+          ],
+          "expected": "penalized",
+          "name": "submission_status",
+          "passed": true
+        },
+        {
+          "actual": 1,
+          "expected": 1,
+          "name": "statistics_total_submissions",
+          "passed": true
+        },
+        {
+          "actual": 1,
+          "expected": 1,
+          "name": "statistics_unsafe_submissions",
+          "passed": true
+        },
+        {
+          "actual": 1,
+          "expected": 1,
+          "name": "idempotency_checks",
+          "passed": true
+        }
+      ],
+      "description": "Unsafe reproduction is denied reward and records a reviewable off-chain penalty event.",
+      "errors": [],
+      "expected": {
+        "contribution_eligibility": "ineligible",
+        "expected_contribution_score": 0.0,
+        "expected_event_type": "unsafe_submission",
+        "expected_executed_onchain": false,
+        "expected_human_review": true,
+        "expected_penalty_points": 25.0,
+        "expected_penalty_reason": "unsafe_submission",
+        "expected_reputation_delta": -0.08,
+        "expected_simulated_stake_loss": 0.0,
+        "expected_statistics": {
+          "total_submissions": 1,
+          "unsafe_submissions": 1
+        },
+        "expected_submission_status": "penalized",
+        "penalty_created": true,
+        "reputation_direction": "decrease",
+        "reward_amount_rule": "zero",
+        "reward_eligible": false,
+        "submission_created": true
+      },
+      "metrics": {
+        "eligible_contributions": 0,
+        "idempotency_checks": 1,
+        "idempotency_checks_passed": 1,
+        "ineligible_contributions": 1,
+        "negative_reputation_events": 1,
+        "penalty_events_created": 1,
+        "pending_contributions": 0,
+        "positive_reputation_events": 0,
+        "protocol_points_distributed": 0.0,
+        "reputation_events_created": 1,
+        "reward_cycles_created": 1,
+        "reward_cycles_finalized": 1,
+        "reward_events_created": 0,
+        "submissions_attempted": 1,
+        "submissions_created": 1,
+        "submissions_rejected": 0,
+        "zero_delta_reputation_events": 0,
+        "zero_reward_submissions": 1
+      },
+      "notes": [],
+      "passed": true,
+      "steps": {
+        "contribution_calculated": true,
+        "node_created": true,
+        "penalty_processed": true,
+        "reputation_processed": true,
+        "reward_cycle_finalized": true,
+        "submission_created": true
+      }
+    },
+    {
+      "actual": {
+        "contribution_eligibilities": [],
+        "contribution_scores": [],
+        "eligible_reward_allocations": 0,
+        "finding_hashes": [],
+        "idempotency_checks": 0,
+        "idempotency_checks_passed": 0,
+        "node_statistics": {
+          "accepted_submissions": 0,
+          "duplicate_submissions": 0,
+          "out_of_scope_submissions": 0,
+          "rejected_submissions": 0,
+          "total_submissions": 0,
+          "unsafe_submissions": 0
+        },
+        "node_status": "inactive",
+        "penalty_created": false,
+        "reputation_after": 0.5,
+        "reputation_before": 0.5,
+        "reputation_deltas": [],
+        "reputation_event_count": 0,
+        "reputation_event_types": [],
+        "reward_amounts": [],
+        "submission_count": 0,
+        "submission_created": false,
+        "submission_error_type": "NodeInactiveError",
+        "submission_rejected": true,
+        "submission_statuses": []
+      },
+      "case_id": "inactive_node_rejected_001",
+      "checks": [
+        {
+          "actual": false,
+          "expected": false,
+          "name": "submission_created",
+          "passed": true
+        },
+        {
+          "actual": true,
+          "expected": true,
+          "name": "submission_rejected",
+          "passed": true
+        },
+        {
+          "actual": "NodeInactiveError",
+          "expected": "NodeInactiveError",
+          "name": "expected_error_type",
+          "passed": true
+        },
+        {
+          "actual": "inactive",
+          "expected": "inactive",
+          "name": "node_status",
+          "passed": true
+        },
+        {
+          "actual": 0.5,
+          "expected": 0.5,
+          "name": "unchanged_reputation",
+          "passed": true
+        },
+        {
+          "actual": 0,
+          "expected": false,
+          "name": "reward_eligibility",
+          "passed": true
+        },
+        {
+          "actual": 0,
+          "expected": 0,
+          "name": "reward_amount_zero",
+          "passed": true
+        },
+        {
+          "actual": false,
+          "expected": false,
+          "name": "penalty_created",
+          "passed": true
+        },
+        {
+          "actual": 0,
+          "expected": 0,
+          "name": "statistics_total_submissions",
+          "passed": true
+        }
+      ],
+      "description": "An inactive agent node is rejected before any SubmissionRecord is created.",
+      "errors": [],
+      "expected": {
+        "expected_error_type": "NodeInactiveError",
+        "expected_node_status": "inactive",
+        "expected_reputation": 0.5,
+        "expected_statistics": {
+          "total_submissions": 0
+        },
+        "penalty_created": false,
+        "reward_amount_rule": "zero",
+        "reward_eligible": false,
+        "submission_created": false,
+        "submission_rejected": true
+      },
+      "metrics": {
+        "eligible_contributions": 0,
+        "idempotency_checks": 0,
+        "idempotency_checks_passed": 0,
+        "ineligible_contributions": 0,
+        "negative_reputation_events": 0,
+        "penalty_events_created": 0,
+        "pending_contributions": 0,
+        "positive_reputation_events": 0,
+        "protocol_points_distributed": 0.0,
+        "reputation_events_created": 0,
+        "reward_cycles_created": 0,
+        "reward_cycles_finalized": 0,
+        "reward_events_created": 0,
+        "submissions_attempted": 1,
+        "submissions_created": 0,
+        "submissions_rejected": 1,
+        "zero_delta_reputation_events": 0,
+        "zero_reward_submissions": 0
+      },
+      "notes": [],
+      "passed": true,
+      "steps": {
+        "contribution_calculated": false,
+        "node_created": true,
+        "penalty_processed": false,
+        "reputation_processed": false,
+        "reward_cycle_finalized": false,
+        "submission_created": false
+      }
+    },
+    {
+      "actual": {
+        "contribution_eligibilities": [
+          "eligible",
+          "eligible",
+          "eligible"
+        ],
+        "contribution_scores": [
+          100.0,
+          100.0,
+          100.0
+        ],
+        "eligible_reward_allocations": 3,
+        "finding_hashes": [
+          "a3205855a9c87b1f8867f3a6905114c460dd75d0ff1fd9f7008573343603925d",
+          "df407de417182dcf32045cb0137080d959478d7aa6e01a5d55b85ed520117aea",
+          "91dc647998ec19ba6baf13f1d458d25094413d5af822a46dc489279855b6e447"
+        ],
+        "idempotency_checks": 3,
+        "idempotency_checks_passed": 3,
+        "node_statistics": {
+          "accepted_submissions": 3,
+          "duplicate_submissions": 0,
+          "out_of_scope_submissions": 0,
+          "rejected_submissions": 0,
+          "total_submissions": 3,
+          "unsafe_submissions": 0
+        },
+        "node_status": "active",
+        "penalty_created": false,
+        "reputation_after": 0.68,
+        "reputation_before": 0.5,
+        "reputation_deltas": [
+          0.06,
+          0.06,
+          0.06
+        ],
+        "reputation_event_count": 3,
+        "reputation_event_types": [
+          "accepted_contribution",
+          "accepted_contribution",
+          "accepted_contribution"
+        ],
+        "reward_amounts": [
+          400.0,
+          400.0,
+          400.0
+        ],
+        "reward_cycle_pool": 1200.0,
+        "reward_cycle_total_allocated": 1200.0,
+        "reward_unit": "protocol_points",
+        "submission_count": 3,
+        "submission_created": true,
+        "submission_rejected": false,
+        "submission_statuses": [
+          "rewarded",
+          "rewarded",
+          "rewarded"
+        ]
+      },
+      "case_id": "reputation_growth_001",
+      "checks": [
+        {
+          "actual": true,
+          "expected": true,
+          "name": "submission_created",
+          "passed": true
+        },
+        {
+          "actual": [
+            "eligible",
+            "eligible",
+            "eligible"
+          ],
+          "expected": "eligible",
+          "name": "contribution_eligibility",
+          "passed": true
+        },
+        {
+          "actual": [
+            100.0,
+            100.0,
+            100.0
+          ],
+          "expected": ">= 90.0",
+          "name": "contribution_score_minimum",
+          "passed": true
+        },
+        {
+          "actual": [
+            "accepted_contribution",
+            "accepted_contribution",
+            "accepted_contribution"
+          ],
+          "expected": "accepted_contribution",
+          "name": "reputation_event_type",
+          "passed": true
+        },
+        {
+          "actual": [
+            0.06,
+            0.06,
+            0.06
+          ],
+          "expected": 0.06,
+          "name": "reputation_delta",
+          "passed": true
+        },
+        {
+          "actual": "increase",
+          "expected": "increase",
+          "name": "reputation_direction",
+          "passed": true
+        },
+        {
+          "actual": 0.68,
+          "expected": 0.68,
+          "name": "final_reputation",
+          "passed": true
+        },
+        {
+          "actual": 3,
+          "expected": 3,
+          "name": "reputation_event_count",
+          "passed": true
+        },
+        {
+          "actual": 3,
+          "expected": true,
+          "name": "reward_eligibility",
+          "passed": true
+        },
+        {
+          "actual": [
+            400.0,
+            400.0,
+            400.0
+          ],
+          "expected": "all > 0",
+          "name": "reward_amount_positive",
+          "passed": true
+        },
+        {
+          "actual": false,
+          "expected": false,
+          "name": "penalty_created",
+          "passed": true
+        },
+        {
+          "actual": [
+            "rewarded",
+            "rewarded",
+            "rewarded"
+          ],
+          "expected": "rewarded",
+          "name": "submission_status",
+          "passed": true
+        },
+        {
+          "actual": 3,
+          "expected": 3,
+          "name": "submission_count",
+          "passed": true
+        },
+        {
+          "actual": true,
+          "expected": true,
+          "name": "distinct_finding_hashes",
+          "passed": true
+        },
+        {
+          "actual": 3,
+          "expected": 3,
+          "name": "statistics_total_submissions",
+          "passed": true
+        },
+        {
+          "actual": 3,
+          "expected": 3,
+          "name": "statistics_accepted_submissions",
+          "passed": true
+        },
+        {
+          "actual": 3,
+          "expected": 3,
+          "name": "idempotency_checks",
+          "passed": true
+        }
+      ],
+      "description": "Three distinct accepted contributions grow one node's reputation gradually and exactly once each.",
+      "errors": [],
+      "expected": {
+        "contribution_eligibility": "eligible",
+        "distinct_finding_hashes": true,
+        "expected_event_type": "accepted_contribution",
+        "expected_final_reputation": 0.68,
+        "expected_reputation_delta": 0.06,
+        "expected_reputation_event_count": 3,
+        "expected_statistics": {
+          "accepted_submissions": 3,
+          "total_submissions": 3
+        },
+        "expected_submission_count": 3,
+        "expected_submission_status": "rewarded",
+        "minimum_contribution_score": 90.0,
+        "penalty_created": false,
+        "reputation_direction": "increase",
+        "reward_amount_rule": "positive",
+        "reward_eligible": true,
+        "submission_created": true
+      },
+      "metrics": {
+        "eligible_contributions": 3,
+        "idempotency_checks": 3,
+        "idempotency_checks_passed": 3,
+        "ineligible_contributions": 0,
+        "negative_reputation_events": 0,
+        "penalty_events_created": 0,
+        "pending_contributions": 0,
+        "positive_reputation_events": 3,
+        "protocol_points_distributed": 1200.0,
+        "reputation_events_created": 3,
+        "reward_cycles_created": 1,
+        "reward_cycles_finalized": 1,
+        "reward_events_created": 3,
+        "submissions_attempted": 3,
+        "submissions_created": 3,
+        "submissions_rejected": 0,
+        "zero_delta_reputation_events": 0,
+        "zero_reward_submissions": 0
+      },
+      "notes": [],
+      "passed": true,
+      "steps": {
+        "contribution_calculated": true,
+        "node_created": true,
+        "penalty_processed": false,
+        "reputation_processed": true,
+        "reward_cycle_finalized": true,
+        "submission_created": true
+      }
+    }
+  ],
+  "dataset": "week_5_protocol_synthetic",
+  "generated_at": "2026-07-16T12:29:30.750198+00:00",
+  "version": "1.0"
+}

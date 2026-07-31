@@ -1,0 +1,14 @@
+[
+  {
+    "category": "access_control",
+    "contract": "src/VulnerableVault.sol",
+    "function": "setTreasury",
+    "root_cause_keywords": [
+      "missing authorization",
+      "unprotected",
+      "no onlyOwner"
+    ],
+    "severity": "High"
+  }
+]
+

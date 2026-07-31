@@ -1,0 +1,14 @@
+{
+  "case_id": "inactive_node_rejected_001",
+  "expected": {
+    "submission_created": false,
+    "submission_rejected": true,
+    "expected_error_type": "NodeInactiveError",
+    "expected_node_status": "inactive",
+    "expected_reputation": 0.5,
+    "reward_eligible": false,
+    "reward_amount_rule": "zero",
+    "penalty_created": false,
+    "expected_statistics": {"total_submissions": 0}
+  }
+}
