@@ -1,6 +1,7 @@
 from app.schemas.deduplication import DeduplicationStatus
 from app.schemas.validation import ValidationEvidence
 from app.services.deduplication_service import (
+    build_root_cause_fingerprint,
     apply_dedup_result_to_validation_evidence,
     build_dedup_key,
     classify_similarity,
@@ -276,3 +277,13 @@ def test_apply_dedup_result_to_validation_evidence_sets_duplicate_fields_and_not
     assert "existing" in evidence.notes
     assert "Deduplication v0 uses deterministic field similarity." in evidence.notes
 
+
+def test_root_cause_fingerprint_reuses_normalized_dedup_identity_not_reporter_data():
+    finding = _finding("finding-1")
+    same_technical_finding = _finding("finding-2")
+    first = build_root_cause_fingerprint(finding)
+    second = build_root_cause_fingerprint(same_technical_finding)
+    assert first == second
+    assert len(first) == 64
+    changed = _finding("finding-3", function="differentFunction")
+    assert build_root_cause_fingerprint(changed) != first

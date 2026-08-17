@@ -1,0 +1,19 @@
+{
+  "project_name": "MiniLendingProtocol",
+  "language": "Solidity",
+  "framework": "Foundry",
+  "chain": "Ethereum",
+  "commit_hash": "local-dev",
+  "contracts_in_scope": [
+    "src/Vault.sol",
+    "src/OracleRouter.sol"
+  ],
+  "contracts_out_of_scope": [],
+  "assets_at_risk": [],
+  "attack_categories": [
+    "access_control",
+    "reentrancy"
+  ],
+  "known_issues": [],
+  "forbidden_actions": []
+}

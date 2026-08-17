@@ -24,7 +24,10 @@ from app.schemas.reputation import (
     ReputationProcessingStatus,
     ReputationSignal,
 )
-from app.services.contribution_scoring_service import load_contribution_score
+from app.services.contribution_scoring_service import (
+    is_valid_independent_duplicate,
+    load_contribution_score,
+)
 from app.services.finding_service import load_project_finding
 from app.services.node_registry_service import load_node, save_node
 from app.services.reproduction_service import load_reproduction_result
@@ -205,12 +208,19 @@ def determine_reputation_event_type(
     validation_status: str,
     reproduction_status: str | None,
     contribution: ContributionScoreRecord,
+    independent_duplicate: bool = False,
 ) -> ReputationEventType:
     validation = _normalize_status(validation_status)
     reproduction = _normalize_status(reproduction_status)
     if validation == "accepted":
         if contribution.eligibility_status == ContributionEligibilityStatus.PENDING:
             raise ReputationProcessingError("Accepted contribution eligibility is still pending")
+        if independent_duplicate:
+            if reproduction != "reproduced":
+                raise ReputationInputMismatchError(
+                    "Accepted independent duplicate requires reproduced evidence"
+                )
+            return ReputationEventType.ACCEPTED_CONTRIBUTION
         if (
             contribution.eligibility_status != ContributionEligibilityStatus.ELIGIBLE
             or not contribution.eligible_for_reward
@@ -337,7 +347,7 @@ def build_reputation_source_payload(
     normalized_severity: str,
     category: str,
 ) -> dict[str, Any]:
-    return {
+    payload = {
         "reputation_version": REPUTATION_VERSION,
         "submission_id": _value(submission, "submission_id"),
         "node_id": _value(submission, "node_id"),
@@ -354,6 +364,13 @@ def build_reputation_source_payload(
         "eligible_for_reward": contribution.eligible_for_reward,
         "normalized_severity": normalized_severity,
     }
+    if is_valid_independent_duplicate(validation):
+        payload["duplicate_relation"] = "independent_root_cause"
+        payload["canonical_finding_id"] = (
+            _value(_value(validation, "evidence"), "canonical_finding_id")
+            or _value(_value(validation, "evidence"), "duplicate_of")
+        )
+    return payload
 
 
 def compute_reputation_source_fingerprint(payload: dict[str, Any]) -> str:
@@ -415,12 +432,27 @@ def build_reputation_event(
         raise ReputationProcessingError("Validation is required to build a reputation event")
     normalized_severity = extract_normalized_severity(finding, validation)
     category = extract_category(submission, finding)
-    event_type = determine_reputation_event_type(validation_status, reproduction_status, contribution)
+    independent_duplicate = is_valid_independent_duplicate(validation)
+    event_type = determine_reputation_event_type(
+        validation_status,
+        reproduction_status,
+        contribution,
+        independent_duplicate=independent_duplicate,
+    )
     delta_components, signals = calculate_reputation_delta(
         event_type,
         contribution.total_score,
         normalized_severity,
     )
+    if independent_duplicate:
+        signals.append(
+            _signal(
+                "ACCEPTED_INDEPENDENT_DUPLICATE",
+                0,
+                "The valid report independently confirmed an existing root cause.",
+                "validation",
+            )
+        )
     statistics_delta = determine_statistics_delta(event_type)
     previous_statistics = node.statistics.model_dump()
     new_statistics_model = apply_statistics_delta(node.statistics, statistics_delta)
@@ -658,6 +690,7 @@ def process_submission_reputation(
     if (
         validation_status == "accepted"
         and contribution.eligibility_status == ContributionEligibilityStatus.INELIGIBLE
+        and not is_valid_independent_duplicate(validation)
     ):
         raise ReputationInputMismatchError(
             "Accepted validation cannot use an ineligible contribution score"

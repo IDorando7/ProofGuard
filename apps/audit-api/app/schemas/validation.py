@@ -1,7 +1,7 @@
 from datetime import datetime
 from enum import Enum
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, model_validator
 
 
 class ValidationStatus(str, Enum):
@@ -13,6 +13,16 @@ class ValidationStatus(str, Enum):
     INSUFFICIENT_EVIDENCE = "insufficient_evidence"
     UNSAFE_POC = "unsafe_poc"
     UNSUPPORTED = "unsupported"
+
+
+class DuplicateKind(str, Enum):
+    """The reason a duplicate relation exists.
+
+    Submission retries are rejected by the submission protocol and therefore
+    never appear as validation duplicate relations.
+    """
+
+    INDEPENDENT_ROOT_CAUSE = "independent_root_cause"
 
 
 class ValidationEvidenceKey(str, Enum):
@@ -37,9 +47,29 @@ class ValidationEvidence(BaseModel):
     in_scope: bool | None = None
     is_duplicate: bool | None = None
     duplicate_of: str | None = None
+    duplicate_kind: DuplicateKind | None = None
+    is_valid_duplicate: bool | None = None
+    canonical_finding_id: str | None = None
     original_severity: str | None = None
     normalized_severity: str | None = None
     notes: list[str] = Field(default_factory=list)
+
+    @model_validator(mode="after")
+    def validate_duplicate_semantics(self) -> "ValidationEvidence":
+        if self.duplicate_kind == DuplicateKind.INDEPENDENT_ROOT_CAUSE:
+            if self.is_duplicate is not True or self.is_valid_duplicate is not True:
+                raise ValueError(
+                    "Independent root-cause duplicates must be valid duplicate relations"
+                )
+            if not self.duplicate_of or not self.canonical_finding_id:
+                raise ValueError(
+                    "Independent root-cause duplicates require a canonical finding"
+                )
+            if self.duplicate_of != self.canonical_finding_id:
+                raise ValueError("duplicate_of must match canonical_finding_id")
+        elif self.is_valid_duplicate is True:
+            raise ValueError("Valid duplicate evidence requires an explicit duplicate kind")
+        return self
 
 
 class ValidationDecisionCreate(BaseModel):
@@ -64,4 +94,3 @@ class ValidationDecisionUpdate(BaseModel):
     reason: str | None = Field(default=None, min_length=1)
     evidence: ValidationEvidence | None = None
     validator_name: str | None = None
-

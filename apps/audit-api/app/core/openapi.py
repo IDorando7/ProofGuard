@@ -33,14 +33,20 @@ OPENAPI_TAGS = [
     {"name": "routing", "description": "Calcularea și consultarea rutării unui audit către subneturi și noduri."},
     {"name": "submissions", "description": "Trimiterea finding-urilor descoperite de noduri către protocol."},
     {"name": "contributions", "description": "Calcularea contribuției și eligibilității pentru recompensă."},
+    {"name": "finding-clusters", "description": "Gruparea deterministă a rapoartelor validate după cauza vulnerabilității."},
+    {"name": "report-quality", "description": "Evaluarea deterministă și auditabilă a calității fiecărui raport dintr-un cluster."},
     {"name": "reproduction", "description": "Încărcarea și executarea controlată a demonstrațiilor Proof of Concept."},
     {"name": "validation", "description": "Validarea finding-urilor și stocarea deciziilor de validare."},
     {"name": "reports", "description": "Generarea și citirea raportului final de audit."},
     {"name": "category-performance", "description": "Metrici brute de performanță ale nodurilor pentru fiecare categorie."},
     {"name": "category-scores", "description": "Scoruri normalizate ale nodurilor pentru fiecare categorie."},
     {"name": "reputation", "description": "Reputația nodurilor și istoricul evenimentelor care o modifică."},
-    {"name": "rewards", "description": "Cicluri de recompense, plăți și penalizări la nivel de nod."},
+    {"name": "rewards", "description": "Cicluri istorice de recompense simulate și penalizări la nivel de nod."},
     {"name": "subnet-rewards", "description": "Alocarea recompenselor între subneturile și nodurile rutate."},
+    {"name": "task-rewards", "description": "Bugete client pentru un audit rutat, separate de recompensele protocolului."},
+    {"name": "task-finding-rewards", "description": "Evaluarea economică deterministă a clusterelor de vulnerabilități din pool-ul minerilor."},
+    {"name": "task-operator-rewards", "description": "Preview determinist pentru deduplicare pe operator, Top-K, Chief Finder și distribuție Q²."},
+    {"name": "week7-task-reward-cycles", "description": "Integrarea și finalizarea imuabilă a recompenselor client-task Week 7."},
 ]
 
 
@@ -381,6 +387,150 @@ OPERATION_DOCS: dict[tuple[str, str], tuple[str, str]] = {
     ("GET", "/submissions/{submission_id}/subnet-rewards"): (
         "Listează recompensele unui submission",
         "Returnează evenimentele de recompensă pentru subneturi asociate submission-ului.",
+    ),
+
+    # Client-funded task reward budgets
+    ("POST", "/projects/{project_id}/task-reward-budgets"): (
+        "Creează bugetul de recompensă al unui audit",
+        "Creează sau reutilizează un buget client în protocol_points pentru o rutare finalizată, fără a distribui recompense.",
+    ),
+    ("POST", "/projects/{project_id}/task-reward-budgets/{task_reward_budget_id}/finalize"): (
+        "Finalizează bugetul de recompensă al auditului",
+        "Face imuabilă împărțirea bugetului între miner, validator și protocol, fără plată sau RewardEvent.",
+    ),
+    ("GET", "/projects/{project_id}/task-reward-budgets/{task_reward_budget_id}"): (
+        "Citește bugetul de recompensă al auditului",
+        "Returnează bugetul client identificat în cadrul proiectului.",
+    ),
+    ("GET", "/projects/{project_id}/routing/{routing_id}/task-reward-budget"): (
+        "Găsește bugetul client al unei rutări",
+        "Returnează bugetul client asociat exact unei execuții de audit rutate.",
+    ),
+    ("GET", "/projects/{project_id}/task-reward-budgets"): (
+        "Listează bugetele client ale proiectului",
+        "Returnează determinist bugetele de audit ale proiectului, separat de ciclurile istorice de recompense.",
+    ),
+
+    # FindingCluster economic valuation (Week 7 Day 4)
+    ("POST", "/projects/{project_id}/routing/{routing_id}/task-rewards/findings/calculate"): (
+        "Calculează alocarea pool-ului minerilor pe vulnerabilități",
+        "Aplică severitatea validată, unicitatea pe operator și largest remainder; nu distribuie recompense către operatori și nu creează RewardEvent.",
+    ),
+    ("GET", "/projects/{project_id}/routing/{routing_id}/task-rewards/findings/latest"): (
+        "Citește ultima evaluare economică a finding-urilor",
+        "Returnează snapshotul calculat curent pentru rutare, separat de plățile Day 5/Day 6.",
+    ),
+    ("GET", "/projects/{project_id}/routing/{routing_id}/task-rewards/findings"): (
+        "Listează evaluările economice ale finding-urilor",
+        "Returnează istoricul determinist, inclusiv snapshoturile supersedate.",
+    ),
+    ("GET", "/projects/{project_id}/routing/{routing_id}/task-rewards/findings/{calculation_id}"): (
+        "Citește o evaluare economică a finding-urilor",
+        "Returnează severitatea, unicitatea, FindingScore și alocarea auditabilă pentru fiecare cluster.",
+    ),
+
+    # Operator payout previews (Week 7 Day 5)
+    ("POST", "/projects/{project_id}/routing/{routing_id}/task-rewards/operators/calculate"): (
+        "Calculează preview-ul recompenselor pe operator",
+        "Deduplică rapoartele pe operator, selectează Top-K și Chief Finder și distribuie pool-ul prin Q² fără a crea RewardEvent.",
+    ),
+    ("GET", "/projects/{project_id}/routing/{routing_id}/task-rewards/operators/latest"): (
+        "Citește ultimul preview de recompense pe operator",
+        "Returnează ultimul snapshot calculat Day 5 pentru rutare, fără stare de plată finalizată.",
+    ),
+    ("GET", "/projects/{project_id}/routing/{routing_id}/task-rewards/operators"): (
+        "Listează preview-urile de recompense pe operator",
+        "Returnează istoricul calculat și supersedat al distribuțiilor Day 5.",
+    ),
+    ("GET", "/projects/{project_id}/routing/{routing_id}/task-rewards/operators/{calculation_id}"): (
+        "Citește un preview de recompense pe operator",
+        "Expune reprezentanții, rankurile, Top-K, Chief, Q², excluderile și conservarea fiecărui cluster.",
+    ),
+
+    # Week 7 integrated client-task reward cycle
+    ("POST", "/projects/{project_id}/routing/{routing_id}/task-reward-cycles"): (
+        "Creează un ciclu Week 7",
+        "Creează idempotent un ciclu draft pentru bugetul client-task finalizat, fără calcul sau plată.",
+    ),
+    ("POST", "/projects/{project_id}/task-reward-cycles/{reward_cycle_id}/calculate"): (
+        "Calculează ciclul Week 7",
+        "Orchestrează snapshoturile Day 4 și Day 5 și verifică conservarea fără a crea RewardEvents.",
+    ),
+    ("POST", "/projects/{project_id}/task-reward-cycles/{reward_cycle_id}/finalize"): (
+        "Finalizează ciclul Week 7",
+        "Revalidează sursele și materializează idempotent RewardEvents deterministe pentru alocările pozitive.",
+    ),
+    ("GET", "/projects/{project_id}/task-reward-cycles/{reward_cycle_id}"): (
+        "Citește ciclul Week 7",
+        "Returnează starea, referințele, amprentele și totalurile ciclului client-task.",
+    ),
+    ("GET", "/projects/{project_id}/task-reward-cycles"): (
+        "Listează ciclurile Week 7",
+        "Returnează ciclurile client-task Week 7 ale proiectului fără a combina istoricul legacy.",
+    ),
+    ("GET", "/projects/{project_id}/routing/{routing_id}/task-reward-cycle"): (
+        "Citește ciclul Week 7 al rutării",
+        "Rezolvă ciclul client-task unic asociat rutării indicate.",
+    ),
+    ("GET", "/projects/{project_id}/task-reward-cycles/{reward_cycle_id}/events"): (
+        "Listează RewardEvents Week 7",
+        "Returnează în ordine deterministă evenimentele finale ale ciclului client-task.",
+    ),
+    ("GET", "/operators/{operator_id}/task-rewards"): (
+        "Citește istoricul economic al operatorului",
+        "Returnează totalurile client-task separat de reputație și scorurile de performanță.",
+    ),
+    ("GET", "/nodes/{node_id}/task-rewards"): (
+        "Citește recompensele reprezentate de nod",
+        "Returnează evenimentele unde nodul a furnizat raportul reprezentativ al operatorului.",
+    ),
+    ("GET", "/submissions/{submission_id}/task-rewards"): (
+        "Citește recompensa client-task a raportului",
+        "Returnează istoricul economic Week 7 pentru submission-ul reprezentativ indicat.",
+    ),
+    ("GET", "/finding-clusters/{finding_cluster_id}/task-rewards"): (
+        "Citește recompensele clusterului",
+        "Returnează RewardEvents finale atribuite cauzei unice indicate.",
+    ),
+
+    # Finding clusters
+    ("POST", "/projects/{project_id}/routing/{routing_id}/finding-clusters/rebuild"): (
+        "Reconstruiește clusterele de vulnerabilități",
+        "Materializează determinist cauzele unice din submission-uri rutate și validate, fără a calcula recompense.",
+    ),
+    ("POST", "/projects/{project_id}/routing/{routing_id}/finding-clusters/finalize"): (
+        "Finalizează clusterele unei rutări",
+        "Îngheață snapshoturile de cauză-rădăcină eligibile înainte de evaluarea economică Day 4, fără a distribui recompense.",
+    ),
+    ("GET", "/projects/{project_id}/routing/{routing_id}/finding-clusters"): (
+        "Listează clusterele unei rutări",
+        "Returnează cauzele unice și rapoartele membre pentru execuția de audit indicată.",
+    ),
+    ("GET", "/projects/{project_id}/routing/{routing_id}/finding-clusters/{finding_cluster_id}"): (
+        "Citește un cluster de vulnerabilitate",
+        "Returnează clusterul derivat identificat în cadrul proiectului și rutării.",
+    ),
+    ("GET", "/submissions/{submission_id}/finding-cluster"): (
+        "Găsește clusterul unui submission",
+        "Returnează cauza unică din snapshotul curent care conține submission-ul indicat.",
+    ),
+
+    # Report quality
+    ("POST", "/projects/{project_id}/routing/{routing_id}/finding-clusters/{finding_cluster_id}/submissions/{submission_id}/quality-assessment"): (
+        "Evaluează calitatea unui raport",
+        "Creează sau finalizează evaluarea validator/protocol pentru un membru eligibil al clusterului; scorul Q este derivat de server.",
+    ),
+    ("GET", "/projects/{project_id}/routing/{routing_id}/finding-clusters/{finding_cluster_id}/quality-assessments"): (
+        "Listează evaluările de calitate",
+        "Returnează evaluările raport-cu-raport ale membrilor clusterului, inclusiv istoricul supersedat la cerere.",
+    ),
+    ("GET", "/projects/{project_id}/routing/{routing_id}/submissions/{submission_id}/quality-assessment"): (
+        "Citește evaluarea activă a unui raport",
+        "Returnează evaluarea activă pentru versiunea curentă a politicii de calitate.",
+    ),
+    ("POST", "/projects/{project_id}/routing/{routing_id}/quality-assessments/rebuild"): (
+        "Reconstruiește evaluările de calitate",
+        "Reevaluează determinist membrii eligibili ai clusterelor fără a calcula sau distribui recompense.",
     ),
 
     # Reproduction

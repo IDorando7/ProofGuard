@@ -148,6 +148,7 @@ def build_final_audit_report(
             reproductions.get(finding.finding_id),
         )
         for finding in findings
+        if not _is_valid_independent_duplicate(decisions.get(finding.finding_id))
     ]
     groups = group_summaries_by_validation_status(summaries)
     scope = load_project_scope(project_workspace)
@@ -368,6 +369,16 @@ def _normalize_severity(value: str | None) -> str:
 def _validation_status(validation_decision: Any | None) -> str:
     status = _string_value(_get_value(validation_decision, "status"))
     return status if status in VALIDATION_STATUSES else "needs_review"
+
+
+def _is_valid_independent_duplicate(validation_decision: Any | None) -> bool:
+    evidence = _get_value(validation_decision, "evidence")
+    duplicate_kind = _string_value(_get_value(evidence, "duplicate_kind"))
+    return (
+        _validation_status(validation_decision) == "accepted"
+        and duplicate_kind == "independent_root_cause"
+        and _get_value(evidence, "is_valid_duplicate") is True
+    )
 
 
 def _first_string(*values: Any) -> str | None:

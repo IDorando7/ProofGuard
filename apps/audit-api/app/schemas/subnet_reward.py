@@ -16,6 +16,8 @@ from app.schemas.subnet import SubnetMemberStatus
 
 SUBNET_REWARD_VERSION = "subnet_reward_v0"
 SUBNET_REWARD_POLICY_VERSION = "subnet_reward_policy_v0"
+# Compatibility label only: existing persisted values are not renamed or migrated.
+LEGACY_SUBNET_TASK_REWARD_POLICY_VERSION = SUBNET_REWARD_POLICY_VERSION
 SUBNET_REWARD_EVENT_VERSION = "subnet_reward_event_v0"
 MEMBERSHIP_MULTIPLIER_POLICY_VERSION = "membership_multiplier_policy_v0"
 CATEGORY_MULTIPLIER_POLICY_VERSION = "category_multiplier_policy_v0"

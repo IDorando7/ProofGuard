@@ -7,6 +7,13 @@ from pydantic import BaseModel, ConfigDict, Field, field_validator, model_valida
 from app.schemas.node import normalize_category
 
 
+class RewardDomain(str, Enum):
+    """Reward accounting domains with intentionally independent semantics."""
+
+    CLIENT_TASK = "client_task"
+    NETWORK_PROTOCOL = "network_protocol"
+
+
 class RewardUnit(str, Enum):
     PROTOCOL_POINTS = "protocol_points"
 

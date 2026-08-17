@@ -1,0 +1,6 @@
+{
+  "clean_root_replay": true,
+  "economic_fingerprint_equal": true,
+  "randomized_input_order": true,
+  "reward_event_ids_equal": true
+}

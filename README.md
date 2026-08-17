@@ -1023,3 +1023,134 @@ No production project or protocol data is modified. The benchmark executes no
 agent, PoC, Docker, forge, project-analysis subprocess, AI/LLM, remote service,
 or external API. Protocol points are simulated only: no real payment, pricing,
 token, wallet, staking, slashing, smart-contract, or blockchain action exists.
+
+## Week 7 Day 1 - Reward Architecture Refactor Foundation
+
+ProofGuard now represents client-funded task budgets separately from future
+network/protocol incentives. The task identity is one finalized
+`ProjectRoutingRecord`, allowing two audit executions of the same project to
+have distinct budgets. One routing can have one idempotent `TaskRewardBudget`
+stored under `data/protocol/task-rewards/budgets/routing/<routing_id>/budget.json`.
+
+The budget uses exact six-decimal `protocol_points` and centralized configurable
+shares for miner, validator, and protocol pools. The default development split
+is 70/20/10. Week 6 largest-remainder allocation guarantees exact conservation.
+Budget creation and finalization do not distribute rewards or create
+RewardEvents.
+
+Week 5 `reward_v0` and Week 6 `subnet_reward_v0` remain readable legacy task
+allocation policies. Their historical reputation, category-score, and
+membership multipliers are not part of new `task_reward_v1` semantics.
+ContributionScore, Reputation, CategoryScore, Membership, and Routing remain
+performance/history/opportunity systems.
+
+See the [Week 7 reward system specification](protocol/specs/reward-model.md).
+
+## Week 7 Day 2 - Root-Cause Clustering and Duplicate Semantics
+
+ProofGuard now materializes one deterministic `FindingCluster` for each
+accepted unique vulnerability inside one finalized routing task. Independent
+reports remain individually attributable members, while
+`distinct_operator_count` resolves and deduplicates `NodeRecord.operator_id`.
+Cluster identity is project-, routing-, and category-scoped and reuses the Week
+4 dedup canonical relation and normalized root-cause identity.
+
+The validator now separates a valid independent root-cause match from a
+same-node submission retry. A reproduced, in-scope independent match is
+accepted with explicit `independent_root_cause` metadata and is not
+automatically reputation-negative. The Week 5 same-node/project/finding-hash
+guard remains unchanged: a repeated submission is rejected before persistence
+and never becomes a cluster member.
+
+Clusters are rebuilt from immutable findings, routed submissions, validation
+decisions, reproduction results, and registry operator identity under
+`data/protocol/finding-clusters/tasks/<routing_id>/`. Rebuilds are idempotent,
+source-fingerprinted, and do not calculate a task reward, transfer tokens, run
+an LLM classifier, or write to a blockchain.
+
+## Week 7 Day 3 - Deterministic Report Quality Assessment
+
+Every eligible validated `FindingCluster` member can now receive a separate,
+versioned `ReportQualityAssessment`. Its five normalized Decimal components are
+correctness (35%), PoC quality (25%), root-cause quality (20%), impact quality
+(10%), and fix quality (10%). ProofGuard calculates Q at six-decimal precision;
+clients cannot submit the total score, node/operator identity, rank, or reward.
+
+Deterministic rules consume existing immutable protocol records and persist
+component sources, reason codes, and evidence references. Where the current
+records cannot honestly establish a value—most notably fix quality—the record
+remains a draft until structured validator input is supplied. Finalized records
+are immutable and changed sources require explicit versioned supersession.
+
+Assessments are stored under
+`data/protocol/report-quality/tasks/<routing_id>/submissions/<submission_id>/`.
+They neither replace Week 5 ContributionScore nor modify reputation,
+CategoryScore, membership, routing, clusters, budgets, or rewards. No LLM,
+Top-K, Chief Finder, Q² allocation, payment, token, or blockchain operation is
+part of Day 3. See the [Week 7 reward system specification](protocol/specs/reward-model.md).
+
+## Week 7 Day 4 - FindingCluster Economic Valuation
+
+Week 7 Day 4 allocates the finalized client-funded miner pool to unique,
+finalized FindingClusters. `finding_cluster_value_v1` uses validator-approved
+severity weights (`16/8/3/1`, Informational `0`) and distinct-operator
+uniqueness `max(0.50, 1 / (1 + 0.20 * ln(N)))`. FindingScore is severity weight
+times the persisted six-decimal uniqueness. Existing Week 6 category pool and
+largest-remainder accounting are reused; category-isolated allocation is the
+default and global allocation is supported.
+
+The result is an immutable, audit-readable cluster allocation snapshot. It
+does not read report Q, select operators, Top-K or Chief Finder, create a
+RewardEvent, distribute a payout, or change reputation, CategoryScore,
+membership or routing. See the [Week 7 reward system specification](protocol/specs/reward-model.md).
+
+## Week 7 Day 5 - Operator-Level Task Reward Preview
+
+Week 7 Day 5 consumes fixed Day 4 cluster rewards and finalized Day 3 report
+quality. It selects the best report per server-derived operator, ranks all
+operator representatives, rewards at most the configured Top-K (default 5),
+selects an early qualified Chief only from Top-K, and distributes the Quality
+Pool with exact Decimal Q² weights and largest remainder.
+
+Candidate/shadow, probation, active and expert assignments can compete when
+properly authorized; membership, reputation, CategoryScore, and
+ContributionScore do not multiply current-task payout. The result is an
+auditable calculated preview with exact per-cluster/task conservation. No
+RewardEvent, final payout, token, payment, reputation update, or blockchain
+operation is created. See the [Week 7 reward system specification](protocol/specs/reward-model.md).
+
+## Week 7 Day 6 - Integrated Client-Task Reward Cycle
+
+Day 6 connects the Week 7 budget, cluster valuation and operator allocation
+snapshots to a `draft -> calculated -> finalized` client-task reward cycle.
+Finalization re-runs the authoritative Day 4/Day 5 orchestration, rejects stale
+sources, and creates deterministic immutable RewardEvents only for positive
+operator allocations. Event creation is atomic and retry-safe; one finalized
+TaskRewardBudget cannot be paid by a second Week 7 cycle.
+
+Economic history is readable by cycle, operator, representative node,
+submission and FindingCluster. It remains separate from ContributionScore,
+reputation, CategoryScore, membership and routing. Validator/protocol pools stay
+reserved, and no wallet, token or blockchain operation occurs.
+
+## Week 7 Day 7 - End-to-End Reward Benchmark
+
+Day 7 runs the real Week 7 services from routing through immutable RewardEvents
+inside temporary isolated roots. The primary fixture contains 64 nodes, 40
+operators, eight root-cause clusters, two categories and more than 100 reports,
+plus a 100-report/50-operator Top-K stress case. It verifies exact Decimal pool
+conservation, operator-based uniqueness, one operator/one position, Top-K and
+Chief bounds, Q² distribution, category and cluster isolation, stale-source
+blocking, crash recovery, double-reward protection and deterministic replay.
+
+Run it with:
+
+```bash
+cd apps/audit-api
+python -m research.benchmarks.week7_reward_benchmark
+```
+
+Generated case, allocation, event, invariant, determinism and Markdown outputs
+are stored under `research/results/week7/`. The benchmark introduces no new
+reward formula, validator economics, network emission, token transfer, wallet
+payment or blockchain write. See the [Week 7 reward system specification](protocol/specs/reward-model.md).

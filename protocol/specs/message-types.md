@@ -234,6 +234,13 @@ Conceptual fields:
 does not reveal private vulnerability details and does not prove the validator
 was honest.
 
+Week 7 Day 2 keeps validation truth separate from root-cause relation. New
+accepted independent matches additionally persist
+`duplicate_kind=independent_root_cause`, `is_valid_duplicate=true`, and
+`canonical_finding_id` (equal to the legacy-compatible `duplicate_of`
+reference). Same-node submission spam is rejected before validation and cannot
+set these fields. Historical `duplicate` decisions remain readable.
+
 ## 7. ContributionScoreCalculated
 
 `ContributionScoreCalculated` is represented in the centralized MVP by the
@@ -522,3 +529,65 @@ submissions.
 Records one simulated contribution allocation exactly once for a submission.
 Its deterministic event ID binds the reward cycle and submission; it does not
 represent a real payment or on-chain claim.
+
+## 15. Off-chain FindingCluster valuation records
+
+These Week 7 Day 4 objects are deterministic calculation snapshots, not signed
+payment messages.
+
+### FindingClusterRewardAllocation
+
+Explains one finalized root cause using its validator-approved severity,
+configured severity weight, distinct valid operator count, persisted
+uniqueness, FindingScore, parent miner/category pool, and allocated protocol
+points. It contains no report Q, operator rank, Top-K, Chief Finder, or
+individual reward.
+
+### TaskFindingRewardCalculated
+
+Records one `finding_cluster_value_v1` allocation across a finalized
+`TaskRewardBudget.miner_pool_points`. It conserves the miner pool between
+distributed and undistributed cluster points, stores a canonical source
+fingerprint, and creates no RewardEvent. Changed economic sources create a
+superseding snapshot; identical inputs reuse the existing logical result.
+
+## 16. Off-chain operator reward preview records
+
+### OperatorClusterRewardAllocation
+
+Explains one operator's representative report, finalized Q and Q², ordinal
+quality rank, Top-K state, optional distinct Chief-qualifying report, Quality
+Pool points, Chief points, and total. Exactly one allocation exists per
+eligible operator per FindingCluster; reports not representing the operator
+remain visible as exclusions.
+
+### TaskOperatorRewardCalculated
+
+Aggregates per-cluster `operator_cluster_payout_v1` previews and per-operator
+task totals. Its canonical fingerprint binds the active Day 4 snapshot,
+authorized report/assignment/operator identities, finalized Day 3 assessments,
+Top-K and Chief policy, selections, Q² values, and exact conserved totals. It is
+not `RewardEventApplied`, does not consume a budget, and is not a payment.
+
+## 17. Week 7 Day 6 reward-cycle messages
+
+### Week7TaskRewardCycle
+
+Policy-versioned `client_task` record with `draft`, `calculated`, and
+`finalized` states. It references the finalized TaskRewardBudget and current
+Day 4/Day 5 calculations, commits their economic content through deterministic
+fingerprints, and conserves miner distributed plus undistributed points.
+
+### Week7TaskRewardEvent
+
+Immutable positive economic event for one reward cycle, FindingCluster and
+operator. It references the representative node/submission, Q and Q² weight,
+quality rank, Chief evidence, Quality Pool amount, Chief bonus and total. Its
+identifier is derived from cycle, cluster, operator, representative submission
+and policy.
+
+### Week7TaskRewardHistorySummary
+
+Read-only economic summary by operator, representative node, submission or
+FindingCluster. It is deliberately separate from ContributionScore,
+ReputationEvent and CategoryScore messages.

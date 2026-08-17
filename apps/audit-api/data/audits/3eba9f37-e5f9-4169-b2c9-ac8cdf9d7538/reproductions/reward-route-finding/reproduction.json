@@ -1,0 +1,16 @@
+{
+  "finding_id": "reward-route-finding",
+  "project_id": "3eba9f37-e5f9-4169-b2c9-ac8cdf9d7538",
+  "status": "reproduced",
+  "poc_file": null,
+  "test_name": null,
+  "command": null,
+  "stdout": null,
+  "stderr": null,
+  "duration_ms": null,
+  "error_message": null,
+  "safety_notes": [],
+  "reproduction_id": "38a8e1fd-d9ca-4e28-83aa-d4ff18afc4de",
+  "created_at": "2026-08-07T15:52:05.016428Z",
+  "updated_at": "2026-08-07T15:52:05.016831Z"
+}

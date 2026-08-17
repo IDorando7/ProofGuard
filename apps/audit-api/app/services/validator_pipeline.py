@@ -5,7 +5,12 @@ from app.schemas.deduplication import DeduplicationResult, DeduplicationStatus
 from app.schemas.reproduction import ReproductionResult
 from app.schemas.scope_validation import ScopeValidationResult, ScopeValidationStatus
 from app.schemas.severity import SeverityChangeType, SeverityNormalizationResult
-from app.schemas.validation import ValidationDecision, ValidationEvidence, ValidationStatus
+from app.schemas.validation import (
+    DuplicateKind,
+    ValidationDecision,
+    ValidationEvidence,
+    ValidationStatus,
+)
 from app.services.deduplication_service import find_duplicate
 from app.services.finding_service import list_project_findings, load_project_finding
 from app.services.reproduction_service import load_reproduction_result
@@ -109,13 +114,6 @@ def _decide_status(
             "Project scope is missing or invalid.",
         )
 
-    if dedup_result.status == DeduplicationStatus.DUPLICATE:
-        return (
-            ValidationStatus.DUPLICATE,
-            max(0.80, dedup_result.similarity_score),
-            "Finding appears to duplicate an existing finding.",
-        )
-
     if reproduction is None:
         return (
             ValidationStatus.NEEDS_REVIEW,
@@ -162,6 +160,12 @@ def _decide_status(
         )
     if reproduction_status == "reproduced" and scope_result.status == ScopeValidationStatus.IN_SCOPE:
         confidence = _accepted_confidence(dedup_result, severity_result)
+        if dedup_result.status == DeduplicationStatus.DUPLICATE:
+            return (
+                ValidationStatus.ACCEPTED,
+                max(0.80, dedup_result.similarity_score),
+                "Finding is a valid independent report of an existing root cause.",
+            )
         return (
             ValidationStatus.ACCEPTED,
             confidence,
@@ -215,6 +219,12 @@ def _build_evidence(
     elif reproduction.safety_notes:
         notes.extend(reproduction.safety_notes)
 
+    independent_duplicate = (
+        dedup_result.status == DeduplicationStatus.DUPLICATE
+        and reproduction is not None
+        and reproduction.status.value == "reproduced"
+        and scope_result.status == ScopeValidationStatus.IN_SCOPE
+    )
     return ValidationEvidence(
         has_finding=True,
         has_reproduction=reproduction is not None,
@@ -225,6 +235,15 @@ def _build_evidence(
         in_scope=_scope_evidence_value(scope_result),
         is_duplicate=dedup_result.is_duplicate,
         duplicate_of=dedup_result.duplicate_of,
+        duplicate_kind=(
+            DuplicateKind.INDEPENDENT_ROOT_CAUSE
+            if independent_duplicate
+            else None
+        ),
+        is_valid_duplicate=True if independent_duplicate else None,
+        canonical_finding_id=(
+            dedup_result.duplicate_of if independent_duplicate else None
+        ),
         original_severity=severity_result.original_severity.value,
         normalized_severity=severity_result.normalized_severity.value,
         notes=notes,

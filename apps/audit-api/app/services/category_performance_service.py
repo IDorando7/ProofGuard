@@ -180,9 +180,11 @@ def determine_category_performance_outcome(
     raw_event_type = reputation_event.event_type
     if isinstance(raw_event_type, Enum):
         raw_event_type = raw_event_type.value
+    if str(raw_event_type) == ReputationEventType.ACCEPTED_CONTRIBUTION.value:
+        if _is_independent_duplicate_event(reputation_event):
+            return CategoryPerformanceOutcome.ACCEPTED_INDEPENDENT_DUPLICATE
+        return CategoryPerformanceOutcome.ACCEPTED_UNIQUE
     mapping = {
-        ReputationEventType.ACCEPTED_CONTRIBUTION.value:
-            CategoryPerformanceOutcome.ACCEPTED_UNIQUE,
         ReputationEventType.REJECTED_FINDING.value:
             CategoryPerformanceOutcome.REJECTED,
         ReputationEventType.DUPLICATE_FINDING.value:
@@ -308,6 +310,14 @@ def validate_category_event_sources(
         "eligible_for_reward": contribution.eligible_for_reward,
         "normalized_severity": event.normalized_severity,
     }
+    if _is_independent_duplicate_event(event):
+        current_reputation_source["duplicate_relation"] = (
+            "independent_root_cause"
+        )
+        current_reputation_source["canonical_finding_id"] = (
+            validation.evidence.canonical_finding_id
+            or validation.evidence.duplicate_of
+        )
     if compute_reputation_source_fingerprint(current_reputation_source) != event.source_fingerprint:
         raise CategoryPerformanceInputMismatchError(
             "Finalized reputation source fingerprint no longer matches its source records"
@@ -418,6 +428,8 @@ def aggregate_category_performance(
     reward_event_ids: list[str] = []
     outcome_field = {
         CategoryPerformanceOutcome.ACCEPTED_UNIQUE: "accepted_unique_submissions",
+        CategoryPerformanceOutcome.ACCEPTED_INDEPENDENT_DUPLICATE:
+            "accepted_independent_duplicate_submissions",
         CategoryPerformanceOutcome.REJECTED: "rejected_submissions",
         CategoryPerformanceOutcome.DUPLICATE: "duplicate_submissions",
         CategoryPerformanceOutcome.OUT_OF_SCOPE: "out_of_scope_submissions",
@@ -458,7 +470,10 @@ def aggregate_category_performance(
 
         score = round(contribution.total_score, 6)
         scores.append(score)
-        if outcome == CategoryPerformanceOutcome.ACCEPTED_UNIQUE:
+        if outcome in {
+            CategoryPerformanceOutcome.ACCEPTED_UNIQUE,
+            CategoryPerformanceOutcome.ACCEPTED_INDEPENDENT_DUPLICATE,
+        }:
             accepted_scores.append(score)
         activity_times.append(event.applied_at or event.created_at)
 
@@ -803,6 +818,13 @@ def _resolve_project_workspace(protocol_data_root: Path, project_id: str) -> Pat
 def _require_equal(actual: Any, expected: Any, label: str) -> None:
     if actual != expected:
         raise CategoryPerformanceInputMismatchError(f"{label} does not match")
+
+
+def _is_independent_duplicate_event(event: ReputationEvent) -> bool:
+    return any(
+        signal.code == "ACCEPTED_INDEPENDENT_DUPLICATE"
+        for signal in getattr(event, "signals", [])
+    )
 
 
 def _ensure_path_within(path: Path, root: Path) -> None:

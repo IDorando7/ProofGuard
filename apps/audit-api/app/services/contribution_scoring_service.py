@@ -121,6 +121,22 @@ def extract_validation_evidence(validation: Any | None) -> Any | None:
     return _value(validation, "evidence")
 
 
+def is_valid_independent_duplicate(validation_or_evidence: Any | None) -> bool:
+    evidence = _value(validation_or_evidence, "evidence")
+    if evidence is None:
+        evidence = validation_or_evidence
+    duplicate_kind = _normalize_status(_value(evidence, "duplicate_kind"))
+    return (
+        duplicate_kind == "independent_root_cause"
+        and _value(evidence, "is_valid_duplicate") is True
+        and _value(evidence, "is_duplicate") is True
+        and bool(
+            _value(evidence, "canonical_finding_id")
+            or _value(evidence, "duplicate_of")
+        )
+    )
+
+
 def extract_normalized_severity(finding: Any, validation: Any | None) -> str:
     evidence = extract_validation_evidence(validation)
     candidate = _value(evidence, "normalized_severity")
@@ -229,6 +245,16 @@ def calculate_uniqueness_component(
         return 0.0, [_signal("UNIQUENESS_NOT_VALIDATED", "uniqueness", 0, "Uniqueness has not been validated.", "validation")]
 
     is_duplicate = _value(validation_evidence, "is_duplicate")
+    if is_valid_independent_duplicate(validation_evidence):
+        return 0.0, [
+            _signal(
+                "INDEPENDENT_ROOT_CAUSE_DUPLICATE",
+                "uniqueness",
+                0,
+                "The valid report independently confirms an existing root cause.",
+                "validation",
+            )
+        ]
     if status == "duplicate" or is_duplicate is True:
         return 0.0, [_signal("CONFIRMED_DUPLICATE", "uniqueness", 0, "Validation evidence confirms a duplicate finding.", "validation")]
     if status == "accepted" and is_duplicate is False:
@@ -295,7 +321,9 @@ def calculate_penalties(
             "out_of_scope": (-20, "PENALTY_OUT_OF_SCOPE", "Validation found the finding out of scope."),
             "insufficient_evidence": (-10, "PENALTY_INSUFFICIENT_EVIDENCE", "Validation found insufficient evidence."),
         }
-        if status in status_penalties:
+        if status in status_penalties and not is_valid_independent_duplicate(
+            validation_evidence
+        ):
             value, code, message = status_penalties[status]
             penalties += value
             signals.append(_signal(code, "penalties", value, message, "validation"))
@@ -366,7 +394,14 @@ def determine_reward_eligibility(
         pending = True
 
     is_duplicate = _value(evidence, "is_duplicate")
-    if is_duplicate is True:
+    independent_duplicate = is_valid_independent_duplicate(evidence)
+    if independent_duplicate:
+        reasons.append(
+            "Finding is a valid independent report of an existing root cause; "
+            "legacy reward_v0 does not reward it as a new vulnerability."
+        )
+        ineligible = True
+    elif is_duplicate is True:
         reasons.append("Finding is marked duplicate.")
         ineligible = True
     elif validation is not None:

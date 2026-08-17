@@ -13,6 +13,7 @@ specification documents, not a production blockchain implementation.
 | [message-types.md](message-types.md) | Conceptual protocol messages and payloads | Draft v0 |
 | [state-machine.md](state-machine.md) | Finding/submission lifecycle and allowed transitions | Draft v0 |
 | [onchain-offchain-boundary.md](onchain-offchain-boundary.md) | Data placement and future blockchain boundary | Draft v0 |
+| [reward-model.md](reward-model.md) | Week 7 reward architecture from task budget through deterministic client-task RewardEvents | Day 6 implemented |
 
 ## Principles
 
@@ -147,3 +148,12 @@ production/shadow routing, category-isolated simulated rewards, deterministic
 replay, and idempotent finalization. It creates no permanent subnet rank and
 performs no payment, token, wallet, staking, blockchain, AI/LLM, PoC, Docker,
 forge, subprocess-analysis, or external-service action.
+
+Week 7 Day 1 implements the **Reward Architecture Refactor Foundation —
+off-chain**. A `RewardDomain` now separates `client_task` accounting from
+future `network_protocol` incentives. One finalized routing may receive one
+idempotent `TaskRewardBudget`, split exactly into miner, validator, and protocol
+pools using centralized Decimal configuration and Week 6 largest-remainder
+accounting. Budget creation creates no RewardEvent, payout, reputation change,
+membership change, routing change, token action, or blockchain write. Week 5
+and Week 6 v0 reward records and policies remain unchanged and readable.
