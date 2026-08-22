@@ -1,0 +1,58 @@
+{
+  "budget_conservation_pass": true,
+  "category_pools": [
+    {
+      "allocated_pool_points": "6300.000000",
+      "category": "access_control",
+      "distributed_cluster_points": "6300.000000",
+      "eligible_cluster_count": 4,
+      "finding_cluster_ids": [
+        "finding_cluster_48cc655fee53e7fc6922daf7707e545d60fc107e6b848ccadbd818bc9dccb548",
+        "finding_cluster_9014a242d7fc20d8dd6061d2dda586950051df3e9d48555b5f3503e3faf9e554",
+        "finding_cluster_b21aa536f375a1ebb0f228212ce2eaee92b1f77b68669941c47f5a278cf74c26",
+        "finding_cluster_eef55caa141f71463fefe213c2e31e7b8a91a05032a8e2988ffddc75e179b8c4"
+      ],
+      "normalized_weight": "0.600000000000",
+      "parent_pool_id": "category_pool_access_control",
+      "positive_score_cluster_count": 4,
+      "requested_weight": "3",
+      "undistributed_cluster_points": "0.000000",
+      "zero_weight_cluster_count": 0
+    },
+    {
+      "allocated_pool_points": "4200.000000",
+      "category": "reentrancy",
+      "distributed_cluster_points": "4200.000000",
+      "eligible_cluster_count": 4,
+      "finding_cluster_ids": [
+        "finding_cluster_11eb8b45edf9b77669864b628cd86975dfa8d79c80aa83e601bb334510159269",
+        "finding_cluster_70b7e1de24043e5bab545e7dd287d6f7827d87fb66baf1dbf229997bb17181ba",
+        "finding_cluster_9e589957172f653270e8a797a07c59969bd726cff6ae146b293cad6de4a297ba",
+        "finding_cluster_c612bb09c055ead1ee92503f75946c04ff8363d746a27bff53e98c3e22f0e996"
+      ],
+      "normalized_weight": "0.400000000000",
+      "parent_pool_id": "category_pool_reentrancy",
+      "positive_score_cluster_count": 4,
+      "requested_weight": "2",
+      "undistributed_cluster_points": "0.000000",
+      "zero_weight_cluster_count": 0
+    }
+  ],
+  "cluster_reward_total": "10500.000000",
+  "conservation_pass": true,
+  "distributed_miner": "9584.680108",
+  "event_conservation_pass": true,
+  "miner_conservation_pass": true,
+  "miner_pool": "10500.000000",
+  "project_id": "project_week7_benchmark",
+  "protocol_pool": "1500.000000",
+  "reporter_reward_total": "9584.680108",
+  "reward_cycle_id": "week7_task_reward_cycle_dcd785eb58aaa136dac04326cd99cfea",
+  "reward_event_total": "9584.680108",
+  "routing_id": "routing_week7_benchmark",
+  "task_reward_budget_id": "task_reward_budget_cb2570b77d9e42a06a4e2910fa307de1",
+  "total_budget": "15000.000000",
+  "undistributed_miner": "915.319892",
+  "validator_pool": "3000.000000",
+  "validator_protocol_untouched": true
+}

@@ -8,7 +8,6 @@ import uuid
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from decimal import Decimal, ROUND_DOWN, ROUND_HALF_UP
-from enum import Enum
 from pathlib import Path
 from typing import Any, Iterable
 
@@ -68,6 +67,10 @@ from app.services.reward_service import load_reward_event_by_submission
 from app.services.submission_service import list_submissions
 from app.services.subnet_router_service import load_routing_record
 from app.services.validation_service import load_validation_decision
+from app.utils.protocol_serialization import (
+    atomic_write_json,
+    protocol_fingerprint,
+)
 
 
 SUBNET_REWARD_CYCLE_FILENAME = "cycle.json"
@@ -2096,25 +2099,13 @@ def _safe_child(root: Path, identifier: str) -> Path:
 
 
 def _write_model_atomic(path: Path, model: BaseModel) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    temporary_name: str | None = None
     try:
-        with tempfile.NamedTemporaryFile(
-            mode="w",
-            encoding="utf-8",
-            dir=path.parent,
-            prefix=".subnet-reward-",
-            suffix=".tmp",
-            delete=False,
-        ) as temporary:
-            temporary_name = temporary.name
-            temporary.write(_serialize(model))
-            temporary.flush()
-            os.fsync(temporary.fileno())
-        Path(temporary_name).replace(path)
+        atomic_write_json(
+            path,
+            model,
+            temporary_prefix=".subnet-reward-",
+        )
     except OSError as exc:
-        if temporary_name is not None:
-            Path(temporary_name).unlink(missing_ok=True)
         raise SubnetRewardStorageError(
             "Unable to persist subnet reward data"
         ) from exc
@@ -2150,41 +2141,7 @@ def _points(value: Any) -> Decimal:
 
 
 def _fingerprint(payload: Any) -> str:
-    encoded = json.dumps(
-        _canonical_value(payload),
-        sort_keys=True,
-        separators=(",", ":"),
-        ensure_ascii=False,
-        allow_nan=False,
-    ).encode("utf-8")
-    return hashlib.sha256(encoded).hexdigest()
-
-
-def _canonical_value(value: Any) -> Any:
-    if isinstance(value, BaseModel):
-        return _canonical_value(value.model_dump())
-    if isinstance(value, Decimal):
-        normalized = value.normalize()
-        return "0" if normalized == 0 else format(normalized, "f")
-    if isinstance(value, datetime):
-        return value.astimezone(timezone.utc).isoformat().replace("+00:00", "Z")
-    if isinstance(value, Enum):
-        return value.value
-    if isinstance(value, dict):
-        return {
-            str(key.value if isinstance(key, Enum) else key): _canonical_value(
-                nested
-            )
-            for key, nested in sorted(
-                value.items(),
-                key=lambda item: str(
-                    item[0].value if isinstance(item[0], Enum) else item[0]
-                ),
-            )
-        }
-    if isinstance(value, (list, tuple)):
-        return [_canonical_value(item) for item in value]
-    return value
+    return protocol_fingerprint(payload)
 
 
 def _utc_now() -> datetime:

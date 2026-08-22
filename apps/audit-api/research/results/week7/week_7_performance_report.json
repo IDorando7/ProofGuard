@@ -1,0 +1,25 @@
+{
+  "cluster_build_ms": 2121,
+  "entity_counts": {
+    "finding_clusters": 8,
+    "nodes": 64,
+    "operators": 40,
+    "submissions": 120
+  },
+  "finding_value_and_cluster_allocation_ms": 22,
+  "quality_assessment_ms": 849,
+  "reporter_allocation_ms": 135,
+  "reward_concentration_observational": {
+    "max_reward": "4514.754012",
+    "median_reward": "295.402476",
+    "rewarded_operators": 17,
+    "top_10_share": "0.921279",
+    "top_1_share": "0.471039",
+    "top_5_share": "0.754031"
+  },
+  "reward_cycle_calculate_ms": 173,
+  "reward_cycle_finalize_ms": 191,
+  "timings_are_observational": true,
+  "total_runtime_ms": 13208,
+  "verification_ms": 140
+}

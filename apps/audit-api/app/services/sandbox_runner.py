@@ -1,9 +1,15 @@
 import subprocess
+import threading
 import time
 from pathlib import Path
 
 from app.schemas.sandbox import SandboxCommandResult, SandboxRunStatus
 from app.services.command_policy import build_safe_forge_command, validate_allowed_command
+
+
+MAX_CONCURRENT_SANDBOX_JOBS = 4
+MAX_OUTPUT_BYTES = 1_048_576
+_SANDBOX_SLOTS = threading.BoundedSemaphore(MAX_CONCURRENT_SANDBOX_JOBS)
 
 
 def build_docker_command(
@@ -28,6 +34,10 @@ def build_docker_command(
         memory_limit,
         "--pids-limit",
         str(pids_limit),
+        "--cap-drop",
+        "ALL",
+        "--security-opt",
+        "no-new-privileges:true",
         "--tmpfs",
         "/tmp:rw,noexec,nosuid,size=256m",
         "-v",
@@ -80,30 +90,32 @@ def run_in_sandbox(
             cpus=cpus,
             pids_limit=pids_limit,
         )
-        completed = subprocess.run(
-            docker_command,
-            shell=False,
-            capture_output=True,
-            text=True,
-            timeout=timeout_seconds,
-            check=False,
-        )
+        with _SANDBOX_SLOTS:
+            completed = subprocess.run(
+                docker_command,
+                shell=False,
+                capture_output=True,
+                text=True,
+                timeout=timeout_seconds,
+                check=False,
+            )
     except subprocess.TimeoutExpired as exc:
         return _result(
             status=SandboxRunStatus.TIMEOUT,
             command=command,
             start=start,
-            stdout=exc.stdout if isinstance(exc.stdout, str) else None,
-            stderr=exc.stderr if isinstance(exc.stderr, str) else None,
+            stdout=_bounded_output(exc.stdout if isinstance(exc.stdout, str) else None),
+            stderr=_bounded_output(exc.stderr if isinstance(exc.stderr, str) else None),
             error_message="Sandbox command timed out.",
             timed_out=True,
         )
     except OSError as exc:
+        del exc
         return _result(
             status=SandboxRunStatus.SANDBOX_ERROR,
             command=command,
             start=start,
-            error_message=f"Sandbox command failed before execution: {exc}",
+            error_message="Sandbox command failed before execution.",
         )
 
     status = SandboxRunStatus.COMPLETED if completed.returncode == 0 else SandboxRunStatus.FAILED
@@ -112,8 +124,8 @@ def run_in_sandbox(
         command=command,
         start=start,
         exit_code=completed.returncode,
-        stdout=completed.stdout,
-        stderr=completed.stderr,
+        stdout=_bounded_output(completed.stdout),
+        stderr=_bounded_output(completed.stderr),
         error_message=None if completed.returncode == 0 else "Sandbox command exited with a non-zero status.",
     )
 
@@ -128,7 +140,18 @@ def is_docker_command_safe(docker_command: list[str]) -> bool:
         "/home/",
         "/root/",
     )
-    required_fragments = ("--rm", "--network", "none", "--pids-limit", "--memory", "--cpus")
+    required_fragments = (
+        "--rm",
+        "--network",
+        "none",
+        "--pids-limit",
+        "--memory",
+        "--cpus",
+        "--cap-drop",
+        "ALL",
+        "--security-opt",
+        "no-new-privileges:true",
+    )
     return all(fragment in docker_command for fragment in required_fragments) and not any(
         fragment in command_text for fragment in forbidden_fragments
     )
@@ -155,3 +178,13 @@ def _result(
         timed_out=timed_out,
     )
 
+
+def _bounded_output(value: str | None) -> str | None:
+    if value is None:
+        return None
+    encoded = value.encode("utf-8", errors="replace")
+    if len(encoded) <= MAX_OUTPUT_BYTES:
+        return value
+    suffix = "\n[ProofGuard output truncated]"
+    budget = MAX_OUTPUT_BYTES - len(suffix.encode("utf-8"))
+    return encoded[:budget].decode("utf-8", errors="ignore") + suffix

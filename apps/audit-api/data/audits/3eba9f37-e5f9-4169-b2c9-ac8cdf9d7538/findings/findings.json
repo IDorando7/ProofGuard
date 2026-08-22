@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Accepted routed finding reward-route-finding",
+    "category": "access_control",
+    "severity": "High",
+    "confidence": 0.9,
+    "contracts": [
+      "src/Vault.sol"
+    ],
+    "functions": [
+      "withdrawreward-route-finding"
+    ],
+    "root_cause": "Missing authorization reward-route-finding",
+    "attack_path": "Attacker invokes privileged path reward-route-finding",
+    "impact": "Unauthorized asset movement reward-route-finding",
+    "conditions": null,
+    "reproduction_steps": [],
+    "poc_type": "none",
+    "poc_file": null,
+    "recommended_fix": "Add authorization.",
+    "status": "candidate",
+    "agent_name": "access_control_agent",
+    "finding_id": "reward-route-finding",
+    "project_id": "3eba9f37-e5f9-4169-b2c9-ac8cdf9d7538"
+  }
+]

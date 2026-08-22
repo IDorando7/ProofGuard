@@ -10,12 +10,12 @@ from app.schemas.poc import (
     ReproductionRunResponse,
 )
 from app.schemas.reproduction import ReproductionResult, ReproductionStatus
-from app.schemas.sandbox import SandboxCommandResult, SandboxRunStatus
-from app.services import safety_preflight_service, sandbox_runner
+from app.services import safety_preflight_service, sandbox_runner  # compatibility aliases
 from app.services.poc_service import poc_exists, store_poc_for_finding
 from app.services.project_service import get_project_or_404, project_workspace
 from app.services.reproduction_service import (
     create_initial_reproduction_result,
+    execute_reproduction_safely,
     list_reproduction_results,
     load_reproduction_result,
     save_reproduction_result,
@@ -87,58 +87,25 @@ def run_reproduction(
     get_project_or_404(db, project_id)
     request = _validate_run_request(payload)
     workspace = project_workspace(project_id)
-    repo_path = workspace / "repo"
 
     if not poc_exists(workspace, request.poc_file):
         raise HTTPException(status_code=404, detail="PoC file not found")
 
-    command = ["forge", "test", "--match-test", request.test_name]
-    safety_result = safety_preflight_service.run_safety_preflight(
-        repo_path=repo_path,
-        poc_file=request.poc_file,
-        test_name=request.test_name,
-        command=command,
-    )
-    safety_notes = _safety_notes(safety_result.issues)
-
-    if not safety_result.passed:
-        result = _save_reproduction_result(
-            project_id=project_id,
-            finding_id=finding_id,
-            workspace=workspace,
-            status=ReproductionStatus.REJECTED_UNSAFE,
-            poc_file=request.poc_file,
-            test_name=request.test_name,
-            command=command,
-            duration_ms=None,
-            error_message="Safety preflight failed",
-            safety_notes=safety_notes,
-        )
-        return _run_response(result)
-
-    sandbox_result = sandbox_runner.run_in_sandbox(
-        repo_path=repo_path,
-        command=command,
-        timeout_seconds=request.timeout_seconds,
+    current = _load_or_create_reproduction(project_id, finding_id, workspace)
+    executed = execute_reproduction_safely(
+        project_id=project_id,
+        finding_id=finding_id,
+        project_workspace=workspace,
+        request=request,
+        reproduction_id=current.reproduction_id,
     )
     write_reproduction_output_files(
         project_workspace=workspace,
         finding_id=finding_id,
-        stdout=sandbox_result.stdout,
-        stderr=sandbox_result.stderr,
+        stdout=executed.stdout,
+        stderr=executed.stderr,
     )
-    result = _save_reproduction_result(
-        project_id=project_id,
-        finding_id=finding_id,
-        workspace=workspace,
-        status=_map_sandbox_status(sandbox_result.status),
-        poc_file=request.poc_file,
-        test_name=request.test_name,
-        command=command,
-        duration_ms=sandbox_result.duration_ms,
-        error_message=sandbox_result.error_message,
-        safety_notes=safety_notes,
-    )
+    result = save_reproduction_result(executed, workspace)
     return _run_response(result)
 
 
@@ -202,49 +169,6 @@ def _load_or_create_reproduction(project_id: str, finding_id: str, workspace) ->
     if existing is not None:
         return existing
     return create_initial_reproduction_result(project_id, finding_id, workspace)
-
-
-def _save_reproduction_result(
-    project_id: str,
-    finding_id: str,
-    workspace,
-    status: ReproductionStatus,
-    poc_file: str | None,
-    test_name: str | None,
-    command: list[str] | None,
-    duration_ms: int | None,
-    error_message: str | None,
-    safety_notes: list[str],
-) -> ReproductionResult:
-    result = _load_or_create_reproduction(project_id, finding_id, workspace)
-    return save_reproduction_result(
-        result.model_copy(
-            update={
-                "status": status,
-                "poc_file": poc_file,
-                "test_name": test_name,
-                "command": command,
-                "duration_ms": duration_ms,
-                "error_message": error_message,
-                "safety_notes": safety_notes,
-            }
-        ),
-        workspace,
-    )
-
-
-def _map_sandbox_status(status: SandboxRunStatus) -> ReproductionStatus:
-    return {
-        SandboxRunStatus.COMPLETED: ReproductionStatus.REPRODUCED,
-        SandboxRunStatus.FAILED: ReproductionStatus.FAILED,
-        SandboxRunStatus.TIMEOUT: ReproductionStatus.TIMEOUT,
-        SandboxRunStatus.REJECTED: ReproductionStatus.REJECTED_UNSAFE,
-        SandboxRunStatus.SANDBOX_ERROR: ReproductionStatus.SANDBOX_ERROR,
-    }[status]
-
-
-def _safety_notes(issues) -> list[str]:
-    return [f"{issue.code}: {issue.message}" for issue in issues]
 
 
 def _run_response(result: ReproductionResult) -> ReproductionRunResponse:

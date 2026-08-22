@@ -1023,3 +1023,311 @@ No production project or protocol data is modified. The benchmark executes no
 agent, PoC, Docker, forge, project-analysis subprocess, AI/LLM, remote service,
 or external API. Protocol points are simulated only: no real payment, pricing,
 token, wallet, staking, slashing, smart-contract, or blockchain action exists.
+
+## Week 7 Day 1 - Reward Architecture Refactor Foundation
+
+ProofGuard now represents client-funded task budgets separately from future
+network/protocol incentives. The task identity is one finalized
+`ProjectRoutingRecord`, allowing two audit executions of the same project to
+have distinct budgets. One routing can have one idempotent `TaskRewardBudget`
+stored under `data/protocol/task-rewards/budgets/routing/<routing_id>/budget.json`.
+
+The budget uses exact six-decimal `protocol_points` and centralized configurable
+shares for miner, validator, and protocol pools. The default development split
+is 70/20/10. Week 6 largest-remainder allocation guarantees exact conservation.
+Budget creation and finalization do not distribute rewards or create
+RewardEvents.
+
+Week 5 `reward_v0` and Week 6 `subnet_reward_v0` remain readable legacy task
+allocation policies. Their historical reputation, category-score, and
+membership multipliers are not part of new `task_reward_v1` semantics.
+ContributionScore, Reputation, CategoryScore, Membership, and Routing remain
+performance/history/opportunity systems.
+
+See the [Week 7 reward system specification](protocol/specs/reward-model.md).
+
+## Week 7 Day 2 - Root-Cause Clustering and Duplicate Semantics
+
+ProofGuard now materializes one deterministic `FindingCluster` for each
+accepted unique vulnerability inside one finalized routing task. Independent
+reports remain individually attributable members, while
+`distinct_operator_count` resolves and deduplicates `NodeRecord.operator_id`.
+Cluster identity is project-, routing-, and category-scoped and reuses the Week
+4 dedup canonical relation and normalized root-cause identity.
+
+The validator now separates a valid independent root-cause match from a
+same-node submission retry. A reproduced, in-scope independent match is
+accepted with explicit `independent_root_cause` metadata and is not
+automatically reputation-negative. The Week 5 same-node/project/finding-hash
+guard remains unchanged: a repeated submission is rejected before persistence
+and never becomes a cluster member.
+
+Clusters are rebuilt from immutable findings, routed submissions, validation
+decisions, reproduction results, and registry operator identity under
+`data/protocol/finding-clusters/tasks/<routing_id>/`. Rebuilds are idempotent,
+source-fingerprinted, and do not calculate a task reward, transfer tokens, run
+an LLM classifier, or write to a blockchain.
+
+## Week 7 Day 3 - Deterministic Report Quality Assessment
+
+Every eligible validated `FindingCluster` member can now receive a separate,
+versioned `ReportQualityAssessment`. Its five normalized Decimal components are
+correctness (35%), reproduction-evidence quality (25%), root-cause quality
+(20%), impact quality (10%), and remediation quality (10%). Persisted v1 records
+retain the repository's established aliases `poc_quality` and `fix_quality` for
+the latter two mapped concepts. ProofGuard calculates Q at six-decimal precision;
+clients cannot submit the total score, node/operator identity, rank, or reward.
+
+Deterministic rules consume existing immutable protocol records and persist
+component sources, reason codes, and evidence references. Where the current
+records cannot honestly establish a value—most notably fix quality—the record
+remains a draft until structured validator input is supplied. Finalized records
+are immutable and changed sources require explicit versioned supersession.
+
+Assessments are stored under
+`data/protocol/report-quality/tasks/<routing_id>/submissions/<submission_id>/`.
+They neither replace Week 5 ContributionScore nor modify reputation,
+CategoryScore, membership, routing, clusters, budgets, or rewards. No LLM,
+Top-K, Chief Finder, Q² allocation, payment, token, or blockchain operation is
+part of Day 3. See the [Week 7 reward system specification](protocol/specs/reward-model.md).
+
+## Week 7 Day 4 - FindingCluster Economic Valuation
+
+Week 7 Day 4 allocates the finalized client-funded miner pool to unique,
+finalized FindingClusters. `finding_cluster_value_v1` uses validator-approved
+severity weights (`16/8/3/1`, Informational `0`) and distinct-operator
+uniqueness `max(0.50, 1 / (1 + 0.20 * ln(N)))`. FindingScore is severity weight
+times the persisted six-decimal uniqueness. Existing Week 6 category pool and
+largest-remainder accounting are reused; category-isolated allocation is the
+default and global allocation is supported. Cluster operator attribution is
+rechecked against authoritative NodeRegistry records before allocation.
+
+The result is an immutable, audit-readable cluster allocation snapshot. It
+does not read report Q, select operators, Top-K or Chief Finder, create a
+RewardEvent, distribute a payout, or change reputation, CategoryScore,
+membership or routing. Integrated reward-cycle finalization later re-runs this
+snapshot and rejects stale sources. See the [Week 7 reward system specification](protocol/specs/reward-model.md).
+
+## Week 7 Day 5 - Operator-Level Task Reward Preview
+
+Week 7 Day 5 consumes fixed Day 4 cluster rewards and finalized Day 3 report
+quality. It selects the best report per server-derived operator, ranks all
+operator representatives, rewards at most the configured Top-K (default 5),
+selects an early qualified Chief only from Top-K, and distributes the Quality
+Pool with exact Decimal Q² weights and largest remainder.
+
+Chief qualification is auditable and requires three separate authoritative
+facts: valid canonical/independent cluster membership for root-cause
+consistency, an accepted-final-severity reference with a structured consistency
+reason, and a positive impact assessment with a validator-derived impact-valid
+reason. One fact cannot stand in for another.
+
+Candidate/shadow, probation, active and expert assignments can compete when
+properly authorized; membership, reputation, CategoryScore, and
+ContributionScore do not multiply current-task payout. The result is an
+auditable calculated preview with exact per-cluster/task conservation. No
+RewardEvent, final payout, token, payment, reputation update, or blockchain
+operation is created. See the [Week 7 reward system specification](protocol/specs/reward-model.md).
+
+## Week 7 Day 6 - Integrated Client-Task Reward Cycle
+
+Day 6 connects the Week 7 budget, cluster valuation and operator allocation
+snapshots to a `draft -> calculated -> finalized` client-task reward cycle.
+Finalization re-runs the authoritative Day 4/Day 5 orchestration, rejects stale
+sources, and creates deterministic immutable RewardEvents only for positive
+operator allocations. Event creation is atomic and retry-safe; one finalized
+TaskRewardBudget cannot be paid by a second Week 7 cycle.
+
+Each cycle persists the complete immutable policy bundle and fingerprint
+version used by its calculation. A read-only `.../task-reward-cycles/{id}/verify`
+endpoint audits source/calculation fingerprints, nested conservation, event-set
+completeness, duplicate economic identities, and safe-retry state without
+repairing or mutating the ledger.
+
+Economic history is readable by cycle, operator, representative node,
+submission and FindingCluster. It remains separate from ContributionScore,
+reputation, CategoryScore, membership and routing. Validator/protocol pools stay
+reserved, and no wallet, token or blockchain operation occurs.
+
+## Week 7 Day 7 - End-to-End Reward Benchmark
+
+Day 7 runs the real Week 7 services from routing through immutable RewardEvents
+inside temporary isolated roots. The CI-safe production fixture contains 64
+nodes, 40 operators, eight root-cause clusters, two categories and 120 reports,
+plus 100-report/50-operator, N=1000 and exact mathematical boundary cases. Its
+33 named cases verify the known Q vector, exact Decimal conservation,
+operator-based uniqueness, one operator/one position, Top-K and Chief bounds,
+Q² distribution, global/category allocation, stale-source blocking, read-only
+verification, partial/complete crash recovery, event-corruption detection,
+double-reward protection, reload and deterministic replay.
+
+Run it with:
+
+```bash
+cd apps/audit-api
+python -m research.benchmarks.week7_reward_benchmark
+```
+
+Generated case, allocation, event, invariant, determinism and Markdown outputs
+are stored under `research/results/week7/`, including canonical accounting,
+cluster/operator, performance, deterministic-state-hash and 21-section final
+report artifacts. The benchmark introduces no new
+reward formula, validator economics, network emission, token transfer, wallet
+payment or blockchain write. See the [Week 7 reward system specification](protocol/specs/reward-model.md).
+
+## Week 8 Day 1 - Validator Attestation Protocol
+
+Week 8 introduces authorized independent validator evidence for finalized
+`FindingCluster` records. Active validator and hybrid nodes may use an internal
+`ValidatorAssignment`; public nodes cannot self-assign. `NodeRecord` remains
+authoritative for node/operator identity, and an operator is blocked from
+validating any cluster containing that operator's report. Deterministic
+assignment identity prevents several nodes of one operator from creating
+several authoritative seats in one cluster.
+
+Validator reproduction is an immutable attribution/provenance wrapper around a
+final Week 3 `ReproductionResult`. It distinguishes `submitted_poc` from
+`independent_reproduction`, preserves failed/timeout/unsafe/unsupported states,
+and never bypasses Safety Preflight or the existing sandbox. The structured
+`ValidationAttestation` separately records validity, root cause, server-derived
+reproduction, severity, impact, reason codes, and authoritative evidence. A
+failed reproduction does not automatically reject the finding.
+
+Attestations are canonical, SHA-256 fingerprinted, atomically persisted,
+immutable, and idempotent per assignment/version. They do not create consensus,
+change cluster severity, update performance, recalculate Week 7 rewards, or pay
+validators. See the
+[Validator Attestation Protocol v1](protocol/specs/validator-attestation-v1.md).
+
+Week 8 Day 2 adds protocol-owned validator committees around that evidence
+flow. STANDARD plans require five independent authoritative operators and
+HIGH_ASSURANCE plans require seven; one optional shadow operator is additional.
+Selection filters NodeRegistry type/status/category, rebuilds reporter conflicts
+from current operator identity, groups multiple nodes by operator, enforces
+capacity, and ranks deterministic workload/history fairness. Agent
+`CategoryScore` and global reputation are not validator-skill inputs. Planned
+membership is fingerprinted and revalidated before immutable, idempotent
+assignment/usage finalization. The public creation endpoint is STANDARD-only
+and accepts no validator identities. Committee creation performs no PoC,
+attestation, consensus, or validator payment. See the
+[Validator Committee Selection v1](protocol/specs/validator-committee-v1.md).
+
+## Week 8 Day 3 - Independent Validator Reproduction
+
+Every assignment in a finalized validator committee now has one logical,
+independently attributable reproduction job. STANDARD committees require five
+authoritative terminal records and HIGH_ASSURANCE committees require seven;
+an optional shadow record is persisted separately and never blocks authoritative
+readiness. The server derives the canonical submitted PoC, audited source
+snapshot, validator/operator/role attribution, environment fingerprint, and
+terminal status.
+
+Execution reuses the Week 3 SafetyPreflight and Docker/Foundry sandbox. It runs
+against a temporary copy with networking disabled, a non-root user, dropped
+capabilities, resource/time/output limits, and bounded global concurrency.
+Committee readiness means only that all authoritative validators reached a
+terminal reproduction state. It does not mean accepted, rejected, reproduced by
+consensus, or rewarded. See
+[Independent Validator Reproduction v1](protocol/specs/validator-reproduction-v1.md).
+
+## Week 8 Day 4 - Validator Consensus and Bounded Escalation
+
+Finalized authoritative attestations and validator-attributed reproduction
+records now feed a deterministic five-component consensus engine. Quorum is
+`N-1`; supermajority is `ceil(2N/3)` using integer arithmetic over the
+authoritative target. STANDARD therefore requires four-of-five and
+HIGH_ASSURANCE five-of-seven. A three-versus-two split is explicitly disputed,
+shadow evidence never counts, and reputation or category scores never weight a
+validator's conclusion.
+
+A reproducible finding is confirmed only when accepted validity, reproduced
+execution, confirmed root cause, exact normalized severity, and validated
+impact each reach supermajority. Non-accepted validity outcomes can terminate
+independently. Finalized disputed/no-quorum Round 1 snapshots open an idempotent
+dispute. One explicit escalation may reuse the Day 2 selector to add four new
+independent operators; cumulative consensus retains every legitimate Round 1
+and Round 2 result. No further rounds, minority penalties, validator scoring,
+reward changes, or new PoC execution are performed. See
+[Validator Consensus v1](protocol/specs/validator-consensus-v1.md).
+
+## Week 8 Day 5 - Validator Performance and Membership
+
+Only a stable finalized validator-consensus outcome may now trigger
+retrospective performance evaluation. Each authoritative or shadow validator's
+attestation and independent reproduction are compared with the final cumulative
+truth to create a per-task `ValidationQualityAssessment`, followed by one
+immutable event and a deterministic category aggregate. A disputed or
+no-quorum finding creates no correctness history. In particular, a validator
+who was locally in the minority can receive full accuracy credit when a bounded
+escalation later confirms that conclusion.
+
+Historical `ValidatorCategoryScore` uses strict Decimal component rates,
+neutral 0.50 defaults for missing history, and experience shrinkage toward
+0.50 until ten resolved tasks. `ValidatorMembership` is a separate
+candidate/probation/active/expert lifecycle with hysteresis. Neither object
+reuses or mutates agent `CategoryScore`, agent subnet membership,
+`ContributionScore`, or global reputation; hybrid nodes may hold different
+agent and validator scores. Shadow work builds skill without influencing past
+consensus. No validator reward or `validator_pool` allocation occurs. See
+[Validator Performance v1](protocol/specs/validator-performance-v1.md).
+
+## Week 8 Day 6 - Validator Reward Allocation
+
+The client-funded validator pool is now an independent, single-consumption
+reward stream. Every legitimate authoritative assignment reserves one equal
+work unit. Completed work earns 30% of that unit; the remaining 70% is scaled
+by the finalized current-task ValidationQualityScore squared. Shadow work,
+severity, majority agreement, reputation, membership, agent skill, and
+historical validator skill do not multiply payout. Incomplete and unearned
+amounts remain undistributed, while miner and protocol pools remain isolated.
+
+See [Validator Reward Allocation v1](protocol/specs/validator-reward-v1.md).
+
+## Week 8 Day 7 - Adversarial Validator Network Benchmark
+
+Day 7 runs the real Week 8 services through conflict-aware committee
+selection, safe independently attributed reproduction, multidimensional
+supermajority consensus, bounded escalation, final-truth quality assessment,
+validator history and pool-isolated rewards. The fixed-seed benchmark provides
+CI, medium and full corpus modes, uses isolated temporary persistence, verifies
+crash/retry/corruption behavior and compares canonical semantic state across a
+clean replay.
+
+```bash
+cd apps/audit-api
+python -m research.benchmarks.week8_validator_benchmark --mode ci
+```
+
+The generated Week 8 report demonstrates the central anti-herding case: a
+Round 1 3-ACCEPT/2-REJECT split remains disputed; four new REJECT validators
+produce final cumulative REJECTED truth, so the original minority receives
+correctness and quality credit. Validator payout has no severity, majority,
+membership, reputation or historical-score multiplier. See the
+[Week 8 validator benchmark specification](protocol/specs/week8-validator-benchmark.md).
+
+## Integration Week, Day 1 - AuditRun Foundation
+
+Integration Day 1 adds the durable `AuditRun` orchestration identity, a
+centrally validated stage lifecycle, ordered structured `AuditEvent` timeline,
+logical artifact references and the `AuditOrchestrator` delegation skeleton.
+Public APIs create/read/list runs, start the skeleton at `PREPARING`, and page
+events after a sequence cursor. No protocol business stage executes
+automatically yet. See the [Integration Day 1 architecture report](apps/audit-api/research/results/integration_week1.md).
+
+## Integration Week, Day 2 - Local Agent Execution
+
+Prepared local-simulator audits now run the real Week 6 routing service through
+`ROUTING`, execute selected AccessControl and Reentrancy assignments through a
+generic `AgentExecutor`, and ingest candidate output into the production
+`Finding` and `SubmissionRecord` services. One durable, deterministic
+`AgentExecutionRecord` per assignment exposes node/operator/category, stable
+runtime version, duration, Findings, Submissions and safe failures. Structured
+AuditEvents preserve node-selection explanations and the complete execution /
+ingestion timeline.
+
+Simulator node/candidate setup is explicit and idempotent; starting an audit
+does not create fake capacity or modify calibration. Orchestration stops after
+`EXECUTING_AGENTS=COMPLETED` with reproduction still pending. No Docker,
+Foundry, validation, calibration, clustering, reward or report stage runs on
+Day 2. The architecture, persistence, APIs, retry semantics and Day 3 linkage
+are documented in the [Integration Week report](apps/audit-api/research/results/integration_week1.md#integration-day-2).

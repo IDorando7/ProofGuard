@@ -1,0 +1,14 @@
+{
+  "double_spend_pass": true,
+  "miner_pool": "3500.000000",
+  "pool_isolation_pass": true,
+  "protocol_pool": "500.000000",
+  "protocol_pool_untouched": true,
+  "reward_event_total": "910.750000",
+  "total_task_budget": "5000.000000",
+  "validator_conservation_pass": true,
+  "validator_cycle_status": "finalized",
+  "validator_distributed": "910.750000",
+  "validator_pool": "1000.000000",
+  "validator_undistributed": "89.250000"
+}

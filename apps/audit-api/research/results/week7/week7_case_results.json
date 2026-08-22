@@ -1,0 +1,936 @@
+{
+  "benchmark_version": "week7_reward_benchmark_v2",
+  "cases": [
+    {
+      "actual": {},
+      "assertions": [
+        {
+          "actual": "0.860000",
+          "assertion_id": "known_q",
+          "description": "The independently known component vector produces Q=0.860000.",
+          "expected": "0.860000",
+          "passed": true
+        }
+      ],
+      "case_id": "quality_formula_known_vector",
+      "duration_ms": 0,
+      "expected": {},
+      "invariant_group": "QUALITY",
+      "invariants": [
+        "known_q"
+      ],
+      "name": "Quality Formula Known Vector",
+      "notes": [],
+      "passed": true,
+      "status": "pass"
+    },
+    {
+      "actual": {},
+      "assertions": [
+        {
+          "actual": "1.000000",
+          "assertion_id": "u_one",
+          "description": "A single distinct operator has full uniqueness.",
+          "expected": "1.000000",
+          "passed": true
+        }
+      ],
+      "case_id": "uniqueness_single_operator",
+      "duration_ms": 0,
+      "expected": {},
+      "invariant_group": "UNIQUENESS",
+      "invariants": [
+        "u_one"
+      ],
+      "name": "Uniqueness Single Operator",
+      "notes": [],
+      "passed": true,
+      "status": "pass"
+    },
+    {
+      "actual": {},
+      "assertions": [
+        {
+          "actual": true,
+          "assertion_id": "operator_not_report_count",
+          "description": "Multiple nodes from one operator count once.",
+          "expected": true,
+          "passed": true
+        },
+        {
+          "actual": 20,
+          "assertion_id": "stored_operator_count",
+          "description": "Day 4 uses the authoritative distinct operator count.",
+          "expected": 20,
+          "passed": true
+        }
+      ],
+      "case_id": "uniqueness_same_operator_multiple_nodes",
+      "duration_ms": 0,
+      "expected": {},
+      "invariant_group": "UNIQUENESS",
+      "invariants": [
+        "operator_not_report_count",
+        "stored_operator_count"
+      ],
+      "name": "Uniqueness Same Operator Multiple Nodes",
+      "notes": [],
+      "passed": true,
+      "status": "pass"
+    },
+    {
+      "actual": {},
+      "assertions": [
+        {
+          "actual": true,
+          "assertion_id": "u_monotone",
+          "description": "Uniqueness is monotone across known operator counts.",
+          "expected": true,
+          "passed": true
+        },
+        {
+          "actual": "0.500000",
+          "assertion_id": "u_floor",
+          "description": "Large N remains at the configured floor.",
+          "expected": "0.500000",
+          "passed": true
+        }
+      ],
+      "case_id": "uniqueness_many_independent_operators",
+      "duration_ms": 0,
+      "expected": {},
+      "invariant_group": "UNIQUENESS",
+      "invariants": [
+        "u_monotone",
+        "u_floor"
+      ],
+      "name": "Uniqueness Many Independent Operators",
+      "notes": [],
+      "passed": true,
+      "status": "pass"
+    },
+    {
+      "actual": {},
+      "assertions": [
+        {
+          "actual": true,
+          "assertion_id": "severity_descending",
+          "description": "Critical > High > Medium > Low for identical N.",
+          "expected": true,
+          "passed": true
+        }
+      ],
+      "case_id": "severity_ordering",
+      "duration_ms": 0,
+      "expected": {},
+      "invariant_group": "CLUSTER_VALUE",
+      "invariants": [
+        "severity_descending"
+      ],
+      "name": "Severity Ordering",
+      "notes": [],
+      "passed": true,
+      "status": "pass"
+    },
+    {
+      "actual": {},
+      "assertions": [
+        {
+          "actual": "8.000000",
+          "assertion_id": "boundary_equality",
+          "description": "Critical at the uniqueness floor equals a unique High.",
+          "expected": "8.000000",
+          "passed": true
+        }
+      ],
+      "case_id": "common_critical_vs_unique_high",
+      "duration_ms": 0,
+      "expected": {},
+      "invariant_group": "CLUSTER_VALUE",
+      "invariants": [
+        "boundary_equality"
+      ],
+      "name": "Common Critical Vs Unique High",
+      "notes": [],
+      "passed": true,
+      "status": "pass"
+    },
+    {
+      "actual": {},
+      "assertions": [
+        {
+          "actual": true,
+          "assertion_id": "global_order",
+          "description": "Critical N=4 receives more than unique High, which exceeds Medium N=12.",
+          "expected": true,
+          "passed": true
+        },
+        {
+          "actual": "10000.000000",
+          "assertion_id": "global_conservation",
+          "description": "Global largest remainder conserves 10,000 points exactly.",
+          "expected": "10000.000000",
+          "passed": true
+        }
+      ],
+      "case_id": "global_cluster_reward_distribution",
+      "duration_ms": 0,
+      "expected": {},
+      "invariant_group": "ACCOUNTING",
+      "invariants": [
+        "global_order",
+        "global_conservation"
+      ],
+      "name": "Global Cluster Reward Distribution",
+      "notes": [],
+      "passed": true,
+      "status": "pass"
+    },
+    {
+      "actual": {},
+      "assertions": [
+        {
+          "actual": 2,
+          "assertion_id": "two_pools",
+          "description": "Two isolated category pools are persisted.",
+          "expected": 2,
+          "passed": true
+        },
+        {
+          "actual": "10500.000000",
+          "assertion_id": "pool_total",
+          "description": "Category pools conserve the miner pool.",
+          "expected": "10500.000000",
+          "passed": true
+        },
+        {
+          "actual": [
+            {},
+            "4000.000000"
+          ],
+          "assertion_id": "empty_pool_not_reassigned",
+          "description": "An explicit empty category pool remains undistributed.",
+          "expected": [
+            {},
+            "4000.000000"
+          ],
+          "passed": true
+        }
+      ],
+      "case_id": "category_pool_isolation",
+      "duration_ms": 0,
+      "expected": {},
+      "invariant_group": "ACCOUNTING",
+      "invariants": [
+        "two_pools",
+        "pool_total",
+        "empty_pool_not_reassigned"
+      ],
+      "name": "Category Pool Isolation",
+      "notes": [],
+      "passed": true,
+      "status": "pass"
+    },
+    {
+      "actual": {},
+      "assertions": [
+        {
+          "actual": "0.960000",
+          "assertion_id": "best_report",
+          "description": "The later Q=.96 report represents its operator.",
+          "expected": "0.960000",
+          "passed": true
+        },
+        {
+          "actual": true,
+          "assertion_id": "best_submission",
+          "description": "Quality representative and Chief qualifying submission may differ.",
+          "expected": true,
+          "passed": true
+        }
+      ],
+      "case_id": "operator_best_report",
+      "duration_ms": 0,
+      "expected": {},
+      "invariant_group": "OPERATOR_DEDUP",
+      "invariants": [
+        "best_report",
+        "best_submission"
+      ],
+      "name": "Operator Best Report",
+      "notes": [],
+      "passed": true,
+      "status": "pass"
+    },
+    {
+      "actual": {},
+      "assertions": [
+        {
+          "actual": 5,
+          "assertion_id": "one_position",
+          "description": "Every rewarded operator occupies one position.",
+          "expected": 5,
+          "passed": true
+        }
+      ],
+      "case_id": "operator_multi_node_top_k_protection",
+      "duration_ms": 0,
+      "expected": {},
+      "invariant_group": "OPERATOR_DEDUP",
+      "invariants": [
+        "one_position"
+      ],
+      "name": "Operator Multi Node Top K Protection",
+      "notes": [],
+      "passed": true,
+      "status": "pass"
+    },
+    {
+      "actual": {},
+      "assertions": [
+        {
+          "actual": 100,
+          "assertion_id": "stress_reports",
+          "description": "Stress fixture contains 100 reports.",
+          "expected": 100,
+          "passed": true
+        },
+        {
+          "actual": 50,
+          "assertion_id": "stress_operators",
+          "description": "Stress fixture contains 50 operator representatives.",
+          "expected": 50,
+          "passed": true
+        },
+        {
+          "actual": 5,
+          "assertion_id": "stress_top_k",
+          "description": "Exactly five stress operators receive positive reward.",
+          "expected": 5,
+          "passed": true
+        }
+      ],
+      "case_id": "top_k_boundary",
+      "duration_ms": 0,
+      "expected": {},
+      "invariant_group": "TOP_K",
+      "invariants": [
+        "stress_reports",
+        "stress_operators",
+        "stress_top_k"
+      ],
+      "name": "Top K Boundary",
+      "notes": [],
+      "passed": true,
+      "status": "pass"
+    },
+    {
+      "actual": {},
+      "assertions": [
+        {
+          "actual": [
+            50,
+            5
+          ],
+          "assertion_id": "all_operators_before_top_k",
+          "description": "All 50 operators affect Day 4-style uniqueness while only five receive payout.",
+          "expected": [
+            50,
+            5
+          ],
+          "passed": true
+        }
+      ],
+      "case_id": "top_k_does_not_change_uniqueness",
+      "duration_ms": 0,
+      "expected": {},
+      "invariant_group": "TOP_K",
+      "invariants": [
+        "all_operators_before_top_k"
+      ],
+      "name": "Top K Does Not Change Uniqueness",
+      "notes": [],
+      "passed": true,
+      "status": "pass"
+    },
+    {
+      "actual": {},
+      "assertions": [
+        {
+          "actual": true,
+          "assertion_id": "chief_exists",
+          "description": "The earliest sufficiently-good Top-K report becomes Chief.",
+          "expected": true,
+          "passed": true
+        },
+        {
+          "actual": true,
+          "assertion_id": "chief_not_highest_required",
+          "description": "Chief selection is not defined as highest Q.",
+          "expected": true,
+          "passed": true
+        }
+      ],
+      "case_id": "chief_basic",
+      "duration_ms": 0,
+      "expected": {},
+      "invariant_group": "CHIEF",
+      "invariants": [
+        "chief_exists",
+        "chief_not_highest_required"
+      ],
+      "name": "Chief Basic",
+      "notes": [],
+      "passed": true,
+      "status": "pass"
+    },
+    {
+      "actual": {},
+      "assertions": [
+        {
+          "actual": true,
+          "assertion_id": "chief_time",
+          "description": "Earlier qualifying report determines Chief timing.",
+          "expected": true,
+          "passed": true
+        },
+        {
+          "actual": "0.960000",
+          "assertion_id": "later_best",
+          "description": "Later best report supplies Q-squared weight.",
+          "expected": "0.960000",
+          "passed": true
+        }
+      ],
+      "case_id": "chief_best_vs_earliest_qualifying",
+      "duration_ms": 0,
+      "expected": {},
+      "invariant_group": "CHIEF",
+      "invariants": [
+        "chief_time",
+        "later_best"
+      ],
+      "name": "Chief Best Vs Earliest Qualifying",
+      "notes": [],
+      "passed": true,
+      "status": "pass"
+    },
+    {
+      "actual": {},
+      "assertions": [
+        {
+          "actual": true,
+          "assertion_id": "later_chief",
+          "description": "The Q=.45 raw first report does not capture Chief.",
+          "expected": true,
+          "passed": true
+        }
+      ],
+      "case_id": "chief_early_low_quality",
+      "duration_ms": 0,
+      "expected": {},
+      "invariant_group": "CHIEF",
+      "invariants": [
+        "later_chief"
+      ],
+      "name": "Chief Early Low Quality",
+      "notes": [],
+      "passed": true,
+      "status": "pass"
+    },
+    {
+      "actual": {},
+      "assertions": [
+        {
+          "actual": 5,
+          "assertion_id": "top_k_bound",
+          "description": "Exactly Top-K operators are rewarded.",
+          "expected": 5,
+          "passed": true
+        },
+        {
+          "actual": true,
+          "assertion_id": "chief_in_top_k",
+          "description": "Chief is one of the rewarded Top-K operators.",
+          "expected": true,
+          "passed": true
+        },
+        {
+          "actual": true,
+          "assertion_id": "rank_six_not_chief",
+          "description": "The earliest qualifying rank-six operator receives neither payout nor Chief.",
+          "expected": true,
+          "passed": true
+        }
+      ],
+      "case_id": "chief_outside_top_k",
+      "duration_ms": 0,
+      "expected": {},
+      "invariant_group": "CHIEF",
+      "invariants": [
+        "top_k_bound",
+        "chief_in_top_k",
+        "rank_six_not_chief"
+      ],
+      "name": "Chief Outside Top K",
+      "notes": [],
+      "passed": true,
+      "status": "pass"
+    },
+    {
+      "actual": {},
+      "assertions": [
+        {
+          "actual": null,
+          "assertion_id": "no_chief",
+          "description": "No Top-K report qualifies as Chief.",
+          "expected": null,
+          "passed": true
+        },
+        {
+          "actual": "152.895141",
+          "assertion_id": "full_quality_pool",
+          "description": "No-Chief returns the complete reward to the quality pool.",
+          "expected": "152.895141",
+          "passed": true
+        }
+      ],
+      "case_id": "no_chief_quality_pool_fallback",
+      "duration_ms": 0,
+      "expected": {},
+      "invariant_group": "CHIEF",
+      "invariants": [
+        "no_chief",
+        "full_quality_pool"
+      ],
+      "name": "No Chief Quality Pool Fallback",
+      "notes": [],
+      "passed": true,
+      "status": "pass"
+    },
+    {
+      "actual": {},
+      "assertions": [
+        {
+          "actual": "4110.409012",
+          "assertion_id": "single_full",
+          "description": "Single finder receives its complete cluster reward.",
+          "expected": "4110.409012",
+          "passed": true
+        }
+      ],
+      "case_id": "single_operator_full_cluster_reward",
+      "duration_ms": 0,
+      "expected": {},
+      "invariant_group": "ACCOUNTING",
+      "invariants": [
+        "single_full"
+      ],
+      "name": "Single Operator Full Cluster Reward",
+      "notes": [],
+      "passed": true,
+      "status": "pass"
+    },
+    {
+      "actual": {},
+      "assertions": [
+        {
+          "actual": {
+            "0.70": "0.4900",
+            "0.85": "0.7225",
+            "0.90": "0.8100",
+            "0.95": "0.9025"
+          },
+          "assertion_id": "q_squared_exact",
+          "description": "Known Q values square exactly with Decimal.",
+          "expected": {
+            "0.70": "0.4900",
+            "0.85": "0.7225",
+            "0.90": "0.8100",
+            "0.95": "0.9025"
+          },
+          "passed": true
+        },
+        {
+          "actual": "1988.631990",
+          "assertion_id": "quality_pool_conserved",
+          "description": "Quality allocations conserve the Quality Pool.",
+          "expected": "1988.631990",
+          "passed": true
+        }
+      ],
+      "case_id": "q_squared_distribution",
+      "duration_ms": 0,
+      "expected": {},
+      "invariant_group": "ACCOUNTING",
+      "invariants": [
+        "q_squared_exact",
+        "quality_pool_conserved"
+      ],
+      "name": "Q Squared Distribution",
+      "notes": [],
+      "passed": true,
+      "status": "pass"
+    },
+    {
+      "actual": {},
+      "assertions": [
+        {
+          "actual": "0",
+          "assertion_id": "zero_weight",
+          "description": "Q=0 produces Q-squared weight zero.",
+          "expected": "0",
+          "passed": true
+        },
+        {
+          "actual": [
+            "0.000000",
+            "100.000000"
+          ],
+          "assertion_id": "zero_undistributed",
+          "description": "All-zero Q does not divide by zero or silently equal-share.",
+          "expected": [
+            "0",
+            "100.000000"
+          ],
+          "passed": true
+        }
+      ],
+      "case_id": "zero_q_non_distributable",
+      "duration_ms": 0,
+      "expected": {},
+      "invariant_group": "ACCOUNTING",
+      "invariants": [
+        "zero_weight",
+        "zero_undistributed"
+      ],
+      "name": "Zero Q Non Distributable",
+      "notes": [],
+      "passed": true,
+      "status": "pass"
+    },
+    {
+      "actual": {},
+      "assertions": [
+        {
+          "actual": true,
+          "assertion_id": "historical_change_finalizes",
+          "description": "Changing reputation without economic inputs does not stale or alter payout.",
+          "expected": true,
+          "passed": true
+        },
+        {
+          "actual": true,
+          "assertion_id": "no_historical_fields",
+          "description": "Day 5 snapshot contains no performance multiplier.",
+          "expected": true,
+          "passed": true
+        }
+      ],
+      "case_id": "historical_performance_reward_independence",
+      "duration_ms": 0,
+      "expected": {},
+      "invariant_group": "SECURITY",
+      "invariants": [
+        "historical_change_finalizes",
+        "no_historical_fields"
+      ],
+      "name": "Historical Performance Reward Independence",
+      "notes": [],
+      "passed": true,
+      "status": "pass"
+    },
+    {
+      "actual": {},
+      "assertions": [
+        {
+          "actual": true,
+          "assertion_id": "routing_project_scope",
+          "description": "Cycle, allocations and events stay inside their authoritative project/routing.",
+          "expected": true,
+          "passed": true
+        }
+      ],
+      "case_id": "multi_routing_project_isolation",
+      "duration_ms": 0,
+      "expected": {},
+      "invariant_group": "SECURITY",
+      "invariants": [
+        "routing_project_scope"
+      ],
+      "name": "Multi Routing Project Isolation",
+      "notes": [],
+      "passed": true,
+      "status": "pass"
+    },
+    {
+      "actual": {},
+      "assertions": [
+        {
+          "actual": true,
+          "assertion_id": "clean_replay",
+          "description": "Clean isolated replay produces identical economic content and event IDs.",
+          "expected": true,
+          "passed": true
+        }
+      ],
+      "case_id": "deterministic_replay",
+      "duration_ms": 0,
+      "expected": {},
+      "invariant_group": "DETERMINISM",
+      "invariants": [
+        "clean_replay"
+      ],
+      "name": "Deterministic Replay",
+      "notes": [],
+      "passed": true,
+      "status": "pass"
+    },
+    {
+      "actual": {},
+      "assertions": [
+        {
+          "actual": true,
+          "assertion_id": "stress_order",
+          "description": "Shuffled report insertion cannot change the stress payout.",
+          "expected": true,
+          "passed": true
+        }
+      ],
+      "case_id": "insertion_order_independence",
+      "duration_ms": 0,
+      "expected": {},
+      "invariant_group": "DETERMINISM",
+      "invariants": [
+        "stress_order"
+      ],
+      "name": "Insertion Order Independence",
+      "notes": [],
+      "passed": true,
+      "status": "pass"
+    },
+    {
+      "actual": {},
+      "assertions": [
+        {
+          "actual": true,
+          "assertion_id": "reload_clean",
+          "description": "Reloaded finalized state passes the read-only verifier.",
+          "expected": true,
+          "passed": true
+        }
+      ],
+      "case_id": "persistence_reload_verification",
+      "duration_ms": 0,
+      "expected": {},
+      "invariant_group": "LIFECYCLE",
+      "invariants": [
+        "reload_clean"
+      ],
+      "name": "Persistence Reload Verification",
+      "notes": [],
+      "passed": true,
+      "status": "pass"
+    },
+    {
+      "actual": {},
+      "assertions": [
+        {
+          "actual": true,
+          "assertion_id": "severity_stale",
+          "description": "Changed finalized cluster severity/source blocks finalization.",
+          "expected": true,
+          "passed": true
+        }
+      ],
+      "case_id": "stale_severity_blocks_finalize",
+      "duration_ms": 0,
+      "expected": {},
+      "invariant_group": "LIFECYCLE",
+      "invariants": [
+        "severity_stale"
+      ],
+      "name": "Stale Severity Blocks Finalize",
+      "notes": [],
+      "passed": true,
+      "status": "pass"
+    },
+    {
+      "actual": {},
+      "assertions": [
+        {
+          "actual": true,
+          "assertion_id": "quality_stale",
+          "description": "Changed finalized quality evidence blocks finalization.",
+          "expected": true,
+          "passed": true
+        }
+      ],
+      "case_id": "stale_quality_blocks_finalize",
+      "duration_ms": 0,
+      "expected": {},
+      "invariant_group": "LIFECYCLE",
+      "invariants": [
+        "quality_stale"
+      ],
+      "name": "Stale Quality Blocks Finalize",
+      "notes": [],
+      "passed": true,
+      "status": "pass"
+    },
+    {
+      "actual": {},
+      "assertions": [
+        {
+          "actual": true,
+          "assertion_id": "reputation_neutral",
+          "description": "A reputation-only mutation leaves current-task finalization valid.",
+          "expected": true,
+          "passed": true
+        }
+      ],
+      "case_id": "reputation_change_does_not_block_finalize",
+      "duration_ms": 0,
+      "expected": {},
+      "invariant_group": "LIFECYCLE",
+      "invariants": [
+        "reputation_neutral"
+      ],
+      "name": "Reputation Change Does Not Block Finalize",
+      "notes": [],
+      "passed": true,
+      "status": "pass"
+    },
+    {
+      "actual": {},
+      "assertions": [
+        {
+          "actual": true,
+          "assertion_id": "double_protection",
+          "description": "Finalize retry is idempotent and a second cycle cannot spend the budget.",
+          "expected": true,
+          "passed": true
+        }
+      ],
+      "case_id": "finalize_retry_no_double_reward",
+      "duration_ms": 0,
+      "expected": {},
+      "invariant_group": "IDEMPOTENCY",
+      "invariants": [
+        "double_protection"
+      ],
+      "name": "Finalize Retry No Double Reward",
+      "notes": [],
+      "passed": true,
+      "status": "pass"
+    },
+    {
+      "actual": {},
+      "assertions": [
+        {
+          "actual": true,
+          "assertion_id": "crash_recovery",
+          "description": "A matching partial event set is detected and completed without duplicates.",
+          "expected": true,
+          "passed": true
+        }
+      ],
+      "case_id": "partial_crash_recovery",
+      "duration_ms": 0,
+      "expected": {},
+      "invariant_group": "RECOVERY",
+      "invariants": [
+        "crash_recovery"
+      ],
+      "name": "Partial Crash Recovery",
+      "notes": [],
+      "passed": true,
+      "status": "pass"
+    },
+    {
+      "actual": {},
+      "assertions": [
+        {
+          "actual": true,
+          "assertion_id": "complete_recovery",
+          "description": "A complete event set without final marker is recognized and finalized once.",
+          "expected": true,
+          "passed": true
+        }
+      ],
+      "case_id": "complete_event_set_recovery",
+      "duration_ms": 0,
+      "expected": {},
+      "invariant_group": "RECOVERY",
+      "invariants": [
+        "complete_recovery"
+      ],
+      "name": "Complete Event Set Recovery",
+      "notes": [],
+      "passed": true,
+      "status": "pass"
+    },
+    {
+      "actual": {},
+      "assertions": [
+        {
+          "actual": true,
+          "assertion_id": "corruption_detected",
+          "description": "Same-total economic event tampering is detected without mutation.",
+          "expected": true,
+          "passed": true
+        }
+      ],
+      "case_id": "event_corruption_detection",
+      "duration_ms": 0,
+      "expected": {},
+      "invariant_group": "SECURITY",
+      "invariants": [
+        "corruption_detected"
+      ],
+      "name": "Event Corruption Detection",
+      "notes": [],
+      "passed": true,
+      "status": "pass"
+    },
+    {
+      "actual": {},
+      "assertions": [
+        {
+          "actual": "10500.000000",
+          "assertion_id": "miner_conservation",
+          "description": "RewardEvents plus undistributed points equal miner pool exactly.",
+          "expected": "10500.000000",
+          "passed": true
+        },
+        {
+          "actual": true,
+          "assertion_id": "cluster_conservation",
+          "description": "Every Day 5 payout accounts for its cluster reward.",
+          "expected": true,
+          "passed": true
+        },
+        {
+          "actual": "915.319892",
+          "assertion_id": "unassessed_undistributed",
+          "description": "Missing report quality remains explicitly undistributed.",
+          "expected": "915.319892",
+          "passed": true
+        }
+      ],
+      "case_id": "full_accounting_conservation",
+      "duration_ms": 0,
+      "expected": {},
+      "invariant_group": "ACCOUNTING",
+      "invariants": [
+        "miner_conservation",
+        "cluster_conservation",
+        "unassessed_undistributed"
+      ],
+      "name": "Full Accounting Conservation",
+      "notes": [],
+      "passed": true,
+      "status": "pass"
+    }
+  ]
+}

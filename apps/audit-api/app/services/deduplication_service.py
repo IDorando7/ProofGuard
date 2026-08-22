@@ -1,3 +1,5 @@
+import hashlib
+import json
 import re
 from typing import Any
 
@@ -67,6 +69,35 @@ def build_dedup_key(candidate: DeduplicationCandidate) -> str:
     contract = candidate.contracts[0] if candidate.contracts else "unknown"
     function = candidate.functions[0] if candidate.functions else "unknown"
     return f"{category}:{contract}:{function}"
+
+
+def build_root_cause_fingerprint(candidate_or_finding: Any) -> str:
+    """Hash the normalized Week 4 dedup identity, never reporter identity.
+
+    This function does not classify matches.  It gives a stable identity to the
+    canonical candidate selected by the existing dedup relation.
+    """
+    candidate = (
+        candidate_or_finding
+        if isinstance(candidate_or_finding, DeduplicationCandidate)
+        else extract_finding_candidate(candidate_or_finding)
+    )
+    payload = {
+        "dedup_policy": "deterministic_field_similarity_v0",
+        "dedup_key": build_dedup_key(candidate),
+        "category": candidate.category or "unknown",
+        "contracts": sorted(set(candidate.contracts)),
+        "functions": sorted(set(candidate.functions)),
+        "root_cause": normalize_text(candidate.root_cause),
+    }
+    canonical = json.dumps(
+        payload,
+        sort_keys=True,
+        separators=(",", ":"),
+        ensure_ascii=False,
+        allow_nan=False,
+    ).encode("utf-8")
+    return hashlib.sha256(canonical).hexdigest()
 
 
 def token_set(text: str | None) -> set[str]:
@@ -279,4 +310,3 @@ def _unique(values: list[str]) -> list[str]:
             seen.add(value)
             unique_values.append(value)
     return unique_values
-

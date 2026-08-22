@@ -2,9 +2,9 @@
   "case_id": "duplicate_finding_001",
   "expected_statuses": {
     "finding_primary_001": "accepted",
-    "finding_duplicate_001": "duplicate"
+    "finding_duplicate_001": "accepted"
   },
   "notes": [
-    "Duplicate engine should classify the second finding as duplicate."
+    "Week 7 accepts the reproduced second report while preserving its independent root-cause duplicate relation."
   ]
 }

@@ -1,0 +1,1501 @@
+{
+  "benchmark_version": "week8_validator_benchmark_v1",
+  "cases": [
+    {
+      "actual": {
+        "value": true
+      },
+      "assertions": [
+        {
+          "actual": true,
+          "assertion_id": "validator_self_validation_blocked.assertion",
+          "description": "Reporter-owned validator nodes are excluded.",
+          "expected": true,
+          "passed": true
+        }
+      ],
+      "case_id": "validator_self_validation_blocked",
+      "description": "Reporter-owned validator nodes are excluded.",
+      "details": {},
+      "duration_ms": 0,
+      "expected": {
+        "value": true
+      },
+      "group": "conflict_of_interest",
+      "invariant_ids": [
+        "CONFLICT_OF_INTEREST"
+      ],
+      "status": "pass"
+    },
+    {
+      "actual": {
+        "value": 1
+      },
+      "assertions": [
+        {
+          "actual": 1,
+          "assertion_id": "same_operator_multiple_nodes_one_seat.assertion",
+          "description": "One operator's multiple nodes occupy at most one authoritative seat.",
+          "expected": 1,
+          "passed": true
+        }
+      ],
+      "case_id": "same_operator_multiple_nodes_one_seat",
+      "description": "One operator's multiple nodes occupy at most one authoritative seat.",
+      "details": {},
+      "duration_ms": 0,
+      "expected": {
+        "value": 1
+      },
+      "group": "operator_diversity",
+      "invariant_ids": [
+        "OPERATOR_DIVERSITY"
+      ],
+      "status": "pass"
+    },
+    {
+      "actual": {
+        "value": true
+      },
+      "assertions": [
+        {
+          "actual": true,
+          "assertion_id": "insufficient_operator_diversity.assertion",
+          "description": "Four operators cannot fill five STANDARD seats.",
+          "expected": true,
+          "passed": true
+        }
+      ],
+      "case_id": "insufficient_operator_diversity",
+      "description": "Four operators cannot fill five STANDARD seats.",
+      "details": {},
+      "duration_ms": 0,
+      "expected": {
+        "value": true
+      },
+      "group": "operator_diversity",
+      "invariant_ids": [
+        "OPERATOR_DIVERSITY"
+      ],
+      "status": "pass"
+    },
+    {
+      "actual": {
+        "value": true
+      },
+      "assertions": [
+        {
+          "actual": true,
+          "assertion_id": "high_assurance_no_silent_downgrade.assertion",
+          "description": "Six operators cannot silently downgrade HIGH_ASSURANCE.",
+          "expected": true,
+          "passed": true
+        }
+      ],
+      "case_id": "high_assurance_no_silent_downgrade",
+      "description": "Six operators cannot silently downgrade HIGH_ASSURANCE.",
+      "details": {},
+      "duration_ms": 0,
+      "expected": {
+        "value": true
+      },
+      "group": "committee",
+      "invariant_ids": [
+        "COMMITTEE"
+      ],
+      "status": "pass"
+    },
+    {
+      "actual": {
+        "value": true
+      },
+      "assertions": [
+        {
+          "actual": true,
+          "assertion_id": "category_capability_filter.assertion",
+          "description": "Unsupported-category validators are excluded.",
+          "expected": true,
+          "passed": true
+        }
+      ],
+      "case_id": "category_capability_filter",
+      "description": "Unsupported-category validators are excluded.",
+      "details": {},
+      "duration_ms": 0,
+      "expected": {
+        "value": true
+      },
+      "group": "committee",
+      "invariant_ids": [
+        "COMMITTEE"
+      ],
+      "status": "pass"
+    },
+    {
+      "actual": {
+        "value": true
+      },
+      "assertions": [
+        {
+          "actual": true,
+          "assertion_id": "committee_selection_deterministic.assertion",
+          "description": "Repeated committee planning has one fingerprint.",
+          "expected": true,
+          "passed": true
+        }
+      ],
+      "case_id": "committee_selection_deterministic",
+      "description": "Repeated committee planning has one fingerprint.",
+      "details": {},
+      "duration_ms": 0,
+      "expected": {
+        "value": true
+      },
+      "group": "determinism",
+      "invariant_ids": [
+        "DETERMINISM"
+      ],
+      "status": "pass"
+    },
+    {
+      "actual": {
+        "value": [
+          5,
+          1
+        ]
+      },
+      "assertions": [
+        {
+          "actual": [
+            5,
+            1
+          ],
+          "assertion_id": "shadow_non_authoritative.assertion",
+          "description": "Shadow is additional and outside authoritative count.",
+          "expected": [
+            5,
+            1
+          ],
+          "passed": true
+        }
+      ],
+      "case_id": "shadow_non_authoritative",
+      "description": "Shadow is additional and outside authoritative count.",
+      "details": {},
+      "duration_ms": 0,
+      "expected": {
+        "value": [
+          5,
+          1
+        ]
+      },
+      "group": "committee",
+      "invariant_ids": [
+        "COMMITTEE"
+      ],
+      "status": "pass"
+    },
+    {
+      "actual": {
+        "value": 6
+      },
+      "assertions": [
+        {
+          "actual": 6,
+          "assertion_id": "independent_reproduction_identity.assertion",
+          "description": "Every assignment has an independently attributable reproduction identity.",
+          "expected": 6,
+          "passed": true
+        }
+      ],
+      "case_id": "independent_reproduction_identity",
+      "description": "Every assignment has an independently attributable reproduction identity.",
+      "details": {},
+      "duration_ms": 0,
+      "expected": {
+        "value": 6
+      },
+      "group": "reproduction",
+      "invariant_ids": [
+        "REPRODUCTION"
+      ],
+      "status": "pass"
+    },
+    {
+      "actual": {
+        "value": "rejected_unsafe"
+      },
+      "assertions": [
+        {
+          "actual": "rejected_unsafe",
+          "assertion_id": "unsafe_artifact_preflight.assertion",
+          "description": "Unsafe synthetic fixture terminates before sandbox execution.",
+          "expected": "rejected_unsafe",
+          "passed": true
+        }
+      ],
+      "case_id": "unsafe_artifact_preflight",
+      "description": "Unsafe synthetic fixture terminates before sandbox execution.",
+      "details": {},
+      "duration_ms": 0,
+      "expected": {
+        "value": "rejected_unsafe"
+      },
+      "group": "safety",
+      "invariant_ids": [
+        "SAFETY"
+      ],
+      "status": "pass"
+    },
+    {
+      "actual": {
+        "value": "confirmed"
+      },
+      "assertions": [
+        {
+          "actual": "confirmed",
+          "assertion_id": "standard_four_of_five_confirmed.assertion",
+          "description": "STANDARD 4-of-5 reaches confirmation.",
+          "expected": "confirmed",
+          "passed": true
+        }
+      ],
+      "case_id": "standard_four_of_five_confirmed",
+      "description": "STANDARD 4-of-5 reaches confirmation.",
+      "details": {},
+      "duration_ms": 0,
+      "expected": {
+        "value": "confirmed"
+      },
+      "group": "consensus",
+      "invariant_ids": [
+        "CONSENSUS"
+      ],
+      "status": "pass"
+    },
+    {
+      "actual": {
+        "value": "disputed"
+      },
+      "assertions": [
+        {
+          "actual": "disputed",
+          "assertion_id": "simple_majority_three_two_disputed.assertion",
+          "description": "STANDARD 3-vs-2 remains disputed.",
+          "expected": "disputed",
+          "passed": true
+        }
+      ],
+      "case_id": "simple_majority_three_two_disputed",
+      "description": "STANDARD 3-vs-2 remains disputed.",
+      "details": {},
+      "duration_ms": 0,
+      "expected": {
+        "value": "disputed"
+      },
+      "group": "consensus",
+      "invariant_ids": [
+        "CONSENSUS"
+      ],
+      "status": "pass"
+    },
+    {
+      "actual": {
+        "value": "confirmed"
+      },
+      "assertions": [
+        {
+          "actual": "confirmed",
+          "assertion_id": "high_assurance_five_of_seven.assertion",
+          "description": "HIGH_ASSURANCE 5-of-7 reaches confirmation.",
+          "expected": "confirmed",
+          "passed": true
+        }
+      ],
+      "case_id": "high_assurance_five_of_seven",
+      "description": "HIGH_ASSURANCE 5-of-7 reaches confirmation.",
+      "details": {},
+      "duration_ms": 0,
+      "expected": {
+        "value": "confirmed"
+      },
+      "group": "consensus",
+      "invariant_ids": [
+        "CONSENSUS"
+      ],
+      "status": "pass"
+    },
+    {
+      "actual": {
+        "value": "disputed"
+      },
+      "assertions": [
+        {
+          "actual": "disputed",
+          "assertion_id": "high_assurance_four_three_disputed.assertion",
+          "description": "HIGH_ASSURANCE 4-vs-3 remains disputed.",
+          "expected": "disputed",
+          "passed": true
+        }
+      ],
+      "case_id": "high_assurance_four_three_disputed",
+      "description": "HIGH_ASSURANCE 4-vs-3 remains disputed.",
+      "details": {},
+      "duration_ms": 0,
+      "expected": {
+        "value": "disputed"
+      },
+      "group": "consensus",
+      "invariant_ids": [
+        "CONSENSUS"
+      ],
+      "status": "pass"
+    },
+    {
+      "actual": {
+        "value": "no_quorum"
+      },
+      "assertions": [
+        {
+          "actual": "no_quorum",
+          "assertion_id": "no_quorum.assertion",
+          "description": "Three authoritative attestations produce NO_QUORUM.",
+          "expected": "no_quorum",
+          "passed": true
+        }
+      ],
+      "case_id": "no_quorum",
+      "description": "Three authoritative attestations produce NO_QUORUM.",
+      "details": {},
+      "duration_ms": 0,
+      "expected": {
+        "value": "no_quorum"
+      },
+      "group": "consensus",
+      "invariant_ids": [
+        "CONSENSUS"
+      ],
+      "status": "pass"
+    },
+    {
+      "actual": {
+        "value": "disputed"
+      },
+      "assertions": [
+        {
+          "actual": "disputed",
+          "assertion_id": "reproduction_only_dispute.assertion",
+          "description": "Reproduction-only disagreement remains visible.",
+          "expected": "disputed",
+          "passed": true
+        }
+      ],
+      "case_id": "reproduction_only_dispute",
+      "description": "Reproduction-only disagreement remains visible.",
+      "details": {},
+      "duration_ms": 0,
+      "expected": {
+        "value": "disputed"
+      },
+      "group": "consensus",
+      "invariant_ids": [
+        "CONSENSUS"
+      ],
+      "status": "pass"
+    },
+    {
+      "actual": {
+        "value": "disputed"
+      },
+      "assertions": [
+        {
+          "actual": "disputed",
+          "assertion_id": "severity_only_dispute.assertion",
+          "description": "Severity-only disagreement is not averaged.",
+          "expected": "disputed",
+          "passed": true
+        }
+      ],
+      "case_id": "severity_only_dispute",
+      "description": "Severity-only disagreement is not averaged.",
+      "details": {},
+      "duration_ms": 0,
+      "expected": {
+        "value": "disputed"
+      },
+      "group": "consensus",
+      "invariant_ids": [
+        "CONSENSUS"
+      ],
+      "status": "pass"
+    },
+    {
+      "actual": {
+        "value": "disputed"
+      },
+      "assertions": [
+        {
+          "actual": "disputed",
+          "assertion_id": "root_cause_only_dispute.assertion",
+          "description": "Root-cause-only disagreement remains visible.",
+          "expected": "disputed",
+          "passed": true
+        }
+      ],
+      "case_id": "root_cause_only_dispute",
+      "description": "Root-cause-only disagreement remains visible.",
+      "details": {},
+      "duration_ms": 0,
+      "expected": {
+        "value": "disputed"
+      },
+      "group": "consensus",
+      "invariant_ids": [
+        "CONSENSUS"
+      ],
+      "status": "pass"
+    },
+    {
+      "actual": {
+        "value": "disputed"
+      },
+      "assertions": [
+        {
+          "actual": "disputed",
+          "assertion_id": "impact_only_dispute.assertion",
+          "description": "Impact-only disagreement remains visible.",
+          "expected": "disputed",
+          "passed": true
+        }
+      ],
+      "case_id": "impact_only_dispute",
+      "description": "Impact-only disagreement remains visible.",
+      "details": {},
+      "duration_ms": 0,
+      "expected": {
+        "value": "disputed"
+      },
+      "group": "consensus",
+      "invariant_ids": [
+        "CONSENSUS"
+      ],
+      "status": "pass"
+    },
+    {
+      "actual": {
+        "value": "disputed"
+      },
+      "assertions": [
+        {
+          "actual": "disputed",
+          "assertion_id": "shadow_vote_excluded.assertion",
+          "description": "A shadow ACCEPT cannot turn authoritative 3-vs-2 into truth.",
+          "expected": "disputed",
+          "passed": true
+        }
+      ],
+      "case_id": "shadow_vote_excluded",
+      "description": "A shadow ACCEPT cannot turn authoritative 3-vs-2 into truth.",
+      "details": {},
+      "duration_ms": 0,
+      "expected": {
+        "value": "disputed"
+      },
+      "group": "consensus",
+      "invariant_ids": [
+        "CONSENSUS"
+      ],
+      "status": "pass"
+    },
+    {
+      "actual": {
+        "value": [
+          9,
+          8,
+          6
+        ]
+      },
+      "assertions": [
+        {
+          "actual": [
+            9,
+            8,
+            6
+          ],
+          "assertion_id": "escalation_standard_five_to_nine.assertion",
+          "description": "STANDARD escalation produces cumulative N=9 with threshold six.",
+          "expected": [
+            9,
+            8,
+            6
+          ],
+          "passed": true
+        }
+      ],
+      "case_id": "escalation_standard_five_to_nine",
+      "description": "STANDARD escalation produces cumulative N=9 with threshold six.",
+      "details": {},
+      "duration_ms": 0,
+      "expected": {
+        "value": [
+          9,
+          8,
+          6
+        ]
+      },
+      "group": "escalation",
+      "invariant_ids": [
+        "ESCALATION"
+      ],
+      "status": "pass"
+    },
+    {
+      "actual": {
+        "value": [
+          11,
+          10,
+          8
+        ]
+      },
+      "assertions": [
+        {
+          "actual": [
+            11,
+            10,
+            8
+          ],
+          "assertion_id": "escalation_high_assurance_seven_to_eleven.assertion",
+          "description": "HIGH_ASSURANCE escalation produces cumulative N=11 with threshold eight.",
+          "expected": [
+            11,
+            10,
+            8
+          ],
+          "passed": true
+        }
+      ],
+      "case_id": "escalation_high_assurance_seven_to_eleven",
+      "description": "HIGH_ASSURANCE escalation produces cumulative N=11 with threshold eight.",
+      "details": {},
+      "duration_ms": 0,
+      "expected": {
+        "value": [
+          11,
+          10,
+          8
+        ]
+      },
+      "group": "escalation",
+      "invariant_ids": [
+        "ESCALATION"
+      ],
+      "status": "pass"
+    },
+    {
+      "actual": {
+        "value": true
+      },
+      "assertions": [
+        {
+          "actual": true,
+          "assertion_id": "previous_operator_excluded_from_escalation.assertion",
+          "description": "Escalation uses four new operators.",
+          "expected": true,
+          "passed": true
+        }
+      ],
+      "case_id": "previous_operator_excluded_from_escalation",
+      "description": "Escalation uses four new operators.",
+      "details": {},
+      "duration_ms": 0,
+      "expected": {
+        "value": true
+      },
+      "group": "escalation",
+      "invariant_ids": [
+        "ESCALATION"
+      ],
+      "status": "pass"
+    },
+    {
+      "actual": {
+        "value": true
+      },
+      "assertions": [
+        {
+          "actual": true,
+          "assertion_id": "reporter_excluded_from_escalation.assertion",
+          "description": "Reporter operators remain excluded during escalation.",
+          "expected": true,
+          "passed": true
+        }
+      ],
+      "case_id": "reporter_excluded_from_escalation",
+      "description": "Reporter operators remain excluded during escalation.",
+      "details": {},
+      "duration_ms": 0,
+      "expected": {
+        "value": true
+      },
+      "group": "conflict_of_interest",
+      "invariant_ids": [
+        "CONFLICT_OF_INTEREST"
+      ],
+      "status": "pass"
+    },
+    {
+      "actual": {
+        "value": true
+      },
+      "assertions": [
+        {
+          "actual": true,
+          "assertion_id": "escalation_insufficient_new_validators.assertion",
+          "description": "Insufficient registered diversity fails closed.",
+          "expected": true,
+          "passed": true
+        }
+      ],
+      "case_id": "escalation_insufficient_new_validators",
+      "description": "Insufficient registered diversity fails closed.",
+      "details": {},
+      "duration_ms": 0,
+      "expected": {
+        "value": true
+      },
+      "group": "escalation",
+      "invariant_ids": [
+        "ESCALATION"
+      ],
+      "status": "pass"
+    },
+    {
+      "actual": {
+        "value": "disputed"
+      },
+      "assertions": [
+        {
+          "actual": "disputed",
+          "assertion_id": "escalation_still_disputed.assertion",
+          "description": "A terminal unresolved dispute is represented without fabricated truth.",
+          "expected": "disputed",
+          "passed": true
+        }
+      ],
+      "case_id": "escalation_still_disputed",
+      "description": "A terminal unresolved dispute is represented without fabricated truth.",
+      "details": {},
+      "duration_ms": 0,
+      "expected": {
+        "value": "disputed"
+      },
+      "group": "escalation",
+      "invariant_ids": [
+        "ESCALATION"
+      ],
+      "status": "pass"
+    },
+    {
+      "actual": {
+        "value": true
+      },
+      "assertions": [
+        {
+          "actual": true,
+          "assertion_id": "no_result_shopping.assertion",
+          "description": "Maximum escalation prevents result shopping.",
+          "expected": true,
+          "passed": true
+        }
+      ],
+      "case_id": "no_result_shopping",
+      "description": "Maximum escalation prevents result shopping.",
+      "details": {},
+      "duration_ms": 0,
+      "expected": {
+        "value": true
+      },
+      "group": "escalation",
+      "invariant_ids": [
+        "ESCALATION"
+      ],
+      "status": "pass"
+    },
+    {
+      "actual": {
+        "value": [
+          "rejected",
+          "1.000000",
+          "1.000000"
+        ]
+      },
+      "assertions": [
+        {
+          "actual": [
+            "rejected",
+            "1.000000",
+            "1.000000"
+          ],
+          "assertion_id": "original_minority_later_correct.assertion",
+          "description": "Original REJECT minority is correct against final cumulative REJECTED truth.",
+          "expected": [
+            "rejected",
+            "1.000000"
+          ],
+          "passed": true
+        }
+      ],
+      "case_id": "original_minority_later_correct",
+      "description": "Original REJECT minority is correct against final cumulative REJECTED truth.",
+      "details": {},
+      "duration_ms": 0,
+      "expected": {
+        "value": [
+          "rejected",
+          "1.000000"
+        ]
+      },
+      "group": "anti_herding",
+      "invariant_ids": [
+        "ANTI_HERDING"
+      ],
+      "status": "pass"
+    },
+    {
+      "actual": {
+        "value": "0.850000"
+      },
+      "assertions": [
+        {
+          "actual": "0.850000",
+          "assertion_id": "validation_quality_known_vector.assertion",
+          "description": "The authoritative known vector produces exact VQ .85.",
+          "expected": "0.850000",
+          "passed": true
+        }
+      ],
+      "case_id": "validation_quality_known_vector",
+      "description": "The authoritative known vector produces exact VQ .85.",
+      "details": {},
+      "duration_ms": 0,
+      "expected": {
+        "value": "0.850000"
+      },
+      "group": "validation_quality",
+      "invariant_ids": [
+        "VALIDATION_QUALITY"
+      ],
+      "status": "pass"
+    },
+    {
+      "actual": {
+        "value": "1.000000"
+      },
+      "assertions": [
+        {
+          "actual": "1.000000",
+          "assertion_id": "validation_quality_na_renormalization.assertion",
+          "description": "N/A components are excluded and applicable weights renormalize.",
+          "expected": "1.000000",
+          "passed": true
+        }
+      ],
+      "case_id": "validation_quality_na_renormalization",
+      "description": "N/A components are excluded and applicable weights renormalize.",
+      "details": {},
+      "duration_ms": 0,
+      "expected": {
+        "value": "1.000000"
+      },
+      "group": "validation_quality",
+      "invariant_ids": [
+        "VALIDATION_QUALITY"
+      ],
+      "status": "pass"
+    },
+    {
+      "actual": {
+        "value": 1
+      },
+      "assertions": [
+        {
+          "actual": 1,
+          "assertion_id": "shadow_validator_performance.assertion",
+          "description": "Shadow work creates quality and performance evidence.",
+          "expected": 1,
+          "passed": true
+        }
+      ],
+      "case_id": "shadow_validator_performance",
+      "description": "Shadow work creates quality and performance evidence.",
+      "details": {},
+      "duration_ms": 0,
+      "expected": {
+        "value": 1
+      },
+      "group": "validator_performance",
+      "invariant_ids": [
+        "VALIDATOR_PERFORMANCE"
+      ],
+      "status": "pass"
+    },
+    {
+      "actual": {
+        "value": true
+      },
+      "assertions": [
+        {
+          "actual": true,
+          "assertion_id": "agent_validator_skill_isolation.assertion",
+          "description": "Node reputation change cannot alter current validator calculation.",
+          "expected": true,
+          "passed": true
+        }
+      ],
+      "case_id": "agent_validator_skill_isolation",
+      "description": "Node reputation change cannot alter current validator calculation.",
+      "details": {},
+      "duration_ms": 0,
+      "expected": {
+        "value": true
+      },
+      "group": "validator_performance",
+      "invariant_ids": [
+        "VALIDATOR_PERFORMANCE"
+      ],
+      "status": "pass"
+    },
+    {
+      "actual": {
+        "value": {
+          "access_control": "1.000000",
+          "accounting": "0.480000",
+          "dos": "0.390000",
+          "governance": "0.300000",
+          "oracle_manipulation": "0.570000",
+          "reentrancy": "0.660000"
+        }
+      },
+      "assertions": [
+        {
+          "actual": {
+            "access_control": "1.000000",
+            "accounting": "0.480000",
+            "dos": "0.390000",
+            "governance": "0.300000",
+            "oracle_manipulation": "0.570000",
+            "reentrancy": "0.660000"
+          },
+          "assertion_id": "validator_category_isolation.assertion",
+          "description": "Six supported categories score independently and access-control evidence does not contaminate reentrancy.",
+          "expected": true,
+          "passed": true
+        }
+      ],
+      "case_id": "validator_category_isolation",
+      "description": "Six supported categories score independently and access-control evidence does not contaminate reentrancy.",
+      "details": {},
+      "duration_ms": 0,
+      "expected": {
+        "value": true
+      },
+      "group": "validator_performance",
+      "invariant_ids": [
+        "VALIDATOR_PERFORMANCE"
+      ],
+      "status": "pass"
+    },
+    {
+      "actual": {
+        "value": [
+          "0.500000",
+          "0.540000",
+          "0.700000",
+          "0.900000"
+        ]
+      },
+      "assertions": [
+        {
+          "actual": [
+            "0.500000",
+            "0.540000",
+            "0.700000",
+            "0.900000"
+          ],
+          "assertion_id": "validator_score_experience_shrinkage.assertion",
+          "description": "Neutral experience shrinkage matches exact v1 vectors.",
+          "expected": [
+            "0.500000",
+            "0.540000",
+            "0.700000",
+            "0.900000"
+          ],
+          "passed": true
+        }
+      ],
+      "case_id": "validator_score_experience_shrinkage",
+      "description": "Neutral experience shrinkage matches exact v1 vectors.",
+      "details": {},
+      "duration_ms": 0,
+      "expected": {
+        "value": [
+          "0.500000",
+          "0.540000",
+          "0.700000",
+          "0.900000"
+        ]
+      },
+      "group": "validator_performance",
+      "invariant_ids": [
+        "VALIDATOR_PERFORMANCE"
+      ],
+      "status": "pass"
+    },
+    {
+      "actual": {
+        "value": "candidate"
+      },
+      "assertions": [
+        {
+          "actual": "candidate",
+          "assertion_id": "validator_membership_cold_start.assertion",
+          "description": "One resolved task remains candidate and shadow evidence is retained.",
+          "expected": "candidate",
+          "passed": true
+        }
+      ],
+      "case_id": "validator_membership_cold_start",
+      "description": "One resolved task remains candidate and shadow evidence is retained.",
+      "details": {},
+      "duration_ms": 0,
+      "expected": {
+        "value": "candidate"
+      },
+      "group": "membership",
+      "invariant_ids": [
+        "MEMBERSHIP"
+      ],
+      "status": "pass"
+    },
+    {
+      "actual": {
+        "value": "200.000000"
+      },
+      "assertions": [
+        {
+          "actual": "200.000000",
+          "assertion_id": "validator_reward_perfect_quality.assertion",
+          "description": "Perfect completed validation earns its complete unit budget.",
+          "expected": "200.000000",
+          "passed": true
+        }
+      ],
+      "case_id": "validator_reward_perfect_quality",
+      "description": "Perfect completed validation earns its complete unit budget.",
+      "details": {},
+      "duration_ms": 0,
+      "expected": {
+        "value": "200.000000"
+      },
+      "group": "reward",
+      "invariant_ids": [
+        "REWARD"
+      ],
+      "status": "pass"
+    },
+    {
+      "actual": {
+        "value": "1.000000"
+      },
+      "assertions": [
+        {
+          "actual": "1.000000",
+          "assertion_id": "validator_reward_correct_minority.assertion",
+          "description": "Correct original minority receives VQ=1 without dissent penalty.",
+          "expected": "1.000000",
+          "passed": true
+        }
+      ],
+      "case_id": "validator_reward_correct_minority",
+      "description": "Correct original minority receives VQ=1 without dissent penalty.",
+      "details": {},
+      "duration_ms": 0,
+      "expected": {
+        "value": "1.000000"
+      },
+      "group": "reward",
+      "invariant_ids": [
+        "REWARD"
+      ],
+      "status": "pass"
+    },
+    {
+      "actual": {
+        "value": true
+      },
+      "assertions": [
+        {
+          "actual": true,
+          "assertion_id": "validator_reward_wrong_majority.assertion",
+          "description": "Wrong original majority receives lower current quality, not a majority bonus.",
+          "expected": true,
+          "passed": true
+        }
+      ],
+      "case_id": "validator_reward_wrong_majority",
+      "description": "Wrong original majority receives lower current quality, not a majority bonus.",
+      "details": {},
+      "duration_ms": 0,
+      "expected": {
+        "value": true
+      },
+      "group": "reward",
+      "invariant_ids": [
+        "REWARD"
+      ],
+      "status": "pass"
+    },
+    {
+      "actual": {
+        "value": [
+          "299.999998",
+          "700.000002"
+        ]
+      },
+      "assertions": [
+        {
+          "actual": [
+            "299.999998",
+            "700.000002"
+          ],
+          "assertion_id": "validator_reward_unresolved_completion_only.assertion",
+          "description": "Terminal unresolved work earns completion only and no fake VQ.",
+          "expected": [
+            "299.999998",
+            "700.000002"
+          ],
+          "passed": true
+        }
+      ],
+      "case_id": "validator_reward_unresolved_completion_only",
+      "description": "Terminal unresolved work earns completion only and no fake VQ.",
+      "details": {},
+      "duration_ms": 0,
+      "expected": {
+        "value": [
+          "299.999998",
+          "700.000002"
+        ]
+      },
+      "group": "reward",
+      "invariant_ids": [
+        "REWARD"
+      ],
+      "status": "pass"
+    },
+    {
+      "actual": {
+        "value": [
+          "0.000000",
+          "200.000000"
+        ]
+      },
+      "assertions": [
+        {
+          "actual": [
+            "0.000000",
+            "200.000000"
+          ],
+          "assertion_id": "validator_reward_no_show.assertion",
+          "description": "A legitimate no-show seat remains reserved and pays zero without redistribution.",
+          "expected": [
+            "0.000000",
+            "200.000000"
+          ],
+          "passed": true
+        }
+      ],
+      "case_id": "validator_reward_no_show",
+      "description": "A legitimate no-show seat remains reserved and pays zero without redistribution.",
+      "details": {},
+      "duration_ms": 0,
+      "expected": {
+        "value": [
+          "0.000000",
+          "200.000000"
+        ]
+      },
+      "group": "reward",
+      "invariant_ids": [
+        "REWARD"
+      ],
+      "status": "pass"
+    },
+    {
+      "actual": {
+        "value": true
+      },
+      "assertions": [
+        {
+          "actual": true,
+          "assertion_id": "validator_reward_no_severity_multiplier.assertion",
+          "description": "Reward inputs contain current VQ but no severity multiplier.",
+          "expected": true,
+          "passed": true
+        }
+      ],
+      "case_id": "validator_reward_no_severity_multiplier",
+      "description": "Reward inputs contain current VQ but no severity multiplier.",
+      "details": {},
+      "duration_ms": 0,
+      "expected": {
+        "value": true
+      },
+      "group": "reward",
+      "invariant_ids": [
+        "REWARD"
+      ],
+      "status": "pass"
+    },
+    {
+      "actual": {
+        "value": true
+      },
+      "assertions": [
+        {
+          "actual": true,
+          "assertion_id": "validator_reward_no_membership_multiplier.assertion",
+          "description": "Membership is absent from current allocation inputs.",
+          "expected": true,
+          "passed": true
+        }
+      ],
+      "case_id": "validator_reward_no_membership_multiplier",
+      "description": "Membership is absent from current allocation inputs.",
+      "details": {},
+      "duration_ms": 0,
+      "expected": {
+        "value": true
+      },
+      "group": "reward",
+      "invariant_ids": [
+        "REWARD"
+      ],
+      "status": "pass"
+    },
+    {
+      "actual": {
+        "value": true
+      },
+      "assertions": [
+        {
+          "actual": true,
+          "assertion_id": "validator_reward_no_categoryscore_multiplier.assertion",
+          "description": "Historical score changes do not alter current calculation fingerprint.",
+          "expected": true,
+          "passed": true
+        }
+      ],
+      "case_id": "validator_reward_no_categoryscore_multiplier",
+      "description": "Historical score changes do not alter current calculation fingerprint.",
+      "details": {},
+      "duration_ms": 0,
+      "expected": {
+        "value": true
+      },
+      "group": "reward",
+      "invariant_ids": [
+        "REWARD"
+      ],
+      "status": "pass"
+    },
+    {
+      "actual": {
+        "value": true
+      },
+      "assertions": [
+        {
+          "actual": true,
+          "assertion_id": "validator_reward_shadow_ineligible.assertion",
+          "description": "Shadow assignment receives no client-funded allocation or RewardEvent.",
+          "expected": true,
+          "passed": true
+        }
+      ],
+      "case_id": "validator_reward_shadow_ineligible",
+      "description": "Shadow assignment receives no client-funded allocation or RewardEvent.",
+      "details": {},
+      "duration_ms": 0,
+      "expected": {
+        "value": true
+      },
+      "group": "reward",
+      "invariant_ids": [
+        "REWARD"
+      ],
+      "status": "pass"
+    },
+    {
+      "actual": {
+        "value": 9
+      },
+      "assertions": [
+        {
+          "actual": 9,
+          "assertion_id": "escalation_does_not_increase_validator_pool.assertion",
+          "description": "Nine escalation work units split the unchanged validator pool.",
+          "expected": 9,
+          "passed": true
+        }
+      ],
+      "case_id": "escalation_does_not_increase_validator_pool",
+      "description": "Nine escalation work units split the unchanged validator pool.",
+      "details": {},
+      "duration_ms": 0,
+      "expected": {
+        "value": 9
+      },
+      "group": "accounting",
+      "invariant_ids": [
+        "ACCOUNTING"
+      ],
+      "status": "pass"
+    },
+    {
+      "actual": {
+        "value": true
+      },
+      "assertions": [
+        {
+          "actual": true,
+          "assertion_id": "validator_pool_exact_conservation.assertion",
+          "description": "Distributed plus undistributed equals validator_pool exactly.",
+          "expected": true,
+          "passed": true
+        }
+      ],
+      "case_id": "validator_pool_exact_conservation",
+      "description": "Distributed plus undistributed equals validator_pool exactly.",
+      "details": {},
+      "duration_ms": 0,
+      "expected": {
+        "value": true
+      },
+      "group": "accounting",
+      "invariant_ids": [
+        "ACCOUNTING"
+      ],
+      "status": "pass"
+    },
+    {
+      "actual": {
+        "value": [
+          true,
+          false,
+          false
+        ]
+      },
+      "assertions": [
+        {
+          "actual": [
+            true,
+            false,
+            false
+          ],
+          "assertion_id": "miner_validator_pool_isolation.assertion",
+          "description": "Validator finalization consumes no miner or protocol pool.",
+          "expected": [
+            true,
+            false,
+            false
+          ],
+          "passed": true
+        }
+      ],
+      "case_id": "miner_validator_pool_isolation",
+      "description": "Validator finalization consumes no miner or protocol pool.",
+      "details": {},
+      "duration_ms": 0,
+      "expected": {
+        "value": [
+          true,
+          false,
+          false
+        ]
+      },
+      "group": "pool_isolation",
+      "invariant_ids": [
+        "POOL_ISOLATION"
+      ],
+      "status": "pass"
+    },
+    {
+      "actual": {
+        "value": true
+      },
+      "assertions": [
+        {
+          "actual": true,
+          "assertion_id": "validator_pool_double_spend_prevention.assertion",
+          "description": "A second validator stream cannot consume the same pool.",
+          "expected": true,
+          "passed": true
+        }
+      ],
+      "case_id": "validator_pool_double_spend_prevention",
+      "description": "A second validator stream cannot consume the same pool.",
+      "details": {},
+      "duration_ms": 0,
+      "expected": {
+        "value": true
+      },
+      "group": "pool_isolation",
+      "invariant_ids": [
+        "POOL_ISOLATION"
+      ],
+      "status": "pass"
+    },
+    {
+      "actual": {
+        "value": [
+          0,
+          5
+        ]
+      },
+      "assertions": [
+        {
+          "actual": [
+            0,
+            5
+          ],
+          "assertion_id": "reward_finalize_retry_idempotent.assertion",
+          "description": "Lost-response finalization retry creates no duplicate events.",
+          "expected": [
+            0,
+            5
+          ],
+          "passed": true
+        }
+      ],
+      "case_id": "reward_finalize_retry_idempotent",
+      "description": "Lost-response finalization retry creates no duplicate events.",
+      "details": {},
+      "duration_ms": 0,
+      "expected": {
+        "value": [
+          0,
+          5
+        ]
+      },
+      "group": "idempotency",
+      "invariant_ids": [
+        "IDEMPOTENCY"
+      ],
+      "status": "pass"
+    },
+    {
+      "actual": {
+        "value": true
+      },
+      "assertions": [
+        {
+          "actual": true,
+          "assertion_id": "reward_partial_write_recovery.assertion",
+          "description": "Partial event publication is detected and recovered without duplicate identity.",
+          "expected": true,
+          "passed": true
+        }
+      ],
+      "case_id": "reward_partial_write_recovery",
+      "description": "Partial event publication is detected and recovered without duplicate identity.",
+      "details": {},
+      "duration_ms": 0,
+      "expected": {
+        "value": true
+      },
+      "group": "recovery",
+      "invariant_ids": [
+        "RECOVERY"
+      ],
+      "status": "pass"
+    },
+    {
+      "actual": {
+        "value": true
+      },
+      "assertions": [
+        {
+          "actual": true,
+          "assertion_id": "reward_corruption_detection.assertion",
+          "description": "A conflicting persisted event amount fails verification.",
+          "expected": true,
+          "passed": true
+        }
+      ],
+      "case_id": "reward_corruption_detection",
+      "description": "A conflicting persisted event amount fails verification.",
+      "details": {},
+      "duration_ms": 0,
+      "expected": {
+        "value": true
+      },
+      "group": "recovery",
+      "invariant_ids": [
+        "RECOVERY"
+      ],
+      "status": "pass"
+    },
+    {
+      "actual": {
+        "value": true
+      },
+      "assertions": [
+        {
+          "actual": true,
+          "assertion_id": "deterministic_replay.assertion",
+          "description": "Clean isolated replay yields identical semantic protocol state.",
+          "expected": true,
+          "passed": true
+        }
+      ],
+      "case_id": "deterministic_replay",
+      "description": "Clean isolated replay yields identical semantic protocol state.",
+      "details": {},
+      "duration_ms": 0,
+      "expected": {
+        "value": true
+      },
+      "group": "determinism",
+      "invariant_ids": [
+        "DETERMINISM"
+      ],
+      "status": "pass"
+    },
+    {
+      "actual": {
+        "value": true
+      },
+      "assertions": [
+        {
+          "actual": true,
+          "assertion_id": "insertion_order_independence.assertion",
+          "description": "Canonical ordering is independent of input ordering.",
+          "expected": true,
+          "passed": true
+        }
+      ],
+      "case_id": "insertion_order_independence",
+      "description": "Canonical ordering is independent of input ordering.",
+      "details": {},
+      "duration_ms": 0,
+      "expected": {
+        "value": true
+      },
+      "group": "determinism",
+      "invariant_ids": [
+        "DETERMINISM"
+      ],
+      "status": "pass"
+    }
+  ]
+}

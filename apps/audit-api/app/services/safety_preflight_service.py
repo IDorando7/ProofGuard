@@ -70,6 +70,7 @@ SUSPICIOUS_SECRET_TOKENS = (
     "/root/",
     "$HOME",
 )
+MAX_POC_BYTES = 262_144
 
 
 def validate_test_name(test_name: str | None) -> list[SafetyIssue]:
@@ -177,11 +178,38 @@ def inspect_poc_file(repo_path: Path, poc_file: str | None) -> list[SafetyIssue]
             )
         ]
 
+    if resolved.stat().st_size > MAX_POC_BYTES:
+        return [
+            SafetyIssue(
+                code="POC_ARTIFACT_TOO_LARGE",
+                severity=SafetyIssueSeverity.HIGH,
+                message="PoC artifact exceeds the reproduction size limit.",
+                file_path=relative_path,
+            )
+        ]
+
     text = resolved.read_text(encoding="utf-8", errors="replace")
     issues: list[SafetyIssue] = []
     for line_number, line in enumerate(text.splitlines(), start=1):
         issues.extend(_inspect_poc_line(line, relative_path, line_number))
     return issues
+
+
+def inspect_repository_symlinks(repo_path: Path) -> list[SafetyIssue]:
+    """Reject symlinks so the copied sandbox workspace cannot dereference host data."""
+    if not repo_path.is_dir():
+        return []
+    for path in sorted(repo_path.rglob("*"), key=lambda item: item.as_posix()):
+        if path.is_symlink():
+            return [
+                SafetyIssue(
+                    code="UNSAFE_SYMLINK",
+                    severity=SafetyIssueSeverity.CRITICAL,
+                    message="Repository symlinks are not allowed in reproduction input.",
+                    file_path=_relative_path(repo_path, path),
+                )
+            ]
+    return []
 
 
 def run_safety_preflight(
@@ -191,6 +219,7 @@ def run_safety_preflight(
     command: list[str] | None = None,
 ) -> SafetyPreflightResult:
     issues: list[SafetyIssue] = []
+    issues.extend(inspect_repository_symlinks(repo_path))
     issues.extend(validate_test_name(test_name))
     issues.extend(validate_command(command))
     issues.extend(inspect_foundry_toml(repo_path))
@@ -360,6 +389,24 @@ def _inspect_poc_line(line: str, file_path: str, line_number: int) -> list[Safet
                     line_number,
                 )
             )
+
+    network_patterns = (
+        "vm.createfork",
+        "vm.createselectfork",
+        "vm.rpcurl",
+        "http://",
+        "https://",
+    )
+    if any(token in lowered for token in network_patterns):
+        issues.append(
+            _poc_issue(
+                "NETWORK_OR_RPC_ACCESS",
+                SafetyIssueSeverity.CRITICAL,
+                "PoC requests network or RPC-backed execution, which is forbidden.",
+                file_path,
+                line_number,
+            )
+        )
 
     return issues
 

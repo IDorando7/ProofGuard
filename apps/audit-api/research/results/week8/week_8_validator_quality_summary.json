@@ -1,0 +1,134 @@
+[
+  {
+    "applicable_components": [
+      "validity",
+      "reproduction",
+      "root_cause",
+      "severity",
+      "impact",
+      "protocol_compliance"
+    ],
+    "assignment_id": "validator_assignment_0ae3ee5e92402bc35a5ff7f1c87917d9d634e1a209a00aa17d31b39d6945c977",
+    "compliance": "1.000000",
+    "fingerprint": "5ea97f0474b4f41ff196b98b5982331944ad6d95fe998267af3327d8eb838492",
+    "impact": "1.000000",
+    "node_id": "c2ff5360-f2be-4ebb-8a45-85dc1b9f9c6d",
+    "operator_id": "committee-operator-04",
+    "reproduction": "1.000000",
+    "role": "authoritative",
+    "root_cause": "1.000000",
+    "severity": "1.000000",
+    "validity": "1.000000",
+    "vq": "1.000000"
+  },
+  {
+    "applicable_components": [
+      "validity",
+      "reproduction",
+      "root_cause",
+      "severity",
+      "impact",
+      "protocol_compliance"
+    ],
+    "assignment_id": "validator_assignment_16b098606140e532993d69a4209a8aff5dbc20c71ab10583c4d40ec33b7be2ae",
+    "compliance": "1.000000",
+    "fingerprint": "7e61e53f68483dc836484aaeeaa42bd1d3c6de639502520a1250cb7f5128fd9e",
+    "impact": "1.000000",
+    "node_id": "8987dd0a-b832-4112-89a7-966ddbf67095",
+    "operator_id": "committee-operator-01",
+    "reproduction": "1.000000",
+    "role": "authoritative",
+    "root_cause": "1.000000",
+    "severity": "0.000000",
+    "validity": "1.000000",
+    "vq": "0.850000"
+  },
+  {
+    "applicable_components": [
+      "validity",
+      "reproduction",
+      "root_cause",
+      "severity",
+      "impact",
+      "protocol_compliance"
+    ],
+    "assignment_id": "validator_assignment_38c7c11bcc49692aa571488bda52a7f412ca1f558ce8140260f3159eb05a2394",
+    "compliance": "1.000000",
+    "fingerprint": "e2ada01210d9883eae511df44071001998cb8eb12c57b8e9e43078b90297742f",
+    "impact": "1.000000",
+    "node_id": "c8c4711e-a24b-483a-89c0-b783790cab9c",
+    "operator_id": "committee-operator-02",
+    "reproduction": "0.000000",
+    "role": "authoritative",
+    "root_cause": "1.000000",
+    "severity": "1.000000",
+    "validity": "1.000000",
+    "vq": "0.800000"
+  },
+  {
+    "applicable_components": [
+      "validity",
+      "reproduction",
+      "root_cause",
+      "severity",
+      "impact",
+      "protocol_compliance"
+    ],
+    "assignment_id": "validator_assignment_4bba14eb8d73c02f4b131778f4dce8c0e9d30c8dab627ae0f6501b4d45e7ad3e",
+    "compliance": "1.000000",
+    "fingerprint": "b2fa854c528e90c6339bfda3d102a6421dacbfe4f7c46d25f647230d4482b47f",
+    "impact": "1.000000",
+    "node_id": "8b07dd7b-f4b8-49be-a2cd-9cd122c10607",
+    "operator_id": "committee-operator-05",
+    "reproduction": "1.000000",
+    "role": "shadow",
+    "root_cause": "1.000000",
+    "severity": "1.000000",
+    "validity": "1.000000",
+    "vq": "1.000000"
+  },
+  {
+    "applicable_components": [
+      "validity",
+      "reproduction",
+      "root_cause",
+      "severity",
+      "impact",
+      "protocol_compliance"
+    ],
+    "assignment_id": "validator_assignment_7329321044e74117496950e2963de09812840de1360c136d674a7a1047e3d0c4",
+    "compliance": "1.000000",
+    "fingerprint": "c26e8a3b96ddedfbe551b9f5651048c05e8ad078a299c21ec6d3e88603227e55",
+    "impact": "1.000000",
+    "node_id": "013302b0-2777-4d3d-b922-f970653df093",
+    "operator_id": "committee-operator-00",
+    "reproduction": "1.000000",
+    "role": "authoritative",
+    "root_cause": "1.000000",
+    "severity": "1.000000",
+    "validity": "1.000000",
+    "vq": "1.000000"
+  },
+  {
+    "applicable_components": [
+      "validity",
+      "reproduction",
+      "root_cause",
+      "severity",
+      "impact",
+      "protocol_compliance"
+    ],
+    "assignment_id": "validator_assignment_f3b783cb41172ec4610f5cb94a1477ec6f6fb3ae4cce084ef82a89bda18a0202",
+    "compliance": "1.000000",
+    "fingerprint": "9ec7aa35cd5f4000c8e37f803bf5186d25d44ff0fcdb1d40a2ec77b7a122b22a",
+    "impact": "1.000000",
+    "node_id": "f02193b6-fc1a-4bc8-8879-de50508265b5",
+    "operator_id": "committee-operator-03",
+    "reproduction": "1.000000",
+    "role": "authoritative",
+    "root_cause": "1.000000",
+    "severity": "1.000000",
+    "validity": "1.000000",
+    "vq": "1.000000"
+  }
+]

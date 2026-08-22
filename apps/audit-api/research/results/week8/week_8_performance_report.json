@@ -1,0 +1,8 @@
+{
+  "committee_selection_ms": 33,
+  "consensus_calculation_ms": 585,
+  "escalation_planning_ms": 754,
+  "quality_performance_reward_ms": 208,
+  "scale_probe_ms": 2347,
+  "scale_quality_vectors": 280
+}

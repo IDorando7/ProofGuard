@@ -1,8 +1,10 @@
 Ce se intampla daca un AI geenreaza cod care are trece de containterul Docker?
 
-La momentul actual se da un numar fix de tokene(protocol points), cate tokene aleg pentru un cycle
+La momentul actual se da un numar fix de tokene(protocol points), cate tokene aleg pentru un cycle ✅
 
-Daca exista un finding duplicat al 2-lea nu primeste reward
+Daca exista un finding duplicat al 2-lea nu primeste ✅
+
+Trebuie validator pentru noua formula de impartire a rewardurilor
 
 Duplicarea merge pe o euristica, trebuie vazut cum se automatizeaza sau daca peste tot este facuta manual.
 
@@ -10,7 +12,7 @@ Normalizarea serveritatii a fost facuta tot dupa o euristica, se pleaca de la un
 in functie de ce se intampla.
 
 Rewardul este calculat astfel : se creaza un cycle, se face o pondere a tuturor subneturilor cu toate vulnerabiltatile
-si apoi se impart la noduri
+si apoi se impart la  ✅
 
 Cum se dau rewardurile pe diferite chainuri si cum am putea da noi?
 

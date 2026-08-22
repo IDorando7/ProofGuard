@@ -16,6 +16,7 @@ SAFE_PERFORMANCE_ID = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_-]{0,255}$")
 
 class CategoryPerformanceOutcome(str, Enum):
     ACCEPTED_UNIQUE = "accepted_unique"
+    ACCEPTED_INDEPENDENT_DUPLICATE = "accepted_independent_duplicate"
     REJECTED = "rejected"
     DUPLICATE = "duplicate"
     OUT_OF_SCOPE = "out_of_scope"
@@ -29,8 +30,10 @@ class CategoryPerformanceCounts(BaseModel):
 
     total_finalized_submissions: int = Field(default=0, ge=0)
     accepted_unique_submissions: int = Field(default=0, ge=0)
+    accepted_independent_duplicate_submissions: int = Field(default=0, ge=0)
     rejected_submissions: int = Field(default=0, ge=0)
     duplicate_submissions: int = Field(default=0, ge=0)
+    submission_duplicate_spam: int = Field(default=0, ge=0)
     out_of_scope_submissions: int = Field(default=0, ge=0)
     insufficient_evidence_submissions: int = Field(default=0, ge=0)
     unsafe_submissions: int = Field(default=0, ge=0)
@@ -45,6 +48,7 @@ class CategoryPerformanceCounts(BaseModel):
         total = self.total_finalized_submissions
         primary_outcomes = (
             self.accepted_unique_submissions,
+            self.accepted_independent_duplicate_submissions,
             self.rejected_submissions,
             self.duplicate_submissions,
             self.out_of_scope_submissions,
@@ -56,6 +60,8 @@ class CategoryPerformanceCounts(BaseModel):
             raise ValueError("Outcome counters cannot exceed total finalized submissions")
         if sum(primary_outcomes) > total:
             raise ValueError("A finalized submission cannot occupy multiple primary outcome buckets")
+        if self.submission_duplicate_spam > total:
+            raise ValueError("Submission spam count cannot exceed finalized submissions")
         if self.reproduction_attempts > total:
             raise ValueError("Reproduction attempts cannot exceed total finalized submissions")
         if self.reproduced_submissions > self.reproduction_attempts:
@@ -210,6 +216,7 @@ class CategoryPerformanceRecord(BaseModel):
         primary_outcome_total = sum(
             (
                 self.counts.accepted_unique_submissions,
+                self.counts.accepted_independent_duplicate_submissions,
                 self.counts.rejected_submissions,
                 self.counts.duplicate_submissions,
                 self.counts.out_of_scope_submissions,
@@ -241,7 +248,10 @@ class CategoryPerformanceRecord(BaseModel):
                 <= stats.maximum_contribution_score
             ):
                 raise ValueError("Average contribution score must be within score bounds")
-        accepted = self.counts.accepted_unique_submissions
+        accepted = (
+            self.counts.accepted_unique_submissions
+            + self.counts.accepted_independent_duplicate_submissions
+        )
         if accepted == 0:
             if (
                 stats.accepted_contribution_score_total != 0

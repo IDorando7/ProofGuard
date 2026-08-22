@@ -127,9 +127,11 @@ def calculate_precision(performance: CategoryPerformanceRecord) -> float:
     finalized = performance.counts.total_finalized_submissions
     if finalized == 0:
         return 0.0
-    return _round6(
-        performance.counts.accepted_unique_submissions / finalized
+    accepted_valid = (
+        performance.counts.accepted_unique_submissions
+        + performance.counts.accepted_independent_duplicate_submissions
     )
+    return _round6(accepted_valid / finalized)
 
 
 def calculate_reproduction_rate(
@@ -145,7 +147,11 @@ def calculate_uniqueness_rate(
     performance: CategoryPerformanceRecord,
 ) -> float:
     accepted = performance.counts.accepted_unique_submissions
-    denominator = accepted + performance.counts.duplicate_submissions
+    denominator = (
+        accepted
+        + performance.counts.accepted_independent_duplicate_submissions
+        + performance.counts.duplicate_submissions
+    )
     if denominator == 0:
         return 0.0
     return _round6(accepted / denominator)
@@ -154,7 +160,11 @@ def calculate_uniqueness_rate(
 def calculate_contribution_quality(
     performance: CategoryPerformanceRecord,
 ) -> float:
-    if performance.counts.accepted_unique_submissions == 0:
+    if (
+        performance.counts.accepted_unique_submissions
+        + performance.counts.accepted_independent_duplicate_submissions
+        == 0
+    ):
         return 0.0
     return _round6(
         performance.contribution_stats.accepted_average_contribution_score
@@ -165,7 +175,10 @@ def calculate_contribution_quality(
 def calculate_consistency(
     performance: CategoryPerformanceRecord,
 ) -> float:
-    accepted = performance.counts.accepted_unique_submissions
+    accepted = (
+        performance.counts.accepted_unique_submissions
+        + performance.counts.accepted_independent_duplicate_submissions
+    )
     if accepted == 0:
         return 0.0
     if accepted == 1:
@@ -275,8 +288,15 @@ def calculate_score_penalties(
             total_penalty=0,
         )
 
+    # v0 records did not distinguish spam from root-cause duplicate outcomes.
+    # Preserve their historical fallback while precise v1 counters take priority.
+    duplicate_penalty_source = (
+        counts.submission_duplicate_spam
+        if counts.submission_duplicate_spam > 0
+        else counts.duplicate_submissions
+    )
     duplicate_penalty = _rate_penalty(
-        counts.duplicate_submissions,
+        duplicate_penalty_source,
         finalized,
         multiplier=0.10,
         maximum=0.10,
@@ -393,8 +413,12 @@ def build_category_score_explanation(
 ) -> list[str]:
     counts = performance.counts
     stats = performance.contribution_stats
-    accepted = counts.accepted_unique_submissions
-    duplicate = counts.duplicate_submissions
+    accepted = (
+        counts.accepted_unique_submissions
+        + counts.accepted_independent_duplicate_submissions
+    )
+    independent_duplicate = counts.accepted_independent_duplicate_submissions
+    duplicate = counts.submission_duplicate_spam
     confidence_text = (
         "full experience confidence"
         if components.experience_confidence == 1
@@ -430,8 +454,10 @@ def build_category_score_explanation(
             f"{components.reproduction_rate:.6f}."
         ),
         (
-            f"{accepted} accepted unique submissions and {duplicate} "
-            "duplicates produced uniqueness rate "
+            f"{counts.accepted_unique_submissions} accepted unique submissions, "
+            f"{independent_duplicate} valid independent duplicates, and "
+            f"{counts.duplicate_submissions} legacy duplicate outcomes produced "
+            "uniqueness rate "
             f"{components.uniqueness_rate:.6f}."
         ),
         (
@@ -449,7 +475,8 @@ def build_category_score_explanation(
             f"{components.experience_confidence:.6f}."
         ),
         (
-            "Duplicate, out-of-scope, insufficient-evidence, rejected, unsafe, "
+            f"{duplicate} submission-spam duplicates plus out-of-scope, "
+            "insufficient-evidence, rejected, unsafe, "
             "and unsupported outcomes produced penalties "
             f"{penalties.duplicate_penalty:.6f}, "
             f"{penalties.out_of_scope_penalty:.6f}, "

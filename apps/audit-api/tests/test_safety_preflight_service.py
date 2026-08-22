@@ -248,3 +248,28 @@ def test_result_contains_standard_notes(tmp_path: Path):
 
     assert "Safety preflight does not execute code." in result.notes
     assert "Passing preflight does not guarantee safety; sandbox execution is still required." in result.notes
+
+
+def test_repository_symlink_is_rejected_before_execution(tmp_path: Path):
+    repo = _repo(tmp_path)
+    outside = tmp_path / "outside.txt"
+    outside.write_text("not part of the repository", encoding="utf-8")
+    (repo / "linked.txt").symlink_to(outside)
+
+    result = run_safety_preflight(repo_path=repo)
+
+    assert result.passed is False
+    assert "UNSAFE_SYMLINK" in _codes(result.issues)
+
+
+def test_rpc_fork_request_is_rejected(tmp_path: Path):
+    repo = _repo(tmp_path)
+    poc_file = _write_poc(
+        repo,
+        'contract PoC { function testClaim() public { vm.createFork("https://example.invalid"); } }\n',
+    )
+
+    result = run_safety_preflight(repo_path=repo, poc_file=poc_file)
+
+    assert result.passed is False
+    assert "NETWORK_OR_RPC_ACCESS" in _codes(result.issues)

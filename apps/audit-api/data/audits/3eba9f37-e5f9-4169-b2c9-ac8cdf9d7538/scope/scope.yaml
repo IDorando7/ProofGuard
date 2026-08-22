@@ -1,0 +1,12 @@
+
+project_name: MiniLendingProtocol
+language: Solidity
+framework: Foundry
+chain: Ethereum
+commit_hash: "local-dev"
+contracts_in_scope:
+  - src/Vault.sol
+  - src/OracleRouter.sol
+attack_categories:
+  - access_control
+  - reentrancy

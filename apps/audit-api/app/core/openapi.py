@@ -27,20 +27,32 @@ de stare sau operații duplicate.
 OPENAPI_TAGS = [
     {"name": "health", "description": "Verificarea disponibilității serviciului."},
     {"name": "projects", "description": "Crearea, inspectarea și pregătirea proiectelor de audit."},
+    {"name": "audit-runs", "description": "Execuțiile de orchestrare și cronologia structurată a unui audit."},
     {"name": "nodes", "description": "Registrul nodurilor care participă în rețeaua ProofGuard."},
     {"name": "subnets", "description": "Administrarea subneturilor specializate pe categorii de vulnerabilități."},
     {"name": "subnet-membership", "description": "Evaluarea și administrarea apartenenței nodurilor la subneturi."},
     {"name": "routing", "description": "Calcularea și consultarea rutării unui audit către subneturi și noduri."},
     {"name": "submissions", "description": "Trimiterea finding-urilor descoperite de noduri către protocol."},
     {"name": "contributions", "description": "Calcularea contribuției și eligibilității pentru recompensă."},
+    {"name": "finding-clusters", "description": "Gruparea deterministă a rapoartelor validate după cauza vulnerabilității."},
+    {"name": "report-quality", "description": "Evaluarea deterministă și auditabilă a calității fiecărui raport dintr-un cluster."},
     {"name": "reproduction", "description": "Încărcarea și executarea controlată a demonstrațiilor Proof of Concept."},
     {"name": "validation", "description": "Validarea finding-urilor și stocarea deciziilor de validare."},
+    {"name": "validator-attestations", "description": "Asignări autorizate, reproducere independentă și atestări structurate ale validatorilor."},
+    {"name": "validator-committees", "description": "Selecția deterministă, diversă pe operator și fără conflicte a comitetelor de validatori."},
+    {"name": "validator-consensus", "description": "Agregare deterministă cu cvorum, supermajoritate și escaladare limitată a dovezilor validatorilor."},
+    {"name": "validator-performance", "description": "Evaluarea retrospectivă, scorurile pe categorii și membership-ul separat al validatorilor."},
+    {"name": "validator-rewards", "description": "Alocarea pool-ului validatorilor pe lucrări authoritative, cu 30% completion și 70% calitate VQ²."},
     {"name": "reports", "description": "Generarea și citirea raportului final de audit."},
     {"name": "category-performance", "description": "Metrici brute de performanță ale nodurilor pentru fiecare categorie."},
     {"name": "category-scores", "description": "Scoruri normalizate ale nodurilor pentru fiecare categorie."},
     {"name": "reputation", "description": "Reputația nodurilor și istoricul evenimentelor care o modifică."},
-    {"name": "rewards", "description": "Cicluri de recompense, plăți și penalizări la nivel de nod."},
+    {"name": "rewards", "description": "Cicluri istorice de recompense simulate și penalizări la nivel de nod."},
     {"name": "subnet-rewards", "description": "Alocarea recompenselor între subneturile și nodurile rutate."},
+    {"name": "task-rewards", "description": "Bugete client pentru un audit rutat, separate de recompensele protocolului."},
+    {"name": "task-finding-rewards", "description": "Evaluarea economică deterministă a clusterelor de vulnerabilități din pool-ul minerilor."},
+    {"name": "task-operator-rewards", "description": "Preview determinist pentru deduplicare pe operator, Top-K, Chief Finder și distribuție Q²."},
+    {"name": "week7-task-reward-cycles", "description": "Integrarea și finalizarea imuabilă a recompenselor client-task Week 7."},
 ]
 
 
@@ -49,6 +61,194 @@ OPERATION_DOCS: dict[tuple[str, str], tuple[str, str]] = {
     ("GET", "/health"): (
         "Verifică starea serviciului",
         "Confirmă că API-ul este pornit și poate răspunde la cereri.",
+    ),
+
+    # Week 8 validator committee selection
+    ("POST", "/projects/{project_id}/routing/{routing_id}/finding-clusters/{cluster_id}/validator-committees"): (
+        "Planifică un comitet standard",
+        "Derivă server-side cinci locuri authoritative și un loc shadow opțional; raportorul nu poate nominaliza validatorii.",
+    ),
+    ("POST", "/projects/{project_id}/routing/{routing_id}/validator-committees/{committee_id}/finalize"): (
+        "Finalizează comitetul de validatori",
+        "Revalidează sursele și eligibilitatea, apoi creează idempotent asignările și contabilitatea validatorilor fără consens sau execuție PoC.",
+    ),
+    ("GET", "/projects/{project_id}/routing/{routing_id}/finding-clusters/{cluster_id}/validator-committees"): (
+        "Listează comitetele clusterului",
+        "Returnează deterministic planurile și comitetele finalizate pentru clusterul și routing-ul din URL.",
+    ),
+    ("GET", "/projects/{project_id}/routing/{routing_id}/validator-committees/{committee_id}"): (
+        "Citește comitetul de validatori",
+        "Returnează snapshot-ul auditabil al candidaților, locurilor, politicii și fingerprint-urilor comitetului.",
+    ),
+    ("GET", "/projects/{project_id}/routing/{routing_id}/validator-committees/{committee_id}/assignments"): (
+        "Listează asignările comitetului",
+        "Returnează asignările authoritative urmate de shadow în ordinea stabilă a locurilor, fără a calcula un verdict.",
+    ),
+
+    # Week 8 validator attestation protocol
+    ("GET", "/projects/{project_id}/routing/{routing_id}/validator-assignments/{assignment_id}"): (
+        "Citește asignarea unui validator",
+        "Returnează relația autorizată dintre validator și FindingCluster; API-ul public nu permite auto-asignarea.",
+    ),
+    ("GET", "/projects/{project_id}/routing/{routing_id}/finding-clusters/{cluster_id}/validator-assignments"): (
+        "Listează asignările unui cluster",
+        "Returnează determinist asignările authoritative și shadow ale clusterului.",
+    ),
+    ("POST", "/projects/{project_id}/routing/{routing_id}/validator-assignments/{assignment_id}/reproduction"): (
+        "Execută reproducerea independentă a validatorului",
+        "Derivă artefactul și snapshot-ul server-side, rulează SafetyPreflight și sandbox-ul Week 3 și persistă un rezultat distinct pentru asignarea de comitet.",
+    ),
+    ("GET", "/projects/{project_id}/routing/{routing_id}/validator-assignments/{assignment_id}/reproduction"): (
+        "Citește reproducerea asignării",
+        "Returnează unicul rezultat final, atribuit validatorului, pentru asignarea și versiunea de reproducere curentă.",
+    ),
+    ("GET", "/projects/{project_id}/routing/{routing_id}/validator-reproductions/{reproduction_id}"): (
+        "Citește reproducerea validatorului",
+        "Returnează învelișul imuabil care atribuie unui validator un rezultat autoritativ Week 3.",
+    ),
+    ("GET", "/projects/{project_id}/routing/{routing_id}/validator-committees/{committee_id}/reproductions"): (
+        "Listează reproducerile comitetului",
+        "Returnează în ordinea locurilor dovezile authoritative și shadow, fără agregare de adevăr sau vot.",
+    ),
+    ("GET", "/projects/{project_id}/routing/{routing_id}/validator-committees/{committee_id}/reproduction-readiness"): (
+        "Citește pregătirea etapei de reproducere",
+        "Raportează dacă toate locurile authoritative au dovezi terminale; rezultatul nu este consens de validitate.",
+    ),
+    ("POST", "/projects/{project_id}/routing/{routing_id}/validator-assignments/{assignment_id}/attestations"): (
+        "Finalizează atestarea validatorului",
+        "Persistă o atestare structurată și imuabilă; starea reproducerii este derivată de server.",
+    ),
+    ("GET", "/projects/{project_id}/routing/{routing_id}/attestations/{attestation_id}"): (
+        "Citește atestarea validatorului",
+        "Returnează concluziile independente despre validitate, cauză, reproducere, severitate și impact.",
+    ),
+    ("GET", "/projects/{project_id}/routing/{routing_id}/finding-clusters/{cluster_id}/attestations"): (
+        "Listează atestările unui cluster",
+        "Returnează dovezile independente în ordine deterministă fără a calcula consens.",
+    ),
+
+    # Week 8 validator consensus and bounded escalation
+    ("POST", "/projects/{project_id}/routing/{routing_id}/finding-clusters/{cluster_id}/validation-consensus"): (
+        "Calculează consensul validatorilor",
+        "Derivă server-side cvorumul, supermajoritatea și cele cinci componente numai din dovezile authoritative persistate.",
+    ),
+    ("POST", "/projects/{project_id}/routing/{routing_id}/validation-consensus/{consensus_id}/finalize"): (
+        "Finalizează snapshot-ul de consens",
+        "Revalidează fingerprint-ul surselor, imutabilizează rezultatul și deschide idempotent o dispută când este necesar.",
+    ),
+    ("GET", "/projects/{project_id}/routing/{routing_id}/validation-consensus/{consensus_id}"): (
+        "Citește consensul validatorilor",
+        "Returnează pragurile, numărătorile, rezultatele componentelor și outcome-ul auditabil.",
+    ),
+    ("GET", "/projects/{project_id}/routing/{routing_id}/finding-clusters/{cluster_id}/validation-consensus"): (
+        "Listează consensurile clusterului",
+        "Păstrează snapshot-urile istorice și consensul cumulativ în ordine deterministă.",
+    ),
+    ("GET", "/projects/{project_id}/routing/{routing_id}/validation-consensus/{consensus_id}/verify"): (
+        "Verifică consensul fără mutații",
+        "Recalculează read-only identitățile, pragurile, componentele, outcome-ul și fingerprint-urile.",
+    ),
+    ("GET", "/projects/{project_id}/routing/{routing_id}/finding-clusters/{cluster_id}/validation-disputes"): (
+        "Listează disputele de validare",
+        "Returnează motivele structurate și starea unei escaladări limitate.",
+    ),
+    ("POST", "/projects/{project_id}/routing/{routing_id}/validation-disputes/{dispute_id}/escalate"): (
+        "Escaladează disputa o singură rundă",
+        "Selectează prin protocol patru operatori noi, excluzând raportorii și toți validatorii rundelor anterioare.",
+    ),
+
+    # Week 8 validator quality and historical skill
+    ("POST", "/projects/{project_id}/routing/{routing_id}/validation-consensus/{consensus_id}/validator-performance/evaluate"): (
+        "Evaluează retrospectiv validatorii",
+        "Derivă calitatea fiecărei atestări authoritative și shadow numai după o rezoluție finală stabilă, apoi reconstruiește istoricul separat al validatorului.",
+    ),
+    ("GET", "/projects/{project_id}/routing/{routing_id}/validation-quality-assessments/{assessment_id}"): (
+        "Citește evaluarea de calitate",
+        "Returnează componentele Decimal, aplicabilitatea și fingerprint-ul evaluării unei singure lucrări de validare.",
+    ),
+    ("GET", "/projects/{project_id}/routing/{routing_id}/finding-clusters/{cluster_id}/validation-quality-assessments"): (
+        "Listează evaluările validatorilor",
+        "Returnează evaluările authoritative și shadow ale clusterului fără a modifica consensul sau recompensele.",
+    ),
+    ("GET", "/validators/{validator_node_id}/categories/{category}/performance"): (
+        "Citește performanța validatorului",
+        "Returnează agregatul reconstruibil din evenimente imuabile pentru validatorul și categoria cerute.",
+    ),
+    ("GET", "/validators/{validator_node_id}/categories/{category}/score"): (
+        "Citește scorul istoric al validatorului",
+        "Returnează scorul validator-only, cu metrici neutre când lipsesc eșantioane și shrinkage către 0.50.",
+    ),
+    ("GET", "/validators/{validator_node_id}/categories/{category}/membership"): (
+        "Citește membership-ul validatorului",
+        "Returnează statutul de validator separat de membership-ul agentului, derivat din istoricul categoriei.",
+    ),
+    ("POST", "/validators/{validator_node_id}/categories/{category}/performance/rebuild"): (
+        "Reconstruiește starea validatorului",
+        "Reaplică determinist evenimentele imuabile și recalculează agregatul, scorul și membership-ul fără auto-scoring din corpul cererii.",
+    ),
+
+    # Week 8 validator-pool reward stream
+    ("POST", "/projects/{project_id}/routing/{routing_id}/validator-reward-cycles"): (
+        "Creează ciclul de recompense al validatorilor",
+        "Leagă un draft de pool-ul validatorilor; toate unitățile de lucru și sumele rămân derivate server-side.",
+    ),
+    ("POST", "/projects/{project_id}/routing/{routing_id}/validator-reward-cycles/{reward_cycle_id}/calculate"): (
+        "Calculează recompensele validatorilor",
+        "Împarte egal pool-ul între asignările authoritative, apoi aplică 30% completion și 70% calitate VQ la pătrat.",
+    ),
+    ("POST", "/projects/{project_id}/routing/{routing_id}/validator-reward-cycles/{reward_cycle_id}/finalize"): (
+        "Finalizează pool-ul validatorilor",
+        "Revalidează snapshot-ul, consumă o singură dată stream-ul validator și publică evenimente imuabile doar pentru alocări pozitive.",
+    ),
+    ("GET", "/projects/{project_id}/routing/{routing_id}/validator-reward-cycles/{reward_cycle_id}"): (
+        "Citește ciclul validatorilor",
+        "Returnează starea, contabilitatea, fingerprint-urile și sumarul work-unit-urilor.",
+    ),
+    ("GET", "/projects/{project_id}/routing/{routing_id}/validator-reward-cycles"): (
+        "Listează ciclurile validatorilor",
+        "Returnează ciclurile validator-pool ale routing-ului în ordine deterministă.",
+    ),
+    ("GET", "/projects/{project_id}/routing/{routing_id}/validator-reward-cycles/{reward_cycle_id}/allocations"): (
+        "Listează alocările validatorilor",
+        "Expune bugetul, completion, calitatea și partea nedistribuită pentru fiecare asignare authoritative.",
+    ),
+    ("GET", "/projects/{project_id}/routing/{routing_id}/validator-reward-cycles/{reward_cycle_id}/events"): (
+        "Listează evenimentele validatorilor",
+        "Returnează evenimentele economice imuabile și pozitive ale ciclului.",
+    ),
+    ("GET", "/projects/{project_id}/routing/{routing_id}/validator-reward-cycles/{reward_cycle_id}/verify"): (
+        "Verifică recompensele validatorilor",
+        "Recalculează read-only snapshot-ul, conservarea pool-ului, VQ la pătrat, evenimentele și consumul unic.",
+    ),
+
+    # AuditRun orchestration foundation
+    ("POST", "/projects/{project_id}/audit-runs"): (
+        "Creează o execuție de audit",
+        "Creează identitatea persistentă AuditRun și primul eveniment structurat, fără a executa agenți sau etape de protocol.",
+    ),
+    ("GET", "/projects/{project_id}/audit-runs"): (
+        "Listează execuțiile de audit",
+        "Returnează AuditRun-urile proiectului în ordine deterministă, de la cea mai nouă execuție.",
+    ),
+    ("GET", "/projects/{project_id}/audit-runs/{audit_run_id}"): (
+        "Citește o execuție de audit",
+        "Returnează starea, progresul, etapele, referințele și informațiile sigure de eroare ale unui AuditRun.",
+    ),
+    ("POST", "/projects/{project_id}/audit-runs/{audit_run_id}/start"): (
+        "Pornește execuția auditului",
+        "Pentru un proiect pregătit execută routing-ul real și agenții locali, apoi se oprește înainte de reproducere; pentru un proiect nepregătit păstrează tranziția Day 1 în PREPARING.",
+    ),
+    ("GET", "/projects/{project_id}/audit-runs/{audit_run_id}/events"): (
+        "Citește cronologia unei execuții de audit",
+        "Returnează AuditEvent-uri ordonate și incrementale după sequence_number, cu filtre structurale opționale.",
+    ),
+    ("GET", "/projects/{project_id}/audit-runs/{audit_run_id}/agent-executions"): (
+        "Listează execuțiile agenților",
+        "Returnează determinist execuțiile assignment-urilor, cu nod, operator, categorie, runtime, durată și referințe Finding/Submission.",
+    ),
+    ("GET", "/projects/{project_id}/audit-runs/{audit_run_id}/agent-executions/{agent_execution_id}"): (
+        "Citește o execuție de agent",
+        "Returnează înregistrarea structurată fără a expune calea internă a workspace-ului.",
     ),
 
     # Nodes
@@ -381,6 +581,158 @@ OPERATION_DOCS: dict[tuple[str, str], tuple[str, str]] = {
     ("GET", "/submissions/{submission_id}/subnet-rewards"): (
         "Listează recompensele unui submission",
         "Returnează evenimentele de recompensă pentru subneturi asociate submission-ului.",
+    ),
+
+    # Client-funded task reward budgets
+    ("POST", "/projects/{project_id}/task-reward-budgets"): (
+        "Creează bugetul de recompensă al unui audit",
+        "Creează sau reutilizează un buget client în protocol_points pentru o rutare finalizată, fără a distribui recompense.",
+    ),
+    ("POST", "/projects/{project_id}/task-reward-budgets/{task_reward_budget_id}/finalize"): (
+        "Finalizează bugetul de recompensă al auditului",
+        "Face imuabilă împărțirea bugetului între miner, validator și protocol, fără plată sau RewardEvent.",
+    ),
+    ("GET", "/projects/{project_id}/task-reward-budgets/{task_reward_budget_id}"): (
+        "Citește bugetul de recompensă al auditului",
+        "Returnează bugetul client identificat în cadrul proiectului.",
+    ),
+    ("GET", "/projects/{project_id}/routing/{routing_id}/task-reward-budget"): (
+        "Găsește bugetul client al unei rutări",
+        "Returnează bugetul client asociat exact unei execuții de audit rutate.",
+    ),
+    ("GET", "/projects/{project_id}/task-reward-budgets"): (
+        "Listează bugetele client ale proiectului",
+        "Returnează determinist bugetele de audit ale proiectului, separat de ciclurile istorice de recompense.",
+    ),
+
+    # FindingCluster economic valuation (Week 7 Day 4)
+    ("POST", "/projects/{project_id}/routing/{routing_id}/task-rewards/findings/calculate"): (
+        "Calculează alocarea pool-ului minerilor pe vulnerabilități",
+        "Aplică severitatea validată, unicitatea pe operator și largest remainder; nu distribuie recompense către operatori și nu creează RewardEvent.",
+    ),
+    ("GET", "/projects/{project_id}/routing/{routing_id}/task-rewards/findings/latest"): (
+        "Citește ultima evaluare economică a finding-urilor",
+        "Returnează snapshotul calculat curent pentru rutare, separat de plățile Day 5/Day 6.",
+    ),
+    ("GET", "/projects/{project_id}/routing/{routing_id}/task-rewards/findings"): (
+        "Listează evaluările economice ale finding-urilor",
+        "Returnează istoricul determinist, inclusiv snapshoturile supersedate.",
+    ),
+    ("GET", "/projects/{project_id}/routing/{routing_id}/task-rewards/findings/{calculation_id}"): (
+        "Citește o evaluare economică a finding-urilor",
+        "Returnează severitatea, unicitatea, FindingScore și alocarea auditabilă pentru fiecare cluster.",
+    ),
+
+    # Operator payout previews (Week 7 Day 5)
+    ("POST", "/projects/{project_id}/routing/{routing_id}/task-rewards/operators/calculate"): (
+        "Calculează preview-ul recompenselor pe operator",
+        "Deduplică rapoartele pe operator, selectează Top-K și Chief Finder și distribuie pool-ul prin Q² fără a crea RewardEvent.",
+    ),
+    ("GET", "/projects/{project_id}/routing/{routing_id}/task-rewards/operators/latest"): (
+        "Citește ultimul preview de recompense pe operator",
+        "Returnează ultimul snapshot calculat Day 5 pentru rutare, fără stare de plată finalizată.",
+    ),
+    ("GET", "/projects/{project_id}/routing/{routing_id}/task-rewards/operators"): (
+        "Listează preview-urile de recompense pe operator",
+        "Returnează istoricul calculat și supersedat al distribuțiilor Day 5.",
+    ),
+    ("GET", "/projects/{project_id}/routing/{routing_id}/task-rewards/operators/{calculation_id}"): (
+        "Citește un preview de recompense pe operator",
+        "Expune reprezentanții, rankurile, Top-K, Chief, Q², excluderile și conservarea fiecărui cluster.",
+    ),
+
+    # Week 7 integrated client-task reward cycle
+    ("POST", "/projects/{project_id}/routing/{routing_id}/task-reward-cycles"): (
+        "Creează un ciclu Week 7",
+        "Creează idempotent un ciclu draft pentru bugetul client-task finalizat, fără calcul sau plată.",
+    ),
+    ("POST", "/projects/{project_id}/task-reward-cycles/{reward_cycle_id}/calculate"): (
+        "Calculează ciclul Week 7",
+        "Orchestrează snapshoturile Day 4 și Day 5 și verifică conservarea fără a crea RewardEvents.",
+    ),
+    ("POST", "/projects/{project_id}/task-reward-cycles/{reward_cycle_id}/finalize"): (
+        "Finalizează ciclul Week 7",
+        "Revalidează sursele și materializează idempotent RewardEvents deterministe pentru alocările pozitive.",
+    ),
+    ("GET", "/projects/{project_id}/task-reward-cycles/{reward_cycle_id}"): (
+        "Citește ciclul Week 7",
+        "Returnează starea, referințele, amprentele și totalurile ciclului client-task.",
+    ),
+    ("GET", "/projects/{project_id}/task-reward-cycles"): (
+        "Listează ciclurile Week 7",
+        "Returnează ciclurile client-task Week 7 ale proiectului fără a combina istoricul legacy.",
+    ),
+    ("GET", "/projects/{project_id}/routing/{routing_id}/task-reward-cycle"): (
+        "Citește ciclul Week 7 al rutării",
+        "Rezolvă ciclul client-task unic asociat rutării indicate.",
+    ),
+    ("GET", "/projects/{project_id}/task-reward-cycles/{reward_cycle_id}/events"): (
+        "Listează RewardEvents Week 7",
+        "Returnează în ordine deterministă evenimentele finale ale ciclului client-task.",
+    ),
+    ("GET", "/projects/{project_id}/task-reward-cycles/{reward_cycle_id}/verify"): (
+        "Verifică auditabil ciclul Week 7",
+        "Revalidează read-only referințele, conservarea, fingerprinturile și setul de RewardEvents fără recalculare sau mutație.",
+    ),
+    ("GET", "/operators/{operator_id}/task-rewards"): (
+        "Citește istoricul economic al operatorului",
+        "Returnează totalurile client-task separat de reputație și scorurile de performanță.",
+    ),
+    ("GET", "/nodes/{node_id}/task-rewards"): (
+        "Citește recompensele reprezentate de nod",
+        "Returnează evenimentele unde nodul a furnizat raportul reprezentativ al operatorului.",
+    ),
+    ("GET", "/submissions/{submission_id}/task-rewards"): (
+        "Citește recompensa client-task a raportului",
+        "Returnează istoricul economic Week 7 pentru submission-ul reprezentativ indicat.",
+    ),
+    ("GET", "/finding-clusters/{finding_cluster_id}/task-rewards"): (
+        "Citește recompensele clusterului",
+        "Returnează RewardEvents finale atribuite cauzei unice indicate.",
+    ),
+
+    # Finding clusters
+    ("POST", "/projects/{project_id}/routing/{routing_id}/finding-clusters/rebuild"): (
+        "Reconstruiește clusterele de vulnerabilități",
+        "Materializează determinist cauzele unice din submission-uri rutate și validate, fără a calcula recompense.",
+    ),
+    ("POST", "/projects/{project_id}/routing/{routing_id}/finding-clusters/finalize"): (
+        "Finalizează clusterele unei rutări",
+        "Îngheață snapshoturile de cauză-rădăcină eligibile înainte de evaluarea economică Day 4, fără a distribui recompense.",
+    ),
+    ("GET", "/projects/{project_id}/routing/{routing_id}/finding-clusters"): (
+        "Listează clusterele unei rutări",
+        "Returnează cauzele unice și rapoartele membre pentru execuția de audit indicată.",
+    ),
+    ("GET", "/projects/{project_id}/routing/{routing_id}/finding-clusters/{finding_cluster_id}"): (
+        "Citește un cluster de vulnerabilitate",
+        "Returnează clusterul derivat identificat în cadrul proiectului și rutării.",
+    ),
+    ("GET", "/submissions/{submission_id}/finding-cluster"): (
+        "Găsește clusterul unui submission",
+        "Returnează cauza unică din snapshotul curent care conține submission-ul indicat.",
+    ),
+
+    # Report quality
+    ("POST", "/projects/{project_id}/routing/{routing_id}/finding-clusters/{finding_cluster_id}/submissions/{submission_id}/quality-assessment"): (
+        "Evaluează calitatea unui raport",
+        "Creează sau finalizează evaluarea validator/protocol pentru un membru eligibil al clusterului; scorul Q este derivat de server.",
+    ),
+    ("GET", "/projects/{project_id}/routing/{routing_id}/finding-clusters/{finding_cluster_id}/quality-assessments"): (
+        "Listează evaluările de calitate",
+        "Returnează evaluările raport-cu-raport ale membrilor clusterului, inclusiv istoricul supersedat la cerere.",
+    ),
+    ("GET", "/projects/{project_id}/routing/{routing_id}/submissions/{submission_id}/quality-assessment"): (
+        "Citește evaluarea activă a unui raport",
+        "Returnează evaluarea activă pentru versiunea curentă a politicii de calitate.",
+    ),
+    ("GET", "/projects/{project_id}/routing/{routing_id}/quality-assessments/{assessment_id}"): (
+        "Citește o versiune a evaluării de calitate",
+        "Returnează evaluarea identificată prin ID-ul determinist, inclusiv o versiune supersedată, numai în proiectul și rutarea din URL.",
+    ),
+    ("POST", "/projects/{project_id}/routing/{routing_id}/quality-assessments/rebuild"): (
+        "Reconstruiește evaluările de calitate",
+        "Reevaluează determinist membrii eligibili ai clusterelor fără a calcula sau distribui recompense.",
     ),
 
     # Reproduction

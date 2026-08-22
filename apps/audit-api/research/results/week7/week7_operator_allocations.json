@@ -1,0 +1,155 @@
+[
+  {
+    "chief_bonus_total": "283.257945",
+    "chief_count": 2,
+    "operator_id": "operator_01",
+    "quality_pool_total": "4231.496067",
+    "rewarded_cluster_count": 3,
+    "top_k_count": 3,
+    "total_task_reward_points": "4514.754012"
+  },
+  {
+    "chief_bonus_total": "0.000000",
+    "chief_count": 0,
+    "operator_id": "operator_02",
+    "quality_pool_total": "325.822505",
+    "rewarded_cluster_count": 2,
+    "top_k_count": 2,
+    "total_task_reward_points": "325.822505"
+  },
+  {
+    "chief_bonus_total": "24.097298",
+    "chief_count": 1,
+    "operator_id": "operator_03",
+    "quality_pool_total": "420.542307",
+    "rewarded_cluster_count": 3,
+    "top_k_count": 3,
+    "total_task_reward_points": "444.639605"
+  },
+  {
+    "chief_bonus_total": "0.000000",
+    "chief_count": 0,
+    "operator_id": "operator_04",
+    "quality_pool_total": "295.402476",
+    "rewarded_cluster_count": 1,
+    "top_k_count": 1,
+    "total_task_reward_points": "295.402476"
+  },
+  {
+    "chief_bonus_total": "0.000000",
+    "chief_count": 0,
+    "operator_id": "operator_05",
+    "quality_pool_total": "295.402476",
+    "rewarded_cluster_count": 1,
+    "top_k_count": 1,
+    "total_task_reward_points": "295.402476"
+  },
+  {
+    "chief_bonus_total": "0.000000",
+    "chief_count": 0,
+    "operator_id": "operator_09",
+    "quality_pool_total": "89.619635",
+    "rewarded_cluster_count": 1,
+    "top_k_count": 1,
+    "total_task_reward_points": "89.619635"
+  },
+  {
+    "chief_bonus_total": "0.000000",
+    "chief_count": 0,
+    "operator_id": "operator_10",
+    "quality_pool_total": "91.557300",
+    "rewarded_cluster_count": 1,
+    "top_k_count": 1,
+    "total_task_reward_points": "91.557300"
+  },
+  {
+    "chief_bonus_total": "104.664842",
+    "chief_count": 1,
+    "operator_id": "operator_11",
+    "quality_pool_total": "523.834768",
+    "rewarded_cluster_count": 1,
+    "top_k_count": 1,
+    "total_task_reward_points": "628.499610"
+  },
+  {
+    "chief_bonus_total": "59.569163",
+    "chief_count": 2,
+    "operator_id": "operator_12",
+    "quality_pool_total": "866.527521",
+    "rewarded_cluster_count": 3,
+    "top_k_count": 3,
+    "total_task_reward_points": "926.096684"
+  },
+  {
+    "chief_bonus_total": "0.000000",
+    "chief_count": 0,
+    "operator_id": "operator_13",
+    "quality_pool_total": "687.224086",
+    "rewarded_cluster_count": 3,
+    "top_k_count": 3,
+    "total_task_reward_points": "687.224086"
+  },
+  {
+    "chief_bonus_total": "0.000000",
+    "chief_count": 0,
+    "operator_id": "operator_14",
+    "quality_pool_total": "470.570340",
+    "rewarded_cluster_count": 2,
+    "top_k_count": 2,
+    "total_task_reward_points": "470.570340"
+  },
+  {
+    "chief_bonus_total": "0.000000",
+    "chief_count": 0,
+    "operator_id": "operator_15",
+    "quality_pool_total": "55.513644",
+    "rewarded_cluster_count": 1,
+    "top_k_count": 1,
+    "total_task_reward_points": "55.513644"
+  },
+  {
+    "chief_bonus_total": "0.000000",
+    "chief_count": 0,
+    "operator_id": "operator_16",
+    "quality_pool_total": "54.363134",
+    "rewarded_cluster_count": 1,
+    "top_k_count": 1,
+    "total_task_reward_points": "54.363134"
+  },
+  {
+    "chief_bonus_total": "0.000000",
+    "chief_count": 0,
+    "operator_id": "operator_19",
+    "quality_pool_total": "89.619634",
+    "rewarded_cluster_count": 1,
+    "top_k_count": 1,
+    "total_task_reward_points": "89.619634"
+  },
+  {
+    "chief_bonus_total": "0.000000",
+    "chief_count": 0,
+    "operator_id": "operator_20",
+    "quality_pool_total": "241.751469",
+    "rewarded_cluster_count": 2,
+    "top_k_count": 2,
+    "total_task_reward_points": "241.751469"
+  },
+  {
+    "chief_bonus_total": "0.000000",
+    "chief_count": 0,
+    "operator_id": "operator_21",
+    "quality_pool_total": "185.325678",
+    "rewarded_cluster_count": 2,
+    "top_k_count": 2,
+    "total_task_reward_points": "185.325678"
+  },
+  {
+    "chief_bonus_total": "0.000000",
+    "chief_count": 0,
+    "operator_id": "operator_22",
+    "quality_pool_total": "188.517820",
+    "rewarded_cluster_count": 2,
+    "top_k_count": 2,
+    "total_task_reward_points": "188.517820"
+  }
+]

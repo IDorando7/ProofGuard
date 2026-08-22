@@ -1,9 +1,14 @@
 import json
+import re
 import uuid
 from pathlib import Path
 from typing import List, Optional
 
 from app.schemas.finding import FindingCreate, Finding
+from app.utils.protocol_serialization import atomic_create_json
+
+
+SAFE_FINDING_ID = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_-]{0,255}$")
 
 
 def save_findings_to_file(
@@ -56,3 +61,32 @@ def load_project_finding(project_workspace: Path, finding_id: str) -> Optional[F
         if finding.finding_id == finding_id:
             return finding
     return None
+
+
+def save_finding_exclusively(
+    project_workspace: Path,
+    finding: Finding,
+) -> tuple[Finding, bool]:
+    """Persist an integration finding without replacing historical agent output."""
+    if not SAFE_FINDING_ID.fullmatch(finding.finding_id):
+        raise ValueError("Invalid finding identifier")
+    findings_root = project_workspace / "findings" / "by-id"
+    output_path = findings_root / f"{finding.finding_id}.json"
+    try:
+        output_path.resolve().relative_to(findings_root.resolve())
+    except ValueError as exc:
+        raise ValueError("Invalid finding identifier") from exc
+    created = atomic_create_json(
+        output_path,
+        finding,
+        temporary_prefix=".finding-",
+    )
+    if created:
+        return finding, True
+    try:
+        existing = Finding.model_validate_json(output_path.read_text(encoding="utf-8"))
+    except Exception as exc:
+        raise ValueError("Stored finding is malformed") from exc
+    if existing != finding:
+        raise ValueError("Finding identifier conflicts with existing content")
+    return existing, False

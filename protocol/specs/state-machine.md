@@ -204,6 +204,13 @@ Related exact enums are:
 6. `duplicate` cannot transition to `reward_eligible` as a new finding. Any
    future credit for corroboration must be a separately specified contribution,
    not a new-vulnerability reward.
+
+Week 7 Day 2 makes that corroboration explicit without rewriting historical
+states. A reproduced, in-scope independent root-cause match is stored as
+`accepted` plus `duplicate_kind=independent_root_cause` and a canonical finding
+reference. The historical exact `duplicate` status remains a terminal legacy
+outcome. Same-node/project/hash submission retries are rejected by the separate
+submission protocol and never enter this validation state machine.
 7. `out_of_scope` cannot transition to `reward_eligible`.
 8. Existing reproduction status `failed` maps to validation status
    `insufficient_evidence` under current validator rules.
@@ -317,3 +324,51 @@ prior-reward source. A source mismatch or change prevents the transition.
 Successful finalization creates at most one deterministic applied reward event
 per eligible submission; replay reuses matching events and never allocates the
 same contribution twice.
+
+## 11. Task FindingCluster valuation lifecycle
+
+Week 7 Day 4 uses a separate derived-snapshot lifecycle:
+
+```text
+calculated -> superseded
+```
+
+Calculation requires finalized routing, finalized client TaskRewardBudget, and
+finalized eligible FindingClusters. It creates no RewardEvent and does not mark
+the budget consumed. Identical economic sources reuse the calculated snapshot.
+A changed budget, policy, category allocation, cluster source, final severity,
+or distinct-operator count creates a new calculated snapshot and retains the
+old one as superseded. Operator-level payout finalization is a future Day 6
+state machine and is deliberately not represented here.
+
+## 12. Operator reward preview lifecycle
+
+Day 5 has the same non-final derived-snapshot lifecycle:
+
+```text
+calculated -> superseded
+```
+
+Calculation requires the current calculated Day 4 snapshot plus current
+authorized cluster/report/operator/quality sources. Identical logical inputs
+reuse one preview. Changed Q, ownership, assignment, immutable submission time,
+Top-K/Chief policy, or Day 4 source produces a new preview and preserves the
+old record as superseded. Neither state creates RewardEvents or marks the task
+budget consumed; Day 6 owns final source revalidation and payout finality.
+
+## 13. Week 7 client-task reward-cycle lifecycle
+
+```text
+draft -> calculated -> finalized
+```
+
+Draft binds finalized routing and budget without calculations or RewardEvents.
+Calculated references current Day 4/Day 5 snapshots and may be explicitly
+recalculated while unfinalized, preserving the prior calculation fingerprint.
+Finalization reloads authoritative sources and is blocked when the integrated
+fingerprint changes.
+
+Positive RewardEvents use deterministic IDs and exclusive atomic creation, so
+a crash between event writes and the cycle update can be retried without
+duplication. Finalized cycles and events are immutable. A second finalized
+cycle cannot consume the same TaskRewardBudget.

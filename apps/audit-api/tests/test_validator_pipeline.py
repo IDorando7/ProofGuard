@@ -95,14 +95,18 @@ def test_out_of_scope_finding_returns_out_of_scope(tmp_path):
     assert decision.confidence == 0.95
 
 
-def test_duplicate_finding_returns_duplicate(tmp_path):
+def test_reproduced_duplicate_finding_is_accepted_independent_duplicate(tmp_path):
     findings = [_finding("finding-1"), _finding("finding-2")]
     workspace = _setup_workspace(tmp_path, findings=findings)
     _save_reproduction(workspace, "finding-2")
 
     decision = validate_finding("project-1", "finding-2", workspace)
 
-    assert decision.status == ValidationStatus.DUPLICATE
+    assert decision.status == ValidationStatus.ACCEPTED
+    assert decision.evidence.is_duplicate is True
+    assert decision.evidence.is_valid_duplicate is True
+    assert decision.evidence.duplicate_kind.value == "independent_root_cause"
+    assert decision.evidence.canonical_finding_id == "finding-1"
 
 
 def test_possible_duplicate_with_reproduced_is_not_duplicate(tmp_path):
@@ -260,8 +264,9 @@ def test_validate_all_findings_identifies_duplicates(tmp_path):
     decisions = validate_all_findings("project-1", workspace)
 
     assert decisions[0].status == ValidationStatus.ACCEPTED
-    assert decisions[1].status == ValidationStatus.DUPLICATE
+    assert decisions[1].status == ValidationStatus.ACCEPTED
     assert decisions[1].evidence.duplicate_of == "finding-1"
+    assert decisions[1].evidence.is_valid_duplicate is True
 
 
 def test_pipeline_does_not_call_docker_forge_or_subprocess():

@@ -1,0 +1,85 @@
+{
+  "accounting_pass": true,
+  "allocations": [
+    {
+      "assignment_id": "validator_assignment_0ae3ee5e92402bc35a5ff7f1c87917d9d634e1a209a00aa17d31b39d6945c977",
+      "base_budget": "200.000000",
+      "completion_reward": "60.000000",
+      "fingerprint": "d9845cf98c6ccb1c266b7b4a4a56e99af37855e358c9c4eb4b3b9430008fad22",
+      "operator_id": "committee-operator-04",
+      "quality_reward": "140.000000",
+      "total_reward": "200.000000",
+      "undistributed": "0.000000",
+      "vq": "1.000000",
+      "vq_squared": "1.000000"
+    },
+    {
+      "assignment_id": "validator_assignment_16b098606140e532993d69a4209a8aff5dbc20c71ab10583c4d40ec33b7be2ae",
+      "base_budget": "200.000000",
+      "completion_reward": "60.000000",
+      "fingerprint": "946b339e4c8425235ba2e42213aa3311580b6052237cafecf68883883fe79e81",
+      "operator_id": "committee-operator-01",
+      "quality_reward": "101.150000",
+      "total_reward": "161.150000",
+      "undistributed": "38.850000",
+      "vq": "0.850000",
+      "vq_squared": "0.722500"
+    },
+    {
+      "assignment_id": "validator_assignment_38c7c11bcc49692aa571488bda52a7f412ca1f558ce8140260f3159eb05a2394",
+      "base_budget": "200.000000",
+      "completion_reward": "60.000000",
+      "fingerprint": "3409da1aa7722ab2c033cd0615c8f68f2511471e8c3acd88c65124c109046956",
+      "operator_id": "committee-operator-02",
+      "quality_reward": "89.600000",
+      "total_reward": "149.600000",
+      "undistributed": "50.400000",
+      "vq": "0.800000",
+      "vq_squared": "0.640000"
+    },
+    {
+      "assignment_id": "validator_assignment_7329321044e74117496950e2963de09812840de1360c136d674a7a1047e3d0c4",
+      "base_budget": "200.000000",
+      "completion_reward": "60.000000",
+      "fingerprint": "6c248fff970fed1fc75f62cc0c4988a5f31c476f6beb371bc5c275f9635ed578",
+      "operator_id": "committee-operator-00",
+      "quality_reward": "140.000000",
+      "total_reward": "200.000000",
+      "undistributed": "0.000000",
+      "vq": "1.000000",
+      "vq_squared": "1.000000"
+    },
+    {
+      "assignment_id": "validator_assignment_f3b783cb41172ec4610f5cb94a1477ec6f6fb3ae4cce084ef82a89bda18a0202",
+      "base_budget": "200.000000",
+      "completion_reward": "60.000000",
+      "fingerprint": "264226de5fee4e909ad82afa8c56c38f57ddbce3775a80fb1f8c5e3f4c375fa2",
+      "operator_id": "committee-operator-03",
+      "quality_reward": "140.000000",
+      "total_reward": "200.000000",
+      "undistributed": "0.000000",
+      "vq": "1.000000",
+      "vq_squared": "1.000000"
+    }
+  ],
+  "completed_units": 5,
+  "completion_reward_total": "300.000000",
+  "distributed": "910.750000",
+  "minority_example": {
+    "final_outcome": "rejected",
+    "original_minority_vq": [
+      "1.000000",
+      "1.000000"
+    ]
+  },
+  "quality_reward_total": "610.750000",
+  "reward_event_count": 5,
+  "undistributed": "89.250000",
+  "unresolved_example": {
+    "distributed_completion": "299.999998",
+    "undistributed_quality": "700.000002"
+  },
+  "unresolved_units": 0,
+  "validator_pool": "1000.000000",
+  "work_units": 5
+}

@@ -106,6 +106,12 @@ stored finding and reproduction result and writes a separate
 `ValidationDecision`. Future validator nodes will independently reproduce and
 evaluate submissions. How their decisions are aggregated remains open.
 
+Week 7 Day 2 preserves that validator/dedup responsibility but separates the
+truth of an accepted report from its root-cause relation. An accepted,
+reproduced independent match can reference an existing canonical finding and
+enter the same task-scoped `FindingCluster`; same-node submission replay is a
+different protocol check and never enters a cluster.
+
 ### 3.4 Protocol Coordinator
 
 Current MVP responsibilities:
@@ -363,6 +369,11 @@ reproduction. Exact mappings and allowed transitions are in
 10. Every reward or penalty references an explainable submission and decision.
 11. Validator and agent identities are separable, even if one operator may run
     both roles in a future deployment.
+
+Invariant 3 uses the legacy new-vulnerability reward meaning. It does not make
+an independently submitted, validator-accepted report invalid or
+reputation-negative. Week 7 task payout competition is intentionally not
+implemented on Day 2.
 12. Simple mistakes and malicious behavior do not receive identical penalties.
 13. A high contribution score cannot override an invalid or non-final
     validation status.
@@ -589,6 +600,12 @@ score, and a currently active node. Active/expert production assignments and
 probation shadow assignments may receive contribution rewards. Candidate
 shadow, suspended, and removed snapshots are ineligible.
 
+That paragraph specifies legacy `subnet_reward_v0`. Week 7 Day 2 does not
+change or invoke that historical allocation policy. New accepted independent
+root-cause reports remain ineligible for the old unique-finding payout while
+retaining a positive contribution/performance path for the future cluster
+reward engine.
+
 Membership multipliers are `probation=0.90`, `active=1.00`, and `expert=1.10`.
 Category-score multipliers are `0.80` below 0.40, `0.95` from 0.40 below 0.60,
 `1.05` from 0.60 below 0.80, and `1.15` from 0.80 through 1.00. Both values
@@ -641,3 +658,62 @@ modify production data, persist leaderboard rank to membership, execute a
 node or PoC, invoke Docker, forge, project-analysis subprocesses, AI/LLMs, or
 external APIs, or perform a payment, token, wallet, staking, smart-contract, or
 blockchain operation.
+
+## 16. Week 7 FindingCluster valuation policy v1
+
+For each finalized task-scoped FindingCluster, Day 4 maps the validator-approved
+severity to configured Decimal weights `16/8/3/1/0` and calculates uniqueness
+from the number of distinct valid operator IDs:
+
+```text
+U(N) = max(0.50, 1 / (1 + 0.20 * ln(N)))
+FindingScore = SeverityWeight * U(N)
+```
+
+The finalized client-task miner pool is allocated proportionally by
+FindingScore. Category-isolated mode preserves Week 6 routed category pools by
+default; global mode is also explicit. Existing largest-remainder accounting
+provides exact six-decimal conservation. Empty or all-zero scopes remain
+undistributed.
+
+This calculation values root causes only. ReportQualityAssessment,
+ContributionScore, reputation, CategoryScore, membership, routing tier, Top-K,
+and Chief Finder are excluded. The calculated snapshot creates no node/operator
+reward or RewardEvent and performs no payment or blockchain operation.
+
+## 17. Week 7 operator cluster payout policy v1
+
+Day 5 accepts the current calculated Day 4 snapshot and authorized cluster
+members with active finalized Day 3 quality assessments. It groups by current
+NodeRecord operator identity, chooses the highest-Q report per operator, ranks
+representatives deterministically, and admits at most configured Top-K.
+
+Chief Finder must be Top-K, meet the exact Q threshold, have validated cluster
+root-cause relation and structured accepted-severity impact evidence, and is
+selected by earliest qualifying immutable submission time. The best Q report
+sets an operator's Q² weight; an earlier qualifying report from that same
+operator may set Chief timing.
+
+The Chief pool and Quality Pool conserve the fixed cluster amount. Quality is
+distributed proportionally by `Q * Q` using existing exact largest remainder.
+No eligible/positive-Q input leaves the cluster amount undistributed rather
+than moving it across root causes or categories. Membership tier, reputation,
+CategoryScore, and ContributionScore do not multiply this client payout.
+
+Day 5 is a calculated preview only. It creates no immutable RewardEvent and no
+wallet, token, payment, reputation, membership, routing, or blockchain change.
+
+## 18. Week 7 integrated client-task reward policy v1
+
+`scalable_multi_agent_reward_v1` binds one finalized client-task
+TaskRewardBudget to at most one Week 7 cycle. Draft creation has no payout side
+effects. Calculation invokes the authoritative Day 4 and Day 5 services.
+Finalization repeats that orchestration, compares deterministic economic
+fingerprints and materializes one positive immutable RewardEvent per rewarded
+operator per FindingCluster.
+
+Event IDs are deterministic and files are created exclusively. Retry after a
+partial crash reuses matching events; conflicting content is never overwritten.
+Finalized event totals plus explicit miner undistributed points equal the task
+miner pool exactly. Validator and protocol pools remain reserved. Legacy Week
+5/6 reward domains, performance records and APIs are unchanged.

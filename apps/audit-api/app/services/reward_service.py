@@ -51,6 +51,8 @@ from app.services.validation_service import load_validation_decision
 
 
 REWARD_VERSION = "reward_v0"
+# Compatibility label only: persisted Week 5 records keep REWARD_VERSION unchanged.
+LEGACY_TASK_REWARD_POLICY_VERSION = REWARD_VERSION
 REWARD_CYCLE_FILENAME = "cycle.json"
 REWARD_EVENT_FILENAME = "reward_event.json"
 SAFE_REWARD_ID = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_-]{0,127}$")

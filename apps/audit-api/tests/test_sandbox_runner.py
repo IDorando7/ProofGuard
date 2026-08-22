@@ -46,6 +46,8 @@ def test_docker_command_contains_resource_limits(tmp_path: Path):
     assert "1" in command
     assert "--pids-limit" in command
     assert "256" in command
+    assert command[command.index("--cap-drop") + 1] == "ALL"
+    assert command[command.index("--security-opt") + 1] == "no-new-privileges:true"
 
 
 def test_docker_command_mounts_only_repo_path_to_workspace_repo(tmp_path: Path):
@@ -109,6 +111,23 @@ def test_run_in_sandbox_returns_failed_when_subprocess_exits_nonzero(tmp_path: P
     assert result.status == SandboxRunStatus.FAILED
     assert result.exit_code == 1
     assert result.stderr == "failure"
+
+
+def test_run_in_sandbox_bounds_captured_output(tmp_path: Path, monkeypatch):
+    repo = _repo(tmp_path)
+
+    def fake_run(args, **kwargs):
+        return subprocess.CompletedProcess(
+            args=args,
+            returncode=0,
+            stdout="x" * 1_100_000,
+            stderr="",
+        )
+
+    monkeypatch.setattr(subprocess, "run", fake_run)
+    result = run_in_sandbox(repo, ["forge", "test"])
+    assert result.stdout.endswith("[ProofGuard output truncated]")
+    assert len(result.stdout.encode("utf-8")) <= 1_048_576
 
 
 def test_run_in_sandbox_returns_timeout_on_timeout_expired(tmp_path: Path, monkeypatch):

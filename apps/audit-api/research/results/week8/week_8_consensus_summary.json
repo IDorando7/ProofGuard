@@ -1,0 +1,256 @@
+[
+  {
+    "case": "four_one",
+    "dispute_reasons": [],
+    "fingerprint": "8554bc231b953433e8380074d520952efa8e2d91303bd00861b7fc726ba189a9",
+    "impact": "validated",
+    "outcome": "confirmed",
+    "quorum": 4,
+    "reproduction": "reproduced",
+    "root_cause": "confirmed",
+    "severity": "High",
+    "target_n": 5,
+    "threshold": 4,
+    "validity": "accepted"
+  },
+  {
+    "case": "high_five_two",
+    "dispute_reasons": [],
+    "fingerprint": "77ac2effb22c6e0c7fc486e2cf133ffc88e0cb9c64ed386c3ca9101820e83de8",
+    "impact": "validated",
+    "outcome": "confirmed",
+    "quorum": 6,
+    "reproduction": "reproduced",
+    "root_cause": "confirmed",
+    "severity": "High",
+    "target_n": 7,
+    "threshold": 5,
+    "validity": "accepted"
+  },
+  {
+    "case": "high_four_three",
+    "dispute_reasons": [
+      "validity_disagreement"
+    ],
+    "fingerprint": "3e41a60ba298e90d62d79d2ab2f981835b2c357cb4b3a95152b4290a9cc103b7",
+    "impact": null,
+    "outcome": "disputed",
+    "quorum": 6,
+    "reproduction": null,
+    "root_cause": null,
+    "severity": null,
+    "target_n": 7,
+    "threshold": 5,
+    "validity": null
+  },
+  {
+    "case": "impact",
+    "dispute_reasons": [
+      "impact_disagreement"
+    ],
+    "fingerprint": "1c26ac01413b0cfd3e7ab21b651200b8e007ae2436915b9bd1208cfc51a66537",
+    "impact": null,
+    "outcome": "disputed",
+    "quorum": 4,
+    "reproduction": "reproduced",
+    "root_cause": "confirmed",
+    "severity": "High",
+    "target_n": 5,
+    "threshold": 4,
+    "validity": "accepted"
+  },
+  {
+    "case": "no_quorum",
+    "dispute_reasons": [
+      "no_quorum"
+    ],
+    "fingerprint": "b1899143e320f7717ff958cf2354209c40a9d2115b1614bdc8624d79f8a35645",
+    "impact": null,
+    "outcome": "no_quorum",
+    "quorum": 4,
+    "reproduction": null,
+    "root_cause": null,
+    "severity": null,
+    "target_n": 5,
+    "threshold": 4,
+    "validity": null
+  },
+  {
+    "case": "reproduction",
+    "dispute_reasons": [
+      "reproduction_disagreement"
+    ],
+    "fingerprint": "383c98257fcf84222ea4a2f9b821bcc036b7cdb372d6c86a2803691c6c5649bf",
+    "impact": "validated",
+    "outcome": "disputed",
+    "quorum": 4,
+    "reproduction": null,
+    "root_cause": "confirmed",
+    "severity": "High",
+    "target_n": 5,
+    "threshold": 4,
+    "validity": "accepted"
+  },
+  {
+    "case": "root_cause",
+    "dispute_reasons": [
+      "root_cause_disagreement"
+    ],
+    "fingerprint": "e62598f9d269cffde24e7af902ae8087aa96a351f059994563ea9b29fc8c56eb",
+    "impact": "validated",
+    "outcome": "disputed",
+    "quorum": 4,
+    "reproduction": "reproduced",
+    "root_cause": null,
+    "severity": "High",
+    "target_n": 5,
+    "threshold": 4,
+    "validity": "accepted"
+  },
+  {
+    "case": "severity",
+    "dispute_reasons": [
+      "severity_disagreement"
+    ],
+    "fingerprint": "568ca3cea455ab8ec5823d93540aeb62a1883c9256fa656c6cc9afaa2d0f4b5d",
+    "impact": "validated",
+    "outcome": "disputed",
+    "quorum": 4,
+    "reproduction": "reproduced",
+    "root_cause": "confirmed",
+    "severity": null,
+    "target_n": 5,
+    "threshold": 4,
+    "validity": "accepted"
+  },
+  {
+    "case": "shadow",
+    "dispute_reasons": [
+      "validity_disagreement"
+    ],
+    "fingerprint": "f6bc290bc9a2db8d00b2b0ed33c7726863ad6d08866ca260e8fed374052f6481",
+    "impact": null,
+    "outcome": "disputed",
+    "quorum": 4,
+    "reproduction": "reproduced",
+    "root_cause": null,
+    "severity": null,
+    "target_n": 5,
+    "threshold": 4,
+    "validity": null
+  },
+  {
+    "case": "terminal_insufficient",
+    "dispute_reasons": [],
+    "fingerprint": "45dd95b58db5223233cde0aea4c2c306c2d52ad03367f25250e0cc4529d81ccf",
+    "impact": "rejected",
+    "outcome": "insufficient_evidence",
+    "quorum": 4,
+    "reproduction": "reproduced",
+    "root_cause": "mismatch",
+    "severity": null,
+    "target_n": 5,
+    "threshold": 4,
+    "validity": "insufficient_evidence"
+  },
+  {
+    "case": "terminal_out_of_scope",
+    "dispute_reasons": [],
+    "fingerprint": "ba76c0daf6332950ea16fe1bd65c5d10d8dca42766d33b86fd1e8778af1316a9",
+    "impact": "rejected",
+    "outcome": "out_of_scope",
+    "quorum": 4,
+    "reproduction": "reproduced",
+    "root_cause": "mismatch",
+    "severity": null,
+    "target_n": 5,
+    "threshold": 4,
+    "validity": "out_of_scope"
+  },
+  {
+    "case": "terminal_rejected",
+    "dispute_reasons": [],
+    "fingerprint": "eb73c3b01b92acbe504fa308c9454313b2cad76147d9464474fc00bfe59b0556",
+    "impact": "rejected",
+    "outcome": "rejected",
+    "quorum": 4,
+    "reproduction": "reproduced",
+    "root_cause": "mismatch",
+    "severity": null,
+    "target_n": 5,
+    "threshold": 4,
+    "validity": "rejected"
+  },
+  {
+    "case": "terminal_unsafe",
+    "dispute_reasons": [],
+    "fingerprint": "18aaadd6afdf5cb5420ad8db0c5290e73b47f1406819f4d6def2185d2a6cb022",
+    "impact": "rejected",
+    "outcome": "unsafe",
+    "quorum": 4,
+    "reproduction": "rejected_unsafe",
+    "root_cause": "mismatch",
+    "severity": null,
+    "target_n": 5,
+    "threshold": 4,
+    "validity": "unsafe_poc"
+  },
+  {
+    "case": "terminal_unsupported",
+    "dispute_reasons": [],
+    "fingerprint": "ec4148181b7204b755c94f596d48794e49a5ca63f89b06c5bad8e477eeb8e750",
+    "impact": "rejected",
+    "outcome": "unsupported",
+    "quorum": 4,
+    "reproduction": "reproduced",
+    "root_cause": "mismatch",
+    "severity": null,
+    "target_n": 5,
+    "threshold": 4,
+    "validity": "unsupported"
+  },
+  {
+    "case": "three_two",
+    "dispute_reasons": [
+      "validity_disagreement"
+    ],
+    "fingerprint": "2130c8d50da39951da8c4f226505f418beeb1d840f371248fdd1df3f251ba1cc",
+    "impact": null,
+    "outcome": "disputed",
+    "quorum": 4,
+    "reproduction": null,
+    "root_cause": null,
+    "severity": null,
+    "target_n": 5,
+    "threshold": 4,
+    "validity": null
+  },
+  {
+    "case": "original_minority_later_correct",
+    "dispute_reasons": [],
+    "fingerprint": "509383e41a2d77535522e1260c8c2a2e70c46326ca7ab9dbe3ab8b5a20ba77e6",
+    "impact": "rejected",
+    "outcome": "rejected",
+    "quorum": 8,
+    "reproduction": "reproduced",
+    "root_cause": "mismatch",
+    "severity": null,
+    "target_n": 9,
+    "threshold": 6,
+    "validity": "rejected"
+  },
+  {
+    "case": "high_assurance_escalation",
+    "dispute_reasons": [],
+    "fingerprint": "3da2c75c79d6d58212efdda1a61a508432363e85de21d6102a974509afa2534b",
+    "impact": "validated",
+    "outcome": "confirmed",
+    "quorum": 10,
+    "reproduction": "reproduced",
+    "root_cause": "confirmed",
+    "severity": "High",
+    "target_n": 11,
+    "threshold": 8,
+    "validity": "accepted"
+  }
+]

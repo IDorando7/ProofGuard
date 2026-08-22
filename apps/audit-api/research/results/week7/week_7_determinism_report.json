@@ -1,0 +1,8 @@
+{
+  "clean_root_replay": true,
+  "deterministic_state_hash": "493630544918b20ab9519a7c92fe8770c2646e5e619a3893377f10e365313a4c",
+  "economic_fingerprint_equal": true,
+  "randomized_input_order": true,
+  "reward_event_ids_equal": true,
+  "seed": 7007
+}
