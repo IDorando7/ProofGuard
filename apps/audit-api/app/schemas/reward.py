@@ -18,6 +18,14 @@ class RewardUnit(str, Enum):
     PROTOCOL_POINTS = "protocol_points"
 
 
+class RewardPoolKind(str, Enum):
+    """Independent, single-consumption streams within one task budget."""
+
+    MINER = "miner"
+    VALIDATOR = "validator"
+    PROTOCOL = "protocol"
+
+
 class RewardCycleStatus(str, Enum):
     DRAFT = "draft"
     CALCULATED = "calculated"

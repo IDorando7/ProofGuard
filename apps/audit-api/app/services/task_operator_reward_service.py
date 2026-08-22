@@ -60,9 +60,14 @@ ELIGIBLE_SUBMISSION_STATUSES = {
     SubmissionStatus.REWARD_PENDING,
     SubmissionStatus.REWARDED,
 }
-CHIEF_IMPACT_REASON_CODES = {
+CHIEF_SEVERITY_REASON_CODES = {
     "accepted_severity_consistent",
     "impact_consistent_with_final_severity",
+    "validator_confirmed_impact_consistent",
+}
+CHIEF_IMPACT_REASON_CODES = {
+    "impact_validated",
+    "validator_confirmed_impact_valid",
     "validator_confirmed_impact_consistent",
 }
 
@@ -448,11 +453,15 @@ def _resolve_member_report(
         )
     impact = assessment.components.impact_quality
     accepted_severity_reference = f"accepted-severity:{cluster.final_severity.value}"
+    reason_codes = set(impact.reason_codes)
+    severity_qualified = (
+        bool(reason_codes.intersection(CHIEF_SEVERITY_REASON_CODES))
+        and accepted_severity_reference in impact.evidence_references
+    )
     impact_qualified = (
         impact.score is not None
         and impact.score > 0
-        and bool(set(impact.reason_codes).intersection(CHIEF_IMPACT_REASON_CODES))
-        and accepted_severity_reference in impact.evidence_references
+        and bool(reason_codes.intersection(CHIEF_IMPACT_REASON_CODES))
     )
     return (
         EligibleReportRewardInput(
@@ -468,7 +477,11 @@ def _resolve_member_report(
             assessment_id=assessment.report_quality_assessment_id,
             assessment_source_fingerprint=assessment.source_fingerprint,
             quality_score=assessment.quality_score,
-            chief_root_cause_qualified=True,
+            chief_root_cause_qualified=member.relation.value in {
+                "canonical",
+                "independent_duplicate",
+            },
+            chief_severity_qualified=severity_qualified,
             chief_impact_qualified=impact_qualified,
             chief_evidence_reason_codes=impact.reason_codes,
             chief_evidence_references=impact.evidence_references,

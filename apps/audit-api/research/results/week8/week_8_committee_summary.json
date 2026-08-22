@@ -1,0 +1,39 @@
+[
+  {
+    "actual_authoritative_size": 5,
+    "assurance_mode": "standard",
+    "cluster_id": "finding_cluster_199f477545e75d55a8e589e697d2952e9b5adbc07ba4c81c71e09b16f2a6eaa4",
+    "committee_id": "validator_committee_901b8ffbbb4218f0b89d74e0b75fdecc12fd93bddff4905b650fa7fda006c4f8",
+    "conflict_free": true,
+    "operator_diverse": true,
+    "operator_ids": [
+      "committee-operator-00",
+      "committee-operator-01",
+      "committee-operator-02",
+      "committee-operator-03",
+      "committee-operator-04"
+    ],
+    "round": 1,
+    "selection_fingerprint": "8e34c169698546dd8d64be3923356d9defd411728881b69493abaad50086c6c3",
+    "shadow_count": 1,
+    "target_authoritative_size": 5
+  },
+  {
+    "actual_authoritative_size": 4,
+    "assurance_mode": "standard",
+    "cluster_id": "finding_cluster_a8ab4bad9c6a069afe296bb3737c59a2cc076c423324b4813056d6015e676280",
+    "committee_id": "validator_committee_527ec38e7b5ca82decb7485b3d6460eee774bb0177c0e4ce423ef2d5636631b2",
+    "conflict_free": true,
+    "operator_diverse": true,
+    "operator_ids": [
+      "committee-operator-06",
+      "committee-operator-07",
+      "committee-operator-08",
+      "committee-operator-09"
+    ],
+    "round": 2,
+    "selection_fingerprint": "646a64a670afbb28bb7c3c7d0230295fc79048c406bfaf7be8850caff1259fe5",
+    "shadow_count": 0,
+    "target_authoritative_size": 4
+  }
+]

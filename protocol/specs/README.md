@@ -14,6 +14,13 @@ specification documents, not a production blockchain implementation.
 | [state-machine.md](state-machine.md) | Finding/submission lifecycle and allowed transitions | Draft v0 |
 | [onchain-offchain-boundary.md](onchain-offchain-boundary.md) | Data placement and future blockchain boundary | Draft v0 |
 | [reward-model.md](reward-model.md) | Week 7 reward architecture from task budget through deterministic client-task RewardEvents | Day 6 implemented |
+| [validator-attestation-v1.md](validator-attestation-v1.md) | Week 8 authorized validator assignments, reproduction provenance, and structured immutable attestations | Day 1 implemented |
+| [validator-committee-v1.md](validator-committee-v1.md) | Week 8 deterministic, conflict-free, operator-diverse validator committee planning and finalization | Day 2 implemented |
+| [validator-reproduction-v1.md](validator-reproduction-v1.md) | Week 8 independent, sandboxed, validator-attributed reproduction execution and committee readiness | Day 3 implemented |
+| [validator-consensus-v1.md](validator-consensus-v1.md) | Week 8 deterministic supermajority consensus, disputes, validation rounds, and bounded independent escalation | Day 4 implemented |
+| [validator-performance-v1.md](validator-performance-v1.md) | Week 8 resolved-truth quality assessments, immutable validator history, category scores, neutral shrinkage, and validator-only membership | Day 5 implemented |
+| [validator-reward-v1.md](validator-reward-v1.md) | Week 8 validator-pool work units, 30/70 completion-quality accounting, VQ², immutable events, and pool-specific consumption | Day 6 implemented |
+| [week8-validator-benchmark.md](week8-validator-benchmark.md) | Week 8 adversarial real-service benchmark, deterministic replay, accounting verification, and final engineering report | Day 7 implemented |
 
 ## Principles
 

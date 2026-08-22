@@ -120,6 +120,9 @@ def get_settings() -> Settings:
         ),
         chief_finder=ChiefFinderConfig(
             bonus_percentage=os.getenv("AUDIT_API_CHIEF_FINDER_BONUS_PERCENTAGE", "0.05"),
+            quality_percentage=os.getenv(
+                "AUDIT_API_QUALITY_POOL_PERCENTAGE", "0.95"
+            ),
             quality_threshold=os.getenv("AUDIT_API_CHIEF_FINDER_QUALITY_THRESHOLD", "0.80"),
         ),
     )

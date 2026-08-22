@@ -5,6 +5,7 @@ from app.services.reproduction_service import get_reproduction_dir
 
 
 SAFE_POC_FILENAME_PATTERN = re.compile(r"^[A-Za-z0-9_-]+\.t\.sol$")
+MAX_POC_BYTES = 262_144
 
 
 def get_repo_test_dir(project_workspace: Path) -> Path:
@@ -27,6 +28,8 @@ def store_poc_for_finding(
     poc_content: str,
 ) -> str:
     validate_poc_filename(poc_filename)
+    if len(poc_content.encode("utf-8")) > MAX_POC_BYTES:
+        raise ValueError(f"PoC content must not exceed {MAX_POC_BYTES} UTF-8 bytes.")
 
     test_dir = get_repo_test_dir(project_workspace)
     test_dir.mkdir(parents=True, exist_ok=True)
@@ -70,4 +73,3 @@ def poc_exists(project_workspace: Path, poc_file: str) -> bool:
         return get_poc_path(project_workspace, poc_file).is_file()
     except ValueError:
         return False
-

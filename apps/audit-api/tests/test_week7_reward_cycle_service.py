@@ -21,6 +21,7 @@ from app.schemas.task_operator_reward import (
 from app.schemas.week7_reward_cycle import (
     Week7RewardHistorySubject,
     Week7RewardProcessingStatus,
+    Week7RewardVerificationStatus,
     Week7TaskRewardCycle,
     Week7TaskRewardCycleCreateRequest,
 )
@@ -32,7 +33,9 @@ from app.services.report_quality_assessment_service import (
 )
 from app.services.subnet_router_service import get_routing_record_path
 from app.services.task_reward_budget_service import get_task_reward_budget_path
+from app.services.task_operator_reward_service import get_task_operator_calculation_path
 from app.services.week7_reward_cycle_service import (
+    Week7RewardCycleConservationError,
     Week7RewardCycleConflictError,
     Week7RewardCycleSourceChangedError,
     Week7RewardCycleStateError,
@@ -46,6 +49,7 @@ from app.services.week7_reward_cycle_service import (
     list_week7_reward_events,
     load_week7_reward_cycle,
     save_week7_reward_cycle,
+    verify_week7_task_reward_cycle,
 )
 from tests.test_task_operator_reward_service import _single_ready
 
@@ -77,6 +81,10 @@ def _calculated_cycle(tmp_path):
 def test_cycle_schema_draft_calculated_finalized_and_immutable(tmp_path):
     root, _, _, _, _, draft = _draft_cycle(tmp_path)
     assert draft.status == RewardCycleStatus.DRAFT
+    assert draft.policy_snapshot is not None
+    assert draft.policy_snapshot.fingerprint_version == "reward_cycle_fingerprint_v1"
+    assert draft.policy_snapshot.protocol_quantum == Decimal("0.000001")
+    assert draft.policy_snapshot.task_operator_reward.duplicates.top_k == 5
     assert draft.distributed_miner_points == 0
     assert draft.undistributed_miner_points == draft.miner_pool_points
     assert draft.reward_event_count == 0
@@ -96,6 +104,9 @@ def test_cycle_schema_draft_calculated_finalized_and_immutable(tmp_path):
         Week7TaskRewardCycle.model_validate(
             {**draft.model_dump(), "status": "finalized"}
         )
+    legacy_payload = draft.model_dump()
+    legacy_payload.pop("policy_snapshot")
+    assert Week7TaskRewardCycle.model_validate(legacy_payload).policy_snapshot is None
     calculated, _ = calculate_week7_task_reward_cycle(
         root, "project-1", draft.reward_cycle_id
     )
@@ -157,6 +168,30 @@ def test_calculate_integrates_day4_day5_without_events_and_is_idempotent(tmp_pat
     assert not (root / "rewards" / "events").exists()
 
 
+def test_calculated_cycle_verification_is_read_only_and_retry_safe(tmp_path):
+    root, _, _, _, _, cycle = _calculated_cycle(tmp_path)
+    cycle_path = next(root.glob("task-rewards/cycles/routing/*/*/cycle.json"))
+    before = cycle_path.read_bytes()
+
+    verification = verify_week7_task_reward_cycle(
+        root, "project-1", cycle.reward_cycle_id
+    )
+
+    assert verification.verification_status == (
+        Week7RewardVerificationStatus.CALCULATED_NOT_FINALIZED
+    )
+    assert verification.ok
+    assert verification.safe_retry_finalize
+    assert verification.source_fingerprint_match
+    assert verification.calculation_fingerprint_match
+    assert verification.budget_conserved
+    assert verification.cluster_rewards_conserved
+    assert verification.reporter_rewards_conserved
+    assert verification.stored_event_count == 0
+    assert cycle_path.read_bytes() == before
+    assert list_week7_reward_events(root) == []
+
+
 def test_finalize_materializes_exact_event_and_repeated_finalize_is_idempotent(tmp_path):
     root, _, _, clusters, budget, calculated = _calculated_cycle(tmp_path)
     result = finalize_week7_task_reward_cycle(
@@ -198,6 +233,77 @@ def test_finalize_materializes_exact_event_and_repeated_finalize_is_idempotent(t
     assert "private_key" not in serialized
     with pytest.raises(Week7RewardCycleStateError):
         calculate_week7_task_reward_cycle(root, "project-1", cycle.reward_cycle_id)
+
+
+def test_finalized_cycle_verifies_complete_immutable_ledger(tmp_path):
+    root, _, _, _, _, calculated = _calculated_cycle(tmp_path)
+    finalized = finalize_week7_task_reward_cycle(
+        root, "project-1", calculated.reward_cycle_id
+    ).cycle
+
+    verification = verify_week7_task_reward_cycle(
+        root, "project-1", finalized.reward_cycle_id
+    )
+
+    assert verification.verification_status == (
+        Week7RewardVerificationStatus.CLEAN_FINALIZED
+    )
+    assert verification.ok
+    assert verification.event_set_complete
+    assert not verification.duplicate_events_found
+    assert verification.expected_event_count == verification.stored_event_count == 1
+    assert verification.expected_event_total == verification.stored_event_total
+    assert verification.stored_event_total == finalized.distributed_miner_points
+
+
+def test_verification_classifies_missing_day5_reference_as_corrupt(tmp_path):
+    root, _, routing, _, _, calculated = _calculated_cycle(tmp_path)
+    path = get_task_operator_calculation_path(
+        root, routing.routing_id, calculated.operator_calculation_id
+    )
+    path.unlink()
+
+    verification = verify_week7_task_reward_cycle(
+        root, "project-1", calculated.reward_cycle_id
+    )
+
+    assert verification.verification_status == (
+        Week7RewardVerificationStatus.CORRUPT_REFERENCES
+    )
+    assert not verification.ok
+    assert not verification.immutable_source_consistent
+
+
+def test_verification_detects_same_total_event_tampering(tmp_path):
+    root, _, _, _, _, calculated = _calculated_cycle(tmp_path)
+    finalized = finalize_week7_task_reward_cycle(
+        root, "project-1", calculated.reward_cycle_id
+    ).cycle
+    event = list_week7_reward_events(root, reward_cycle_id=finalized.reward_cycle_id)[0]
+    path = get_week7_reward_event_path(root, event.reward_cycle_id, event.reward_event_id)
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    payload["quality_reward_points"] = str(
+        Decimal(payload["quality_reward_points"]) - Decimal("1.000000")
+    )
+    payload["chief_bonus_points"] = str(
+        Decimal(payload["chief_bonus_points"]) + Decimal("1.000000")
+    )
+    path.write_text(json.dumps(payload, sort_keys=True), encoding="utf-8")
+
+    verification = verify_week7_task_reward_cycle(
+        root, "project-1", finalized.reward_cycle_id
+    )
+
+    assert verification.verification_status == (
+        Week7RewardVerificationStatus.FINALIZED_EVENT_MISMATCH
+    )
+    assert not verification.ok
+    assert not verification.event_set_complete
+    assert any("conflicts" in error for error in verification.errors)
+    with pytest.raises(Week7RewardCycleConservationError):
+        finalize_week7_task_reward_cycle(
+            root, "project-1", finalized.reward_cycle_id
+        )
 
 
 def test_draft_cannot_finalize(tmp_path):
@@ -306,7 +412,9 @@ def test_economic_source_fingerprint_changes_block_finalization(
             TaskOperatorRewardConfig(
                 duplicates=DuplicateRewardConfig(top_k=1),
                 chief_finder=ChiefFinderConfig(
-                    bonus_percentage="0.05", quality_threshold="0.80"
+                    bonus_percentage="0.05",
+                    quality_percentage="0.95",
+                    quality_threshold="0.80",
                 ),
             ),
         ),
@@ -315,7 +423,9 @@ def test_economic_source_fingerprint_changes_block_finalization(
             TaskOperatorRewardConfig(
                 duplicates=DuplicateRewardConfig(top_k=5),
                 chief_finder=ChiefFinderConfig(
-                    bonus_percentage="0.10", quality_threshold="0.90"
+                    bonus_percentage="0.10",
+                    quality_percentage="0.90",
+                    quality_threshold="0.90",
                 ),
             ),
         ),
@@ -376,6 +486,14 @@ def test_partial_crash_retry_reuses_deterministic_event(tmp_path):
         root, "project-1", calculated.reward_cycle_id
     )
     assert stored_cycle.status == RewardCycleStatus.CALCULATED
+    verification = verify_week7_task_reward_cycle(
+        root, "project-1", calculated.reward_cycle_id
+    )
+    assert verification.verification_status == (
+        Week7RewardVerificationStatus.EVENT_SET_COMPLETE_STATUS_NOT_FINALIZED
+    )
+    assert verification.safe_retry_finalize
+    assert verification.event_set_complete
 
     completed = finalize_week7_task_reward_cycle(
         root, "project-1", calculated.reward_cycle_id

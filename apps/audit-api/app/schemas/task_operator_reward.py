@@ -106,12 +106,34 @@ class ChiefFinderConfig(BaseModel):
     model_config = ConfigDict(extra="forbid", frozen=True)
 
     bonus_percentage: Decimal = Decimal("0.05")
+    quality_percentage: Decimal = Decimal("0.95")
     quality_threshold: Decimal = Decimal("0.80")
 
-    @field_validator("bonus_percentage", "quality_threshold", mode="before")
+    @model_validator(mode="before")
+    @classmethod
+    def derive_legacy_quality_percentage(cls, value: Any) -> Any:
+        if isinstance(value, dict) and "quality_percentage" not in value:
+            migrated = dict(value)
+            chief = _decimal(
+                migrated.get("bonus_percentage", Decimal("0.05")),
+                "bonus_percentage",
+            )
+            migrated["quality_percentage"] = Decimal("1") - chief
+            return migrated
+        return value
+
+    @field_validator(
+        "bonus_percentage", "quality_percentage", "quality_threshold", mode="before"
+    )
     @classmethod
     def validate_ratios(cls, value: Any, info) -> Decimal:
         return _ratio(value, info.field_name)
+
+    @model_validator(mode="after")
+    def validate_pool_total(self) -> "ChiefFinderConfig":
+        if self.bonus_percentage + self.quality_percentage != Decimal("1"):
+            raise ValueError("Chief and quality pool shares must sum exactly to one")
+        return self
 
 
 class TaskOperatorRewardConfig(BaseModel):
@@ -152,6 +174,7 @@ class EligibleReportRewardInput(BaseModel):
     assessment_source_fingerprint: str
     quality_score: Decimal
     chief_root_cause_qualified: bool
+    chief_severity_qualified: bool
     chief_impact_qualified: bool
     chief_evidence_reason_codes: list[str]
     chief_evidence_references: list[str]
@@ -327,6 +350,7 @@ class FindingClusterOperatorPayoutCalculation(BaseModel):
     top_k_limit: int = Field(..., ge=1)
     rewarded_operator_count: int = Field(..., ge=0)
     chief_bonus_percentage: Decimal
+    quality_pool_percentage: Decimal
     chief_quality_threshold: Decimal
     chief_operator_id: str | None = None
     chief_qualifying_submission_id: str | None = None
@@ -340,6 +364,19 @@ class FindingClusterOperatorPayoutCalculation(BaseModel):
     outcome: ClusterPayoutOutcome
     policy_version: str
     source_fingerprint: str
+
+    @model_validator(mode="before")
+    @classmethod
+    def derive_legacy_quality_pool_percentage(cls, value: Any) -> Any:
+        if isinstance(value, dict) and "quality_pool_percentage" not in value:
+            migrated = dict(value)
+            chief = _decimal(
+                migrated.get("chief_bonus_percentage", Decimal("0.05")),
+                "chief_bonus_percentage",
+            )
+            migrated["quality_pool_percentage"] = Decimal("1") - chief
+            return migrated
+        return value
 
     @field_validator(
         "finding_cluster_id", "project_id", "routing_id", "chief_operator_id",
@@ -365,7 +402,12 @@ class FindingClusterOperatorPayoutCalculation(BaseModel):
             raise ValueError("Cluster payout fingerprint must be SHA-256")
         return value
 
-    @field_validator("chief_bonus_percentage", "chief_quality_threshold", mode="before")
+    @field_validator(
+        "chief_bonus_percentage",
+        "quality_pool_percentage",
+        "chief_quality_threshold",
+        mode="before",
+    )
     @classmethod
     def validate_ratios(cls, value: Any, info) -> Decimal:
         return _ratio(value, info.field_name)
@@ -388,6 +430,8 @@ class FindingClusterOperatorPayoutCalculation(BaseModel):
 
     @model_validator(mode="after")
     def validate_conservation(self) -> "FindingClusterOperatorPayoutCalculation":
+        if self.chief_bonus_percentage + self.quality_pool_percentage != Decimal("1"):
+            raise ValueError("Persisted Chief and quality shares must sum exactly to one")
         if self.chief_bonus_pool_points + self.quality_pool_points != self.cluster_reward_points:
             raise ValueError("Chief and quality pools must equal the Day 4 cluster reward")
         if self.distributed_points + self.undistributed_points != self.cluster_reward_points:

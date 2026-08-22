@@ -19,6 +19,7 @@ from app.schemas.finding_cluster import (
     FindingClusterMemberRelation,
     FindingClusterRebuildResult,
     FindingClusterStatus,
+    FindingClusterValidationAuthority,
 )
 from app.schemas.reproduction import ReproductionStatus
 from app.schemas.routing import ProjectRoutingRecord, RoutingStatus
@@ -306,6 +307,49 @@ def load_finding_cluster(
         )
     }
     return current.get(finding_cluster_id)
+
+
+def attach_final_validator_consensus(
+    protocol_data_root: Path,
+    *,
+    project_id: str,
+    routing_id: str,
+    finding_cluster_id: str,
+    validation_consensus_id: str,
+    consensus_outcome: str,
+    consensus_severity: FindingSeverity | None,
+) -> FindingCluster:
+    """Attach new Week 8 authority without rewriting legacy cluster evidence."""
+    cluster = load_finding_cluster(
+        protocol_data_root, project_id, routing_id, finding_cluster_id
+    )
+    if cluster is None:
+        raise FindingClusterNotFoundError("Finding cluster not found")
+    if cluster.final_validation_consensus_id is not None:
+        if (
+            cluster.final_validation_consensus_id == validation_consensus_id
+            and cluster.validator_consensus_outcome == consensus_outcome
+            and cluster.validator_consensus_severity == consensus_severity
+        ):
+            return cluster
+        raise FindingClusterFinalizedError(
+            "Finding cluster already references a different finalized validator consensus"
+        )
+    updated = cluster.model_copy(
+        update={
+            "validation_authority": FindingClusterValidationAuthority.VALIDATOR_CONSENSUS,
+            "final_validation_consensus_id": validation_consensus_id,
+            "validator_consensus_outcome": consensus_outcome,
+            "validator_consensus_severity": consensus_severity,
+            "updated_at": _utc_now(),
+        }
+    )
+    atomic_write_json(
+        get_cluster_path(protocol_data_root, routing_id, finding_cluster_id),
+        updated,
+        temporary_prefix=".finding-cluster-consensus-",
+    )
+    return updated
 
 
 def find_cluster_by_submission(

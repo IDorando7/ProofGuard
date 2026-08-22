@@ -39,6 +39,14 @@ def test_create_calculate_finalize_read_and_history_routes(client):
     assert calculated.status_code == 200
     assert calculated.json()["cycle"]["status"] == "calculated"
     assert calculated.json()["cycle"]["reward_event_count"] == 0
+    calculated_verification = client.get(
+        f"/projects/{project_id}/task-reward-cycles/{cycle_id}/verify"
+    )
+    assert calculated_verification.status_code == 200
+    assert calculated_verification.json()["verification_status"] == (
+        "calculated_not_finalized"
+    )
+    assert calculated_verification.json()["safe_retry_finalize"] is True
 
     finalized = client.post(
         f"/projects/{project_id}/task-reward-cycles/{cycle_id}/finalize",
@@ -52,6 +60,12 @@ def test_create_calculate_finalize_read_and_history_routes(client):
         final_cycle["distributed_miner_points"]
         == day4["miner_pool_points"]
     )
+    finalized_verification = client.get(
+        f"/projects/{project_id}/task-reward-cycles/{cycle_id}/verify"
+    )
+    assert finalized_verification.status_code == 200
+    assert finalized_verification.json()["verification_status"] == "clean_finalized"
+    assert finalized_verification.json()["event_set_complete"] is True
 
     assert client.get(
         f"/projects/{project_id}/task-reward-cycles/{cycle_id}"
@@ -87,6 +101,14 @@ def test_create_calculate_finalize_read_and_history_routes(client):
     assert final_again.status_code == 200
     assert final_again.json()["processing_status"] == "already_finalized"
     assert final_again.json()["reward_events_created"] == 0
+
+
+def test_verify_unknown_cycle_returns_404(client):
+    project_id, _, _ = _operator_ready(client)
+    response = client.get(
+        f"/projects/{project_id}/task-reward-cycles/unknown-cycle/verify"
+    )
+    assert response.status_code == 404
 
 
 def test_api_rejects_client_rewards_chief_events_and_finalized_mutation(client):

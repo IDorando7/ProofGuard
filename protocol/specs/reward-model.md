@@ -462,29 +462,23 @@ reward amount, wallet, key, or payment field.
 
 ```mermaid
 flowchart TD
-    A[Validated Submission] --> B[FindingCluster Member]
+    S[Submission] --> V[Validation Decision]
+    V --> C[FindingCluster Member]
+    R[Existing Reproduction Result] --> QE[Authoritative Quality Evidence]
+    V --> QE
+    C --> QE
+    QE --> QA[ReportQualityAssessment]
+    QA --> Q[Quality Score Q]
+    Q -. Day 5 input .-> FR[Future Report Reward Allocation]
 
-    B --> C[Correctness Assessment]
-    B --> D[PoC Quality Assessment]
-    B --> E[Root-Cause Assessment]
-    B --> F[Impact Assessment]
-    B --> G[Fix Assessment]
+    CS[ContributionScore] --> RP[Reputation]
+    RP --> CP[Category Performance]
+    CP --> SC[CategoryScore]
+    SC --> M[Membership]
+    M --> RT[Routing]
+    RT --> S
 
-    C --> H[Weighted Quality Calculator]
-    D --> H
-    E --> H
-    F --> H
-    G --> H
-
-    H --> I[ReportQualityAssessment Q]
-
-    I -. future input .-> J[Operator Deduplication]
-    J -. future input .-> K[Top-K]
-    K -. future input .-> L[Q Squared Reward Distribution]
-
-    M[ContributionScore] --> N[Reputation and Category Performance]
-
-    I -. separate from .-> M
+    CS -. "ContributionScore != Q" .-> Q
 ```
 
 ## 21. ContributionScore vs ReportQualityAssessment
@@ -520,8 +514,13 @@ Validation / Reproduction / Finding
 
 ## 22. Quality Components
 
-The only component names in policy v1 are `correctness`, `poc_quality`,
-`root_cause_quality`, `impact_quality`, and `fix_quality`. Every assessed value
+The five conceptual policy-v1 dimensions are `correctness`,
+`reproduction_evidence_quality`, `root_cause_quality`, `impact_quality`, and
+`remediation_quality`. For backward compatibility with the repository's
+established PoC/fix vocabulary, the persisted v1 field names are `correctness`,
+`poc_quality`, `root_cause_quality`, `impact_quality`, and `fix_quality`;
+`poc_quality` means reproduction-evidence quality and `fix_quality` means
+remediation quality. Every assessed value
 is an exact Decimal in `[0, 1]`. External floats, negative values, values above
 one, NaN, Infinity, unknown component names, and values beyond six decimal
 places fail validation; malformed inputs are not clamped.
@@ -531,6 +530,11 @@ sorted reason codes, sorted evidence references, policy version, and state.
 States are `assessed`, `not_assessed`, and `not_applicable`. Policy v1 normally
 requires all five to be `assessed`; an incomplete record stays `draft` and has
 no Q. Missing data never defaults to a perfect score.
+
+The rubric anchors are `0.00` missing or incorrect, `0.25` materially
+incomplete, `0.50` partially adequate, `0.75` good, and `1.00` excellent and
+fully supported. Intermediate Decimals are allowed when authoritative evidence
+supports them; the anchors are guidance rather than a discrete-only scale.
 
 ## 23. Correctness
 
@@ -546,7 +550,7 @@ submission API. A trusted validator may provide a nuanced structured score
 through the dedicated protocol operation; ProofGuard still validates and
 weights it.
 
-## 24. PoC Quality
+## 24. Reproduction Evidence Quality (`poc_quality` in persisted v1 records)
 
 PoC quality weight is `0.25`. Policy v1 consumes the stored
 `ReproductionResult`; text containing the word “PoC” is irrelevant.
@@ -588,7 +592,7 @@ placeholder impact receives `0.000000`. Full or other nuanced values require
 validator-supplied structured assessment. A reporter saying “Critical” does
 not automatically earn full impact quality.
 
-## 27. Fix Quality
+## 27. Remediation Quality (`fix_quality` in persisted v1 records)
 
 Fix quality weight is `0.10`. Current records have recommendation prose but no
 structured fix validator. Non-empty prose cannot establish that a fix addresses
@@ -638,10 +642,10 @@ or reward amount is part of this policy.
 ```text
 Q =
     0.35 * correctness
-  + 0.25 * poc_quality
+  + 0.25 * reproduction_evidence_quality
   + 0.20 * root_cause_quality
   + 0.10 * impact_quality
-  + 0.10 * fix_quality
+  + 0.10 * remediation_quality
 ```
 
 Only the final Q boundary is quantized, using round-half-even and quantum
@@ -706,6 +710,7 @@ The API is:
 POST /projects/{project_id}/routing/{routing_id}/finding-clusters/{cluster_id}/submissions/{submission_id}/quality-assessment
 GET  /projects/{project_id}/routing/{routing_id}/finding-clusters/{cluster_id}/quality-assessments
 GET  /projects/{project_id}/routing/{routing_id}/submissions/{submission_id}/quality-assessment
+GET  /projects/{project_id}/routing/{routing_id}/quality-assessments/{assessment_id}
 POST /projects/{project_id}/routing/{routing_id}/quality-assessments/rebuild
 ```
 
@@ -796,6 +801,13 @@ Exact v1 calculator output:
 members. It is not node count, submission count, committee size, quality
 assessment count, Top-K size, or global network size. Three nodes owned by
 Operator A and one owned by Operator B therefore give `N = 2`.
+
+At calculation time Day 4 resolves every member's `node_id` through the
+authoritative NodeRegistry and requires its current `NodeRecord.operator_id` to
+match the finalized cluster attribution. Missing nodes, changed operator
+mappings, or a cached distinct count that differs from the authoritative set
+fail explicitly and require cluster reconciliation; they are never silently
+substituted during economic calculation.
 
 Accepted independent duplicates count. Spam, rejected, out-of-scope, unsafe,
 unsupported, and insufficient-evidence reports do not become valid cluster
@@ -904,6 +916,13 @@ and amount, allocated cluster points, and an allocation fingerprint.
 policy/configuration versions, budget linkage, allocation scope, optional
 category pools, sorted cluster allocations, distributed/undistributed totals,
 and source fingerprint. It is not a finalized operator payout cycle.
+
+The repository intentionally does not add a second Day 4 finalization API.
+The integrated Week 7 reward cycle owns `draft -> calculated -> finalized`,
+re-runs the authoritative Day 4 calculation before finalization, and blocks a
+stale cycle when budget, cluster, severity, membership attribution, policy, or
+allocation inputs produce a different snapshot. Day 4 records themselves are
+immutable calculated inputs; changed sources create a superseding record.
 
 Persistence is atomic, deterministic, Decimal-safe JSON:
 
@@ -1056,12 +1075,16 @@ reward:
   task:
     chief_finder:
       bonus_percentage: 0.05
+      quality_percentage: 0.95
       quality_threshold: 0.80
 ```
 
-The threshold and percentage are exact six-decimal values in `[0,1]`. Chief
+The threshold and percentages are exact six-decimal values in `[0,1]`; the two
+pool percentages must sum exactly to one and are never silently normalized. Chief
 identity is still calculated when the configured bonus is zero; its economic
-bonus is simply zero.
+bonus is simply zero. Older calculated previews that predate the explicit
+quality-share field remain readable by deriving it as exactly `1 - chief_share`;
+new snapshots persist and fingerprint both shares.
 
 ## 48. Chief Qualification
 
@@ -1069,15 +1092,23 @@ A Chief-qualifying report must:
 
 - belong to a Top-K operator and be an eligible finalized quality assessment;
 - have `Q >= quality_threshold` exactly (`.799999` fails, `.800000` passes);
-- be a canonical or accepted independent root-cause FindingCluster member;
-- have a positive assessed impact component with an explicit structured reason
-  such as `accepted_severity_consistent`; and
-- reference the cluster's validator-approved accepted severity.
+- be a canonical or accepted independent root-cause FindingCluster member,
+  which is the authoritative root-cause qualification;
+- have a structured severity-consistency reason such as
+  `accepted_severity_consistent` and reference the cluster's
+  validator-approved accepted severity; and
+- have a positive assessed impact component with a separate validator-derived
+  impact-validity reason such as `validator_confirmed_impact_valid`.
 
-Cluster membership supplies the validated root-cause relation. Day 5 does not
-run semantic classification. Generic `impact_present_consistency_not_structurally_assessed`
-is deliberately insufficient for Chief status. A low-Q report may still earn a
-Top-K Quality Pool share; the threshold applies only to Chief.
+Cluster membership supplies the validated root-cause relation. The Day 5 input
+snapshot persists separate `chief_root_cause_qualified`,
+`chief_severity_qualified`, and `chief_impact_qualified` facts together with
+the assessment reason codes and evidence references. Day 5 does not run
+semantic classification. Generic
+`impact_present_consistency_not_structurally_assessed`, or either structured
+fact without the other, is deliberately insufficient for Chief status. A low-Q
+report may still earn a Top-K Quality Pool share; the threshold applies only to
+Chief.
 
 Chief is restricted to Top-K so the maximum positive recipients remains K. An
 early qualifying rank-6 operator cannot create a sixth beneficiary.
@@ -1315,6 +1346,18 @@ also commits to:
 Generated calculation timestamps, host paths, reputation, membership and
 CategoryScore are excluded.
 
+Every new cycle also persists a typed `Week7RewardPolicySnapshot`. It records
+the immutable budget, cluster, quality, finding-value and reporter-allocation
+policy/configuration versions and values, the exact `0.000001` quantum, and the
+`largest_remainder_round_down_v1` rounding identity. Fingerprint canonicalization
+is identified as `reward_cycle_fingerprint_v1`. Legacy cycle JSON without this
+field remains readable; it uses its historical version-specific defaults.
+
+The source fingerprint commits to authoritative payout inputs. The calculation
+fingerprint commits to that source plus the complete derived Day 4/Day 5
+allocation. This distinction detects both stale source state and corruption of
+persisted calculation artifacts.
+
 ## 58. Source Revalidation
 
 Finalization never trusts calculated JSON alone. It reloads the finalized
@@ -1387,7 +1430,48 @@ and is never overwritten.
 If a process writes some events and crashes before updating the cycle, retry
 reuses matching events, creates only missing events, rechecks conservation and
 then marks the cycle finalized. Repeated finalization returns the same cycle and
-events without duplicates.
+events without duplicates. An already-finalized retry also checks immutable
+event IDs, exact totals and, when retained calculation artifacts are available,
+every economic event field against the calculated snapshot.
+
+The JSON store is not claimed to provide a multi-file database transaction.
+Its accounting boundary is instead a staged, retry-safe publication protocol:
+all sources are revalidated, deterministic event files are exclusively and
+atomically created, the complete event set is reconciled, and only then is the
+cycle JSON atomically replaced with `finalized`. Concurrent retries can race to
+create the same event ID, but cannot publish two differing events under it.
+
+### Verification and Recovery
+
+`GET /projects/{project_id}/task-reward-cycles/{cycle_id}/verify` is read-only.
+It reloads cycle references, recomputes the integrated calculation fingerprint,
+rebuilds current payout-relevant cluster/operator/quality inputs, verifies all
+budget/cluster/reporter equations, reconstructs deterministic expected events,
+and compares the ledger by economic identity and total. It never calculates in
+place, writes an event, finalizes, or repairs data.
+
+The structured result distinguishes `draft`, `calculated_not_finalized`,
+`stale_calculation`, `partial_event_publication`,
+`event_set_complete_status_not_finalized`, `clean_finalized`,
+`finalized_event_mismatch`, and `corrupt_references`. It also reports whether a
+finalization retry is safe. Recovery is conservative: a calculated cycle can
+resume only when every already-published deterministic event exactly matches a
+subset of the expected set and all fingerprints and conservation checks pass.
+Conflicting or corrupted economic history is reported and never overwritten.
+
+### Failure Modes
+
+| Condition | Protocol behavior |
+|---|---|
+| Stale budget, cluster, operator mapping, Q, or policy | Block finalization; explicitly recalculate |
+| Budget already consumed | Reject a second finalized cycle |
+| Missing cluster reward or quality input | Preserve the affected value as undistributed |
+| No eligible reporter or all Q-squared weights zero | Preserve the cluster reward as undistributed |
+| Empty explicit category pool | Preserve that category pool as undistributed |
+| Matching partial event publication | Safe retry creates only missing deterministic events |
+| Complete events but missing final marker | Safe retry validates the complete set, then publishes the marker |
+| Duplicate finalize after success | Return the finalized cycle; create no events |
+| Missing, altered, duplicate, or conflicting event | Verification fails; no automatic overwrite or repair |
 
 ## 63. Task-Level Conservation
 
@@ -1457,23 +1541,33 @@ task payout != performance score
 Day 7 verifies Days 1–6 through the production services. The benchmark lives at
 `apps/audit-api/research/benchmarks/week7_reward_benchmark.py` and writes
 deterministic evidence under `apps/audit-api/research/results/week7/`. It does
-not copy the uniqueness, Top-K, Chief, Q-squared, or finalization formulas.
+not copy the uniqueness, Top-K, Chief, Q-squared, or finalization formulas. Its
+independent assertions use known constants, mathematical ordering, exact
+conservation and corruption/recovery outcomes rather than comparing a function
+with itself.
 
 ## 68. Synthetic Benchmark Scenario
 
 The primary isolated scenario has 64 routed nodes, 40 operators, eight finalized
-FindingClusters, two categories, and more than 100 validated reports. It includes
+FindingClusters, two categories, and 120 reports. It includes
 multi-node operators, independent duplicates, invalid outcomes, mixed severity
 and quality, an unassessed cluster, and several Chief/no-Chief paths. Protocol,
 workspace, and output roots are isolated; IDs and submission times are fixed.
 
+This production-service scale is deliberately CI-safe because building every
+submission, validation, cluster and quality artifact through the filesystem is
+substantially more expensive than the pure calculator stages. Dedicated
+100-report/50-operator and N=1000 cases extend the scale boundary; broader
+multi-project/routing combinations remain in service/API regressions.
+
 ## 69. Benchmark Cases
 
-The machine-readable cases cover single-finder conservation, equal duplicates,
-a 100-report/50-operator stress case, operator deduplication, Chief timing and
-Top-K restriction, no-Chief redistribution, validator severity, operator-based
-uniqueness, category isolation, undistributed clusters, task conservation,
-double-reward protection, stale-source blocking, crash recovery, and replay.
+The 33 machine-readable cases cover the known Q vector; uniqueness bounds and
+floor; severity ordering; global and category allocation; all-zero Q; best
+report/operator; Top-K; Chief timing/restriction; no-Chief redistribution;
+historical-performance separation; persistence reload; stale Q and severity;
+partial and complete-before-marker recovery; event corruption; task
+conservation; double-reward protection; insertion ordering; and clean replay.
 
 ## 70. Economic Invariants
 
@@ -1495,7 +1589,8 @@ The whole pipeline runs from two clean roots. Normalization excludes only
 generated metadata timestamps and compares budget/cluster fingerprints, Day 4
 and Day 5 economic content, representatives, ranks, Chiefs, amounts, cycle
 fingerprints, and RewardEvent IDs. A fixed-seed shuffled stress input also
-verifies iteration-order independence.
+verifies iteration-order independence. Canonical JSON of the normalized
+economic state is SHA-256 hashed and published as `deterministic_state_hash`.
 
 ## 72. Source-Revalidation Results
 
@@ -1508,9 +1603,11 @@ configuration sources.
 ## 73. Crash-Recovery Results
 
 Finalization is interrupted after a deterministic event subset is written.
-Retry derives the same IDs, validates existing content, creates only missing
-events, conserves the pool, and finalizes once. Conflicting content under an
-expected deterministic ID remains a hard integrity error.
+The read-only verifier classifies the subset as safely recoverable. Retry derives
+the same IDs, validates existing content, creates only missing events, conserves
+the pool, and finalizes once. A separate case publishes the complete event set
+before the final marker and proves retry creates zero events. Same-total economic
+event tampering is detected without mutation.
 
 ## 74. Sybil and Duplicate Stress Results
 

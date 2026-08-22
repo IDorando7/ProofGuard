@@ -5,6 +5,7 @@ from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 
 from app.api.routes_category_performance import router as category_performance_router
+from app.api.routes_audit_runs import router as audit_runs_router
 from app.api.routes_category_scores import router as category_scores_router
 from app.api.routes_contributions import router as contributions_router
 from app.api.routes_finding_clusters import router as finding_clusters_router
@@ -26,6 +27,11 @@ from app.api.routes_submissions import router as submissions_router
 from app.api.routes_subnets import router as subnets_router
 from app.api.routes_subnet_membership import router as subnet_membership_router
 from app.api.routes_validation import router as validation_router
+from app.api.routes_validator_attestations import router as validator_attestations_router
+from app.api.routes_validator_committees import router as validator_committees_router
+from app.api.routes_validator_consensus import router as validator_consensus_router
+from app.api.routes_validator_performance import router as validator_performance_router
+from app.api.routes_validator_rewards import router as validator_rewards_router
 from app.core.database import init_db
 from app.core.openapi import API_DESCRIPTION, OPENAPI_TAGS, configure_openapi
 
@@ -70,6 +76,7 @@ app.include_router(report_quality_router)
 app.include_router(reputation_router)
 app.include_router(rewards_router)
 app.include_router(projects_router)
+app.include_router(audit_runs_router)
 app.include_router(routing_router)
 app.include_router(subnet_rewards_router)
 app.include_router(task_rewards_router)
@@ -78,6 +85,11 @@ app.include_router(task_operator_rewards_router)
 app.include_router(week7_reward_cycles_router)
 app.include_router(reproduction_router)
 app.include_router(validation_router)
+app.include_router(validator_attestations_router)
+app.include_router(validator_committees_router)
+app.include_router(validator_consensus_router)
+app.include_router(validator_performance_router)
+app.include_router(validator_rewards_router)
 app.include_router(reports_router)
 
 configure_openapi(app)

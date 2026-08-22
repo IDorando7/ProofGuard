@@ -64,6 +64,12 @@ def test_quality_create_read_list_and_rebuild_routes(client):
     )
     assert read.status_code == 200
     assert read.json() == body
+    read_by_id = client.get(
+        f"/projects/{project_id}/routing/{routing.routing_id}/quality-assessments/"
+        f"{body['report_quality_assessment_id']}"
+    )
+    assert read_by_id.status_code == 200
+    assert read_by_id.json() == body
     listed = client.get(
         f"/projects/{project_id}/routing/{routing.routing_id}/finding-clusters/"
         f"{cluster['finding_cluster_id']}/quality-assessments"
@@ -150,6 +156,14 @@ def test_invalid_component_and_linkage_fail_cleanly(client):
             submission.submission_id,
         ),
         json=VALIDATOR_INPUT,
+    ).status_code == 404
+    assert client.get(
+        f"/projects/{project_id}/routing/{routing.routing_id}/quality-assessments/"
+        f"report_quality_assessment_{'0' * 32}"
+    ).status_code == 404
+    assert client.get(
+        f"/projects/{project_id}/routing/missing-routing/quality-assessments/"
+        f"report_quality_assessment_{'0' * 32}"
     ).status_code == 404
 
 

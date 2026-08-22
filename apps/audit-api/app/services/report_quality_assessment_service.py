@@ -557,6 +557,51 @@ def load_active_report_quality_assessment(
     return matches[0]
 
 
+def load_report_quality_assessment_by_id(
+    protocol_data_root: Path,
+    project_id: str,
+    routing_id: str,
+    assessment_id: str,
+) -> ReportQualityAssessment | None:
+    """Load any assessment version by its deterministic ID within URL scope."""
+    for value, label in (
+        (project_id, "project"),
+        (routing_id, "routing"),
+        (assessment_id, "report quality assessment"),
+    ):
+        _validate_identifier(value, label)
+    if not assessment_id.startswith("report_quality_assessment_"):
+        raise ReportQualityLinkageError("Invalid report quality assessment identifier")
+
+    task_root = get_report_quality_root(protocol_data_root) / routing_id
+    _ensure_within(task_root, get_report_quality_root(protocol_data_root))
+    submissions_root = task_root / "submissions"
+    if not submissions_root.exists():
+        return None
+    if not submissions_root.is_dir():
+        raise ReportQualityStorageError("Stored report quality task is malformed")
+
+    matches: list[ReportQualityAssessment] = []
+    for submission_root in sorted(submissions_root.iterdir(), key=lambda item: item.name):
+        if not submission_root.is_dir():
+            raise ReportQualityStorageError("Stored report quality submission is malformed")
+        _validate_identifier(submission_root.name, "submission")
+        matches.extend(
+            item
+            for item in _load_all_for_submission(
+                protocol_data_root, routing_id, submission_root.name
+            )
+            if item.report_quality_assessment_id == assessment_id
+        )
+    if len(matches) > 1:
+        raise ReportQualityStorageError(
+            "Report quality assessment identifier is not unique within the task"
+        )
+    if not matches or matches[0].project_id != project_id:
+        return None
+    return matches[0]
+
+
 def list_submission_report_quality_assessments(
     protocol_data_root: Path,
     routing_id: str,

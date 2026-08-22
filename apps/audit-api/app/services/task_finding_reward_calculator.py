@@ -46,8 +46,10 @@ def calculate_uniqueness(
     config: UniquenessRewardConfig,
 ) -> Decimal:
     """Calculate max(floor, 1/(1+coefficient*ln(N))) using Decimal only."""
-    if isinstance(distinct_operator_count, bool) or distinct_operator_count < 1:
-        raise FindingValuationError("Distinct operator count must be at least one")
+    if type(distinct_operator_count) is not int or distinct_operator_count < 1:
+        raise FindingValuationError(
+            "Distinct operator count must be a positive integer"
+        )
     if config.coefficient == 0 or distinct_operator_count == 1:
         return Decimal("1.000000")
     with localcontext() as context:

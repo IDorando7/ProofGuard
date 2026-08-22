@@ -27,16 +27,25 @@ def test_full_week7_real_service_benchmark_generates_passing_auditable_outputs(t
     assert tuple(item.case_id for item in cases.cases) == REQUIRED_CASE_IDS
     assert all(item.passed for item in cases.cases)
     assert summary.benchmark_passed
+    assert summary.seed == 7007
+    assert summary.total_cases == len(REQUIRED_CASE_IDS) >= 30
     assert summary.nodes == 64
     assert summary.operators == 40
     assert summary.valid_submissions >= 100
     assert summary.finding_clusters == 8
+    assert summary.quality_assessments >= 100
     assert summary.reward_events > 0
     assert Decimal(summary.distributed_miner_amount) > 0
     assert Decimal(summary.distributed_miner_amount) + Decimal(
         summary.undistributed_miner_amount
     ) == Decimal(summary.miner_pool)
     assert all(outputs["invariants"].values())
+    assert outputs["accounting"]["conservation_pass"]
+    assert outputs["accounting"]["event_conservation_pass"]
+    assert outputs["verification"]["verification_status"] == "clean_finalized"
+    assert outputs["determinism"]["deterministic_state_hash"] == (
+        summary.deterministic_state_hash
+    )
     for filename in GENERATED_FILENAMES:
         path = tmp_path / "results" / filename
         assert path.is_file()
@@ -45,6 +54,8 @@ def test_full_week7_real_service_benchmark_generates_passing_auditable_outputs(t
         assert "private_key" not in text
     report = (tmp_path / "results" / "week7_report.md").read_text(encoding="utf-8")
     assert all(section in report for section in REQUIRED_REPORT_SECTIONS)
+    assert "Q = 0.35*C + 0.25*P + 0.20*R + 0.10*I + 0.10*F" in report
+    assert summary.deterministic_state_hash in report
 
 
 @pytest.mark.parametrize("count", list(range(1, 300)) + [500, 1000, 10**6])

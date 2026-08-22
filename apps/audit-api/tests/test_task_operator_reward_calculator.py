@@ -74,6 +74,7 @@ def _report(
         assessment_source_fingerprint=f"{1000 + index:064x}",
         quality_score=quality,
         chief_root_cause_qualified=chief,
+        chief_severity_qualified=chief,
         chief_impact_qualified=chief,
         chief_evidence_reason_codes=(
             ["accepted_severity_consistent"] if chief else []
@@ -88,6 +89,7 @@ def test_default_and_boundary_configuration():
     config = TaskOperatorRewardConfig()
     assert config.duplicates.top_k == 5
     assert config.chief_finder.bonus_percentage == Decimal("0.05")
+    assert config.chief_finder.quality_percentage == Decimal("0.95")
     assert config.chief_finder.quality_threshold == Decimal("0.80")
     assert DuplicateRewardConfig(top_k=1).top_k == 1
     for value in (0, -1, 1001):
@@ -97,6 +99,14 @@ def test_default_and_boundary_configuration():
         for value in ("-0.000001", "1.000001"):
             with pytest.raises(ValidationError):
                 ChiefFinderConfig(**{field: value})
+    with pytest.raises(ValidationError):
+        ChiefFinderConfig(
+            bonus_percentage="0.10",
+            quality_percentage="0.95",
+        )
+    assert ChiefFinderConfig(
+        bonus_percentage="0.10"
+    ).quality_percentage == Decimal("0.90")
     serialized = config.model_dump_json()
     assert serialized == TaskOperatorRewardConfig().model_dump_json()
     assert "membership" not in serialized
@@ -272,6 +282,57 @@ def test_threshold_boundary_and_impact_evidence_apply_only_to_chief():
     assert result.quality_pool_points == result.cluster_reward_points
 
 
+@pytest.mark.parametrize(
+    "failed_fact",
+    [
+        "chief_root_cause_qualified",
+        "chief_severity_qualified",
+        "chief_impact_qualified",
+    ],
+)
+def test_each_authoritative_chief_qualification_fact_is_required(failed_fact):
+    report = _report(1, "0.950000").model_copy(update={failed_fact: False})
+    result = calculate_cluster_operator_payout(
+        _day4(), [report], [], TaskOperatorRewardConfig()
+    )
+    assert result.chief_operator_id is None
+    assert result.chief_bonus_pool_points == 0
+    assert result.quality_pool_points == result.cluster_reward_points
+
+
+def test_full_numerical_example_conserves_exact_cluster_reward():
+    reports = [
+        _report(index, quality)
+        for index, quality in enumerate(
+            ["0.900000", "0.950000", "0.850000", "0.700000"],
+            start=1,
+        )
+    ]
+    result = calculate_cluster_operator_payout(
+        _day4("5559.850000"), reports, [], TaskOperatorRewardConfig()
+    )
+    assert result.chief_bonus_pool_points == Decimal("277.992500")
+    assert result.quality_pool_points == Decimal("5281.857500")
+    assert [item.quality_weight for item in result.operator_allocations] == [
+        Decimal("0.902500000000"),
+        Decimal("0.810000000000"),
+        Decimal("0.722500000000"),
+        Decimal("0.490000000000"),
+    ]
+    assert [item.total_reward_points for item in result.operator_allocations] == [
+        Decimal("1629.701331"),
+        Decimal("1740.660731"),
+        Decimal("1304.663947"),
+        Decimal("884.823991"),
+    ]
+    assert sum(
+        item.total_reward_points for item in result.operator_allocations
+    ) == Decimal("5559.850000")
+    legacy_payload = result.model_dump()
+    legacy_payload.pop("quality_pool_percentage")
+    assert result.__class__.model_validate(legacy_payload) == result
+
+
 def test_zero_quality_weight_is_safe_and_fully_undistributed():
     reports = [_report(1, "0.000000", chief=False), _report(2, "0.000000", chief=False)]
     result = calculate_cluster_operator_payout(
@@ -294,7 +355,9 @@ def test_chief_split_boundary_percentages_conserve_tiny_pool(percentage):
         [],
         TaskOperatorRewardConfig(
             chief_finder=ChiefFinderConfig(
-                bonus_percentage=percentage, quality_threshold="0.800000"
+                bonus_percentage=percentage,
+                quality_percentage=(Decimal("1") - Decimal(percentage)),
+                quality_threshold="0.800000",
             )
         ),
     )

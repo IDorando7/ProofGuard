@@ -6,6 +6,7 @@ from pydantic import ValidationError
 from app.schemas.finding import FindingSeverity
 from app.schemas.task_finding_reward import (
     FindingClusterAllocationReason,
+    FindingClusterValue,
     SeverityRewardWeightConfig,
     TaskFindingRewardConfig,
     UniquenessRewardConfig,
@@ -20,8 +21,6 @@ from app.services.task_finding_reward_calculator import (
 
 
 def _value(identifier: str, score: str):
-    from app.schemas.task_finding_reward import FindingClusterValue
-
     return FindingClusterValue(
         finding_cluster_id=identifier,
         project_id="project-1",
@@ -113,6 +112,9 @@ def test_uniqueness_is_monotone_deterministic_and_safe_for_huge_counts():
         calculate_uniqueness(0, config)
     with pytest.raises(FindingValuationError):
         calculate_uniqueness(-1, config)
+    for invalid in (True, 1.5, Decimal("2"), "2"):
+        with pytest.raises(FindingValuationError, match="positive integer"):
+            calculate_uniqueness(invalid, config)
 
 
 def test_zero_coefficient_means_full_uniqueness_for_every_positive_count():
@@ -157,3 +159,49 @@ def test_empty_and_all_zero_parent_pool_remain_undistributed():
     assert allocate_finding_cluster_pool(
         Decimal("1.000000"), [_value("cluster-a", "0.000000")]
     ) == {"cluster-a": Decimal("0.000000")}
+
+
+def test_global_three_cluster_benchmark_is_exact_and_conservative():
+    config = TaskFindingRewardConfig()
+    cases = [
+        ("cluster-a", FindingSeverity.HIGH, 1),
+        ("cluster-b", FindingSeverity.CRITICAL, 4),
+        ("cluster-c", FindingSeverity.MEDIUM, 12),
+    ]
+    values = []
+    for identifier, severity, operator_count in cases:
+        weight = severity_weight(severity, config.severity_weights)
+        uniqueness = calculate_uniqueness(operator_count, config.uniqueness)
+        score = calculate_finding_score(weight, uniqueness)
+        values.append(
+            FindingClusterValue(
+                finding_cluster_id=identifier,
+                project_id="project-1",
+                routing_id="routing-1",
+                category="access_control",
+                cluster_source_fingerprint="a" * 64,
+                final_severity=severity,
+                severity_weight=weight,
+                distinct_operator_count=operator_count,
+                uniqueness=uniqueness,
+                finding_score=score,
+                allocation_reason="positive_finding_score",
+            )
+        )
+
+    assert [value.finding_score for value in values] == [
+        Decimal("8.000000"),
+        Decimal("12.526832"),
+        Decimal("2.004033"),
+    ]
+    rewards = allocate_finding_cluster_pool(Decimal("10000.000000"), values)
+    assert rewards == {
+        "cluster-a": Decimal("3550.684805"),
+        "cluster-b": Decimal("5559.854005"),
+        "cluster-c": Decimal("889.461190"),
+    }
+    assert rewards["cluster-b"] > rewards["cluster-a"] > rewards["cluster-c"]
+    assert sum(rewards.values(), Decimal("0")) == Decimal("10000.000000")
+    assert allocate_finding_cluster_pool(
+        Decimal("10000.000000"), list(reversed(values))
+    ) == rewards

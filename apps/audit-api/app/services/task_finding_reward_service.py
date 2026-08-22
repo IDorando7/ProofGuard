@@ -31,6 +31,7 @@ from app.schemas.task_finding_reward import (
 )
 from app.schemas.task_reward import TaskRewardBudgetStatus
 from app.services.finding_cluster_service import list_task_finding_clusters
+from app.services.node_registry_service import load_node
 from app.services.subnet_reward_allocation_service import allocate_category_pools
 from app.services.subnet_router_service import load_routing_record
 from app.services.task_finding_reward_calculator import (
@@ -172,6 +173,22 @@ def calculate_task_finding_rewards(
         if cluster.category not in routed_categories:
             raise TaskFindingRewardLinkageError(
                 "FindingCluster category is not part of the task routing"
+            )
+        authoritative_operator_ids: set[str] = set()
+        for member in cluster.members:
+            node = load_node(protocol_data_root, member.node_id)
+            if node is None:
+                raise TaskFindingRewardStateError(
+                    "FindingCluster member node is missing from NodeRegistry"
+                )
+            if node.operator_id != member.operator_id:
+                raise TaskFindingRewardStateError(
+                    "FindingCluster operator attribution is stale; cluster rebuild is required"
+                )
+            authoritative_operator_ids.add(node.operator_id)
+        if len(authoritative_operator_ids) != cluster.distinct_operator_count:
+            raise TaskFindingRewardStateError(
+                "FindingCluster distinct operator count does not match NodeRegistry"
             )
     try:
         values = [value_finding_cluster(cluster, config) for cluster in clusters]

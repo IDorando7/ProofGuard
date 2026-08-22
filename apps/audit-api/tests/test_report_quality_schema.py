@@ -1,6 +1,7 @@
 import json
 from datetime import datetime, timezone
 from decimal import Decimal
+from inspect import signature
 
 import pytest
 from pydantic import ValidationError
@@ -113,6 +114,50 @@ def test_quality_formula_exact_boundaries_and_example():
     assert calculate_report_quality(example, config) == calculate_report_quality(
         ReportQualityComponents(**dict(reversed(list(example.model_dump().items())))),
         config,
+    )
+
+
+@pytest.mark.parametrize(
+    ("active_component", "expected"),
+    [
+        ("correctness_score", "0.350000"),
+        ("poc_quality_score", "0.250000"),
+        ("root_cause_quality_score", "0.200000"),
+        ("impact_quality_score", "0.100000"),
+        ("fix_quality_score", "0.100000"),
+    ],
+)
+def test_each_quality_component_has_its_exact_policy_weight(active_component, expected):
+    values = {
+        "correctness_score": "0",
+        "poc_quality_score": "0",
+        "root_cause_quality_score": "0",
+        "impact_quality_score": "0",
+        "fix_quality_score": "0",
+    }
+    values[active_component] = "1"
+    result = calculate_report_quality(
+        ReportQualityComponents(**values), ReportQualityConfig()
+    )
+    assert result == Decimal(expected)
+    assert result.as_tuple().exponent == -6
+
+
+def test_quality_calculator_accepts_no_historical_or_economic_inputs():
+    parameters = set(signature(calculate_report_quality).parameters)
+    assert parameters == {"component_scores", "config"}
+    assert parameters.isdisjoint(
+        {
+            "reputation",
+            "category_score",
+            "membership",
+            "routing_rank",
+            "task_reward_budget",
+            "previous_rewards",
+            "accepted_finding_count",
+            "severity",
+            "distinct_operator_count",
+        }
     )
 
 

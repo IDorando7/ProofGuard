@@ -145,6 +145,7 @@ def calculate_cluster_operator_payout(
                 and quality_weight(report.quality_score) > 0
                 and report.quality_score >= config.chief_finder.quality_threshold
                 and report.chief_root_cause_qualified
+                and report.chief_severity_qualified
                 and report.chief_impact_qualified
             ),
             key=lambda item: (item.submitted_at, item.submission_id),
@@ -301,6 +302,7 @@ def calculate_cluster_operator_payout(
         top_k_limit=config.duplicates.top_k,
         rewarded_operator_count=sum(item.rewarded for item in allocations),
         chief_bonus_percentage=config.chief_finder.bonus_percentage,
+        quality_pool_percentage=config.chief_finder.quality_percentage,
         chief_quality_threshold=config.chief_finder.quality_threshold,
         chief_operator_id=chief_operator_id,
         chief_qualifying_submission_id=(

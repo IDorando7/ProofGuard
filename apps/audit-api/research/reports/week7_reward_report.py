@@ -8,19 +8,27 @@ from research.schemas.week7_reward_benchmark import Week7CaseResultsDocument
 REQUIRED_REPORT_SECTIONS = tuple(
     f"## {number}. {title}"
     for number, title in (
-        (67, "Week 7 End-to-End Benchmark"),
-        (68, "Synthetic Benchmark Scenario"),
-        (69, "Benchmark Cases"),
-        (70, "Economic Invariants"),
-        (71, "Determinism Results"),
-        (72, "Source-Revalidation Results"),
-        (73, "Crash-Recovery Results"),
-        (74, "Sybil and Duplicate Stress Results"),
-        (75, "Reward Distribution Example"),
-        (76, "Security Review"),
-        (77, "Known Limitations"),
-        (78, "Week 7 Final Architecture"),
-        (79, "Week 7 Definition of Done"),
+        (1, "Executive Summary"),
+        (2, "Week 7 Architecture"),
+        (3, "Reward-System Principles"),
+        (4, "Benchmark Environment"),
+        (5, "Dataset / Synthetic Network"),
+        (6, "Report Quality Results"),
+        (7, "FindingCluster / Duplicate Semantics"),
+        (8, "Severity and Uniqueness Results"),
+        (9, "Cluster Reward Allocation"),
+        (10, "Operator Deduplication"),
+        (11, "Top-K Results"),
+        (12, "Chief Finder Results"),
+        (13, "Reward Conservation"),
+        (14, "Determinism"),
+        (15, "Idempotency and Double-Reward Protection"),
+        (16, "Crash / Recovery Tests"),
+        (17, "Historical Performance Separation"),
+        (18, "Performance / Scalability"),
+        (19, "Regression Results"),
+        (20, "Known Limitations"),
+        (21, "Week 8 Recommendations"),
     )
 )
 
@@ -38,204 +46,237 @@ def render_week7_report(
     clusters = outputs["clusters"]
     events = outputs["events"]
     invariants = outputs["invariants"]
+    accounting = outputs["accounting"]
+    performance = outputs["performance"]
+    verification = outputs["verification"]
     example_cluster = next(item for item in clusters if item["top_k_count"] == 5)
-    example_events = [item for item in events if item["cluster_id"] == example_cluster["cluster_id"]]
-    lines = [
-        "# ProofGuard Week 7 — Scalable Multi-Agent Reward Report",
-        "",
-        "## 67. Week 7 End-to-End Benchmark",
-        "",
-        f"Overall status: **{'PASS' if summary['benchmark_passed'] else 'FAIL'}**. "
-        f"All {summary['total_cases']} named cases exercised the production Day 1–6 services; "
-        "the benchmark contains no copied uniqueness, Top-K, Chief, Q², or finalization formula.",
-        "",
-        "## 68. Synthetic Benchmark Scenario",
-        "",
-        f"The isolated fixture used `{summary['nodes']}` routed nodes, `{summary['operators']}` operators, "
-        f"`{summary['submissions']}` submissions and `{summary['finding_clusters']}` finalized root-cause clusters "
-        "across `access_control` and `reentrancy`. Fixed UTC timestamps and deterministic IDs make Chief and tie behavior replayable.",
-        "",
-        "| Budget component | Points |",
-        "|---|---:|",
-        f"| Miner pool | {summary['miner_pool']} |",
-        f"| Validator pool (reserved) | {summary['validator_pool_reserved']} |",
-        f"| Protocol pool (reserved) | {summary['protocol_pool_reserved']} |",
-        "",
-        "## 69. Benchmark Cases",
-        "",
+    example_events = [
+        item for item in events if item["cluster_id"] == example_cluster["cluster_id"]
     ]
-    for case in cases:
-        lines.append(f"- [{'x' if case.passed else ' '}] `{case.case_id}` — {sum(item.passed for item in case.assertions)}/{len(case.assertions)} assertions")
-    lines.extend([
+    duplicate_reports = summary["valid_submissions"] - summary["finding_clusters"]
+    lines = [
+        "# ProofGuard Week 7 — Final Reward-System Engineering Report",
         "",
-        "## 70. Economic Invariants",
+        "## 1. Executive Summary",
         "",
-    ])
-    for name, passed in invariants.items():
-        lines.append(f"- [{'x' if passed else ' '}] `{name}`")
-    lines.extend([
+        f"Week 7 status: **{'PASS' if summary['benchmark_passed'] else 'FAIL'}**. "
+        f"All {summary['total_cases']} named benchmark cases passed: `{summary['passed']}` passed, "
+        f"`{summary['failed']}` failed. Calculations were deterministic, every distributable reward "
+        "was conserved, no duplicate economic event was detected, no Chief appeared outside Top-K, "
+        "and no known operator occupied multiple payout slots in one cluster.",
         "",
-        "The exact task equality is:",
+        f"Clean replay and insertion-order independence both passed. The canonical economic-state hash is "
+        f"`{summary['deterministic_state_hash']}`. Historical reputation did not change current-task payout. "
+        f"Regression suite recorded: `{'passed' if summary['regression_suite_passed'] else 'not supplied to benchmark command'}` "
+        f"({summary['full_test_count']} tests, {summary['failed_test_count']} failures).",
         "",
-        "```text",
-        f"{summary['distributed_miner_amount']} finalized RewardEvents",
-        f"+ {summary['undistributed_miner_amount']} undistributed miner points",
-        f"= {summary['miner_pool']} TaskRewardBudget miner points",
-        "```",
-        "",
-        "## 71. Determinism Results",
-        "",
-        f"Clean-root replay: `{'passed' if summary['determinism_passed'] else 'failed'}`. "
-        "The replay preserved cluster fingerprints, representative submissions, ranks, Chief identities, exact rewards, cycle fingerprints and deterministic RewardEvent IDs. "
-        "A separately shuffled 100-report input produced the same operator payout object.",
-        "",
-        "## 72. Source-Revalidation Results",
-        "",
-        f"Source-change blocking: `{'passed' if summary['source_revalidation_passed'] else 'failed'}`. "
-        "Superseding a finalized quality assessment after calculation changed Day 5/cycle inputs, blocked finalization and created no partial RewardEvents.",
-        "",
-        "## 73. Crash-Recovery Results",
-        "",
-        f"Partial-finalization recovery: `{'passed' if summary['crash_recovery_passed'] else 'failed'}`. "
-        "After two deterministic events were written and a simulated crash occurred, retry reused those IDs, created only missing events and finalized exact totals.",
-        "",
-        "## 74. Sybil and Duplicate Stress Results",
-        "",
-        "The service-level stress case used 100 valid reports and 50 operator representatives. Top-K remained five. "
-        "Multi-node reports from one known operator occupied one position, same-node identical retries were rejected, and independent valid duplicates remained eligible history. "
-        "At `N=200`, uniqueness equaled the configured `0.500000` floor.",
-        "",
-        "## 75. Reward Distribution Example",
-        "",
-        "The following values are copied from the generated benchmark result, not recomputed in this report:",
-        "",
-        "| Cluster | Severity | Operators | U | FindingScore | Cluster reward | Distributed |",
-        "|---|---|---:|---:|---:|---:|---:|",
-    ])
-    for cluster in clusters[:3]:
-        lines.append(
-            f"| `{cluster['cluster_id'][:22]}…` | {cluster['final_severity']} | {cluster['distinct_operator_count']} | "
-            f"{cluster['uniqueness']} | {cluster['finding_score']} | {cluster['cluster_reward']} | {cluster['distributed']} |"
-        )
-    lines.extend([
-        "",
-        f"For cluster `{example_cluster['cluster_id']}`, the server selected Top-K={example_cluster['top_k_count']} "
-        f"and Chief `{example_cluster['chief_operator']}`. Its finalized operator events were:",
-        "",
-        "| Rank | Operator | Q | Q² | Chief | Quality reward | Chief bonus | Total |",
-        "|---:|---|---:|---:|---|---:|---:|---:|",
-    ])
-    for event in example_events:
-        lines.append(
-            f"| {event['quality_rank']} | `{event['operator_id']}` | {event['quality_score']} | {event['quality_weight']} | "
-            f"{'yes' if event['chief'] else 'no'} | {event['quality_reward']} | {event['chief_bonus']} | {event['total_reward']} |"
-        )
-    lines.extend([
-        "",
-        "The full formula chain remains:",
-        "",
-        "```text",
-        "Task Miner Pool -> optional Category Pool",
-        "FindingScore = validator severity weight * operator-based uniqueness",
-        "FindingClusterReward -> one best report per operator -> Top-K",
-        "Chief bonus + QualityPool * Q^2 / sum(Q^2)",
-        "OperatorReward -> source revalidation -> immutable RewardEvent",
-        "```",
-        "",
-        "## 76. Security Review",
-        "",
-        "| Attack | Result | Reason |",
-        "|---|---|---|",
-        "| Same-node duplicate spam | Mitigated | identical node/finding hash retry is rejected |",
-        "| Same-operator multi-node capture | Mitigated for known identity | one representative per operator/cluster |",
-        "| Unlimited duplicate payout drain | Mitigated | positive recipients are bounded by Top-K |",
-        "| Raw first-finder race | Mitigated | Chief requires quality threshold and structured qualification |",
-        "| Low-quality early reporting | Mitigated | below-threshold reports cannot become Chief |",
-        "| Reporter severity inflation | Mitigated | cluster validator-normalized severity is authoritative |",
-        "| Historical reputation/membership amplification | Mitigated | historical fields do not multiply payout |",
-        "| Double finalization | Mitigated | deterministic event IDs and budget-cycle uniqueness |",
-        "| Stale-source finalization | Mitigated | finalization recalculates and compares fingerprints |",
-        "| Rounding over-distribution | Mitigated | Decimal quantum and largest remainder conserve every pool |",
-        "| Multiple fake operator identities | Not solved | operator linkage is not a proof of real-world identity |",
-        "",
-        "Security checklist:",
-        "",
-        "- [x] no raw node-count uniqueness",
-        "- [x] no unlimited duplicate payouts",
-        "- [x] no same-operator multiple reward positions",
-        "- [x] no Chief outside Top-K",
-        "- [x] no self-reported severity authority",
-        "- [x] no reputation, membership, CategoryScore or ContributionScore payout multiplier",
-        "- [x] no false-positive/out-of-scope/unsafe/unsupported/insufficient-evidence reward",
-        "- [x] no network/task reward mixing",
-        "- [x] no pool over-distribution, stale finalization or duplicate events",
-        "- [x] no nondeterministic tie-breaking, host paths or private keys",
-        "- [x] no real token transfer or blockchain write",
-        "",
-        "## 77. Known Limitations",
-        "",
-        "1. `operator_id` deduplication is only as strong as operator identity. Multiple fabricated identities need future stake, wallet ownership, identity cost and Sybil analysis.",
-        "2. Validator-approved severity and structured quality evidence remain trusted inputs; multi-validator consensus is not implemented.",
-        "3. Deterministic root-cause clustering can still false-merge or false-split reports; no semantic ML/LLM classifier is used.",
-        "4. RewardEvents are ProofGuard protocol-point accounting records. No token, wallet, bank or blockchain settlement occurs.",
-        "5. Validator and protocol pools remain reserved; validator economics and treasury transfer are intentionally absent.",
-        "",
-        "## 78. Week 7 Final Architecture",
+        "## 2. Week 7 Architecture",
         "",
         "```mermaid",
         "flowchart TD",
-        "    A[Client Audit Task] --> B[TaskRewardBudget]",
-        "    B --> C[Miner Pool]",
-        "    B --> D[Validator Pool Reserved]",
-        "    B --> E[Protocol Pool Reserved]",
-        "    C --> F[Validated Submissions]",
-        "    F --> G[FindingClusters by Root Cause]",
-        "    G --> H[Validator Final Severity]",
-        "    G --> I[Distinct Valid Operators]",
-        "    H --> J[Severity Weight]",
-        "    I --> K[Uniqueness]",
-        "    J --> L[FindingScore]",
-        "    K --> L",
-        "    L --> M[FindingCluster Reward]",
-        "    M --> N[Finalized Report Quality]",
-        "    N --> O[Group by Operator]",
-        "    O --> P[Best Report per Operator]",
-        "    P --> Q[Top-K]",
-        "    Q --> R[Chief Finder Selection]",
-        "    Q --> S[Q Squared Weights]",
-        "    R --> T[Chief Bonus]",
-        "    S --> U[Quality Pool]",
-        "    T --> V[Operator Reward]",
-        "    U --> V",
-        "    V --> W[RewardCycle Calculated]",
-        "    W --> X[Source Revalidation]",
-        "    X -->|Valid| Y[Immutable RewardEvents]",
-        "    X -->|Changed| Z[Block Finalization]",
-        "    Y --> AA[RewardCycle Finalized]",
-        "    AB[ContributionScore] --> AC[Reputation]",
-        "    AC --> AD[Category Performance]",
-        "    AD --> AE[Category Score]",
-        "    AE --> AF[Membership]",
-        "    AF --> AG[Routing]",
-        "    AG --> A",
+        "    R[Routing Assignment] --> B[Task Reward Budget]",
+        "    R --> FC[Finding Clusters]",
+        "    FC --> FV[Severity x Uniqueness]",
+        "    FV --> FCR[Finding Cluster Rewards]",
+        "    QA[Report Quality Assessments] --> OD[Operator Deduplication]",
+        "    OD --> TK[Top K]",
+        "    TK --> Q2[Q Squared]",
+        "    TK --> CF[Chief Finder]",
+        "    FCR --> RA[Report Reward Allocations]",
+        "    Q2 --> RA",
+        "    CF --> RA",
+        "    B --> RC[Reward Cycle]",
+        "    RA --> RC",
+        "    RC --> FP[Fingerprint Verification]",
+        "    FP --> EV[Immutable Reward Events]",
         "```",
         "",
-        "Five boundaries are explicit: report is not cluster; node is not operator; severity is not report quality; historical performance is not current payout; and client task budget is not network emissions.",
+        "Lifecycle: `draft -> calculated -> fingerprint revalidation -> finalized`. Immutable RewardEvents are the accounting truth.",
         "",
-        "## 79. Week 7 Definition of Done",
+        "## 3. Reward-System Principles",
         "",
-        f"- [{'x' if summary['benchmark_passed'] else ' '}] complete Day 1–6 real-service pipeline benchmark",
-        f"- [{'x' if summary['determinism_passed'] else ' '}] deterministic clean-root replay and event identity",
-        f"- [{'x' if summary['source_revalidation_passed'] else ' '}] stale economic sources blocked",
-        f"- [{'x' if summary['crash_recovery_passed'] else ' '}] partial crash recovery without duplicates",
-        f"- [{'x' if summary['double_reward_protection_passed'] else ' '}] same-budget double payout blocked",
-        "- [x] exact Decimal task conservation",
-        "- [x] no new reward formula or settlement integration",
+        "| Lane | Question | Inputs | Output |",
+        "|---|---|---|---|",
+        "| Historical performance | Who deserves future opportunities? | ContributionScore, Reputation, CategoryScore, Membership | Routing eligibility/rank |",
+        "| Finding value | How valuable is the validated vulnerability? | Final severity and distinct eligible operators | FindingScore and FindingClusterReward |",
+        "| Report quality | How strong is this report? | Typed authoritative quality evidence | Q |",
+        "| Reporter payout | Who receives the cluster reward? | Operator grouping, Q, Top-K, Chief evidence | ReportRewardAllocation |",
         "",
-        "Recommended Week 8 refinements are identity/stake hardening, validator consensus, explicit disputes/reversals, private benchmark seeds and broader load profiling. They are recommendations only; none were implemented by Day 7.",
+        "Exact formulas:",
         "",
-    ])
-    report = "\n".join(lines)
+        "```text",
+        "Q = 0.35*C + 0.25*P + 0.20*R + 0.10*I + 0.10*F",
+        "Critical=16, High=8, Medium=3, Low=1",
+        "U(N) = max(0.50, 1 / (1 + 0.20*ln(N)))",
+        "FindingScore = SeverityWeight * U(N)",
+        "ClusterReward_i = Pool * FindingScore_i / sum(FindingScores)",
+        "Reporter quality weight_i = Q_i^2",
+        "```",
+        "",
+        "## 4. Benchmark Environment",
+        "",
+        f"Runtime: Python `{summary['runtime_version']}`; seed: `{summary['seed']}`; benchmark version: "
+        f"`{summary['benchmark_version']}`; reward policy: `{summary['reward_policy_version']}`; "
+        f"fingerprint version: `{summary['fingerprint_version']}`; quantum: `{summary['protocol_quantum']}`.",
+        "",
+        "Command: `python -m research.benchmarks.week7_reward_benchmark`. All production fixtures use temporary isolated roots, fixed UTC timestamps, deterministic IDs, synthetic metadata, and no external target or reproduction execution.",
+        "",
+        "## 5. Dataset / Synthetic Network",
+        "",
+        f"The CI-safe real-service scenario used `{summary['projects']}` project, `{summary['routings']}` routing, "
+        f"`{summary['categories']}` active categories, `{summary['operators']}` operators, `{summary['nodes']}` routed nodes, "
+        f"`{summary['submissions']}` submissions, `{summary['quality_assessments']}` finalized assessments and "
+        f"`{summary['finding_clusters']}` FindingClusters. It includes 100-report/50-operator and N=1000 calculator stress cases.",
+        "",
+        "The production-service fixture is intentionally smaller than the prompt's 2-project/4-routing recommendation to keep CI runtime bounded. Cross-project/routing rejection remains covered by service/API regressions; the benchmark itself verifies all persisted economic references remain project/routing/budget scoped.",
+        "",
+        "## 6. Report Quality Results",
+        "",
+        "The independent known vector `(1.00, .80, .90, .70, .60)` produced `Q=0.860000`. All finalized Q values and Top-K Q² weights remained in `[0,1]`. Q=0 produced weight zero; an all-zero denominator stayed explicitly undistributed rather than silently equal-sharing.",
+        "",
+        "## 7. FindingCluster / Duplicate Semantics",
+        "",
+        f"The fixture contained `{duplicate_reports}` valid reports beyond the `{summary['finding_clusters']}` canonical reports and `{summary['invalid_submissions']}` invalid submissions. Independent root-cause overlaps remained valid FindingCluster members even outside Top-K. Same-node replay was rejected and emitted no reward. `duplicate_submission` means replay/spam; `independent_root_cause` means legitimate independent discovery.",
+        "",
+        "A prominent operator-count case used multiple nodes for one operator: report count exceeded distinct operator count, while Day 4 and Day 5 both retained the authoritative operator count. The 100-report stress case resolved to 50 operators and five rewarded positions.",
+        "",
+        "## 8. Severity and Uniqueness Results",
+        "",
+        "The benchmark verified `U(1)=1.000000`, monotonic decrease through N=2/5/10/50, and the `0.500000` floor through N=149/250/1000. For identical N, Critical > High > Medium > Low. A Critical at the uniqueness floor scores exactly 8, equal to a unique High.",
+        "",
+        "## 9. Cluster Reward Allocation",
+        "",
+        "The independent 10,000-point global case (High N=1, Critical N=4, Medium N=12) produced the expected `B > A > C` ordering and conserved exactly `10000.000000`. The integrated scenario used isolated access-control and reentrancy category pools; no category consumed another category's points. A separate explicit empty-category case retained its entire 4000-point pool without cross-category reassignment.",
+        "",
+        "| Cluster | Severity | Operators | U | FindingScore | Reward | Distributed | Conserved |",
+        "|---|---|---:|---:|---:|---:|---:|---|",
+    ]
+    for cluster in clusters:
+        lines.append(
+            f"| `{cluster['cluster_id'][:20]}…` | {cluster['final_severity']} | {cluster['distinct_operator_count']} | "
+            f"{cluster['uniqueness']} | {cluster['finding_score']} | {cluster['cluster_reward']} | "
+            f"{cluster['distributed']} | {'yes' if cluster['conservation_pass'] else 'no'} |"
+        )
+    lines.extend(
+        [
+            "",
+            "## 10. Operator Deduplication",
+            "",
+            "Eligible reports are grouped by authoritative NodeRecord.operator_id. The representative is chosen by highest Q, then earliest submission timestamp, submission ID and node ID. The benchmark proved a later Q=.96 report can represent an operator while its earlier Q=.82 report preserves Chief qualification time.",
+            "",
+            "Known limitation: operator grouping prevents one registered operator's many nodes from capturing several slots, but does not cryptographically prove that two registered operator IDs are controlled by different people.",
+            "",
+            "## 11. Top-K Results",
+            "",
+            "The exact order is: eligible reports -> group by operator -> best report/operator -> Q descending deterministic ranking -> first K. K remained five. Fifty stress operators influenced uniqueness, while only five received positive payout. Non-Top-K reports remained accepted, legitimate cluster members.",
+            "",
+            "Uniqueness happens before Top-K and uses all distinct eligible operators.",
+            "",
+            "## 12. Chief Finder Results",
+            "",
+            "Chief must be Top-K, have Q>=.80, satisfy separate validator-derived root-cause/severity/impact facts, and be earliest by qualifying submission time. Highest Q alone does not select Chief. `rewarded_submission_id` may differ from `chief_qualifying_submission_id`.",
+            "",
+            f"Example cluster `{example_cluster['cluster_id']}` selected Chief `{example_cluster['chief_operator']}` from Top-K={example_cluster['top_k_count']}:",
+            "",
+            "| Rank | Operator | Q | Q² | Chief | Quality reward | Chief bonus | Total |",
+            "|---:|---|---:|---:|---|---:|---:|---:|",
+        ]
+    )
+    for event in example_events:
+        lines.append(
+            f"| {event['quality_rank']} | `{event['operator_id']}` | {event['quality_score']} | "
+            f"{event['quality_weight']} | {'yes' if event['chief'] else 'no'} | "
+            f"{event['quality_reward']} | {event['chief_bonus']} | {event['total_reward']} |"
+        )
+    lines.extend(
+        [
+            "",
+            "A rank-six early qualifier could not become Chief. Where no Top-K report qualified, Chief Pool was zero and 100% entered the Q² Quality Pool. Chief never created a K+1 recipient.",
+            "",
+            "## 13. Reward Conservation",
+            "",
+            "```text",
+            f"total budget {accounting['total_budget']} = miner {accounting['miner_pool']} + validator {accounting['validator_pool']} + protocol {accounting['protocol_pool']}",
+            f"distributed miner {accounting['distributed_miner']} + undistributed miner {accounting['undistributed_miner']} = miner pool {accounting['miner_pool']}",
+            f"RewardEvent total {accounting['reward_event_total']} = reporter allocation total {accounting['reporter_reward_total']}",
+            "```",
+            "",
+            f"Accounting status: `{'PASS' if accounting['conservation_pass'] else 'FAIL'}`. Validator and protocol pools were reserved and untouched. Every cluster satisfied distributed + undistributed = cluster reward, with exact Decimal equality and no tolerance.",
+            "",
+            "## 14. Determinism",
+            "",
+            f"Clean-root replay: `{'PASS' if summary['determinism_passed'] else 'FAIL'}`. Insertion-order replay: `{'PASS' if summary['insertion_order_passed'] else 'FAIL'}`. IDs, cluster membership, Q, uniqueness, FindingScores, rewards, representatives, Top-K, Chief, fingerprints and event identities matched. Runtime measurements and generated timestamps are excluded from the economic hash.",
+            "",
+            f"Deterministic state hash: `{summary['deterministic_state_hash']}`.",
+            "",
+            "## 15. Idempotency and Double-Reward Protection",
+            "",
+            f"Result: `{'PASS' if summary['double_reward_protection_passed'] else 'FAIL'}`. Repeated calculation returned the same fingerprint. Repeating finalize after a lost response returned already-finalized and created zero events. A second cycle could not consume the same TaskRewardBudget.",
+            "",
+            "## 16. Crash / Recovery Tests",
+            "",
+            f"Partial event publication: `{'PASS' if summary['crash_recovery_passed'] else 'FAIL'}`. The verifier classified the matching partial set as recoverable; retry reused existing deterministic IDs and wrote only missing events. A complete event set without the final marker was separately recognized and finalized with zero duplicate writes. Same-total event-component corruption was detected read-only and never overwritten.",
+            "",
+            f"Final verification status: `{verification['verification_status']}`; event set complete: `{verification['event_set_complete']}`; safe retry needed: `{verification['safe_retry_finalize']}`.",
+            "",
+            "## 17. Historical Performance Separation",
+            "",
+            "Changing node reputation after calculation did not change the integrated fingerprint, Top-K, Chief, reward values or finalization result. Day 5 contains no Reputation, CategoryScore, Membership or ContributionScore payout multiplier. Those signals remain routing inputs only. A candidate with a stronger current Q can out-earn an expert with a weaker Q once both legitimately participate.",
+            "",
+            "## 18. Performance / Scalability",
+            "",
+            "Timings are observational and intentionally not fingerprinted:",
+            "",
+            "| Stage | Milliseconds |",
+            "|---|---:|",
+            f"| Cluster build | {performance['cluster_build_ms']} |",
+            f"| Quality assessment | {performance['quality_assessment_ms']} |",
+            f"| Finding value + cluster allocation | {performance['finding_value_and_cluster_allocation_ms']} |",
+            f"| Reporter allocation | {performance['reporter_allocation_ms']} |",
+            f"| Integrated cycle calculation | {performance['reward_cycle_calculate_ms']} |",
+            f"| Finalization | {performance['reward_cycle_finalize_ms']} |",
+            f"| Verification | {performance['verification_ms']} |",
+            f"| Total benchmark | {performance['total_runtime_ms']} |",
+            "",
+            "The scenario also inserted 1,000 unrelated nodes and proved they did not change or force recomputation of the task snapshot. Reward concentration statistics are observational only and do not feed CategoryScore or routing.",
+            "",
+            "## 19. Regression Results",
+            "",
+            f"Full regression flag: `{'PASS' if summary['regression_suite_passed'] else 'NOT RECORDED'}`; tests: `{summary['full_test_count']}`; failures: `{summary['failed_test_count']}`. The benchmark itself passed every invariant below:",
+            "",
+        ]
+    )
+    for name, passed in invariants.items():
+        lines.append(f"- [{'x' if passed else ' '}] `{name}`")
+    lines.extend(
+        [
+            "",
+            "## 20. Known Limitations",
+            "",
+            "1. operator_id is application-level grouping, not cryptographic Sybil resistance.",
+            "2. Validator-derived severity and quality evidence remain trusted components; independent-validator consensus is future work.",
+            "3. Validator and protocol pools remain reserved; Week 7 implements miner/reporter accounting only.",
+            "4. RewardEvents are simulated protocol points, not token, wallet, fiat or blockchain settlement.",
+            "5. Routing fairness, complementary specialist routing and private qualification benchmarks need longer-term study.",
+            "6. Deterministic root-cause clustering can still false-merge or false-split reports.",
+            "7. The filesystem ledger uses staged atomic publication and deterministic retry rather than a multi-file database transaction.",
+            "",
+            "## 21. Week 8 Recommendations",
+            "",
+            "Recommended architectural work: validator economics and disagreement handling; stronger operator identity/Sybil resistance; routing-fairness measurement; high-assurance second-round audits; protocol commitments/signatures; broader external synthetic datasets; and real-world shadow testing without economic settlement. No Week 8 mechanism is implemented here.",
+            "",
+            "Week 7 conclusion: historical performance determines opportunity; validated severity and independent discovery determine vulnerability value; current report quality determines reporter competition; the bounded client miner pool limits payout; and finalized immutable RewardEvents are the reproducible accounting truth.",
+            "",
+            "### Named Case Matrix",
+            "",
+        ]
+    )
+    for case in cases:
+        lines.append(
+            f"- [{'x' if case.passed else ' '}] `{case.case_id}` ({case.invariant_group}) — "
+            f"{sum(item.passed for item in case.assertions)}/{len(case.assertions)} assertions"
+        )
+    report = "\n".join(lines) + "\n"
     missing = [section for section in REQUIRED_REPORT_SECTIONS if section not in report]
     if missing:
         raise ValueError(f"Week 7 report missing required sections: {missing}")

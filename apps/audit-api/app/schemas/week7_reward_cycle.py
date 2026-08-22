@@ -9,7 +9,9 @@ from typing import Any, Literal
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
 from app.schemas.finding import FindingCategory, FindingSeverity
+from app.schemas.finding_cluster import FINDING_CLUSTER_POLICY_VERSION
 from app.schemas.node import normalize_category
+from app.schemas.report_quality import ReportQualityConfig
 from app.schemas.reward import (
     RewardCycleStatus,
     RewardDomain,
@@ -17,14 +19,19 @@ from app.schemas.reward import (
     RewardUnit,
 )
 from app.schemas.subnet_reward import MAX_PROTOCOL_POINTS, PROTOCOL_POINTS_QUANTUM
-from app.schemas.task_finding_reward import FindingAllocationScope
-from app.schemas.task_operator_reward import QUALITY_WEIGHT_QUANTUM
+from app.schemas.task_finding_reward import FindingAllocationScope, TaskFindingRewardConfig
+from app.schemas.task_operator_reward import (
+    QUALITY_WEIGHT_QUANTUM,
+    TaskOperatorRewardConfig,
+)
+from app.schemas.task_reward import TASK_REWARD_POLICY_VERSION, TaskRewardPoolConfig
 
 
 WEEK7_REWARD_CYCLE_VERSION = "week7_task_reward_cycle_v1"
 WEEK7_REWARD_POLICY_VERSION = "scalable_multi_agent_reward_v1"
 WEEK7_REWARD_CONFIGURATION_VERSION = "week7_reward_cycle_config_v1"
 WEEK7_REWARD_EVENT_VERSION = "week7_task_reward_event_v1"
+WEEK7_REWARD_FINGERPRINT_VERSION = "reward_cycle_fingerprint_v1"
 SAFE_IDENTIFIER = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_-]{0,255}$")
 SHA256_HEX = re.compile(r"^[0-9a-f]{64}$")
 CYCLE_ID = re.compile(r"^week7_task_reward_cycle_[0-9a-f]{32}$")
@@ -45,6 +52,19 @@ class Week7RewardHistorySubject(str, Enum):
     NODE = "node"
     SUBMISSION = "submission"
     FINDING_CLUSTER = "finding_cluster"
+
+
+class Week7RewardVerificationStatus(str, Enum):
+    DRAFT = "draft"
+    CALCULATED_NOT_FINALIZED = "calculated_not_finalized"
+    STALE_CALCULATION = "stale_calculation"
+    PARTIAL_EVENT_PUBLICATION = "partial_event_publication"
+    EVENT_SET_COMPLETE_STATUS_NOT_FINALIZED = (
+        "event_set_complete_status_not_finalized"
+    )
+    CLEAN_FINALIZED = "clean_finalized"
+    FINALIZED_EVENT_MISMATCH = "finalized_event_mismatch"
+    CORRUPT_REFERENCES = "corrupt_references"
 
 
 def _identifier(value: str, label: str) -> str:
@@ -154,6 +174,43 @@ class Week7TaskRewardCycleActionRequest(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
 
+class Week7RewardPolicySnapshot(BaseModel):
+    """Immutable policy bundle committed by every new client-task cycle."""
+
+    model_config = ConfigDict(extra="forbid", frozen=True)
+
+    fingerprint_version: Literal["reward_cycle_fingerprint_v1"] = (
+        WEEK7_REWARD_FINGERPRINT_VERSION
+    )
+    week7_cycle_policy_version: str
+    week7_cycle_configuration_version: str
+    task_budget_policy_version: str = TASK_REWARD_POLICY_VERSION
+    task_budget_configuration_version: str
+    task_reward_pool: TaskRewardPoolConfig
+    finding_cluster_policy_version: str = FINDING_CLUSTER_POLICY_VERSION
+    report_quality_policy_version: str
+    report_quality_configuration_version: str
+    report_quality: ReportQualityConfig
+    task_finding_policy_version: str
+    task_finding_configuration_version: str
+    task_finding_reward: TaskFindingRewardConfig
+    task_operator_policy_version: str
+    task_operator_configuration_version: str
+    task_operator_reward: TaskOperatorRewardConfig
+    protocol_quantum: Decimal = PROTOCOL_POINTS_QUANTUM
+    rounding_policy: Literal["largest_remainder_round_down_v1"] = (
+        "largest_remainder_round_down_v1"
+    )
+
+    @field_validator("protocol_quantum", mode="before")
+    @classmethod
+    def validate_quantum(cls, value: Any) -> Decimal:
+        quantum = _decimal(value, "protocol_quantum")
+        if quantum != PROTOCOL_POINTS_QUANTUM:
+            raise ValueError("Week 7 policy snapshot requires protocol quantum 0.000001")
+        return quantum
+
+
 class Week7TaskRewardCycle(BaseModel):
     model_config = ConfigDict(extra="forbid", frozen=True)
 
@@ -161,6 +218,7 @@ class Week7TaskRewardCycle(BaseModel):
     cycle_version: Literal["week7_task_reward_cycle_v1"] = WEEK7_REWARD_CYCLE_VERSION
     policy_version: str = Field(..., min_length=1, max_length=128)
     configuration_version: str = Field(..., min_length=1, max_length=128)
+    policy_snapshot: Week7RewardPolicySnapshot | None = None
     reward_domain: Literal[RewardDomain.CLIENT_TASK] = RewardDomain.CLIENT_TASK
     reward_unit: Literal[RewardUnit.PROTOCOL_POINTS] = RewardUnit.PROTOCOL_POINTS
     project_id: str
@@ -509,3 +567,50 @@ class Week7TaskRewardHistorySummary(BaseModel):
         if self.chief_finder_count != sum(event.chief_finder for event in self.events):
             raise ValueError("Chief Finder count does not match events")
         return self
+
+
+class Week7TaskRewardCycleVerification(BaseModel):
+    """Read-only deterministic diagnosis of one cycle and its event ledger."""
+
+    model_config = ConfigDict(extra="forbid", frozen=True)
+
+    reward_cycle_id: str
+    project_id: str
+    routing_id: str
+    lifecycle_status: RewardCycleStatus
+    verification_status: Week7RewardVerificationStatus
+    ok: bool
+    source_fingerprint_match: bool | None
+    calculation_fingerprint_match: bool | None
+    budget_conserved: bool
+    cluster_rewards_conserved: bool
+    reporter_rewards_conserved: bool
+    event_set_complete: bool
+    duplicate_events_found: bool
+    immutable_source_consistent: bool
+    safe_retry_finalize: bool
+    expected_event_count: int = Field(..., ge=0)
+    stored_event_count: int = Field(..., ge=0)
+    expected_event_total: Decimal
+    stored_event_total: Decimal
+    errors: list[str]
+
+    @field_validator("reward_cycle_id", "project_id", "routing_id")
+    @classmethod
+    def validate_verification_ids(cls, value: str, info) -> str:
+        return _identifier(value, info.field_name)
+
+    @field_validator("expected_event_total", "stored_event_total", mode="before")
+    @classmethod
+    def validate_verification_points(cls, value: Any, info) -> Decimal:
+        return _points(value, info.field_name)
+
+    @field_validator("errors")
+    @classmethod
+    def validate_errors(cls, value: list[str]) -> list[str]:
+        cleaned = [item.strip() for item in value]
+        if any(not item for item in cleaned):
+            raise ValueError("Verification errors must be non-empty")
+        if cleaned != list(dict.fromkeys(cleaned)):
+            raise ValueError("Verification errors must be unique and ordered")
+        return cleaned

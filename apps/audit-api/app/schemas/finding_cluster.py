@@ -29,6 +29,11 @@ class FindingClusterMemberRelation(str, Enum):
     INDEPENDENT_DUPLICATE = "independent_duplicate"
 
 
+class FindingClusterValidationAuthority(str, Enum):
+    LEGACY_BACKEND = "legacy_backend"
+    VALIDATOR_CONSENSUS = "validator_consensus"
+
+
 class FindingClusterMember(BaseModel):
     model_config = ConfigDict(extra="forbid", frozen=True)
 
@@ -92,6 +97,12 @@ class FindingCluster(BaseModel):
     canonical_submission_id: str = Field(..., min_length=1, max_length=256)
     final_validation_status: Literal[ValidationStatus.ACCEPTED] = ValidationStatus.ACCEPTED
     final_severity: FindingSeverity
+    validation_authority: FindingClusterValidationAuthority = (
+        FindingClusterValidationAuthority.LEGACY_BACKEND
+    )
+    final_validation_consensus_id: str | None = None
+    validator_consensus_outcome: str | None = None
+    validator_consensus_severity: FindingSeverity | None = None
     root_cause_key: str = Field(..., min_length=1, max_length=1024)
     root_cause_fingerprint: str
     members: list[FindingClusterMember] = Field(..., min_length=1)
@@ -127,6 +138,15 @@ class FindingCluster(BaseModel):
         ):
             raise ValueError("Invalid finding cluster identifier field")
         return cleaned
+
+    @field_validator("final_validation_consensus_id")
+    @classmethod
+    def validate_consensus_identifier(cls, value: str | None) -> str | None:
+        if value is None:
+            return None
+        if not SAFE_IDENTIFIER.fullmatch(value) or value in {".", ".."}:
+            raise ValueError("Invalid final validation consensus identifier")
+        return value
 
     @field_validator("category", mode="before")
     @classmethod
@@ -186,6 +206,18 @@ class FindingCluster(BaseModel):
                 raise ValueError("Finalized clusters require finalized_at")
         elif self.finalized_at is not None:
             raise ValueError("Open clusters cannot have finalized_at")
+        if self.validation_authority == FindingClusterValidationAuthority.VALIDATOR_CONSENSUS:
+            if self.final_validation_consensus_id is None or self.validator_consensus_outcome is None:
+                raise ValueError("Validator consensus authority requires its immutable reference")
+        elif any(
+            value is not None
+            for value in (
+                self.final_validation_consensus_id,
+                self.validator_consensus_outcome,
+                self.validator_consensus_severity,
+            )
+        ):
+            raise ValueError("Legacy validation cannot claim validator consensus fields")
         return self
 
 

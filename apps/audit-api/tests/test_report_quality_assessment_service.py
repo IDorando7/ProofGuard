@@ -9,6 +9,8 @@ from app.schemas.report_quality import (
     ReportQualityConfig,
 )
 from app.schemas.reproduction import ReproductionStatus
+from app.schemas.subnet import SubnetMemberStatus
+from app.schemas.task_reward import TaskRewardBudgetCreateRequest
 from app.schemas.validation import ValidationStatus
 from app.services.finding_cluster_service import rebuild_finding_clusters_for_task
 from app.services.finding_service import load_project_finding
@@ -31,6 +33,8 @@ from app.services.reproduction_service import (
     load_reproduction_result,
     save_reproduction_result,
 )
+from app.services.subnet_registry_service import load_subnet_member, save_subnet_member
+from app.services.task_reward_budget_service import create_task_reward_budget
 from app.services.validation_service import (
     load_validation_decision,
     save_validation_decision,
@@ -274,6 +278,54 @@ def test_reproduction_source_change_changes_fingerprint(tmp_path):
     assert changed.reproduction_source_fingerprint != first.reproduction_source_fingerprint
     assert changed.source_fingerprint != first.source_fingerprint
     assert changed.components.poc_quality.score == Decimal("0.750000")
+
+
+def test_historical_selection_state_and_task_budget_do_not_change_q(tmp_path):
+    root, workspace, routing, submissions, result = _sources(tmp_path)
+    cluster = result.clusters[0]
+    submission = submissions[0][0]
+    original, _ = _assess(root, workspace, routing, cluster, submission, FULL_INPUT)
+
+    node = load_node(root, submission.node_id)
+    statistics = node.statistics.model_copy(
+        update={
+            "total_submissions": node.statistics.total_submissions + 100,
+            "accepted_submissions": node.statistics.accepted_submissions + 100,
+        }
+    )
+    save_node(
+        root,
+        node.model_copy(update={"reputation_score": 0.99, "statistics": statistics}),
+    )
+    member = load_subnet_member(root, "subnet_access_control", submission.node_id)
+    save_subnet_member(
+        root,
+        member.model_copy(
+            update={
+                "status": SubnetMemberStatus.EXPERT,
+                "category_score": 0.99,
+                "rank": 99,
+                "finalized_submissions": member.finalized_submissions + 100,
+                "accepted_unique_submissions": member.accepted_unique_submissions + 100,
+            }
+        ),
+    )
+    create_task_reward_budget(
+        root,
+        workspace,
+        "project-1",
+        TaskRewardBudgetCreateRequest(
+            routing_id=routing.routing_id,
+            total_budget_points="1000000.000000",
+        ),
+    )
+
+    repeated, operation = _assess(
+        root, workspace, routing, cluster, submission, FULL_INPUT
+    )
+    assert operation == "unchanged"
+    assert repeated.quality_score == original.quality_score == Decimal("0.860000")
+    assert repeated.source_fingerprint == original.source_fingerprint
 
 
 def test_ineligible_or_mismatched_sources_cannot_finalize(tmp_path):

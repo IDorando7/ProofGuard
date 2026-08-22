@@ -11,9 +11,11 @@ from pydantic import ValidationError
 
 from app.core.config import get_settings
 from app.schemas.reward import RewardCycleStatus, RewardDomain
+from app.schemas.finding_cluster import FindingClusterStatus
 from app.schemas.routing import RoutingStatus
 from app.schemas.task_finding_reward import (
     FindingAllocationScope,
+    TaskFindingRewardConfig,
     TaskFindingRewardCalculation,
     TaskFindingRewardCalculationRequest,
 )
@@ -28,7 +30,9 @@ from app.schemas.week7_reward_cycle import (
     WEEK7_REWARD_EVENT_VERSION,
     WEEK7_REWARD_POLICY_VERSION,
     Week7RewardHistorySubject,
+    Week7RewardPolicySnapshot,
     Week7RewardProcessingStatus,
+    Week7RewardVerificationStatus,
     Week7TaskRewardCycle,
     Week7TaskRewardCycleCreateRequest,
     Week7TaskRewardCycleListResponse,
@@ -36,10 +40,28 @@ from app.schemas.week7_reward_cycle import (
     Week7TaskRewardEvent,
     Week7TaskRewardEventListResponse,
     Week7TaskRewardHistorySummary,
+    Week7TaskRewardCycleVerification,
 )
+from app.services.finding_cluster_service import (
+    list_task_finding_clusters,
+    load_finding_cluster,
+)
+from app.services.node_registry_service import load_node
 from app.services.subnet_router_service import load_routing_record
-from app.services.task_finding_reward_service import calculate_task_finding_rewards
-from app.services.task_operator_reward_service import calculate_task_operator_rewards
+from app.services.task_finding_reward_service import (
+    TaskFindingRewardStateError,
+    _source_payload as build_task_finding_source_payload,
+    calculate_task_finding_rewards,
+    load_task_finding_calculation,
+)
+from app.services.task_finding_reward_calculator import value_finding_cluster
+from app.services.task_operator_reward_calculator import calculate_cluster_operator_payout
+from app.services.task_operator_reward_service import (
+    _operator_summaries,
+    _resolve_member_report,
+    calculate_task_operator_rewards,
+    load_task_operator_calculation,
+)
 from app.services.task_reward_budget_service import load_task_reward_budget
 from app.utils.protocol_serialization import (
     atomic_create_json,
@@ -179,6 +201,7 @@ def create_week7_task_reward_cycle(
         "task_reward_budget_source_fingerprint": budget.source_fingerprint,
         "allocation_scope": scope,
         "category_weights": weights,
+        "policy_snapshot": _policy_snapshot(),
         "protocol_quantum": Decimal("0.000001"),
     }
     request_fingerprint = protocol_fingerprint(request_payload)
@@ -198,6 +221,7 @@ def create_week7_task_reward_cycle(
         reward_cycle_id=reward_cycle_id,
         policy_version=policy,
         configuration_version=config_version,
+        policy_snapshot=_policy_snapshot(),
         project_id=project_id,
         routing_id=routing_id,
         routing_source_fingerprint=routing.source_fingerprint,
@@ -293,6 +317,54 @@ def finalize_week7_task_reward_cycle(
         events = list_week7_reward_events(
             protocol_data_root, reward_cycle_id=cycle.reward_cycle_id
         )
+        expected_events = None
+        if cycle.operator_calculation_id and cycle.finding_calculation_id:
+            try:
+                day4 = load_task_finding_calculation(
+                    protocol_data_root,
+                    cycle.project_id,
+                    cycle.routing_id,
+                    cycle.finding_calculation_id,
+                )
+                day5 = load_task_operator_calculation(
+                    protocol_data_root,
+                    cycle.project_id,
+                    cycle.routing_id,
+                    cycle.operator_calculation_id,
+                )
+                if day4 is not None and day5 is not None:
+                    expected_events = _build_expected_events(
+                        cycle,
+                        day4,
+                        day5,
+                        cycle.finalization_source_fingerprint,
+                    )
+            except (ValueError, OSError):
+                # Legacy/synthetic persisted cycles may not retain nested artifacts;
+                # their immutable IDs and conserved total remain the retry guard.
+                expected_events = None
+        if (
+            sorted(event.reward_event_id for event in events)
+            != cycle.reward_event_ids
+            or sum(
+                (event.total_reward_points for event in events), Decimal("0")
+            )
+            != cycle.distributed_miner_points
+            or (
+                expected_events is not None
+                and {
+                    event.reward_event_id: _event_identity(event)
+                    for event in events
+                }
+                != {
+                    event.reward_event_id: _event_identity(event)
+                    for event in expected_events
+                }
+            )
+        ):
+            raise Week7RewardCycleConservationError(
+                "Finalized Week 7 event ledger does not match the cycle"
+            )
         return Week7TaskRewardCycleResponse(
             processing_status=Week7RewardProcessingStatus.ALREADY_FINALIZED,
             cycle=cycle,
@@ -312,9 +384,14 @@ def finalize_week7_task_reward_cycle(
             "TaskRewardBudget was already consumed by another finalized Week 7 cycle"
         )
 
-    day4, day5, current_fingerprint = _calculate_current_snapshot(
-        protocol_data_root, cycle
-    )
+    try:
+        day4, day5, current_fingerprint = _calculate_current_snapshot(
+            protocol_data_root, cycle
+        )
+    except TaskFindingRewardStateError as exc:
+        raise Week7RewardCycleSourceChangedError(
+            "Authoritative Day 4 source state changed after cycle calculation"
+        ) from exc
     _validate_pipeline_conservation(cycle, day4, day5)
     if (
         current_fingerprint != cycle.calculation_fingerprint
@@ -702,9 +779,433 @@ def get_week7_reward_history(
     )
 
 
+def verify_week7_task_reward_cycle(
+    protocol_data_root: Path,
+    project_id: str,
+    reward_cycle_id: str,
+) -> Week7TaskRewardCycleVerification:
+    """Audit a cycle and its ledger without recalculating or writing protocol state."""
+    cycle = _load_required_cycle(protocol_data_root, project_id, reward_cycle_id)
+    errors: list[str] = []
+
+    def record(message: str) -> None:
+        if message not in errors:
+            errors.append(message)
+
+    budget_conserved = (
+        cycle.miner_pool_points
+        + cycle.validator_pool_points
+        + cycle.protocol_pool_points
+        == cycle.total_budget_points
+        and cycle.distributed_miner_points + cycle.undistributed_miner_points
+        == cycle.miner_pool_points
+    )
+    if not budget_conserved:
+        record("Cycle budget or miner-pool totals do not conserve protocol points.")
+
+    source_match: bool | None = None
+    calculation_match: bool | None = None
+    cluster_conserved = cycle.status == RewardCycleStatus.DRAFT
+    reporter_conserved = cycle.status == RewardCycleStatus.DRAFT
+    immutable_sources = True
+    day4: TaskFindingRewardCalculation | None = None
+    day5: TaskOperatorRewardCalculation | None = None
+    routing = None
+    budget = None
+
+    try:
+        routing, budget = _load_authoritative_sources(protocol_data_root, cycle)
+    except Week7RewardCycleError as exc:
+        immutable_sources = False
+        source_match = False
+        record(str(exc))
+
+    if cycle.status != RewardCycleStatus.DRAFT:
+        try:
+            day4 = load_task_finding_calculation(
+                protocol_data_root,
+                cycle.project_id,
+                cycle.routing_id,
+                cycle.finding_calculation_id,
+            )
+            day5 = load_task_operator_calculation(
+                protocol_data_root,
+                cycle.project_id,
+                cycle.routing_id,
+                cycle.operator_calculation_id,
+            )
+        except (ValueError, OSError) as exc:
+            immutable_sources = False
+            record(f"Referenced calculation could not be loaded: {exc}")
+        if day4 is None or day5 is None:
+            immutable_sources = False
+            record("Referenced Day 4 or Day 5 calculation is missing.")
+        else:
+            if (
+                day4.source_fingerprint
+                != cycle.finding_calculation_source_fingerprint
+                or day5.source_fingerprint
+                != cycle.operator_calculation_source_fingerprint
+            ):
+                immutable_sources = False
+                record("Cycle calculation references do not match stored artifact fingerprints.")
+            try:
+                _validate_pipeline_conservation(cycle, day4, day5)
+                cluster_conserved = (
+                    day4.distributed_cluster_points
+                    + day4.undistributed_cluster_points
+                    == cycle.miner_pool_points
+                )
+                reporter_conserved = (
+                    day5.distributed_operator_points
+                    + day5.undistributed_cluster_points
+                    == day4.distributed_cluster_points
+                    and day5.distributed_operator_points
+                    == cycle.distributed_miner_points
+                )
+            except Week7RewardCycleConservationError as exc:
+                cluster_conserved = False
+                reporter_conserved = False
+                record(str(exc))
+            if routing is not None and budget is not None:
+                computed = protocol_fingerprint(
+                    _calculation_payload(cycle, routing, budget, day4, day5)
+                )
+                calculation_match = computed == cycle.calculation_fingerprint
+                if not calculation_match:
+                    record("Stored calculation fingerprint does not match referenced artifacts.")
+                try:
+                    source_match = _verify_current_cycle_sources(
+                        protocol_data_root,
+                        cycle,
+                        routing,
+                        budget,
+                        day4,
+                        day5,
+                        record,
+                    )
+                except (ValueError, OSError) as exc:
+                    source_match = False
+                    immutable_sources = False
+                    record(f"Current economic source verification failed: {exc}")
+
+    expected_events: list[Week7TaskRewardEvent] = []
+    expected_total = Decimal("0.000000")
+    if day4 is not None and day5 is not None and cycle.calculation_fingerprint:
+        expected_finalization = _finalization_fingerprint(
+            cycle, day4, day5, cycle.calculation_fingerprint
+        )
+        if (
+            cycle.status == RewardCycleStatus.FINALIZED
+            and cycle.finalization_source_fingerprint != expected_finalization
+        ):
+            record("Finalization fingerprint does not match the calculated snapshot.")
+        expected_events = _build_expected_events(
+            cycle, day4, day5, expected_finalization
+        )
+        expected_total = sum(
+            (event.total_reward_points for event in expected_events), Decimal("0")
+        )
+
+    stored_events: list[Week7TaskRewardEvent] = []
+    ledger_readable = True
+    try:
+        stored_events = list_week7_reward_events(
+            protocol_data_root, reward_cycle_id=cycle.reward_cycle_id
+        )
+    except Week7RewardCycleError as exc:
+        ledger_readable = False
+        record(f"RewardEvent ledger could not be read: {exc}")
+    stored_total = sum(
+        (event.total_reward_points for event in stored_events), Decimal("0")
+    )
+    economic_keys = [
+        (event.finding_cluster_id, event.operator_id) for event in stored_events
+    ]
+    duplicates = len(economic_keys) != len(set(economic_keys))
+    if duplicates:
+        record("Duplicate cluster/operator RewardEvents were found.")
+
+    expected_by_id = {event.reward_event_id: event for event in expected_events}
+    stored_by_id = {event.reward_event_id: event for event in stored_events}
+    identities_match = ledger_readable
+    for event_id in sorted(set(expected_by_id).intersection(stored_by_id)):
+        if _event_identity(expected_by_id[event_id]) != _event_identity(
+            stored_by_id[event_id]
+        ):
+            identities_match = False
+            record(f"RewardEvent {event_id} conflicts with the calculated allocation.")
+    extra_ids = sorted(set(stored_by_id) - set(expected_by_id))
+    if extra_ids:
+        identities_match = False
+        record("Unexpected RewardEvents exist for this cycle.")
+    event_set_complete = (
+        ledger_readable
+        and identities_match
+        and not duplicates
+        and set(stored_by_id) == set(expected_by_id)
+        and stored_total == expected_total
+    )
+
+    if cycle.status == RewardCycleStatus.FINALIZED:
+        if sorted(stored_by_id) != cycle.reward_event_ids:
+            event_set_complete = False
+            record("Finalized cycle RewardEvent references do not match the ledger.")
+        if stored_total != cycle.distributed_miner_points:
+            event_set_complete = False
+            record("Finalized RewardEvent total does not match distributed miner points.")
+
+    partial_matching = (
+        cycle.status == RewardCycleStatus.CALCULATED
+        and bool(stored_events)
+        and identities_match
+        and not duplicates
+        and set(stored_by_id).issubset(expected_by_id)
+    )
+    if not ledger_readable or (
+        (day4 is None or day5 is None)
+        and cycle.status != RewardCycleStatus.DRAFT
+    ):
+        verification_status = Week7RewardVerificationStatus.CORRUPT_REFERENCES
+    elif cycle.status == RewardCycleStatus.DRAFT:
+        verification_status = Week7RewardVerificationStatus.DRAFT
+        if stored_events:
+            verification_status = Week7RewardVerificationStatus.CORRUPT_REFERENCES
+            record("Draft cycle unexpectedly has RewardEvents.")
+    elif cycle.status == RewardCycleStatus.CALCULATED:
+        if source_match is False or calculation_match is False:
+            verification_status = Week7RewardVerificationStatus.STALE_CALCULATION
+        elif event_set_complete and expected_events:
+            verification_status = (
+                Week7RewardVerificationStatus.EVENT_SET_COMPLETE_STATUS_NOT_FINALIZED
+            )
+            record("Complete RewardEvent set exists but cycle status is not finalized.")
+        elif partial_matching:
+            verification_status = Week7RewardVerificationStatus.PARTIAL_EVENT_PUBLICATION
+            record("A matching partial RewardEvent set is awaiting finalization retry.")
+        elif not stored_events:
+            verification_status = Week7RewardVerificationStatus.CALCULATED_NOT_FINALIZED
+        else:
+            verification_status = Week7RewardVerificationStatus.CORRUPT_REFERENCES
+    else:
+        verification_status = (
+            Week7RewardVerificationStatus.CLEAN_FINALIZED
+            if event_set_complete
+            and source_match is not False
+            and calculation_match is not False
+            and immutable_sources
+            and budget_conserved
+            and cluster_conserved
+            and reporter_conserved
+            else Week7RewardVerificationStatus.FINALIZED_EVENT_MISMATCH
+        )
+
+    ok = verification_status in {
+        Week7RewardVerificationStatus.DRAFT,
+        Week7RewardVerificationStatus.CALCULATED_NOT_FINALIZED,
+        Week7RewardVerificationStatus.CLEAN_FINALIZED,
+    }
+    safe_retry = (
+        cycle.status == RewardCycleStatus.CALCULATED
+        and source_match is not False
+        and calculation_match is not False
+        and immutable_sources
+        and budget_conserved
+        and cluster_conserved
+        and reporter_conserved
+        and identities_match
+        and not duplicates
+        and set(stored_by_id).issubset(expected_by_id)
+    )
+    return Week7TaskRewardCycleVerification(
+        reward_cycle_id=cycle.reward_cycle_id,
+        project_id=cycle.project_id,
+        routing_id=cycle.routing_id,
+        lifecycle_status=cycle.status,
+        verification_status=verification_status,
+        ok=ok,
+        source_fingerprint_match=source_match,
+        calculation_fingerprint_match=calculation_match,
+        budget_conserved=budget_conserved,
+        cluster_rewards_conserved=cluster_conserved,
+        reporter_rewards_conserved=reporter_conserved,
+        event_set_complete=event_set_complete,
+        duplicate_events_found=duplicates,
+        immutable_source_consistent=immutable_sources,
+        safe_retry_finalize=safe_retry,
+        expected_event_count=len(expected_events),
+        stored_event_count=len(stored_events),
+        expected_event_total=expected_total,
+        stored_event_total=stored_total,
+        errors=errors,
+    )
+
+
+def _verify_current_cycle_sources(
+    protocol_data_root: Path,
+    cycle: Week7TaskRewardCycle,
+    routing,
+    budget,
+    day4: TaskFindingRewardCalculation,
+    day5: TaskOperatorRewardCalculation,
+    record,
+) -> bool:
+    """Rebuild payout-relevant source relations in memory; never persist."""
+    matches = True
+    snapshot = cycle.policy_snapshot or _policy_snapshot()
+    if (
+        cycle.status != RewardCycleStatus.FINALIZED
+        and cycle.policy_snapshot is not None
+        and snapshot != _policy_snapshot()
+    ):
+        record("Current economic policy bundle differs from the cycle snapshot.")
+        matches = False
+
+    clusters = list_task_finding_clusters(
+        protocol_data_root, cycle.project_id, cycle.routing_id
+    )
+    cluster_by_id = {cluster.finding_cluster_id: cluster for cluster in clusters}
+    allocation_by_id = {
+        allocation.finding_cluster_id: allocation
+        for allocation in day4.cluster_allocations
+    }
+    if set(cluster_by_id) != set(allocation_by_id):
+        record("Current FindingCluster set differs from the Day 4 snapshot.")
+        matches = False
+    for cluster_id in sorted(set(cluster_by_id).intersection(allocation_by_id)):
+        cluster = cluster_by_id[cluster_id]
+        allocation = allocation_by_id[cluster_id]
+        if (
+            cluster.status != FindingClusterStatus.FINALIZED
+            or cluster.source_fingerprint != allocation.cluster_source_fingerprint
+            or cluster.category != allocation.category
+            or cluster.final_severity != allocation.final_severity
+        ):
+            record(f"FindingCluster {cluster_id} changed after calculation.")
+            matches = False
+        operator_ids = set()
+        for member in cluster.members:
+            node = load_node(protocol_data_root, member.node_id)
+            if node is None or node.operator_id != member.operator_id:
+                record(f"FindingCluster {cluster_id} has stale operator attribution.")
+                matches = False
+                continue
+            operator_ids.add(node.operator_id)
+        if len(operator_ids) != allocation.distinct_operator_count:
+            record(f"FindingCluster {cluster_id} operator count changed.")
+            matches = False
+        current_value = value_finding_cluster(
+            cluster, snapshot.task_finding_reward
+        )
+        if (
+            current_value.severity_weight != allocation.severity_weight
+            or current_value.uniqueness != allocation.uniqueness
+            or current_value.finding_score != allocation.finding_score
+        ):
+            record(f"FindingCluster {cluster_id} value no longer matches Day 4.")
+            matches = False
+
+    finding_config = TaskFindingRewardConfig(
+        severity_weights=day4.severity_weights,
+        uniqueness=day4.uniqueness_config,
+        default_allocation_scope=day4.allocation_scope,
+    )
+    day4_payload = build_task_finding_source_payload(
+        policy_version=day4.policy_version,
+        configuration_version=day4.configuration_version,
+        budget=budget,
+        allocation_scope=day4.allocation_scope,
+        config=finding_config,
+        category_weights=day4.category_weights,
+        category_pools=day4.category_pool_allocations,
+        allocations=day4.cluster_allocations,
+    )
+    if protocol_fingerprint(day4_payload) != day4.source_fingerprint:
+        record("Day 4 source fingerprint does not match its stored allocation snapshot.")
+        matches = False
+
+    assignments = {
+        assignment.assignment_id: assignment
+        for result in routing.results
+        for assignment in result.assignments
+    }
+    current_payouts = []
+    stored_payout_by_id = {
+        payout.finding_cluster_id: payout for payout in day5.cluster_payouts
+    }
+    for allocation in day4.cluster_allocations:
+        cluster = cluster_by_id.get(allocation.finding_cluster_id)
+        if cluster is None:
+            continue
+        reports = []
+        exclusions = []
+        for member in cluster.members:
+            report, exclusion = _resolve_member_report(
+                protocol_data_root,
+                cycle.project_id,
+                cycle.routing_id,
+                cluster,
+                member,
+                assignments,
+                snapshot.report_quality_policy_version,
+            )
+            if report is not None:
+                reports.append(report)
+            elif exclusion is not None:
+                exclusions.append(exclusion)
+        payout = calculate_cluster_operator_payout(
+            allocation,
+            reports,
+            exclusions,
+            snapshot.task_operator_reward,
+            policy_version=snapshot.task_operator_policy_version,
+        )
+        current_payouts.append(payout)
+        if stored_payout_by_id.get(allocation.finding_cluster_id) != payout:
+            record(
+                f"Reporter allocation for {allocation.finding_cluster_id} changed after calculation."
+            )
+            matches = False
+    current_payouts.sort(key=lambda item: item.finding_cluster_id)
+    summaries = _operator_summaries(current_payouts)
+    source_total = sum(
+        (item.cluster_reward_points for item in current_payouts), Decimal("0")
+    )
+    distributed = sum(
+        (item.distributed_points for item in current_payouts), Decimal("0")
+    )
+    day5_payload = {
+        "calculation_version": day5.calculation_version,
+        "policy_version": day5.policy_version,
+        "configuration_version": day5.configuration_version,
+        "project_id": cycle.project_id,
+        "routing_id": cycle.routing_id,
+        "routing_source_fingerprint": routing.source_fingerprint,
+        "task_reward_budget_id": day4.task_reward_budget_id,
+        "day4_calculation_id": day4.calculation_id,
+        "day4_source_fingerprint": day4.source_fingerprint,
+        "protocol_quantum": Decimal("0.000001"),
+        "operator_reward_config": snapshot.task_operator_reward,
+        "cluster_payouts": current_payouts,
+        "operator_summaries": summaries,
+        "source_cluster_reward_points": source_total,
+        "distributed_operator_points": distributed,
+        "undistributed_cluster_points": source_total - distributed,
+    }
+    if protocol_fingerprint(day5_payload) != day5.source_fingerprint:
+        record("Day 5 source fingerprint does not match current reporter inputs.")
+        matches = False
+    return matches
+
+
 def _calculate_current_snapshot(
     protocol_data_root: Path, cycle: Week7TaskRewardCycle
 ) -> tuple[TaskFindingRewardCalculation, TaskOperatorRewardCalculation, str]:
+    policy_snapshot = cycle.policy_snapshot or _policy_snapshot()
+    if cycle.policy_snapshot is not None and policy_snapshot != _policy_snapshot():
+        raise Week7RewardCycleSourceChangedError(
+            "Week 7 economic policy bundle changed after cycle creation"
+        )
     routing, budget = _load_authoritative_sources(protocol_data_root, cycle)
     day4, _ = calculate_task_finding_rewards(
         protocol_data_root,
@@ -715,6 +1216,9 @@ def _calculate_current_snapshot(
             allocation_scope=cycle.allocation_scope,
             category_weights=(cycle.category_weights or None),
         ),
+        configured_policy=policy_snapshot.task_finding_reward,
+        policy_version=policy_snapshot.task_finding_policy_version,
+        configuration_version=policy_snapshot.task_finding_configuration_version,
     )
     day5, _ = calculate_task_operator_rewards(
         protocol_data_root,
@@ -723,6 +1227,9 @@ def _calculate_current_snapshot(
         TaskOperatorRewardCalculationRequest(
             task_finding_reward_calculation_id=day4.calculation_id
         ),
+        configured_policy=policy_snapshot.task_operator_reward,
+        policy_version=policy_snapshot.task_operator_policy_version,
+        configuration_version=policy_snapshot.task_operator_configuration_version,
     )
     payload = _calculation_payload(cycle, routing, budget, day4, day5)
     return day4, day5, protocol_fingerprint(payload)
@@ -767,22 +1274,24 @@ def _load_authoritative_sources(protocol_data_root: Path, cycle: Week7TaskReward
     return routing, budget
 
 
-def _policy_snapshot() -> dict[str, Any]:
+def _policy_snapshot() -> Week7RewardPolicySnapshot:
     settings = get_settings()
-    return {
-        "week7_cycle_policy_version": settings.week7_reward_cycle_policy_version,
-        "week7_cycle_configuration_version": settings.week7_reward_cycle_configuration_version,
-        "task_finding_policy_version": settings.task_finding_policy_version,
-        "task_finding_configuration_version": settings.task_finding_configuration_version,
-        "task_finding_reward": settings.task_finding_reward,
-        "task_operator_policy_version": settings.task_operator_policy_version,
-        "task_operator_configuration_version": settings.task_operator_configuration_version,
-        "task_operator_reward": settings.task_operator_reward,
-        "report_quality_policy_version": settings.report_quality_policy_version,
-        "report_quality_configuration_version": settings.report_quality_configuration_version,
-        "report_quality": settings.report_quality,
-        "protocol_quantum": Decimal("0.000001"),
-    }
+    return Week7RewardPolicySnapshot(
+        week7_cycle_policy_version=settings.week7_reward_cycle_policy_version,
+        week7_cycle_configuration_version=settings.week7_reward_cycle_configuration_version,
+        task_budget_configuration_version=settings.task_reward_configuration_version,
+        task_reward_pool=settings.task_reward_pool,
+        report_quality_policy_version=settings.report_quality_policy_version,
+        report_quality_configuration_version=settings.report_quality_configuration_version,
+        report_quality=settings.report_quality,
+        task_finding_policy_version=settings.task_finding_policy_version,
+        task_finding_configuration_version=settings.task_finding_configuration_version,
+        task_finding_reward=settings.task_finding_reward,
+        task_operator_policy_version=settings.task_operator_policy_version,
+        task_operator_configuration_version=settings.task_operator_configuration_version,
+        task_operator_reward=settings.task_operator_reward,
+        protocol_quantum=Decimal("0.000001"),
+    )
 
 
 def _calculation_payload(cycle, routing, budget, day4, day5) -> dict[str, Any]:
@@ -791,7 +1300,7 @@ def _calculation_payload(cycle, routing, budget, day4, day5) -> dict[str, Any]:
         "policy_version": cycle.policy_version,
         "configuration_version": cycle.configuration_version,
         "request_fingerprint": cycle.request_fingerprint,
-        "policy_snapshot": _policy_snapshot(),
+        "policy_snapshot": cycle.policy_snapshot or _policy_snapshot(),
         "routing": {
             "routing_id": routing.routing_id,
             "source_fingerprint": routing.source_fingerprint,
@@ -839,7 +1348,7 @@ def _finalization_fingerprint(cycle, day4, day5, calculation_fingerprint) -> str
             "routing_source_fingerprint": cycle.routing_source_fingerprint,
             "day4_source_fingerprint": day4.source_fingerprint,
             "day5_source_fingerprint": day5.source_fingerprint,
-            "policy_snapshot": _policy_snapshot(),
+            "policy_snapshot": cycle.policy_snapshot or _policy_snapshot(),
         }
     )
 
@@ -1011,6 +1520,7 @@ def _immutable_request_payload(cycle: Week7TaskRewardCycle) -> dict[str, Any]:
         "cycle_version": cycle.cycle_version,
         "policy_version": cycle.policy_version,
         "configuration_version": cycle.configuration_version,
+        "policy_snapshot": cycle.policy_snapshot,
         "reward_domain": cycle.reward_domain,
         "reward_unit": cycle.reward_unit,
         "project_id": cycle.project_id,

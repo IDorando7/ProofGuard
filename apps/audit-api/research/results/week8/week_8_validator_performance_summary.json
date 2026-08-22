@@ -1,0 +1,68 @@
+[
+  {
+    "category": "access_control",
+    "confidence": "0.100000",
+    "final_score": "0.550000",
+    "fingerprint": "eb7b1876cd2329f1402901a125cd3c490973392f92f9e646d6b7b735b1e37c13",
+    "membership": "candidate",
+    "node_id": "013302b0-2777-4d3d-b922-f970653df093",
+    "operator_id": "committee-operator-00",
+    "raw_score": "1.000000",
+    "resolved_validations": 1
+  },
+  {
+    "category": "access_control",
+    "confidence": "0.100000",
+    "final_score": "0.535000",
+    "fingerprint": "0dcc230d7b5fd347537310b1cf33ca5e74f65acecaeafdfd1eaa0ef396d21c19",
+    "membership": "candidate",
+    "node_id": "8987dd0a-b832-4112-89a7-966ddbf67095",
+    "operator_id": "committee-operator-01",
+    "raw_score": "0.850000",
+    "resolved_validations": 1
+  },
+  {
+    "category": "access_control",
+    "confidence": "0.100000",
+    "final_score": "0.550000",
+    "fingerprint": "0dc835ee7de522228932d9a5f8b484f3019cbb49b8d0ea083853d3911db9d461",
+    "membership": "candidate",
+    "node_id": "8b07dd7b-f4b8-49be-a2cd-9cd122c10607",
+    "operator_id": "committee-operator-05",
+    "raw_score": "1.000000",
+    "resolved_validations": 1
+  },
+  {
+    "category": "access_control",
+    "confidence": "0.100000",
+    "final_score": "0.550000",
+    "fingerprint": "fa82168c2733ecd22ea95c982f3fc5bdcc8e14d10360d302983d2477f4b8b459",
+    "membership": "candidate",
+    "node_id": "c2ff5360-f2be-4ebb-8a45-85dc1b9f9c6d",
+    "operator_id": "committee-operator-04",
+    "raw_score": "1.000000",
+    "resolved_validations": 1
+  },
+  {
+    "category": "access_control",
+    "confidence": "0.100000",
+    "final_score": "0.530000",
+    "fingerprint": "923d32532fe589fd49de26c33008061ba04183bf8f9b2c0c13db1d9b10ffd3da",
+    "membership": "candidate",
+    "node_id": "c8c4711e-a24b-483a-89c0-b783790cab9c",
+    "operator_id": "committee-operator-02",
+    "raw_score": "0.800000",
+    "resolved_validations": 1
+  },
+  {
+    "category": "access_control",
+    "confidence": "0.100000",
+    "final_score": "0.550000",
+    "fingerprint": "28de48b68ce5aaa9c32d8c48885068036f462f0da51ea458161d29eec25aa687",
+    "membership": "candidate",
+    "node_id": "f02193b6-fc1a-4bc8-8879-de50508265b5",
+    "operator_id": "committee-operator-03",
+    "raw_score": "1.000000",
+    "resolved_validations": 1
+  }
+]

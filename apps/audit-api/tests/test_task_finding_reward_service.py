@@ -17,6 +17,7 @@ from app.services.finding_cluster_service import (
     finalize_finding_clusters_for_task,
     rebuild_finding_clusters_for_task,
 )
+from app.services.node_registry_service import load_node, save_node
 from app.services.task_finding_reward_service import (
     TaskFindingRewardLinkageError,
     TaskFindingRewardNotFoundError,
@@ -203,6 +204,18 @@ def test_quality_reputation_membership_and_timestamps_do_not_enter_fingerprint(t
     assert status == TaskFindingCalculationProcessingStatus.UNCHANGED
     assert second.source_fingerprint == first.source_fingerprint
     assert second.calculated_at == first.calculated_at
+
+
+def test_node_registry_operator_mapping_is_authoritative(tmp_path):
+    root, _, routing, clusters, _, request = _ready(tmp_path)
+    member = clusters[0].members[0]
+    node = load_node(root, member.node_id)
+    save_node(root, node.model_copy(update={"operator_id": "changed-operator"}))
+
+    with pytest.raises(TaskFindingRewardStateError, match="operator attribution is stale"):
+        calculate_task_finding_rewards(
+            root, "project-1", routing.routing_id, request
+        )
 
 
 def test_requires_finalized_budget_and_clusters(tmp_path):

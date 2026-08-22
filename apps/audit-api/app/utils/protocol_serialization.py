@@ -82,6 +82,34 @@ def atomic_write_json(
             Path(temporary_name).unlink(missing_ok=True)
 
 
+def atomic_write_text(
+    path: Path,
+    content: str,
+    *,
+    temporary_prefix: str = ".protocol-text-",
+) -> None:
+    """Atomically replace a UTF-8 text artifact without exposing partial output."""
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temporary_name: str | None = None
+    try:
+        with tempfile.NamedTemporaryFile(
+            mode="w",
+            encoding="utf-8",
+            dir=path.parent,
+            prefix=temporary_prefix,
+            suffix=".tmp",
+            delete=False,
+        ) as temporary:
+            temporary_name = temporary.name
+            temporary.write(content)
+            temporary.flush()
+            os.fsync(temporary.fileno())
+        Path(temporary_name).replace(path)
+    finally:
+        if temporary_name is not None:
+            Path(temporary_name).unlink(missing_ok=True)
+
+
 def atomic_create_json(
     path: Path,
     payload: Any,

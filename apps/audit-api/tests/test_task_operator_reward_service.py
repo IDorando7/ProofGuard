@@ -51,7 +51,12 @@ def _quality(quality_profile="high"):
         root_cause_quality_score=values[2],
         impact_quality_score=values[3],
         fix_quality_score=values[4],
-        reason_codes={"impact_quality": ["accepted_severity_consistent"]},
+        reason_codes={
+            "impact_quality": [
+                "accepted_severity_consistent",
+                "validator_confirmed_impact_valid",
+            ]
+        },
     )
 
 
@@ -150,6 +155,44 @@ def test_missing_or_draft_quality_leaves_cluster_reward_undistributed(
     assert payout.distributed_points == 0
     assert payout.undistributed_points == payout.cluster_reward_points
     assert payout.report_exclusions[0].reason.value == reason
+
+
+@pytest.mark.parametrize(
+    "impact_reason_codes",
+    [
+        ["accepted_severity_consistent"],
+        ["validator_confirmed_impact_valid"],
+    ],
+)
+def test_chief_requires_separate_severity_and_impact_confirmation(
+    tmp_path, impact_reason_codes
+):
+    root, workspace, routing, clusters, _, day4 = _single_ready(
+        tmp_path, assess=False
+    )
+    values = _quality("high").model_dump()
+    values["reason_codes"] = {"impact_quality": impact_reason_codes}
+    assess_report_quality(
+        root,
+        workspace,
+        "project-1",
+        routing.routing_id,
+        clusters[0].finding_cluster_id,
+        clusters[0].members[0].submission_id,
+        ReportQualityAssessmentRequest.model_validate(values),
+    )
+    calculation, _ = calculate_task_operator_rewards(
+        root,
+        "project-1",
+        routing.routing_id,
+        TaskOperatorRewardCalculationRequest(
+            task_finding_reward_calculation_id=day4.calculation_id
+        ),
+    )
+    payout = calculation.cluster_payouts[0]
+    assert payout.chief_operator_id is None
+    assert payout.chief_bonus_pool_points == 0
+    assert payout.quality_pool_points == payout.cluster_reward_points
 
 
 def test_two_nodes_same_operator_create_one_position_and_best_q_wins(tmp_path):
@@ -300,7 +343,9 @@ def test_policy_changes_supersede_and_excluded_performance_data_does_not_change_
         configured_policy=TaskOperatorRewardConfig(
             duplicates=DuplicateRewardConfig(top_k=1),
             chief_finder=ChiefFinderConfig(
-                bonus_percentage="0.10", quality_threshold="0.90"
+                bonus_percentage="0.10",
+                quality_percentage="0.90",
+                quality_threshold="0.90",
             ),
         ),
         configuration_version="changed-config",

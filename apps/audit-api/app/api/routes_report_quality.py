@@ -22,6 +22,7 @@ from app.services.report_quality_assessment_service import (
     assess_report_quality,
     list_cluster_report_quality_assessments,
     load_active_report_quality_assessment,
+    load_report_quality_assessment_by_id,
     rebuild_task_report_quality_assessments,
 )
 
@@ -130,6 +131,34 @@ def get_submission_quality_assessment(
             status_code=500, detail="Stored report quality data is malformed"
         ) from exc
     if assessment is None or assessment.project_id != project_id:
+        raise HTTPException(status_code=404, detail="Report quality assessment not found")
+    return assessment
+
+
+@router.get(
+    "/projects/{project_id}/routing/{routing_id}/quality-assessments/{assessment_id}",
+    response_model=ReportQualityAssessment,
+)
+def get_quality_assessment_by_id(
+    project_id: str,
+    routing_id: str,
+    assessment_id: str,
+    db: Session = Depends(get_db),
+    root: Path = Depends(protocol_data_root),
+) -> ReportQualityAssessment:
+    """Read one immutable assessment version by its server-derived identity."""
+    get_project_or_404(db, project_id)
+    try:
+        assessment = load_report_quality_assessment_by_id(
+            root, project_id, routing_id, assessment_id
+        )
+    except ReportQualityLinkageError as exc:
+        raise HTTPException(status_code=409, detail=str(exc)) from exc
+    except ReportQualityStorageError as exc:
+        raise HTTPException(
+            status_code=500, detail="Stored report quality data is malformed"
+        ) from exc
+    if assessment is None:
         raise HTTPException(status_code=404, detail="Report quality assessment not found")
     return assessment
 

@@ -10,7 +10,7 @@ SAFE_TEST_NAME_PATTERN = re.compile(r"^[A-Za-z0-9_]+$")
 
 class PocUploadRequest(BaseModel):
     poc_filename: str
-    poc_content: str
+    poc_content: str = Field(..., max_length=262_144)
 
     @field_validator("poc_filename")
     @classmethod
@@ -67,4 +67,3 @@ class ReproductionRunResponse(BaseModel):
     duration_ms: int | None
     error_message: str | None
     safety_notes: list[str]
-

@@ -13,6 +13,7 @@ from app.schemas.week7_reward_cycle import (
     Week7TaskRewardCycleCreateRequest,
     Week7TaskRewardCycleListResponse,
     Week7TaskRewardCycleResponse,
+    Week7TaskRewardCycleVerification,
     Week7TaskRewardEventListResponse,
     Week7TaskRewardHistorySummary,
 )
@@ -33,6 +34,7 @@ from app.services.week7_reward_cycle_service import (
     list_week7_reward_events_response,
     load_week7_reward_cycle,
     load_week7_reward_cycle_by_routing,
+    verify_week7_task_reward_cycle,
 )
 
 
@@ -225,6 +227,23 @@ def list_project_week7_cycle_events(
     return list_week7_reward_events_response(
         root, reward_cycle_id=reward_cycle_id, project_id=project_id
     )
+
+
+@router.get(
+    "/projects/{project_id}/task-reward-cycles/{reward_cycle_id}/verify",
+    response_model=Week7TaskRewardCycleVerification,
+)
+def verify_project_week7_reward_cycle(
+    project_id: str,
+    reward_cycle_id: str,
+    db: Session = Depends(get_db),
+    root: Path = Depends(protocol_data_root),
+) -> Week7TaskRewardCycleVerification:
+    get_project_or_404(db, project_id)
+    try:
+        return verify_week7_task_reward_cycle(root, project_id, reward_cycle_id)
+    except Exception as exc:
+        _raise_protocol_error(exc)
 
 
 def _history(
