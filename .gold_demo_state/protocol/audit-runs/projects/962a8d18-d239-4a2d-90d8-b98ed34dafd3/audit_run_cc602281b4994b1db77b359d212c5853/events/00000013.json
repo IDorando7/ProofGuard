@@ -1,0 +1,22 @@
+{
+  "artifact_refs": [],
+  "audit_event_id": "audit_event_cc4aa066bd984c70662d1ad0c6df2b4b1bac8d2fc3e665687b440b0f871679d3",
+  "audit_run_id": "audit_run_cc602281b4994b1db77b359d212c5853",
+  "category": null,
+  "created_at": "2026-08-25T00:27:06.595834Z",
+  "entity_id": "audit_run_cc602281b4994b1db77b359d212c5853",
+  "entity_type": "audit_run",
+  "event_level": "INFO",
+  "event_type": "STAGE_PROGRESS",
+  "event_version": "audit_event_v1",
+  "message": "Routed 2 categories into 8 assignments.",
+  "metadata": {
+    "attempt_count": 1,
+    "progress_current": 2,
+    "progress_total": 2
+  },
+  "node_id": null,
+  "operator_id": null,
+  "sequence_number": 13,
+  "stage": "ROUTING"
+}

@@ -25,6 +25,14 @@ def get_project_or_404(db: Session, project_id: str) -> AuditProject:
     return project
 
 
+def list_projects(db: Session) -> list[AuditProject]:
+    return list(
+        db.query(AuditProject)
+        .order_by(AuditProject.created_at.desc(), AuditProject.id.asc())
+        .all()
+    )
+
+
 async def create_project(
     db: Session,
     project_name: str,
@@ -110,4 +118,3 @@ def project_workspace(project_id: str) -> Path:
 
 def load_project_scope(project_id: str):
     return read_parsed_scope(project_workspace(project_id))
-

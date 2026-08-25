@@ -1,0 +1,20 @@
+{
+  "assigned_at": "2026-08-25T00:27:10.114563Z",
+  "assignment_role": "authoritative",
+  "assignment_version": "validator_assignment_v1",
+  "attested_at": "2026-08-25T00:27:43.328670Z",
+  "category": "access_control",
+  "expires_at": null,
+  "finding_cluster_id": "finding_cluster_5661df4d88d8554ac9322b1702bc772ec197dcb65f1aeeca9991b512f11c0ee6",
+  "project_id": "962a8d18-d239-4a2d-90d8-b98ed34dafd3",
+  "routing_id": "b5a7816c-bb38-4015-9109-901c667db96d",
+  "seat_index": 4,
+  "source_fingerprint": "43989df0ee7ebd1b6d7cda281d0dc5e68b8cf3df2f696646d4e0f354cd03db9b",
+  "status": "attested",
+  "updated_at": "2026-08-25T00:27:43.328670Z",
+  "validation_round": 1,
+  "validator_assignment_id": "validator_assignment_ca19ac1d1f33be99d25f9b3e945c61d611981368cc531b50100ff2d7801fdc6a",
+  "validator_committee_id": "validator_committee_88e5713432cd01b0c69517d68169a7582e3645cf13753b08011e86f05c3a1ac6",
+  "validator_node_id": "7d32953d-9c36-458c-93f6-6b304bab97d7",
+  "validator_operator_id": "demo-validator-op-02"
+}

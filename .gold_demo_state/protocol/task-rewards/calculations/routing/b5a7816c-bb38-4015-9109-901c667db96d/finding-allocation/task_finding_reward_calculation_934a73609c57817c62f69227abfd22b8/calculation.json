@@ -1,0 +1,62 @@
+{
+  "allocation_scope": "global",
+  "calculated_at": "2026-08-25T00:27:46.453984Z",
+  "calculation_id": "task_finding_reward_calculation_934a73609c57817c62f69227abfd22b8",
+  "calculation_version": "task_finding_reward_calculation_v1",
+  "category_pool_allocations": [],
+  "category_weights": {},
+  "cluster_allocations": [
+    {
+      "allocation_reason": "positive_finding_score",
+      "category": "reentrancy",
+      "cluster_reward_points": "7000.000000",
+      "cluster_source_fingerprint": "e6aef1ab0873764ac57a57f18328b30705455d7fb109e3decbdb5090b36e0662",
+      "distinct_operator_count": 4,
+      "final_severity": "High",
+      "finding_cluster_id": "finding_cluster_78804a9cdfbc12251ebe35dab86bb610cf7d91637f105c4a8a864d5bd231115c",
+      "finding_score": "6.263416",
+      "parent_pool_id": "task_reward_budget_deaa492ad06fde97154506c63da4af66",
+      "parent_pool_points": "7000.000000",
+      "parent_pool_type": "miner_pool",
+      "project_id": "962a8d18-d239-4a2d-90d8-b98ed34dafd3",
+      "routing_id": "b5a7816c-bb38-4015-9109-901c667db96d",
+      "severity_weight": "8",
+      "source_fingerprint": "e63d3327ba8d1bde755e67e672e37b821b6a0f72b52bbb36f09dd2ad79125126",
+      "uniqueness": "0.782927"
+    }
+  ],
+  "configuration_version": "task_finding_allocation_config_v1",
+  "created_at": "2026-08-25T00:27:46.453984Z",
+  "distributed_cluster_points": "7000.000000",
+  "eligible_cluster_count": 1,
+  "miner_pool_points": "7000.000000",
+  "outcome": "allocated",
+  "policy_version": "finding_cluster_value_v1",
+  "positive_score_cluster_count": 1,
+  "project_id": "962a8d18-d239-4a2d-90d8-b98ed34dafd3",
+  "protocol_pool_points_snapshot": "1000.000000",
+  "reward_domain": "client_task",
+  "reward_unit": "protocol_points",
+  "routing_id": "b5a7816c-bb38-4015-9109-901c667db96d",
+  "severity_weights": {
+    "critical": "16",
+    "high": "8",
+    "informational": "0",
+    "low": "1",
+    "medium": "3"
+  },
+  "source_fingerprint": "934a73609c57817c62f69227abfd22b8db3714ffad3fc98686cf5b1ee089f4d3",
+  "status": "calculated",
+  "superseded_by_calculation_id": null,
+  "supersedes_calculation_id": null,
+  "task_reward_budget_id": "task_reward_budget_deaa492ad06fde97154506c63da4af66",
+  "task_reward_budget_source_fingerprint": "deaa492ad06fde97154506c63da4af66bc689b74633331263fa0157047e887d3",
+  "total_finding_score": "6.263416",
+  "undistributed_cluster_points": "0.000000",
+  "uniqueness_config": {
+    "coefficient": "0.20",
+    "floor": "0.50"
+  },
+  "validator_pool_points_snapshot": "2000.000000",
+  "zero_weight_cluster_count": 0
+}

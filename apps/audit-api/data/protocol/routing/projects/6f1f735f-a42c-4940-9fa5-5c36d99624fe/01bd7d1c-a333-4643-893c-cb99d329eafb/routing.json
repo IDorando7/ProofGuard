@@ -1,0 +1,145 @@
+{
+  "allow_partial": true,
+  "calculated_at": "2026-08-24T20:06:51.495156Z",
+  "complete_categories": 0,
+  "created_at": "2026-08-24T20:06:51.495156Z",
+  "description": null,
+  "failed_categories": 0,
+  "finalized_at": "2026-08-24T20:06:51.501665Z",
+  "include_exploration": true,
+  "nodes_per_category": 4,
+  "partial_categories": 2,
+  "production_assignments": 0,
+  "project_id": "6f1f735f-a42c-4940-9fa5-5c36d99624fe",
+  "project_scope_fingerprint": "ec0536e20f8c1ef0bb5dbef633e364abe1bb498aa3fbf347475889e84242cc50",
+  "request_fingerprint": "3168872961bf99b04b8e24b1af426cc6616cb795458478c6ed3f5e72123d68c8",
+  "requested_categories": [
+    "access_control",
+    "reentrancy"
+  ],
+  "results": [
+    {
+      "assignments": [
+        {
+          "assignment_id": "assignment_72bfbe6d0462bdb6ec77ec8c365449c8",
+          "assignment_mode": "shadow",
+          "candidate_snapshot": {
+            "accepted_unique_submissions": 0,
+            "category": "access_control",
+            "category_score": 0.0,
+            "category_score_id": "unavailable_category_score_096f3f8a-0fb0-4d95-9e5c-56cced09bb75_access_control",
+            "experience_confidence": 0.0,
+            "exploration_assignments_before": 0,
+            "finalized_submissions": 0,
+            "last_exploration_assignment_at": null,
+            "membership_source_fingerprint": "701330a8cf4e74d54496999fc07791752b5da0a7dbd35fbb881fbbe9d544aa49",
+            "membership_status": "candidate",
+            "node_id": "096f3f8a-0fb0-4d95-9e5c-56cced09bb75",
+            "node_status": "active",
+            "score_source_fingerprint": null,
+            "subnet_id": "subnet_access_control"
+          },
+          "category": "access_control",
+          "category_score": 0.0,
+          "created_at": "2026-08-24T20:06:51.495156Z",
+          "experience_confidence": 0.0,
+          "membership_status": "candidate",
+          "node_id": "096f3f8a-0fb0-4d95-9e5c-56cced09bb75",
+          "position": 1,
+          "project_id": "6f1f735f-a42c-4940-9fa5-5c36d99624fe",
+          "qualification_reference": null,
+          "routing_id": "01bd7d1c-a333-4643-893c-cb99d329eafb",
+          "selection_reasons": [
+            "Selected for shadow exploration as a candidate member.",
+            "Selected using finalized exploration usage: 0 prior assignments.",
+            "Shadow output is not authoritative during Router v0."
+          ],
+          "selection_type": "exploration",
+          "subnet_id": "subnet_access_control"
+        }
+      ],
+      "category": "access_control",
+      "complete": false,
+      "exploration_selected": 1,
+      "exploration_target": 1,
+      "ranked_selected": 0,
+      "ranked_target": 3,
+      "requested_assignments": 4,
+      "shortage_reasons": [
+        "no_ranked_members"
+      ],
+      "subnet_id": "subnet_access_control",
+      "subnet_status": "active",
+      "total_selected": 1,
+      "warnings": [
+        "Selected 0 of 3 ranked production nodes."
+      ]
+    },
+    {
+      "assignments": [
+        {
+          "assignment_id": "assignment_ed6331fa5ec432fdee31d5f010681714",
+          "assignment_mode": "shadow",
+          "candidate_snapshot": {
+            "accepted_unique_submissions": 0,
+            "category": "reentrancy",
+            "category_score": 0.0,
+            "category_score_id": "unavailable_category_score_096f3f8a-0fb0-4d95-9e5c-56cced09bb75_reentrancy",
+            "experience_confidence": 0.0,
+            "exploration_assignments_before": 0,
+            "finalized_submissions": 0,
+            "last_exploration_assignment_at": null,
+            "membership_source_fingerprint": "eabca167abd91bfd9b41a3f1ca78ac24ccbd1173a6694a60e2521518a3119d5c",
+            "membership_status": "candidate",
+            "node_id": "096f3f8a-0fb0-4d95-9e5c-56cced09bb75",
+            "node_status": "active",
+            "score_source_fingerprint": null,
+            "subnet_id": "subnet_reentrancy"
+          },
+          "category": "reentrancy",
+          "category_score": 0.0,
+          "created_at": "2026-08-24T20:06:51.495156Z",
+          "experience_confidence": 0.0,
+          "membership_status": "candidate",
+          "node_id": "096f3f8a-0fb0-4d95-9e5c-56cced09bb75",
+          "position": 1,
+          "project_id": "6f1f735f-a42c-4940-9fa5-5c36d99624fe",
+          "qualification_reference": null,
+          "routing_id": "01bd7d1c-a333-4643-893c-cb99d329eafb",
+          "selection_reasons": [
+            "Selected for shadow exploration as a candidate member.",
+            "Selected using finalized exploration usage: 0 prior assignments.",
+            "Shadow output is not authoritative during Router v0."
+          ],
+          "selection_type": "exploration",
+          "subnet_id": "subnet_reentrancy"
+        }
+      ],
+      "category": "reentrancy",
+      "complete": false,
+      "exploration_selected": 1,
+      "exploration_target": 1,
+      "ranked_selected": 0,
+      "ranked_target": 3,
+      "requested_assignments": 4,
+      "shortage_reasons": [
+        "no_ranked_members"
+      ],
+      "subnet_id": "subnet_reentrancy",
+      "subnet_status": "active",
+      "total_selected": 1,
+      "warnings": [
+        "Selected 0 of 3 ranked production nodes."
+      ]
+    }
+  ],
+  "routing_id": "01bd7d1c-a333-4643-893c-cb99d329eafb",
+  "routing_version": "subnet_router_v0",
+  "shadow_assignments": 2,
+  "source_fingerprint": "4cb5e89942a16a86370b2d95f938513463d8082aad11a696240ba450e37933a3",
+  "status": "finalized",
+  "superseded_by_routing_id": null,
+  "supersedes_routing_id": null,
+  "total_assignments": 2,
+  "updated_at": "2026-08-24T20:06:51.501665Z"
+}

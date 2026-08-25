@@ -1,0 +1,110 @@
+{
+  "title": "ProofGuard E2E Audit Demo",
+  "base_url": "http://127.0.0.1:8000",
+  "timeout_seconds": 180,
+  "target_path": "proofguard_demo_target",
+  "variables": {
+    "demo_client_id": "demo-client",
+    "routing_id": "",
+    "project_id": ""
+  },
+  "steps": [
+    {
+      "id": "health",
+      "method": "GET",
+      "path": "/health",
+      "checkpoint": "Server is alive. Keep this as the opening technical screenshot.",
+      "enabled": true
+    },
+    {
+      "id": "create_project",
+      "method": "POST",
+      "path": "/REPLACE_WITH_REAL_PROJECT_ENDPOINT",
+      "json": {
+        "name": "ProofGuard E2E Demo",
+        "source_path": "{{target_path}}"
+      },
+      "extract": {
+        "project_id": "$.project_id"
+      },
+      "checkpoint": "Project created and target codebase ingested.",
+      "enabled": false
+    },
+    {
+      "id": "list_nodes",
+      "method": "GET",
+      "path": "/REPLACE_WITH_REAL_NODE_LIST_ENDPOINT",
+      "checkpoint": "Node registry after agent/validator registration.",
+      "enabled": false
+    },
+    {
+      "id": "route_audit",
+      "method": "POST",
+      "path": "/REPLACE_WITH_REAL_ROUTING_ENDPOINT",
+      "json": {
+        "project_id": "{{project_id}}"
+      },
+      "extract": {
+        "routing_id": "$.routing_id"
+      },
+      "checkpoint": "Routing plan: which agents were selected for which categories.",
+      "enabled": false
+    },
+    {
+      "id": "submissions",
+      "method": "GET",
+      "path": "/REPLACE_WITH_REAL_SUBMISSIONS_ENDPOINT",
+      "checkpoint": "Candidate findings from multiple nodes, including overlap/duplicates.",
+      "enabled": false
+    },
+    {
+      "id": "clusters",
+      "method": "GET",
+      "path": "/REPLACE_WITH_REAL_CLUSTER_ENDPOINT",
+      "checkpoint": "FindingClusters: canonical root causes after deduplication.",
+      "enabled": false
+    },
+    {
+      "id": "validator_committees",
+      "method": "GET",
+      "path": "/REPLACE_WITH_REAL_VALIDATOR_COMMITTEE_ENDPOINT",
+      "checkpoint": "Validator committee: unique operators, reporter conflicts excluded.",
+      "enabled": false
+    },
+    {
+      "id": "validator_reproductions",
+      "method": "GET",
+      "path": "/REPLACE_WITH_REAL_VALIDATOR_REPRODUCTION_ENDPOINT",
+      "checkpoint": "Independent reproduction results per validator.",
+      "enabled": false
+    },
+    {
+      "id": "consensus",
+      "method": "GET",
+      "path": "/REPLACE_WITH_REAL_CONSENSUS_ENDPOINT",
+      "checkpoint": "Consensus result: highlight a 3-vs-2 DISPUTED case and escalation.",
+      "enabled": false
+    },
+    {
+      "id": "validator_scores",
+      "method": "GET",
+      "path": "/REPLACE_WITH_REAL_VALIDATOR_SCORE_ENDPOINT",
+      "checkpoint": "ValidatorCategoryScore evolution after final resolution.",
+      "enabled": false
+    },
+    {
+      "id": "miner_rewards",
+      "method": "GET",
+      "path": "/REPLACE_WITH_REAL_MINER_REWARD_ENDPOINT",
+      "checkpoint": "Miner reward cycle and conservation.",
+      "enabled": false
+    },
+    {
+      "id": "validator_rewards",
+      "method": "GET",
+      "path": "/REPLACE_WITH_REAL_VALIDATOR_REWARD_ENDPOINT",
+      "checkpoint": "Validator rewards: 30% completion + 70% VQ^2 quality.",
+      "enabled": false
+    }
+  ]
+}

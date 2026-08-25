@@ -1,0 +1,16 @@
+{
+  "finding_id": "finding_6bd6905aba721742783b879563570b204a85f794",
+  "project_id": "962a8d18-d239-4a2d-90d8-b98ed34dafd3",
+  "status": "generated",
+  "poc_file": "test/ProofGuardAccessControl.t.sol",
+  "test_name": "testUnauthorizedSetAdmin",
+  "command": null,
+  "stdout": null,
+  "stderr": null,
+  "duration_ms": null,
+  "error_message": null,
+  "safety_notes": [],
+  "reproduction_id": "f754770f-c56d-4d26-9012-1dea52860c7d",
+  "created_at": "2026-08-25T00:27:10.082668Z",
+  "updated_at": "2026-08-25T00:27:10.082884Z"
+}

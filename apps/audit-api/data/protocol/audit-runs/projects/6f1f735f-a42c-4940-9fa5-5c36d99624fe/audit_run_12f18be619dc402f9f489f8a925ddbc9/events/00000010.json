@@ -1,0 +1,22 @@
+{
+  "artifact_refs": [],
+  "audit_event_id": "audit_event_bc081102895cd190291aa626b0841f2059fba488aaa86e0940769759ac8ae308",
+  "audit_run_id": "audit_run_12f18be619dc402f9f489f8a925ddbc9",
+  "category": null,
+  "created_at": "2026-08-24T20:06:51.533400Z",
+  "entity_id": "audit_run_12f18be619dc402f9f489f8a925ddbc9",
+  "entity_type": "audit_run",
+  "event_level": "ERROR",
+  "event_type": "STAGE_FAILED",
+  "event_version": "audit_event_v1",
+  "message": "Audit stage EXECUTING_AGENTS failed: Node has no registered local runtime",
+  "metadata": {
+    "attempt_count": 1,
+    "error_code": "STAGE_EXECUTION_ERROR",
+    "error_message": "Node has no registered local runtime"
+  },
+  "node_id": null,
+  "operator_id": null,
+  "sequence_number": 10,
+  "stage": "EXECUTING_AGENTS"
+}

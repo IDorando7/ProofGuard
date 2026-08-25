@@ -1,0 +1,13 @@
+{
+  "applied_at": "2026-08-25T00:27:06.556055Z",
+  "assignment_id": "assignment_dbfe52f4f3a4120eb781dce0b1b37a92",
+  "assignment_mode": "production",
+  "category": "reentrancy",
+  "node_id": "d8253257-0781-4036-8260-740b049f526f",
+  "project_id": "962a8d18-d239-4a2d-90d8-b98ed34dafd3",
+  "routing_id": "b5a7816c-bb38-4015-9109-901c667db96d",
+  "selection_type": "ranked",
+  "source_fingerprint": "3a8b82a8074f65b2a982f06b127b7a8094caa23acc05137171924d61c5d23cb3",
+  "subnet_id": "subnet_reentrancy",
+  "usage_event_id": "routing_usage_assignment_dbfe52f4f3a4120eb781dce0b1b37a92"
+}

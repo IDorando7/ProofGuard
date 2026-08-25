@@ -11,6 +11,7 @@ SAFE_TEST_NAME_PATTERN = re.compile(r"^[A-Za-z0-9_]+$")
 class PocUploadRequest(BaseModel):
     poc_filename: str
     poc_content: str = Field(..., max_length=262_144)
+    test_name: str | None = None
 
     @field_validator("poc_filename")
     @classmethod
@@ -21,11 +22,19 @@ class PocUploadRequest(BaseModel):
             raise ValueError("poc_filename must be a safe filename, not a path")
         return value
 
+    @field_validator("test_name")
+    @classmethod
+    def validate_test_name(cls, value: str | None) -> str | None:
+        if value is not None and not SAFE_TEST_NAME_PATTERN.fullmatch(value):
+            raise ValueError("test_name must contain only letters, numbers, and underscores")
+        return value
+
 
 class PocUploadResponse(BaseModel):
     project_id: str
     finding_id: str
     poc_file: str
+    test_name: str | None = None
     stored_path: str
     status: str
     message: str

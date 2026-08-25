@@ -1,0 +1,39 @@
+{
+  "capacity_adjusted": false,
+  "category": "access_control",
+  "created_at": "2026-08-25T00:27:04.438129Z",
+  "decision_id": "membership_decision_f2dfcf8ea7cf0cb7098f1006dc6718ac",
+  "final_status": "active",
+  "node_id": "521d144b-5e3d-43cf-9a84-481365f5a192",
+  "policy_version": "membership_policy_v0",
+  "previous_status": null,
+  "reason_codes": [
+    "eligible_active"
+  ],
+  "reasons": [
+    "The node meets active membership requirements."
+  ],
+  "recommended_status": "active",
+  "source_fingerprint": "f2dfcf8ea7cf0cb7098f1006dc6718ac94800a0bf33a7affc72ee0b22691de0a",
+  "source_snapshot": {
+    "accepted_unique_submissions": 6,
+    "category_score": 0.7784,
+    "category_score_id": "category_score_521d144b-5e3d-43cf-9a84-481365f5a192_access_control",
+    "experience_confidence": 0.6,
+    "finalized_submissions": 6,
+    "node_status": "active",
+    "node_supported_categories": [
+      "access_control"
+    ],
+    "performance_id": "performance_521d144b-5e3d-43cf-9a84-481365f5a192_access_control",
+    "previous_membership_status": null,
+    "recent_unsafe_event_ids": [],
+    "score_band": "strong",
+    "subnet_maximum_active_nodes": 20,
+    "subnet_minimum_category_score": 0.6,
+    "subnet_minimum_finalized_submissions": 5,
+    "subnet_status": "active",
+    "unsafe_submissions": 0
+  },
+  "subnet_id": "subnet_access_control"
+}

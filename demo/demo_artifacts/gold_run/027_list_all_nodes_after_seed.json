@@ -1,0 +1,573 @@
+{
+  "index": 27,
+  "name": "list_all_nodes_after_seed",
+  "method": "GET",
+  "path": "/nodes",
+  "status_code": 200,
+  "response": [
+    {
+      "display_name": "Demo Access Agent 01",
+      "public_key": null,
+      "supported_categories": [
+        "access_control"
+      ],
+      "description": "Synthetic demo discovery node",
+      "node_id": "176e9d08-96b1-4381-a83a-ce0c95429e4b",
+      "node_type": "agent",
+      "operator_id": "demo-agent-access-op-01",
+      "status": "active",
+      "reputation_score": 0.85,
+      "statistics": {
+        "total_submissions": 7,
+        "accepted_submissions": 7,
+        "rejected_submissions": 0,
+        "duplicate_submissions": 0,
+        "out_of_scope_submissions": 0,
+        "unsafe_submissions": 0
+      },
+      "status_reason": "Node registered.",
+      "created_at": "2026-08-25T00:27:03.811230Z",
+      "updated_at": "2026-08-25T00:27:04.051581Z",
+      "status_updated_at": "2026-08-25T00:27:03.811230Z"
+    },
+    {
+      "display_name": "Demo Access Agent 02",
+      "public_key": null,
+      "supported_categories": [
+        "access_control"
+      ],
+      "description": "Synthetic demo discovery node",
+      "node_id": "521d144b-5e3d-43cf-9a84-481365f5a192",
+      "node_type": "agent",
+      "operator_id": "demo-agent-access-op-02",
+      "status": "active",
+      "reputation_score": 0.8,
+      "statistics": {
+        "total_submissions": 6,
+        "accepted_submissions": 6,
+        "rejected_submissions": 0,
+        "duplicate_submissions": 0,
+        "out_of_scope_submissions": 0,
+        "unsafe_submissions": 0
+      },
+      "status_reason": "Node registered.",
+      "created_at": "2026-08-25T00:27:03.818591Z",
+      "updated_at": "2026-08-25T00:27:04.111353Z",
+      "status_updated_at": "2026-08-25T00:27:03.818591Z"
+    },
+    {
+      "display_name": "Demo Access Agent 03",
+      "public_key": null,
+      "supported_categories": [
+        "access_control"
+      ],
+      "description": "Synthetic demo discovery node",
+      "node_id": "5ac571ca-8245-41e2-aa2b-0f2b98c9f1fe",
+      "node_type": "agent",
+      "operator_id": "demo-agent-access-op-03",
+      "status": "active",
+      "reputation_score": 0.7,
+      "statistics": {
+        "total_submissions": 5,
+        "accepted_submissions": 5,
+        "rejected_submissions": 0,
+        "duplicate_submissions": 0,
+        "out_of_scope_submissions": 0,
+        "unsafe_submissions": 0
+      },
+      "status_reason": "Node registered.",
+      "created_at": "2026-08-25T00:27:03.821372Z",
+      "updated_at": "2026-08-25T00:27:04.170778Z",
+      "status_updated_at": "2026-08-25T00:27:03.821372Z"
+    },
+    {
+      "display_name": "Demo Access Agent 04",
+      "public_key": null,
+      "supported_categories": [
+        "access_control"
+      ],
+      "description": "Synthetic demo discovery node",
+      "node_id": "36657ae9-4111-4eb0-a420-b24f5195af21",
+      "node_type": "agent",
+      "operator_id": "demo-agent-access-op-04",
+      "status": "active",
+      "reputation_score": 0.5,
+      "statistics": {
+        "total_submissions": 0,
+        "accepted_submissions": 0,
+        "rejected_submissions": 0,
+        "duplicate_submissions": 0,
+        "out_of_scope_submissions": 0,
+        "unsafe_submissions": 0
+      },
+      "status_reason": "Node registered.",
+      "created_at": "2026-08-25T00:27:03.824059Z",
+      "updated_at": "2026-08-25T00:27:03.824059Z",
+      "status_updated_at": "2026-08-25T00:27:03.824059Z"
+    },
+    {
+      "display_name": "Demo Reentrancy Agent 01",
+      "public_key": null,
+      "supported_categories": [
+        "reentrancy"
+      ],
+      "description": "Synthetic demo discovery node",
+      "node_id": "d8253257-0781-4036-8260-740b049f526f",
+      "node_type": "agent",
+      "operator_id": "demo-agent-reentrancy-op-01",
+      "status": "active",
+      "reputation_score": 0.85,
+      "statistics": {
+        "total_submissions": 7,
+        "accepted_submissions": 7,
+        "rejected_submissions": 0,
+        "duplicate_submissions": 0,
+        "out_of_scope_submissions": 0,
+        "unsafe_submissions": 0
+      },
+      "status_reason": "Node registered.",
+      "created_at": "2026-08-25T00:27:03.826990Z",
+      "updated_at": "2026-08-25T00:27:04.259728Z",
+      "status_updated_at": "2026-08-25T00:27:03.826990Z"
+    },
+    {
+      "display_name": "Demo Reentrancy Agent 02",
+      "public_key": null,
+      "supported_categories": [
+        "reentrancy"
+      ],
+      "description": "Synthetic demo discovery node",
+      "node_id": "e27510b1-ce19-486a-ad83-7f1e1fa36339",
+      "node_type": "agent",
+      "operator_id": "demo-agent-reentrancy-op-02",
+      "status": "active",
+      "reputation_score": 0.8,
+      "statistics": {
+        "total_submissions": 6,
+        "accepted_submissions": 6,
+        "rejected_submissions": 0,
+        "duplicate_submissions": 0,
+        "out_of_scope_submissions": 0,
+        "unsafe_submissions": 0
+      },
+      "status_reason": "Node registered.",
+      "created_at": "2026-08-25T00:27:03.830613Z",
+      "updated_at": "2026-08-25T00:27:04.344678Z",
+      "status_updated_at": "2026-08-25T00:27:03.830613Z"
+    },
+    {
+      "display_name": "Demo Reentrancy Agent 03",
+      "public_key": null,
+      "supported_categories": [
+        "reentrancy"
+      ],
+      "description": "Synthetic demo discovery node",
+      "node_id": "8433bed6-bbfb-42d0-a1d8-d14bf9256387",
+      "node_type": "agent",
+      "operator_id": "demo-agent-reentrancy-op-03",
+      "status": "active",
+      "reputation_score": 0.7,
+      "statistics": {
+        "total_submissions": 5,
+        "accepted_submissions": 5,
+        "rejected_submissions": 0,
+        "duplicate_submissions": 0,
+        "out_of_scope_submissions": 0,
+        "unsafe_submissions": 0
+      },
+      "status_reason": "Node registered.",
+      "created_at": "2026-08-25T00:27:03.832711Z",
+      "updated_at": "2026-08-25T00:27:04.428699Z",
+      "status_updated_at": "2026-08-25T00:27:03.832711Z"
+    },
+    {
+      "display_name": "Demo Reentrancy Agent 04",
+      "public_key": null,
+      "supported_categories": [
+        "reentrancy"
+      ],
+      "description": "Synthetic demo discovery node",
+      "node_id": "13bbbb03-c821-4df2-8017-41aed754c8f0",
+      "node_type": "agent",
+      "operator_id": "demo-agent-reentrancy-op-04",
+      "status": "active",
+      "reputation_score": 0.5,
+      "statistics": {
+        "total_submissions": 0,
+        "accepted_submissions": 0,
+        "rejected_submissions": 0,
+        "duplicate_submissions": 0,
+        "out_of_scope_submissions": 0,
+        "unsafe_submissions": 0
+      },
+      "status_reason": "Node registered.",
+      "created_at": "2026-08-25T00:27:03.834891Z",
+      "updated_at": "2026-08-25T00:27:03.834891Z",
+      "status_updated_at": "2026-08-25T00:27:03.834891Z"
+    },
+    {
+      "display_name": "Demo Validator 01",
+      "public_key": null,
+      "supported_categories": [
+        "access_control",
+        "reentrancy"
+      ],
+      "description": "Synthetic demo validator operator",
+      "node_id": "519f3b0d-c78c-4e30-a3fd-0b2573720be5",
+      "node_type": "validator",
+      "operator_id": "demo-validator-op-01",
+      "status": "active",
+      "reputation_score": 0.5,
+      "statistics": {
+        "total_submissions": 0,
+        "accepted_submissions": 0,
+        "rejected_submissions": 0,
+        "duplicate_submissions": 0,
+        "out_of_scope_submissions": 0,
+        "unsafe_submissions": 0
+      },
+      "status_reason": "Node registered.",
+      "created_at": "2026-08-25T00:27:04.501641Z",
+      "updated_at": "2026-08-25T00:27:04.501641Z",
+      "status_updated_at": "2026-08-25T00:27:04.501641Z"
+    },
+    {
+      "display_name": "Demo Validator 02",
+      "public_key": null,
+      "supported_categories": [
+        "access_control",
+        "reentrancy"
+      ],
+      "description": "Synthetic demo validator operator",
+      "node_id": "7d32953d-9c36-458c-93f6-6b304bab97d7",
+      "node_type": "validator",
+      "operator_id": "demo-validator-op-02",
+      "status": "active",
+      "reputation_score": 0.5,
+      "statistics": {
+        "total_submissions": 0,
+        "accepted_submissions": 0,
+        "rejected_submissions": 0,
+        "duplicate_submissions": 0,
+        "out_of_scope_submissions": 0,
+        "unsafe_submissions": 0
+      },
+      "status_reason": "Node registered.",
+      "created_at": "2026-08-25T00:27:04.504509Z",
+      "updated_at": "2026-08-25T00:27:04.504509Z",
+      "status_updated_at": "2026-08-25T00:27:04.504509Z"
+    },
+    {
+      "display_name": "Demo Validator 03",
+      "public_key": null,
+      "supported_categories": [
+        "access_control",
+        "reentrancy"
+      ],
+      "description": "Synthetic demo validator operator",
+      "node_id": "f87f271f-04c0-4197-9f22-d7112e57297b",
+      "node_type": "validator",
+      "operator_id": "demo-validator-op-03",
+      "status": "active",
+      "reputation_score": 0.5,
+      "statistics": {
+        "total_submissions": 0,
+        "accepted_submissions": 0,
+        "rejected_submissions": 0,
+        "duplicate_submissions": 0,
+        "out_of_scope_submissions": 0,
+        "unsafe_submissions": 0
+      },
+      "status_reason": "Node registered.",
+      "created_at": "2026-08-25T00:27:04.508269Z",
+      "updated_at": "2026-08-25T00:27:04.508269Z",
+      "status_updated_at": "2026-08-25T00:27:04.508269Z"
+    },
+    {
+      "display_name": "Demo Validator 04",
+      "public_key": null,
+      "supported_categories": [
+        "access_control",
+        "reentrancy"
+      ],
+      "description": "Synthetic demo validator operator",
+      "node_id": "56d42db2-701f-4b77-8974-3ca93e318b99",
+      "node_type": "validator",
+      "operator_id": "demo-validator-op-04",
+      "status": "active",
+      "reputation_score": 0.5,
+      "statistics": {
+        "total_submissions": 0,
+        "accepted_submissions": 0,
+        "rejected_submissions": 0,
+        "duplicate_submissions": 0,
+        "out_of_scope_submissions": 0,
+        "unsafe_submissions": 0
+      },
+      "status_reason": "Node registered.",
+      "created_at": "2026-08-25T00:27:04.511142Z",
+      "updated_at": "2026-08-25T00:27:04.511142Z",
+      "status_updated_at": "2026-08-25T00:27:04.511142Z"
+    },
+    {
+      "display_name": "Demo Validator 05",
+      "public_key": null,
+      "supported_categories": [
+        "access_control",
+        "reentrancy"
+      ],
+      "description": "Synthetic demo validator operator",
+      "node_id": "38e6cbb6-defa-43ce-8a6c-f9fe7af5979d",
+      "node_type": "validator",
+      "operator_id": "demo-validator-op-05",
+      "status": "active",
+      "reputation_score": 0.5,
+      "statistics": {
+        "total_submissions": 0,
+        "accepted_submissions": 0,
+        "rejected_submissions": 0,
+        "duplicate_submissions": 0,
+        "out_of_scope_submissions": 0,
+        "unsafe_submissions": 0
+      },
+      "status_reason": "Node registered.",
+      "created_at": "2026-08-25T00:27:04.513327Z",
+      "updated_at": "2026-08-25T00:27:04.513327Z",
+      "status_updated_at": "2026-08-25T00:27:04.513327Z"
+    },
+    {
+      "display_name": "Demo Validator 06",
+      "public_key": null,
+      "supported_categories": [
+        "access_control",
+        "reentrancy"
+      ],
+      "description": "Synthetic demo validator operator",
+      "node_id": "9403605f-dcc8-4221-8be0-48da209887fa",
+      "node_type": "validator",
+      "operator_id": "demo-validator-op-06",
+      "status": "active",
+      "reputation_score": 0.5,
+      "statistics": {
+        "total_submissions": 0,
+        "accepted_submissions": 0,
+        "rejected_submissions": 0,
+        "duplicate_submissions": 0,
+        "out_of_scope_submissions": 0,
+        "unsafe_submissions": 0
+      },
+      "status_reason": "Node registered.",
+      "created_at": "2026-08-25T00:27:04.515348Z",
+      "updated_at": "2026-08-25T00:27:04.515348Z",
+      "status_updated_at": "2026-08-25T00:27:04.515348Z"
+    },
+    {
+      "display_name": "Demo Validator 07",
+      "public_key": null,
+      "supported_categories": [
+        "access_control",
+        "reentrancy"
+      ],
+      "description": "Synthetic demo validator operator",
+      "node_id": "6f553f92-d859-4a9c-acf4-32d78d03c971",
+      "node_type": "validator",
+      "operator_id": "demo-validator-op-07",
+      "status": "active",
+      "reputation_score": 0.5,
+      "statistics": {
+        "total_submissions": 0,
+        "accepted_submissions": 0,
+        "rejected_submissions": 0,
+        "duplicate_submissions": 0,
+        "out_of_scope_submissions": 0,
+        "unsafe_submissions": 0
+      },
+      "status_reason": "Node registered.",
+      "created_at": "2026-08-25T00:27:04.517409Z",
+      "updated_at": "2026-08-25T00:27:04.517409Z",
+      "status_updated_at": "2026-08-25T00:27:04.517409Z"
+    },
+    {
+      "display_name": "Demo Validator 08",
+      "public_key": null,
+      "supported_categories": [
+        "access_control",
+        "reentrancy"
+      ],
+      "description": "Synthetic demo validator operator",
+      "node_id": "33ecf64c-16e7-41c7-9630-1d4c53b5261c",
+      "node_type": "validator",
+      "operator_id": "demo-validator-op-08",
+      "status": "active",
+      "reputation_score": 0.5,
+      "statistics": {
+        "total_submissions": 0,
+        "accepted_submissions": 0,
+        "rejected_submissions": 0,
+        "duplicate_submissions": 0,
+        "out_of_scope_submissions": 0,
+        "unsafe_submissions": 0
+      },
+      "status_reason": "Node registered.",
+      "created_at": "2026-08-25T00:27:04.521226Z",
+      "updated_at": "2026-08-25T00:27:04.521226Z",
+      "status_updated_at": "2026-08-25T00:27:04.521226Z"
+    },
+    {
+      "display_name": "Demo Validator 09",
+      "public_key": null,
+      "supported_categories": [
+        "access_control",
+        "reentrancy"
+      ],
+      "description": "Synthetic demo validator operator",
+      "node_id": "7904d4b1-c53e-4bb3-b008-3fe1f00e2b46",
+      "node_type": "validator",
+      "operator_id": "demo-validator-op-09",
+      "status": "active",
+      "reputation_score": 0.5,
+      "statistics": {
+        "total_submissions": 0,
+        "accepted_submissions": 0,
+        "rejected_submissions": 0,
+        "duplicate_submissions": 0,
+        "out_of_scope_submissions": 0,
+        "unsafe_submissions": 0
+      },
+      "status_reason": "Node registered.",
+      "created_at": "2026-08-25T00:27:04.524421Z",
+      "updated_at": "2026-08-25T00:27:04.524421Z",
+      "status_updated_at": "2026-08-25T00:27:04.524421Z"
+    },
+    {
+      "display_name": "Demo Validator 10",
+      "public_key": null,
+      "supported_categories": [
+        "access_control",
+        "reentrancy"
+      ],
+      "description": "Synthetic demo validator operator",
+      "node_id": "b5a500c3-12ef-4657-91e2-843f553a4aac",
+      "node_type": "validator",
+      "operator_id": "demo-validator-op-10",
+      "status": "active",
+      "reputation_score": 0.5,
+      "statistics": {
+        "total_submissions": 0,
+        "accepted_submissions": 0,
+        "rejected_submissions": 0,
+        "duplicate_submissions": 0,
+        "out_of_scope_submissions": 0,
+        "unsafe_submissions": 0
+      },
+      "status_reason": "Node registered.",
+      "created_at": "2026-08-25T00:27:04.527123Z",
+      "updated_at": "2026-08-25T00:27:04.527123Z",
+      "status_updated_at": "2026-08-25T00:27:04.527123Z"
+    },
+    {
+      "display_name": "Demo Validator 11",
+      "public_key": null,
+      "supported_categories": [
+        "access_control",
+        "reentrancy"
+      ],
+      "description": "Synthetic demo validator operator",
+      "node_id": "25eed10f-d870-49f9-acc1-fe8828acb804",
+      "node_type": "validator",
+      "operator_id": "demo-validator-op-11",
+      "status": "active",
+      "reputation_score": 0.5,
+      "statistics": {
+        "total_submissions": 0,
+        "accepted_submissions": 0,
+        "rejected_submissions": 0,
+        "duplicate_submissions": 0,
+        "out_of_scope_submissions": 0,
+        "unsafe_submissions": 0
+      },
+      "status_reason": "Node registered.",
+      "created_at": "2026-08-25T00:27:04.529694Z",
+      "updated_at": "2026-08-25T00:27:04.529694Z",
+      "status_updated_at": "2026-08-25T00:27:04.529694Z"
+    },
+    {
+      "display_name": "Demo Validator 12",
+      "public_key": null,
+      "supported_categories": [
+        "access_control",
+        "reentrancy"
+      ],
+      "description": "Synthetic demo validator operator",
+      "node_id": "20fb58ad-8b1d-4755-a42c-3740476271dd",
+      "node_type": "validator",
+      "operator_id": "demo-validator-op-12",
+      "status": "active",
+      "reputation_score": 0.5,
+      "statistics": {
+        "total_submissions": 0,
+        "accepted_submissions": 0,
+        "rejected_submissions": 0,
+        "duplicate_submissions": 0,
+        "out_of_scope_submissions": 0,
+        "unsafe_submissions": 0
+      },
+      "status_reason": "Node registered.",
+      "created_at": "2026-08-25T00:27:04.531588Z",
+      "updated_at": "2026-08-25T00:27:04.531588Z",
+      "status_updated_at": "2026-08-25T00:27:04.531588Z"
+    },
+    {
+      "display_name": "Demo Validation Hybrid 01",
+      "public_key": null,
+      "supported_categories": [
+        "access_control",
+        "reentrancy"
+      ],
+      "description": "Synthetic demo hybrid used on validation side",
+      "node_id": "97cf87f2-80f4-4284-8234-0146b50a5d58",
+      "node_type": "hybrid",
+      "operator_id": "demo-validator-hybrid-op-01",
+      "status": "active",
+      "reputation_score": 0.5,
+      "statistics": {
+        "total_submissions": 0,
+        "accepted_submissions": 0,
+        "rejected_submissions": 0,
+        "duplicate_submissions": 0,
+        "out_of_scope_submissions": 0,
+        "unsafe_submissions": 0
+      },
+      "status_reason": "Node registered.",
+      "created_at": "2026-08-25T00:27:04.533628Z",
+      "updated_at": "2026-08-25T00:27:04.533628Z",
+      "status_updated_at": "2026-08-25T00:27:04.533628Z"
+    },
+    {
+      "display_name": "Demo Validation Hybrid 02",
+      "public_key": null,
+      "supported_categories": [
+        "access_control",
+        "reentrancy"
+      ],
+      "description": "Synthetic demo hybrid used on validation side",
+      "node_id": "9d7c5661-672b-45f5-aa46-7f2df19045a4",
+      "node_type": "hybrid",
+      "operator_id": "demo-validator-hybrid-op-02",
+      "status": "active",
+      "reputation_score": 0.5,
+      "statistics": {
+        "total_submissions": 0,
+        "accepted_submissions": 0,
+        "rejected_submissions": 0,
+        "duplicate_submissions": 0,
+        "out_of_scope_submissions": 0,
+        "unsafe_submissions": 0
+      },
+      "status_reason": "Node registered.",
+      "created_at": "2026-08-25T00:27:04.535705Z",
+      "updated_at": "2026-08-25T00:27:04.535705Z",
+      "status_updated_at": "2026-08-25T00:27:04.535705Z"
+    }
+  ]
+}

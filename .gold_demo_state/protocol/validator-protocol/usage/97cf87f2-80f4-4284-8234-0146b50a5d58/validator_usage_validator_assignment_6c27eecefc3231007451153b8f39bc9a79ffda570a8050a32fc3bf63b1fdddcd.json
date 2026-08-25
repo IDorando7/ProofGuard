@@ -1,0 +1,16 @@
+{
+  "assigned_at": "2026-08-25T00:27:44.944922Z",
+  "category": "reentrancy",
+  "finding_cluster_id": "finding_cluster_78804a9cdfbc12251ebe35dab86bb610cf7d91637f105c4a8a864d5bd231115c",
+  "operator_id": "demo-validator-hybrid-op-01",
+  "project_id": "962a8d18-d239-4a2d-90d8-b98ed34dafd3",
+  "role": "shadow",
+  "routing_id": "b5a7816c-bb38-4015-9109-901c667db96d",
+  "source_fingerprint": "ab490c17517a36fec897f5cd9d4d8af6dd5148323d1268f38c8e685777b6b734",
+  "usage_event_id": "validator_usage_validator_assignment_6c27eecefc3231007451153b8f39bc9a79ffda570a8050a32fc3bf63b1fdddcd",
+  "usage_version": "validator_assignment_usage_v1",
+  "validation_round": 1,
+  "validator_assignment_id": "validator_assignment_6c27eecefc3231007451153b8f39bc9a79ffda570a8050a32fc3bf63b1fdddcd",
+  "validator_committee_id": "validator_committee_342e2decec10be6b2f9da341db5c7922ce43307b59ed04b43aa4af6f9d9985b6",
+  "validator_node_id": "97cf87f2-80f4-4284-8234-0146b50a5d58"
+}

@@ -1,0 +1,23 @@
+{
+  "index": 12,
+  "name": "get_subnet_reentrancy",
+  "method": "GET",
+  "path": "/subnets/by-category/reentrancy",
+  "status_code": 200,
+  "response": {
+    "category": "reentrancy",
+    "name": "Reentrancy Subnet",
+    "description": null,
+    "minimum_category_score": 0.6,
+    "minimum_finalized_submissions": 5,
+    "maximum_active_nodes": 20,
+    "exploration_ratio": 0.2,
+    "subnet_id": "subnet_reentrancy",
+    "registry_version": "subnet_registry_v0",
+    "status": "active",
+    "status_reason": "Subnet registered.",
+    "created_at": "2026-08-25T00:27:03.996883Z",
+    "updated_at": "2026-08-25T00:27:03.996883Z",
+    "status_updated_at": "2026-08-25T00:27:03.996883Z"
+  }
+}

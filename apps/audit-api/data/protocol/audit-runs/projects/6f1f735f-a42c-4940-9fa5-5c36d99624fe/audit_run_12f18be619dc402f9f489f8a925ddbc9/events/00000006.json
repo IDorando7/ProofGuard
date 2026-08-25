@@ -1,0 +1,31 @@
+{
+  "artifact_refs": [],
+  "audit_event_id": "audit_event_caa7347ef61dbdc9608e4e6787f7be3e7dcbaea57f486db5f386b117c95f3e9c",
+  "audit_run_id": "audit_run_12f18be619dc402f9f489f8a925ddbc9",
+  "category": "reentrancy",
+  "created_at": "2026-08-24T20:06:51.511824Z",
+  "entity_id": "assignment_ed6331fa5ec432fdee31d5f010681714",
+  "entity_type": "routing_assignment",
+  "event_level": "INFO",
+  "event_type": "ROUTING_NODE_SELECTED",
+  "event_version": "audit_event_v1",
+  "message": "Routing assignment selected a node.",
+  "metadata": {
+    "assignment_id": "assignment_ed6331fa5ec432fdee31d5f010681714",
+    "assignment_mode": "shadow",
+    "category_score": 0.0,
+    "membership": "candidate",
+    "position": 1,
+    "routing_id": "01bd7d1c-a333-4643-893c-cb99d329eafb",
+    "selection_reasons": [
+      "Selected for shadow exploration as a candidate member.",
+      "Selected using finalized exploration usage: 0 prior assignments.",
+      "Shadow output is not authoritative during Router v0."
+    ],
+    "selection_type": "exploration"
+  },
+  "node_id": "096f3f8a-0fb0-4d95-9e5c-56cced09bb75",
+  "operator_id": "demo-agent-hybrid-op-01",
+  "sequence_number": 6,
+  "stage": "ROUTING"
+}

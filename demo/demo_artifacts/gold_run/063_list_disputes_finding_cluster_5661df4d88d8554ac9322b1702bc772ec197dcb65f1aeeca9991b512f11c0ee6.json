@@ -1,0 +1,39 @@
+{
+  "index": 63,
+  "name": "list_disputes_finding_cluster_5661df4d88d8554ac9322b1702bc772ec197dcb65f1aeeca9991b512f11c0ee6",
+  "method": "GET",
+  "path": "/projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_5661df4d88d8554ac9322b1702bc772ec197dcb65f1aeeca9991b512f11c0ee6/validation-disputes",
+  "status_code": 200,
+  "response": {
+    "total": 1,
+    "disputes": [
+      {
+        "validation_dispute_id": "validation_dispute_59014e3b633726baf822479b42cc1732002e912430c68e22c6967d29f621ab5b",
+        "dispute_version": "validation_dispute_v1",
+        "escalation_policy": {
+          "policy_version": "validation_escalation_policy_v1",
+          "additional_authoritative_validators": 4,
+          "max_escalation_rounds": 1,
+          "exclude_all_prior_validator_operators": true,
+          "shadow_slots": 0
+        },
+        "project_id": "962a8d18-d239-4a2d-90d8-b98ed34dafd3",
+        "routing_id": "b5a7816c-bb38-4015-9109-901c667db96d",
+        "finding_cluster_id": "finding_cluster_5661df4d88d8554ac9322b1702bc772ec197dcb65f1aeeca9991b512f11c0ee6",
+        "triggering_consensus_id": "validation_consensus_839f332b48de3ae18779f349413b668ddc38712d394bb2426992ba1c6e11afa8",
+        "triggering_round_id": "validation_round_ff8726a6d37f21dd562f39f3ff100965426ae6a737bc50c403418981e3fdc3b7",
+        "reason_codes": [
+          "validity_disagreement"
+        ],
+        "status": "open",
+        "escalation_round_id": null,
+        "escalation_committee_id": null,
+        "resolution_consensus_id": null,
+        "source_fingerprint": "419e07601cec5e2f33085224ac87134873ebaf09036f4c9b905cc1f87f0f51b6",
+        "created_at": "2026-08-25T00:27:43.689590Z",
+        "updated_at": "2026-08-25T00:27:43.689590Z",
+        "resolved_at": null
+      }
+    ]
+  }
+}

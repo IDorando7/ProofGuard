@@ -1,0 +1,96 @@
+{
+  "score_id": "5326d3a6-7e0f-40a2-b3cc-1b4078013ad5",
+  "scoring_version": "contribution_v0",
+  "submission_id": "39b56569-56bd-4fe5-a8da-7db1eb0b3c0a",
+  "project_id": "proofguard_gold_demo_history_v1",
+  "finding_id": "demo_history_reentrancy_3_2",
+  "node_id": "8433bed6-bbfb-42d0-a1d8-d14bf9256387",
+  "validation_id": "35f79187-bca4-4ec3-ba71-036010d1324d",
+  "reproduction_id": "91ed2c66-b219-4363-943e-855b3d73e281",
+  "total_score": 81.0,
+  "eligibility_status": "eligible",
+  "eligible_for_reward": true,
+  "eligibility_reasons": [
+    "Validation status is accepted.",
+    "Reproduction status is reproduced.",
+    "Finding is not marked duplicate.",
+    "Finding is in scope."
+  ],
+  "components": {
+    "validity": 30.0,
+    "severity": 1.0,
+    "reproducibility": 25.0,
+    "uniqueness": 15.0,
+    "quality": 10.0,
+    "penalties": 0.0,
+    "raw_total": 81.0
+  },
+  "signals": [
+    {
+      "code": "VALIDATION_ACCEPTED",
+      "component": "validity",
+      "points": 30.0,
+      "message": "ValidationDecision accepted the finding.",
+      "source": "validation"
+    },
+    {
+      "code": "SEVERITY_INFORMATIONAL",
+      "component": "severity",
+      "points": 1.0,
+      "message": "The normalized severity is Informational.",
+      "source": "validation"
+    },
+    {
+      "code": "REPRODUCTION_CONFIRMED",
+      "component": "reproducibility",
+      "points": 25.0,
+      "message": "ReproductionResult confirmed the finding.",
+      "source": "reproduction"
+    },
+    {
+      "code": "CONFIRMED_UNIQUE",
+      "component": "uniqueness",
+      "points": 15.0,
+      "message": "Validation evidence confirms the finding is not a duplicate.",
+      "source": "validation"
+    },
+    {
+      "code": "QUALITY_ROOT_CAUSE",
+      "component": "quality",
+      "points": 2.0,
+      "message": "The finding explains a meaningful root cause.",
+      "source": "finding"
+    },
+    {
+      "code": "QUALITY_ATTACK_PATH",
+      "component": "quality",
+      "points": 2.0,
+      "message": "The finding explains a meaningful attack path.",
+      "source": "finding"
+    },
+    {
+      "code": "QUALITY_IMPACT",
+      "component": "quality",
+      "points": 2.0,
+      "message": "The finding explains a meaningful impact.",
+      "source": "finding"
+    },
+    {
+      "code": "QUALITY_RECOMMENDED_FIX",
+      "component": "quality",
+      "points": 2.0,
+      "message": "The finding includes a meaningful recommended fix.",
+      "source": "finding"
+    },
+    {
+      "code": "QUALITY_LOCATION",
+      "component": "quality",
+      "points": 2.0,
+      "message": "The finding identifies at least one contract and function.",
+      "source": "finding"
+    }
+  ],
+  "reason": "Eligible contribution with score 81. The finding was accepted, reproduced, confirmed unique, and normalized as Informational severity.",
+  "created_at": "2026-08-25T00:27:04.376860Z",
+  "updated_at": "2026-08-25T00:27:04.376860Z"
+}

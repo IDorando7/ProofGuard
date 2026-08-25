@@ -1,0 +1,12 @@
+{
+  "agent_execution_id": "agent_execution_dd6e2e8153f7c3d61b272c839ea65c7b1e46cba5",
+  "audit_run_id": "audit_run_cc602281b4994b1db77b359d212c5853",
+  "category": "reentrancy",
+  "entity_id": "0446a9f6-2804-47f8-8f08-02149021686d",
+  "entity_type": "submission",
+  "node_id": "d8253257-0781-4036-8260-740b049f526f",
+  "operator_id": "demo-agent-reentrancy-op-01",
+  "project_id": "962a8d18-d239-4a2d-90d8-b98ed34dafd3",
+  "routing_assignment_id": "assignment_dbfe52f4f3a4120eb781dce0b1b37a92",
+  "routing_id": "b5a7816c-bb38-4015-9109-901c667db96d"
+}

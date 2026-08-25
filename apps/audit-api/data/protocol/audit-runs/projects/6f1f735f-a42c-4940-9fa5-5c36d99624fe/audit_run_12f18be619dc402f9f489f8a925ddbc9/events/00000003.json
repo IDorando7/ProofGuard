@@ -1,0 +1,27 @@
+{
+  "artifact_refs": [],
+  "audit_event_id": "audit_event_4edc8f78d68330a98b40a63eb2b868d415d15c6e0ad1c52d8db542db3c3061bd",
+  "audit_run_id": "audit_run_12f18be619dc402f9f489f8a925ddbc9",
+  "category": null,
+  "created_at": "2026-08-24T20:06:51.478184Z",
+  "entity_id": "audit_run_12f18be619dc402f9f489f8a925ddbc9",
+  "entity_type": "audit_run",
+  "event_level": "INFO",
+  "event_type": "STAGE_COMPLETED",
+  "event_version": "audit_event_v1",
+  "message": "Prepared repository and 1 scoped contracts verified.",
+  "metadata": {
+    "attempt_count": 1,
+    "entity_refs": [],
+    "progress_current": 1,
+    "progress_total": 1,
+    "stage_metadata": {
+      "scoped_contract_count": 1,
+      "workspace_ref": "project:6f1f735f-a42c-4940-9fa5-5c36d99624fe"
+    }
+  },
+  "node_id": null,
+  "operator_id": null,
+  "sequence_number": 3,
+  "stage": "PREPARING"
+}

@@ -1,0 +1,29 @@
+{
+  "index": 102,
+  "name": "verify_week7_miner_reward_cycle",
+  "method": "GET",
+  "path": "/projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/task-reward-cycles/week7_task_reward_cycle_edbe00ed5e73e30196533fba9376a55b/verify",
+  "status_code": 200,
+  "response": {
+    "reward_cycle_id": "week7_task_reward_cycle_edbe00ed5e73e30196533fba9376a55b",
+    "project_id": "962a8d18-d239-4a2d-90d8-b98ed34dafd3",
+    "routing_id": "b5a7816c-bb38-4015-9109-901c667db96d",
+    "lifecycle_status": "finalized",
+    "verification_status": "clean_finalized",
+    "ok": true,
+    "source_fingerprint_match": true,
+    "calculation_fingerprint_match": true,
+    "budget_conserved": true,
+    "cluster_rewards_conserved": true,
+    "reporter_rewards_conserved": true,
+    "event_set_complete": true,
+    "duplicate_events_found": false,
+    "immutable_source_consistent": true,
+    "safe_retry_finalize": false,
+    "expected_event_count": 0,
+    "stored_event_count": 0,
+    "expected_event_total": "0",
+    "stored_event_total": "0",
+    "errors": []
+  }
+}

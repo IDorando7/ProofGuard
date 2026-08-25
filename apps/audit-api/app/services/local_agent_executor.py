@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from functools import lru_cache
 from pathlib import Path
 from typing import Callable, Protocol
 
@@ -73,9 +74,17 @@ class LocalAgentRegistry:
         selected = bindings if bindings is not None else default_local_bindings()
         self._bindings: dict[str, LocalAgentBinding] = {}
         for binding in selected:
-            if binding.node_id in self._bindings:
+            self.register(binding)
+
+    def register(self, binding: LocalAgentBinding) -> LocalAgentBinding:
+        """Register one server-controlled runtime binding idempotently."""
+        existing = self._bindings.get(binding.node_id)
+        if existing is not None:
+            if existing != binding:
                 raise ValueError("Duplicate local node runtime binding")
-            self._bindings[binding.node_id] = binding
+            return existing
+        self._bindings[binding.node_id] = binding
+        return binding
 
     def resolve(
         self, node: NodeRecord, category: str | FindingCategory
@@ -195,6 +204,39 @@ def default_local_bindings() -> list[LocalAgentBinding]:
             factory=ReentrancyAgent,
         ),
     ]
+
+
+def category_local_binding(
+    node_id: str,
+    category: str | FindingCategory,
+) -> LocalAgentBinding:
+    """Build a binding using the existing category-specialist agents."""
+    normalized = FindingCategory(normalize_category(category))
+    if normalized == FindingCategory.ACCESS_CONTROL:
+        return LocalAgentBinding(
+            node_id=node_id,
+            category=normalized,
+            agent_type="AccessControlAgent",
+            agent_version="access_control_static_v1",
+            factory=AccessControlAgent,
+        )
+    if normalized == FindingCategory.REENTRANCY:
+        return LocalAgentBinding(
+            node_id=node_id,
+            category=normalized,
+            agent_type="ReentrancyAgent",
+            agent_version="reentrancy_static_v1",
+            factory=ReentrancyAgent,
+        )
+    raise LocalAgentCapabilityError(
+        "No local specialist runtime exists for the requested category"
+    )
+
+
+@lru_cache
+def get_local_agent_registry() -> LocalAgentRegistry:
+    """Return the runtime registry owned by this API process."""
+    return LocalAgentRegistry()
 
 
 def _normalize_candidates(

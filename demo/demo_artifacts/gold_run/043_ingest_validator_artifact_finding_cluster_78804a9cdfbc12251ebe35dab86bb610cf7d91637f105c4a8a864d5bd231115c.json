@@ -1,0 +1,16 @@
+{
+  "index": 43,
+  "name": "ingest_validator_artifact_finding_cluster_78804a9cdfbc12251ebe35dab86bb610cf7d91637f105c4a8a864d5bd231115c",
+  "method": "POST",
+  "path": "/projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/findings/finding_7b7166f7eaa3109ca2fa1436caef11ab95d8e030/poc",
+  "status_code": 200,
+  "response": {
+    "project_id": "962a8d18-d239-4a2d-90d8-b98ed34dafd3",
+    "finding_id": "finding_7b7166f7eaa3109ca2fa1436caef11ab95d8e030",
+    "poc_file": "test/ProofGuardReentrancy.t.sol",
+    "test_name": "testReentrantWithdrawal",
+    "stored_path": "repo/test/ProofGuardReentrancy.t.sol",
+    "status": "generated",
+    "message": "PoC stored for reproduction."
+  }
+}

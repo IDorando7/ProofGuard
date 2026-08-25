@@ -30,6 +30,7 @@ class FindingClusterMemberRelation(str, Enum):
 
 
 class FindingClusterValidationAuthority(str, Enum):
+    PENDING_VALIDATOR_CONSENSUS = "pending_validator_consensus"
     LEGACY_BACKEND = "legacy_backend"
     VALIDATOR_CONSENSUS = "validator_consensus"
 
@@ -41,7 +42,7 @@ class FindingClusterMember(BaseModel):
     finding_id: str = Field(..., min_length=1, max_length=256)
     node_id: str = Field(..., min_length=1, max_length=256)
     operator_id: str = Field(..., min_length=1, max_length=128)
-    validation_id: str = Field(..., min_length=1, max_length=256)
+    validation_id: str | None = Field(default=None, min_length=1, max_length=256)
     reproduction_id: str | None = Field(default=None, min_length=1, max_length=256)
     submitted_at: datetime
     relation: FindingClusterMemberRelation
@@ -95,20 +96,35 @@ class FindingCluster(BaseModel):
     category: FindingCategory
     canonical_finding_id: str = Field(..., min_length=1, max_length=256)
     canonical_submission_id: str = Field(..., min_length=1, max_length=256)
-    final_validation_status: Literal[ValidationStatus.ACCEPTED] = ValidationStatus.ACCEPTED
-    final_severity: FindingSeverity
-    validation_authority: FindingClusterValidationAuthority = (
-        FindingClusterValidationAuthority.LEGACY_BACKEND
+    final_validation_status: ValidationStatus | None = Field(
+        default=ValidationStatus.ACCEPTED,
+        description="Final protocol truth; null while validator consensus is unresolved.",
+    )
+    claimed_severity: FindingSeverity | None = Field(
+        default=None,
+        description="Canonical reporter severity claim; never implies validation.",
+    )
+    final_severity: FindingSeverity | None = Field(
+        ...,
+        description="Resolved accepted severity; null before consensus and for non-confirmed outcomes.",
+    )
+    validation_authority: FindingClusterValidationAuthority = Field(
+        default=FindingClusterValidationAuthority.LEGACY_BACKEND,
+        description="Authority responsible for final truth, or pending validator consensus.",
     )
     final_validation_consensus_id: str | None = None
     validator_consensus_outcome: str | None = None
     validator_consensus_severity: FindingSeverity | None = None
+    validation_resolution_source_fingerprint: str | None = None
     root_cause_key: str = Field(..., min_length=1, max_length=1024)
     root_cause_fingerprint: str
     members: list[FindingClusterMember] = Field(..., min_length=1)
     report_count: int = Field(..., ge=1)
     distinct_operator_count: int = Field(..., ge=1)
-    status: FindingClusterStatus
+    status: FindingClusterStatus = Field(
+        ...,
+        description="Membership/source lifecycle only; finalized means frozen, not accepted.",
+    )
     source_fingerprint: str
     created_at: datetime
     updated_at: datetime
@@ -153,9 +169,15 @@ class FindingCluster(BaseModel):
     def normalize_cluster_category(cls, value: Any) -> str:
         return normalize_category(value)
 
-    @field_validator("root_cause_fingerprint", "source_fingerprint")
+    @field_validator(
+        "root_cause_fingerprint",
+        "source_fingerprint",
+        "validation_resolution_source_fingerprint",
+    )
     @classmethod
-    def validate_fingerprints(cls, value: str) -> str:
+    def validate_fingerprints(cls, value: str | None) -> str | None:
+        if value is None:
+            return None
         if not SHA256_HEX.fullmatch(value):
             raise ValueError("Fingerprint must be a lowercase SHA-256 digest")
         return value
@@ -206,19 +228,82 @@ class FindingCluster(BaseModel):
                 raise ValueError("Finalized clusters require finalized_at")
         elif self.finalized_at is not None:
             raise ValueError("Open clusters cannot have finalized_at")
-        if self.validation_authority == FindingClusterValidationAuthority.VALIDATOR_CONSENSUS:
-            if self.final_validation_consensus_id is None or self.validator_consensus_outcome is None:
-                raise ValueError("Validator consensus authority requires its immutable reference")
-        elif any(
-            value is not None
-            for value in (
-                self.final_validation_consensus_id,
-                self.validator_consensus_outcome,
-                self.validator_consensus_severity,
-            )
+        consensus_fields = (
+            self.final_validation_consensus_id,
+            self.validator_consensus_outcome,
+            self.validator_consensus_severity,
+            self.validation_resolution_source_fingerprint,
+        )
+        if (
+            self.validation_authority
+            == FindingClusterValidationAuthority.PENDING_VALIDATOR_CONSENSUS
         ):
-            raise ValueError("Legacy validation cannot claim validator consensus fields")
+            if self.final_validation_status is not None or self.final_severity is not None:
+                raise ValueError("Pending validator consensus cannot claim final truth")
+            if any(value is not None for value in consensus_fields):
+                raise ValueError("Pending validator consensus cannot claim a final consensus")
+        elif self.validation_authority == FindingClusterValidationAuthority.VALIDATOR_CONSENSUS:
+            if (
+                self.final_validation_consensus_id is None
+                or self.validator_consensus_outcome is None
+                or self.validation_resolution_source_fingerprint is None
+            ):
+                raise ValueError("Validator consensus authority requires its immutable reference")
+            expected_status = {
+                "confirmed": ValidationStatus.ACCEPTED,
+                "rejected": ValidationStatus.REJECTED,
+                "out_of_scope": ValidationStatus.OUT_OF_SCOPE,
+                "insufficient_evidence": ValidationStatus.INSUFFICIENT_EVIDENCE,
+                "unsafe": ValidationStatus.UNSAFE_POC,
+                "unsupported": ValidationStatus.UNSUPPORTED,
+            }.get(self.validator_consensus_outcome)
+            if expected_status is None:
+                raise ValueError("Only resolved validator consensus may finalize a cluster")
+            if self.final_validation_status != expected_status:
+                raise ValueError("Final validation status must match validator consensus")
+            if expected_status == ValidationStatus.ACCEPTED:
+                if (
+                    self.final_severity is None
+                    or self.validator_consensus_severity != self.final_severity
+                ):
+                    raise ValueError("Confirmed consensus requires one final severity")
+            elif self.final_severity is not None or self.validator_consensus_severity is not None:
+                raise ValueError("Non-confirmed consensus cannot claim a final severity")
+        else:
+            if any(value is not None for value in consensus_fields):
+                raise ValueError("Legacy validation cannot claim validator consensus fields")
+            if (
+                self.final_validation_status != ValidationStatus.ACCEPTED
+                or self.final_severity is None
+            ):
+                raise ValueError("Legacy cluster authority requires accepted reproduced truth")
         return self
+
+
+def has_resolved_accepted_cluster_truth(cluster: FindingCluster) -> bool:
+    """Return whether an accepted final authority exists, independent of freezing."""
+    if (
+        cluster.final_validation_status != ValidationStatus.ACCEPTED
+        or cluster.final_severity is None
+    ):
+        return False
+    if cluster.validation_authority == FindingClusterValidationAuthority.LEGACY_BACKEND:
+        return True
+    return (
+        cluster.validation_authority
+        == FindingClusterValidationAuthority.VALIDATOR_CONSENSUS
+        and cluster.validator_consensus_outcome == "confirmed"
+        and cluster.final_validation_consensus_id is not None
+        and cluster.validation_resolution_source_fingerprint is not None
+    )
+
+
+def is_finding_cluster_reward_eligible(cluster: FindingCluster) -> bool:
+    """Return whether frozen membership and final truth permit miner valuation."""
+    return (
+        cluster.status == FindingClusterStatus.FINALIZED
+        and has_resolved_accepted_cluster_truth(cluster)
+    )
 
 
 class FindingClusterRebuildRequest(BaseModel):

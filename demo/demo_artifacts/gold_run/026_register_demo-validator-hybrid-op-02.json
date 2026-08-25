@@ -1,0 +1,33 @@
+{
+  "index": 26,
+  "name": "register_demo-validator-hybrid-op-02",
+  "method": "POST",
+  "path": "/nodes",
+  "status_code": 201,
+  "response": {
+    "display_name": "Demo Validation Hybrid 02",
+    "public_key": null,
+    "supported_categories": [
+      "access_control",
+      "reentrancy"
+    ],
+    "description": "Synthetic demo hybrid used on validation side",
+    "node_id": "9d7c5661-672b-45f5-aa46-7f2df19045a4",
+    "node_type": "hybrid",
+    "operator_id": "demo-validator-hybrid-op-02",
+    "status": "active",
+    "reputation_score": 0.5,
+    "statistics": {
+      "total_submissions": 0,
+      "accepted_submissions": 0,
+      "rejected_submissions": 0,
+      "duplicate_submissions": 0,
+      "out_of_scope_submissions": 0,
+      "unsafe_submissions": 0
+    },
+    "status_reason": "Node registered.",
+    "created_at": "2026-08-25T00:27:04.535705Z",
+    "updated_at": "2026-08-25T00:27:04.535705Z",
+    "status_updated_at": "2026-08-25T00:27:04.535705Z"
+  }
+}

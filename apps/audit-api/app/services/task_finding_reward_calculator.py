@@ -3,7 +3,10 @@ from __future__ import annotations
 from decimal import ROUND_HALF_EVEN, Decimal, localcontext
 
 from app.schemas.finding import FindingSeverity
-from app.schemas.finding_cluster import FindingCluster
+from app.schemas.finding_cluster import (
+    FindingCluster,
+    is_finding_cluster_reward_eligible,
+)
 from app.schemas.task_finding_reward import (
     FINDING_SCORE_QUANTUM,
     UNIQUENESS_QUANTUM,
@@ -88,6 +91,10 @@ def value_finding_cluster(
     cluster: FindingCluster,
     config: TaskFindingRewardConfig,
 ) -> FindingClusterValue:
+    if not is_finding_cluster_reward_eligible(cluster):
+        raise FindingValuationError(
+            "FindingCluster lacks resolved accepted validation truth"
+        )
     operator_count = len({member.operator_id for member in cluster.members})
     if operator_count != cluster.distinct_operator_count:
         raise FindingValuationError(

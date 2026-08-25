@@ -1,0 +1,13 @@
+{
+  "applied_at": "2026-08-24T20:06:51.501665Z",
+  "assignment_id": "assignment_72bfbe6d0462bdb6ec77ec8c365449c8",
+  "assignment_mode": "shadow",
+  "category": "access_control",
+  "node_id": "096f3f8a-0fb0-4d95-9e5c-56cced09bb75",
+  "project_id": "6f1f735f-a42c-4940-9fa5-5c36d99624fe",
+  "routing_id": "01bd7d1c-a333-4643-893c-cb99d329eafb",
+  "selection_type": "exploration",
+  "source_fingerprint": "3e55455587c645ba6cab8c90fcd6b5436193eee9f1d0a9bd581b468cf24d909d",
+  "subnet_id": "subnet_access_control",
+  "usage_event_id": "routing_usage_assignment_72bfbe6d0462bdb6ec77ec8c365449c8"
+}

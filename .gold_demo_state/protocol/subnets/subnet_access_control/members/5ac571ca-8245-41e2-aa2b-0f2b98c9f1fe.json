@@ -1,0 +1,28 @@
+{
+  "accepted_unique_submissions": 5,
+  "administrative_lock": false,
+  "category": "access_control",
+  "category_score": 0.7185,
+  "category_score_id": "category_score_5ac571ca-8245-41e2-aa2b-0f2b98c9f1fe_access_control",
+  "category_score_source_fingerprint": "befa82c46f069e87b5d5312acef7c317e83316da70730eeb1b965b12659c3215",
+  "exploration_assignments": 0,
+  "finalized_submissions": 5,
+  "joined_at": "2026-08-25T00:27:04.438129Z",
+  "last_assigned_at": null,
+  "last_decision_id": "membership_decision_fee45257c447f5692bb37710bd9995da",
+  "last_evaluated_at": "2026-08-25T00:27:04.438129Z",
+  "membership_source_fingerprint": "fee45257c447f5692bb37710bd9995dac37fe330ea061e657826427733438fa2",
+  "membership_version": "subnet_membership_v0",
+  "node_id": "5ac571ca-8245-41e2-aa2b-0f2b98c9f1fe",
+  "performance_id": "performance_5ac571ca-8245-41e2-aa2b-0f2b98c9f1fe_access_control",
+  "policy_version": "membership_policy_v0",
+  "rank": null,
+  "status": "active",
+  "status_reason": "The node meets active membership requirements.",
+  "status_reason_codes": [
+    "eligible_active"
+  ],
+  "status_updated_at": "2026-08-25T00:27:04.438129Z",
+  "subnet_id": "subnet_access_control",
+  "updated_at": "2026-08-25T00:27:04.438129Z"
+}

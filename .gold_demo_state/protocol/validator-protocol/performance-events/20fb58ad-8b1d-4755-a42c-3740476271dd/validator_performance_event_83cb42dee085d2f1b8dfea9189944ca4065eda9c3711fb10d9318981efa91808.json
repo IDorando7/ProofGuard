@@ -1,0 +1,22 @@
+{
+  "assignment_role": "authoritative",
+  "category": "reentrancy",
+  "event_version": "validator_performance_event_v1",
+  "final_validation_consensus_id": "validation_consensus_1a8b5a2b978130c2fefb311da27ba3afc20dfef4cfffc1ea733fe389a3a5f090",
+  "finalized_at": "2026-08-25T00:27:46.361429Z",
+  "finding_cluster_id": "finding_cluster_78804a9cdfbc12251ebe35dab86bb610cf7d91637f105c4a8a864d5bd231115c",
+  "impact_correct": false,
+  "operator_id": "demo-validator-op-12",
+  "project_id": "962a8d18-d239-4a2d-90d8-b98ed34dafd3",
+  "protocol_compliant": true,
+  "reproduction_correct": true,
+  "root_cause_correct": false,
+  "routing_id": "b5a7816c-bb38-4015-9109-901c667db96d",
+  "severity_correct": false,
+  "source_fingerprint": "5ad35d66233589686353299abe58d2dd2b9cefa0c5699d41109d1ab9f72f2f08",
+  "validation_quality_assessment_id": "validation_quality_assessment_f7a0d202df7b3db44da7d44c1edbf61bf750d7ae8ef576004bac53793a29191e",
+  "validation_quality_score": "0.250000",
+  "validator_node_id": "20fb58ad-8b1d-4755-a42c-3740476271dd",
+  "validator_performance_event_id": "validator_performance_event_83cb42dee085d2f1b8dfea9189944ca4065eda9c3711fb10d9318981efa91808",
+  "validity_correct": false
+}

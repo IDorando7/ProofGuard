@@ -24,6 +24,10 @@ from app.services.agent_execution_service import (
     list_agent_executions,
     require_agent_execution,
 )
+from app.services.local_agent_executor import (
+    LocalAgentRegistry,
+    get_local_agent_registry,
+)
 from app.services.audit_day2_handlers import (
     AgentExecutionStageHandler,
     ProjectPreparationStageHandler,
@@ -132,6 +136,7 @@ def start_project_audit_run(
     payload: AuditRunActionRequest | None = Body(default=None),
     db: Session = Depends(get_db),
     root: Path = Depends(protocol_data_root),
+    registry: LocalAgentRegistry = Depends(get_local_agent_registry),
 ) -> AuditRun:
     del payload
     project = get_project_or_404(db, project_id)
@@ -151,7 +156,10 @@ def start_project_audit_run(
             stage_handlers={
                 AuditStage.PREPARING: ProjectPreparationStageHandler(workspace),
                 AuditStage.ROUTING: RoutingStageHandler(workspace),
-                AuditStage.EXECUTING_AGENTS: AgentExecutionStageHandler(workspace),
+                AuditStage.EXECUTING_AGENTS: AgentExecutionStageHandler(
+                    workspace,
+                    registry=registry,
+                ),
             },
             stop_after_stage=AuditStage.EXECUTING_AGENTS,
         ).run(project_id, audit_run_id)

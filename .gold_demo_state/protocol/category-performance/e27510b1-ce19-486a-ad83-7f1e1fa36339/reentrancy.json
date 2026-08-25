@@ -1,0 +1,54 @@
+{
+  "category": "reentrancy",
+  "contribution_stats": {
+    "accepted_average_contribution_score": 92.0,
+    "accepted_contribution_score_total": 552.0,
+    "accepted_maximum_contribution_score": 92.0,
+    "accepted_minimum_contribution_score": 92.0,
+    "average_contribution_score": 92.0,
+    "maximum_contribution_score": 92.0,
+    "minimum_contribution_score": 92.0,
+    "total_contribution_score": 552.0
+  },
+  "counts": {
+    "accepted_independent_duplicate_submissions": 0,
+    "accepted_unique_submissions": 6,
+    "duplicate_submissions": 0,
+    "insufficient_evidence_submissions": 0,
+    "out_of_scope_submissions": 0,
+    "rejected_submissions": 0,
+    "reproduced_submissions": 6,
+    "reproduction_attempts": 6,
+    "reward_eligible_submissions": 6,
+    "rewarded_submissions": 0,
+    "submission_duplicate_spam": 0,
+    "total_finalized_submissions": 6,
+    "unsafe_submissions": 0,
+    "unsupported_submissions": 0
+  },
+  "created_at": "2026-08-25T00:27:04.350252Z",
+  "first_activity_at": "2026-08-25T00:27:04.282586Z",
+  "last_activity_at": "2026-08-25T00:27:04.345373Z",
+  "node_id": "e27510b1-ce19-486a-ad83-7f1e1fa36339",
+  "performance_id": "performance_e27510b1-ce19-486a-ad83-7f1e1fa36339_reentrancy",
+  "performance_version": "category_performance_v0",
+  "rebuilt_at": "2026-08-25T00:27:04.350252Z",
+  "source_event_ids": [
+    "3d228563-0582-4fa7-b6f9-a45e994c32ec",
+    "c3cd1dc2-ae6f-4d8e-a120-c6babe51ddcb",
+    "cf9653e1-209c-4897-8055-4179f469b6f7",
+    "d0379f11-1681-41c2-9f1d-ed4351f265b9",
+    "f06b1ffa-51f0-425d-9334-503736a935d9",
+    "ffd28b05-a170-4e23-9bd1-8f203841bcd2"
+  ],
+  "source_fingerprint": "f742e3edcab73856f43769475d36fc70dcfe6b11c39751886a0761ecbd44bd64",
+  "source_submission_ids": [
+    "08ada09d-1ba6-4d14-b0e1-8d3cdbcc61bb",
+    "44cdcb3a-9cd4-45b6-ab64-9f3b887ab62d",
+    "6e18fd5a-8ae1-4e25-97e9-ebaf2b691cf3",
+    "8dadb25b-a2e3-4c09-a666-5aee30907732",
+    "9742f60a-8ccd-4ffc-92d7-f5dcd9b439cd",
+    "f8757d76-93ec-4909-adca-028aa2ffc101"
+  ],
+  "updated_at": "2026-08-25T00:27:04.350351Z"
+}

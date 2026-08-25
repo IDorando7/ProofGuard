@@ -1,0 +1,22 @@
+{
+  "artifact_refs": [],
+  "audit_event_id": "audit_event_f0872263fe5eddf9b25d25ce348bfbc8638507fb4db4609f8069d18ff7a9896c",
+  "audit_run_id": "audit_run_cc602281b4994b1db77b359d212c5853",
+  "category": null,
+  "created_at": "2026-08-25T00:27:06.603040Z",
+  "entity_id": "audit_run_cc602281b4994b1db77b359d212c5853",
+  "entity_type": "audit_run",
+  "event_level": "INFO",
+  "event_type": "STAGE_STARTED",
+  "event_version": "audit_event_v1",
+  "message": "Audit stage EXECUTING_AGENTS started.",
+  "metadata": {
+    "attempt_count": 1,
+    "progress_current": 0,
+    "progress_total": null
+  },
+  "node_id": null,
+  "operator_id": null,
+  "sequence_number": 15,
+  "stage": "EXECUTING_AGENTS"
+}

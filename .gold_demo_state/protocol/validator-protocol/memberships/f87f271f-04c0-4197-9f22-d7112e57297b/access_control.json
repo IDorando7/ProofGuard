@@ -1,0 +1,32 @@
+{
+  "category": "access_control",
+  "created_at": "2026-08-25T00:27:44.913715Z",
+  "evaluated_at": "2026-08-25T00:27:44.913715Z",
+  "membership_policy": {
+    "active_minimum_resolved": 5,
+    "active_minimum_score": "0.600000",
+    "active_minimum_validity_samples": 3,
+    "active_retention_score": "0.500000",
+    "expert_minimum_reproduction_accuracy": "0.750000",
+    "expert_minimum_reproduction_samples": 3,
+    "expert_minimum_resolved": 10,
+    "expert_minimum_score": "0.800000",
+    "expert_minimum_validity_accuracy": "0.800000",
+    "expert_retention_score": "0.700000",
+    "policy_version": "validator_membership_policy_v1",
+    "probation_minimum_resolved": 3,
+    "probation_minimum_score": "0.400000"
+  },
+  "membership_version": "validator_membership_v1",
+  "operator_id": "demo-validator-op-03",
+  "previous_status": null,
+  "reason_codes": [
+    "building_resolved_history"
+  ],
+  "score_source_fingerprint": "d5c478f01f0dcf6b9b4ea0ca592d7bea02d5575965eb129220ae17a5588db0fc",
+  "source_fingerprint": "7a198ea867a23436bd90694eec75544d4a1eed85601f51b13ded08118701e7cf",
+  "status": "candidate",
+  "validator_category_score_id": "validator_category_score_30392810250415b228f2c7413c0b17782981a177fa910c0e9d517721a904b091",
+  "validator_membership_id": "validator_membership_761228997eb9542b640bd33cca84c39d91d14c5be4a2c79bffacbbce3580e62b",
+  "validator_node_id": "f87f271f-04c0-4197-9f22-d7112e57297b"
+}

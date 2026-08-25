@@ -1,0 +1,35 @@
+{
+  "index": 68,
+  "name": "validator_attestation_validator_assignment_673da65ea118982f9caf49e89a2dd26fc26d9f457c5c2c218dbadb8d871972c7_rejected",
+  "method": "POST",
+  "path": "/projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validator-assignments/validator_assignment_673da65ea118982f9caf49e89a2dd26fc26d9f457c5c2c218dbadb8d871972c7/attestations",
+  "status_code": 200,
+  "response": {
+    "attestation_id": "validation_attestation_3fe1d1b4a00a243688845ee6b7792da5f7505131b4c23df7eca48cefe286923b",
+    "attestation_protocol_version": "validation_attestation_v1",
+    "validator_assignment_id": "validator_assignment_673da65ea118982f9caf49e89a2dd26fc26d9f457c5c2c218dbadb8d871972c7",
+    "project_id": "962a8d18-d239-4a2d-90d8-b98ed34dafd3",
+    "routing_id": "b5a7816c-bb38-4015-9109-901c667db96d",
+    "finding_cluster_id": "finding_cluster_5661df4d88d8554ac9322b1702bc772ec197dcb65f1aeeca9991b512f11c0ee6",
+    "validator_node_id": "38e6cbb6-defa-43ce-8a6c-f9fe7af5979d",
+    "validator_operator_id": "demo-validator-op-05",
+    "assignment_role": "authoritative",
+    "validity_decision": "rejected",
+    "root_cause_decision": "mismatch",
+    "reproduction_decision": "reproduced",
+    "normalized_severity": null,
+    "impact_decision": "rejected",
+    "reason_codes": [],
+    "evidence_references": [
+      "finding_cluster_5661df4d88d8554ac9322b1702bc772ec197dcb65f1aeeca9991b512f11c0ee6",
+      "validator_assignment_673da65ea118982f9caf49e89a2dd26fc26d9f457c5c2c218dbadb8d871972c7",
+      "validator_reproduction_e5789d587d9bece1e4cb5d08a07c6754deb1d67744e6aea6e1b2f17d6f35ba54",
+      "validator_week3_result_abf2cca0d302ecea3e1ae19c5862695f0c6c42b3904c39008fbb97abc8b8ecca"
+    ],
+    "validator_reproduction_id": "validator_reproduction_e5789d587d9bece1e4cb5d08a07c6754deb1d67744e6aea6e1b2f17d6f35ba54",
+    "source_fingerprint": "3a5415ea18fb4e625c96efb7f0f114c869c3f2dde4247792b864e9ee0e85e6ce",
+    "status": "finalized",
+    "created_at": "2026-08-25T00:27:43.922603Z",
+    "finalized_at": "2026-08-25T00:27:43.922603Z"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "agent_name": "access_control_agent",
+  "attack_path": "An unauthorized caller can invoke the function directly.",
+  "category": "access_control",
+  "conditions": null,
+  "confidence": 0.75,
+  "contracts": [
+    "src/ProofGuardDemoVault.sol"
+  ],
+  "finding_id": "finding_6bd6905aba721742783b879563570b204a85f794",
+  "functions": [
+    "setAdmin"
+  ],
+  "impact": "Protocol configuration or privileged state can be changed by anyone.",
+  "poc_file": null,
+  "poc_type": "none",
+  "project_id": "962a8d18-d239-4a2d-90d8-b98ed34dafd3",
+  "recommended_fix": "Restrict the function with onlyOwner, role checks, or equivalent authorization.",
+  "reproduction_steps": [
+    "Call setAdmin from an address without privileges."
+  ],
+  "root_cause": "Privileged function is externally callable without authorization.",
+  "severity": "High",
+  "status": "candidate",
+  "title": "Missing access control on setAdmin"
+}

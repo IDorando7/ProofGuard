@@ -1,0 +1,106 @@
+{
+  "index": 99,
+  "name": "create_week7_miner_reward_cycle",
+  "method": "POST",
+  "path": "/projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/task-reward-cycles",
+  "status_code": 201,
+  "response": {
+    "processing_status": "created",
+    "cycle": {
+      "reward_cycle_id": "week7_task_reward_cycle_edbe00ed5e73e30196533fba9376a55b",
+      "cycle_version": "week7_task_reward_cycle_v1",
+      "policy_version": "scalable_multi_agent_reward_v1",
+      "configuration_version": "week7_reward_cycle_config_v1",
+      "policy_snapshot": {
+        "fingerprint_version": "reward_cycle_fingerprint_v1",
+        "week7_cycle_policy_version": "scalable_multi_agent_reward_v1",
+        "week7_cycle_configuration_version": "week7_reward_cycle_config_v1",
+        "task_budget_policy_version": "task_reward_v1",
+        "task_budget_configuration_version": "task_reward_config_v1",
+        "task_reward_pool": {
+          "miner_share": "0.70",
+          "validator_share": "0.20",
+          "protocol_share": "0.10"
+        },
+        "finding_cluster_policy_version": "root_cause_cluster_v1",
+        "report_quality_policy_version": "report_quality_policy_v1",
+        "report_quality_configuration_version": "report_quality_config_v1",
+        "report_quality": {
+          "correctness": "0.35",
+          "poc_quality": "0.25",
+          "root_cause": "0.20",
+          "impact": "0.10",
+          "fix": "0.10"
+        },
+        "task_finding_policy_version": "finding_cluster_value_v1",
+        "task_finding_configuration_version": "task_finding_allocation_config_v1",
+        "task_finding_reward": {
+          "severity_weights": {
+            "critical": "16",
+            "high": "8",
+            "medium": "3",
+            "low": "1",
+            "informational": "0"
+          },
+          "uniqueness": {
+            "coefficient": "0.20",
+            "floor": "0.50"
+          },
+          "default_allocation_scope": "category_isolated"
+        },
+        "task_operator_policy_version": "operator_cluster_payout_v1",
+        "task_operator_configuration_version": "operator_cluster_payout_config_v1",
+        "task_operator_reward": {
+          "duplicates": {
+            "top_k": 5
+          },
+          "chief_finder": {
+            "bonus_percentage": "0.05",
+            "quality_percentage": "0.95",
+            "quality_threshold": "0.80"
+          }
+        },
+        "protocol_quantum": "0.000001",
+        "rounding_policy": "largest_remainder_round_down_v1"
+      },
+      "reward_domain": "client_task",
+      "reward_unit": "protocol_points",
+      "project_id": "962a8d18-d239-4a2d-90d8-b98ed34dafd3",
+      "routing_id": "b5a7816c-bb38-4015-9109-901c667db96d",
+      "routing_source_fingerprint": "eb362a83276633b325d4a1e3b571825a7d1841391cbd835b58a33e6351c8ff08",
+      "task_reward_budget_id": "task_reward_budget_deaa492ad06fde97154506c63da4af66",
+      "task_reward_budget_source_fingerprint": "deaa492ad06fde97154506c63da4af66bc689b74633331263fa0157047e887d3",
+      "status": "draft",
+      "allocation_scope": "global",
+      "category_weights": {},
+      "total_budget_points": "10000",
+      "miner_pool_points": "7000.000000",
+      "validator_pool_points": "2000.000000",
+      "protocol_pool_points": "1000.000000",
+      "finding_calculation_id": null,
+      "finding_calculation_source_fingerprint": null,
+      "operator_calculation_id": null,
+      "operator_calculation_source_fingerprint": null,
+      "distributed_miner_points": "0.000000",
+      "undistributed_miner_points": "7000.000000",
+      "reward_event_count": 0,
+      "rewarded_operator_count": 0,
+      "rewarded_cluster_count": 0,
+      "chief_finder_count": 0,
+      "reward_event_ids": [],
+      "request_fingerprint": "edbe00ed5e73e30196533fba9376a55b06a9357273754d9a64d0d6a4e5b991b3",
+      "calculation_fingerprint": null,
+      "finalization_source_fingerprint": null,
+      "calculation_revision": 0,
+      "superseded_calculation_fingerprints": [],
+      "description": "ProofGuard Gold demo miner reward stream",
+      "created_at": "2026-08-25T00:27:46.445296Z",
+      "updated_at": "2026-08-25T00:27:46.445296Z",
+      "calculated_at": null,
+      "finalized_at": null
+    },
+    "reward_events_created": 0,
+    "reward_events_existing": 0,
+    "message": "Draft Week 7 client-task reward cycle created; no reward was calculated or paid."
+  }
+}

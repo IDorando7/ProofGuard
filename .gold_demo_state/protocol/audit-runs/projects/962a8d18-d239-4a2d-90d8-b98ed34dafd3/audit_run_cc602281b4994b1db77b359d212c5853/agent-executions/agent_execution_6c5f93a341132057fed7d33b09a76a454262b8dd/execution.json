@@ -1,0 +1,32 @@
+{
+  "agent_execution_id": "agent_execution_6c5f93a341132057fed7d33b09a76a454262b8dd",
+  "agent_execution_version": "agent_execution_v1",
+  "agent_type": "AccessControlAgent",
+  "agent_version": "access_control_static_v1",
+  "attempt_count": 1,
+  "audit_run_id": "audit_run_cc602281b4994b1db77b359d212c5853",
+  "category": "access_control",
+  "completed_at": "2026-08-25T00:27:06.624704Z",
+  "created_at": "2026-08-25T00:27:06.606980Z",
+  "duration_ms": 16,
+  "error_code": null,
+  "error_message": null,
+  "executor_type": "local",
+  "finding_count": 1,
+  "finding_ids": [
+    "finding_6bd6905aba721742783b879563570b204a85f794"
+  ],
+  "node_id": "176e9d08-96b1-4381-a83a-ce0c95429e4b",
+  "operator_id": "demo-agent-access-op-01",
+  "project_id": "962a8d18-d239-4a2d-90d8-b98ed34dafd3",
+  "routing_assignment_id": "assignment_3c743afc4af291ce84f7fd1bfba2f124",
+  "routing_id": "b5a7816c-bb38-4015-9109-901c667db96d",
+  "source_fingerprint": "3c0da51da89ecb06ff54ca94b9735eb6c96f57b79f8d5514b0e977c2dd8194a4",
+  "started_at": "2026-08-25T00:27:06.607972Z",
+  "status": "COMPLETED",
+  "submission_count": 1,
+  "submission_ids": [
+    "16014a4d-a000-44ad-83c6-dbe8017b936e"
+  ],
+  "updated_at": "2026-08-25T00:27:06.624704Z"
+}

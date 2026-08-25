@@ -1,0 +1,27 @@
+{
+  "created_at": "2026-08-25T00:27:43.689590Z",
+  "dispute_version": "validation_dispute_v1",
+  "escalation_committee_id": "validator_committee_7943551b4b669442d0489599ab2531a45dcf0e9c950bffb8b6cd7e5b1a2ab5aa",
+  "escalation_policy": {
+    "additional_authoritative_validators": 4,
+    "exclude_all_prior_validator_operators": true,
+    "max_escalation_rounds": 1,
+    "policy_version": "validation_escalation_policy_v1",
+    "shadow_slots": 0
+  },
+  "escalation_round_id": "validation_round_77dd19273e993e02183f0980ccbda3dc51fb66e00c909a0a09ae4940df932a90",
+  "finding_cluster_id": "finding_cluster_5661df4d88d8554ac9322b1702bc772ec197dcb65f1aeeca9991b512f11c0ee6",
+  "project_id": "962a8d18-d239-4a2d-90d8-b98ed34dafd3",
+  "reason_codes": [
+    "validity_disagreement"
+  ],
+  "resolution_consensus_id": "validation_consensus_c558e32a0ad07f8a4c11b4492ccf2209f2c6cbbdd5f3de522a1a6c0ec6e8dbed",
+  "resolved_at": "2026-08-25T00:27:44.507868Z",
+  "routing_id": "b5a7816c-bb38-4015-9109-901c667db96d",
+  "source_fingerprint": "419e07601cec5e2f33085224ac87134873ebaf09036f4c9b905cc1f87f0f51b6",
+  "status": "resolved",
+  "triggering_consensus_id": "validation_consensus_839f332b48de3ae18779f349413b668ddc38712d394bb2426992ba1c6e11afa8",
+  "triggering_round_id": "validation_round_ff8726a6d37f21dd562f39f3ff100965426ae6a737bc50c403418981e3fdc3b7",
+  "updated_at": "2026-08-25T00:27:44.507864Z",
+  "validation_dispute_id": "validation_dispute_59014e3b633726baf822479b42cc1732002e912430c68e22c6967d29f621ab5b"
+}

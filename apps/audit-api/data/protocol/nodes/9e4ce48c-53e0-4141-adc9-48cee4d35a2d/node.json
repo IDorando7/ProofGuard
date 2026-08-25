@@ -1,0 +1,26 @@
+{
+  "display_name": "Demo Discovery Hybrid 02",
+  "public_key": null,
+  "supported_categories": [
+    "access_control",
+    "reentrancy"
+  ],
+  "description": "Synthetic demo hybrid used on discovery side",
+  "node_id": "9e4ce48c-53e0-4141-adc9-48cee4d35a2d",
+  "node_type": "hybrid",
+  "operator_id": "demo-agent-hybrid-op-02",
+  "status": "active",
+  "reputation_score": 0.5,
+  "statistics": {
+    "total_submissions": 0,
+    "accepted_submissions": 0,
+    "rejected_submissions": 0,
+    "duplicate_submissions": 0,
+    "out_of_scope_submissions": 0,
+    "unsafe_submissions": 0
+  },
+  "status_reason": "Node registered.",
+  "created_at": "2026-08-24T19:52:01.407519Z",
+  "updated_at": "2026-08-24T19:52:01.407519Z",
+  "status_updated_at": "2026-08-24T19:52:01.407519Z"
+}

@@ -1,0 +1,16 @@
+{
+  "category": "cross_chain",
+  "created_at": "2026-08-24T19:52:01.413789Z",
+  "description": null,
+  "exploration_ratio": 0.2,
+  "maximum_active_nodes": 20,
+  "minimum_category_score": 0.6,
+  "minimum_finalized_submissions": 5,
+  "name": "Cross Chain Subnet",
+  "registry_version": "subnet_registry_v0",
+  "status": "active",
+  "status_reason": "Subnet registered.",
+  "status_updated_at": "2026-08-24T19:52:01.413789Z",
+  "subnet_id": "subnet_cross_chain",
+  "updated_at": "2026-08-24T19:52:01.413789Z"
+}

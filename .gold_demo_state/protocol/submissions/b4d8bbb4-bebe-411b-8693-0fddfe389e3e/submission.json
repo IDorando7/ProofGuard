@@ -1,0 +1,27 @@
+{
+  "submission_id": "b4d8bbb4-bebe-411b-8693-0fddfe389e3e",
+  "project_id": "962a8d18-d239-4a2d-90d8-b98ed34dafd3",
+  "finding_id": "finding_501d71ccf9b08e7b76a872a9fcec4be5584b10b5",
+  "node_id": "521d144b-5e3d-43cf-9a84-481365f5a192",
+  "node_type": "agent",
+  "agent_name": "AccessControlAgent",
+  "agent_version": "access_control_static_v1",
+  "category": "access_control",
+  "finding_hash": "ed44d9d90507eb22d3ef4cf46604c36b49eba16bcdca95838e4289b2c0881e45",
+  "status": "submitted",
+  "reproduction_id": null,
+  "validation_id": null,
+  "routing_id": "b5a7816c-bb38-4015-9109-901c667db96d",
+  "routing_assignment_id": "assignment_7dfa8e6a5f34934cf28cbcbcbc23da9c",
+  "reward_status": "pending",
+  "metadata": {
+    "audit_run_id": "audit_run_cc602281b4994b1db77b359d212c5853",
+    "agent_execution_id": "agent_execution_347262a42a82e6bb405f6f7daf1e5cba8cd8f387",
+    "candidate_fingerprint": "068530e97db22d5a473ff62bf11d3c16268ca224df0b23b3e4c98c0ef7253cae"
+  },
+  "submitted_at": "2026-08-25T00:27:06.645790Z",
+  "created_at": "2026-08-25T00:27:06.645790Z",
+  "updated_at": "2026-08-25T00:27:06.645790Z",
+  "status_updated_at": "2026-08-25T00:27:06.645790Z",
+  "status_reason": "Finding submission created."
+}

@@ -1,0 +1,21 @@
+{
+  "command": [
+    "forge",
+    "test",
+    "--match-test",
+    "testReentrantWithdrawal"
+  ],
+  "created_at": "2026-08-25T00:27:45.938504Z",
+  "duration_ms": 172,
+  "error_message": null,
+  "finding_id": "finding_7b7166f7eaa3109ca2fa1436caef11ab95d8e030",
+  "poc_file": "test/ProofGuardReentrancy.t.sol",
+  "project_id": "962a8d18-d239-4a2d-90d8-b98ed34dafd3",
+  "reproduction_id": "validator_week3_result_0e5d24a72e28245c68f956cdb780965e25044ae7003160feee31eda9d2825999",
+  "safety_notes": [],
+  "status": "reproduced",
+  "stderr": "",
+  "stdout": "Compiling 2 files with Solc 0.8.20\nSolc 0.8.20 finished in 13.20ms\nCompiler run successful!\n\nRan 1 test for test/ProofGuardReentrancy.t.sol:ProofGuardReentrancyTest\n[PASS] testReentrantWithdrawal() (gas: 757551)\nSuite result: ok. 1 passed; 0 failed; 0 skipped; finished in 259.34µs (103.33µs CPU time)\n\nRan 1 test suite in 4.31ms (259.34µs CPU time): 1 tests passed, 0 failed, 0 skipped (1 total tests)\n",
+  "test_name": "testReentrantWithdrawal",
+  "updated_at": "2026-08-25T00:27:46.112486Z"
+}

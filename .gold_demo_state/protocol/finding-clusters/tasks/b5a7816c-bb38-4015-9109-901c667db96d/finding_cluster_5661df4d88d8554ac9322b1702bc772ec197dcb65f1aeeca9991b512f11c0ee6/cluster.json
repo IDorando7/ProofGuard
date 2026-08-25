@@ -1,0 +1,73 @@
+{
+  "canonical_finding_id": "finding_6bd6905aba721742783b879563570b204a85f794",
+  "canonical_submission_id": "16014a4d-a000-44ad-83c6-dbe8017b936e",
+  "category": "access_control",
+  "claimed_severity": "High",
+  "cluster_version": "finding_cluster_v1",
+  "created_at": "2026-08-25T00:27:08.593609Z",
+  "distinct_operator_count": 4,
+  "final_severity": null,
+  "final_validation_consensus_id": "validation_consensus_c558e32a0ad07f8a4c11b4492ccf2209f2c6cbbdd5f3de522a1a6c0ec6e8dbed",
+  "final_validation_status": "rejected",
+  "finalized_at": "2026-08-25T00:27:08.603036Z",
+  "finding_cluster_id": "finding_cluster_5661df4d88d8554ac9322b1702bc772ec197dcb65f1aeeca9991b512f11c0ee6",
+  "members": [
+    {
+      "finding_id": "finding_6bd6905aba721742783b879563570b204a85f794",
+      "node_id": "176e9d08-96b1-4381-a83a-ce0c95429e4b",
+      "operator_id": "demo-agent-access-op-01",
+      "relation": "canonical",
+      "reproduction_id": null,
+      "source_fingerprint": "5fcfcafacd5ccfd05ccf85b32e8b4bae4d070582e3794034b4be3ca1643d6f4d",
+      "submission_id": "16014a4d-a000-44ad-83c6-dbe8017b936e",
+      "submitted_at": "2026-08-25T00:27:06.617788Z",
+      "validation_id": "08138f92-8a92-4d9e-9eb1-abf088bdec31"
+    },
+    {
+      "finding_id": "finding_501d71ccf9b08e7b76a872a9fcec4be5584b10b5",
+      "node_id": "521d144b-5e3d-43cf-9a84-481365f5a192",
+      "operator_id": "demo-agent-access-op-02",
+      "relation": "independent_duplicate",
+      "reproduction_id": null,
+      "source_fingerprint": "ae3455dcb87fe9df1a5abb9726924f4b0c679036ed9a84c265e7dc6681e60480",
+      "submission_id": "b4d8bbb4-bebe-411b-8693-0fddfe389e3e",
+      "submitted_at": "2026-08-25T00:27:06.645790Z",
+      "validation_id": "45cdd941-36ad-45ac-9e51-35246c6b427a"
+    },
+    {
+      "finding_id": "finding_36a1220a1427cb5a5b154b599aee3f1bde4fb06f",
+      "node_id": "5ac571ca-8245-41e2-aa2b-0f2b98c9f1fe",
+      "operator_id": "demo-agent-access-op-03",
+      "relation": "independent_duplicate",
+      "reproduction_id": null,
+      "source_fingerprint": "4896c5f38d16c1e14dff285106be57e27f9d19516c7723f2c854504e36632927",
+      "submission_id": "7b755542-32c1-48d0-a796-994f3d9942d0",
+      "submitted_at": "2026-08-25T00:27:06.674070Z",
+      "validation_id": "62744fbe-1f71-425c-a7fb-d87ff0ba0147"
+    },
+    {
+      "finding_id": "finding_dea82a105ed867c7e1073019ebebca913c254877",
+      "node_id": "36657ae9-4111-4eb0-a420-b24f5195af21",
+      "operator_id": "demo-agent-access-op-04",
+      "relation": "independent_duplicate",
+      "reproduction_id": null,
+      "source_fingerprint": "412a6de9c299b2c024ce1013607d209142e85efce092dc33286c64fa4e8bbd44",
+      "submission_id": "98db4580-b229-4e6d-a01e-11fa6b300e4c",
+      "submitted_at": "2026-08-25T00:27:06.700105Z",
+      "validation_id": "a5fbe335-e992-46e5-a2af-e43197993551"
+    }
+  ],
+  "policy_version": "root_cause_cluster_v1",
+  "project_id": "962a8d18-d239-4a2d-90d8-b98ed34dafd3",
+  "report_count": 4,
+  "root_cause_fingerprint": "d9a089b32ff6487f184129a085dc37bd618648dc72e978c10541bcbcc82eb004",
+  "root_cause_key": "findingcategoryaccess_control:src/ProofGuardDemoVault.sol:setadmin",
+  "routing_id": "b5a7816c-bb38-4015-9109-901c667db96d",
+  "source_fingerprint": "29fd40dc99159c9048852f3f8c119d248d86f56f5995455675144ed1c163823c",
+  "status": "finalized",
+  "updated_at": "2026-08-25T00:27:44.509036Z",
+  "validation_authority": "validator_consensus",
+  "validation_resolution_source_fingerprint": "349b61ef67949c172c6fd1ec61e00744a2805f1a6f9877061da74d0f1f729a57",
+  "validator_consensus_outcome": "rejected",
+  "validator_consensus_severity": null
+}

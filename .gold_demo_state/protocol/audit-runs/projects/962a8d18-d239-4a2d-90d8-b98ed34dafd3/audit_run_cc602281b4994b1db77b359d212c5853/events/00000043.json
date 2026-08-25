@@ -1,0 +1,24 @@
+{
+  "artifact_refs": [],
+  "audit_event_id": "audit_event_6280ccc54f554b25f744c9120199f73654ac93c1c9bd8d65857f03a283e6b7f8",
+  "audit_run_id": "audit_run_cc602281b4994b1db77b359d212c5853",
+  "category": "reentrancy",
+  "created_at": "2026-08-25T00:27:06.762194Z",
+  "entity_id": "0446a9f6-2804-47f8-8f08-02149021686d",
+  "entity_type": "submission",
+  "event_level": "INFO",
+  "event_type": "SUBMISSION_CREATED",
+  "event_version": "audit_event_v1",
+  "message": "Protocol submission is available for an agent finding.",
+  "metadata": {
+    "execution_id": "agent_execution_dd6e2e8153f7c3d61b272c839ea65c7b1e46cba5",
+    "finding_hash": "de727496b7dfb6b806d27e9d4bb15836f161e6139b6335a379b22ef43513c0a6",
+    "finding_id": "finding_84449c71f82795487531d68e85aba69626155049",
+    "submission_id": "0446a9f6-2804-47f8-8f08-02149021686d",
+    "submission_status": "submitted"
+  },
+  "node_id": "d8253257-0781-4036-8260-740b049f526f",
+  "operator_id": "demo-agent-reentrancy-op-01",
+  "sequence_number": 43,
+  "stage": "EXECUTING_AGENTS"
+}

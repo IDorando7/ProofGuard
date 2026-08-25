@@ -1,0 +1,175 @@
+{
+  "project_id": "962a8d18-d239-4a2d-90d8-b98ed34dafd3",
+  "project_name": "proofguard-e2e-demo",
+  "generated_at": "2026-08-25T00:27:46.634670Z",
+  "scope": {
+    "project_name": "proofguard-e2e-demo",
+    "language": "solidity",
+    "framework": "foundry",
+    "contracts_in_scope": [
+      "src/ProofGuardDemoVault.sol"
+    ],
+    "attack_categories": [
+      "access_control",
+      "reentrancy"
+    ]
+  },
+  "total_findings": 8,
+  "severity_breakdown": {
+    "Critical": 0,
+    "High": 8,
+    "Medium": 0,
+    "Low": 0,
+    "Informational": 0
+  },
+  "validation_breakdown": {
+    "accepted": 0,
+    "rejected": 0,
+    "duplicate": 0,
+    "needs_review": 8,
+    "out_of_scope": 0,
+    "insufficient_evidence": 0,
+    "unsafe_poc": 0,
+    "unsupported": 0
+  },
+  "accepted_findings": [],
+  "rejected_findings": [],
+  "duplicate_findings": [],
+  "needs_review_findings": [
+    {
+      "finding_id": "finding_36a1220a1427cb5a5b154b599aee3f1bde4fb06f",
+      "title": "Missing access control on setAdmin",
+      "category": "access_control",
+      "original_severity": "High",
+      "normalized_severity": "High",
+      "validation_status": "needs_review",
+      "confidence": 0.4,
+      "contract": "src/ProofGuardDemoVault.sol",
+      "function": "setAdmin",
+      "reproduction_status": null,
+      "poc_file": null,
+      "test_name": null,
+      "reason": "Finding has no reproduction result yet."
+    },
+    {
+      "finding_id": "finding_501d71ccf9b08e7b76a872a9fcec4be5584b10b5",
+      "title": "Missing access control on setAdmin",
+      "category": "access_control",
+      "original_severity": "High",
+      "normalized_severity": "High",
+      "validation_status": "needs_review",
+      "confidence": 0.4,
+      "contract": "src/ProofGuardDemoVault.sol",
+      "function": "setAdmin",
+      "reproduction_status": null,
+      "poc_file": null,
+      "test_name": null,
+      "reason": "Finding has no reproduction result yet."
+    },
+    {
+      "finding_id": "finding_6bd6905aba721742783b879563570b204a85f794",
+      "title": "Missing access control on setAdmin",
+      "category": "access_control",
+      "original_severity": "High",
+      "normalized_severity": "High",
+      "validation_status": "needs_review",
+      "confidence": 0.4,
+      "contract": "src/ProofGuardDemoVault.sol",
+      "function": "setAdmin",
+      "reproduction_status": "generated",
+      "poc_file": "test/ProofGuardAccessControl.t.sol",
+      "test_name": "testUnauthorizedSetAdmin",
+      "reason": "Finding has no reproduction result yet."
+    },
+    {
+      "finding_id": "finding_7b7166f7eaa3109ca2fa1436caef11ab95d8e030",
+      "title": "Potential reentrancy in withdrawAll",
+      "category": "reentrancy",
+      "original_severity": "High",
+      "normalized_severity": "High",
+      "validation_status": "needs_review",
+      "confidence": 0.4,
+      "contract": "src/ProofGuardDemoVault.sol",
+      "function": "withdrawAll",
+      "reproduction_status": "generated",
+      "poc_file": "test/ProofGuardReentrancy.t.sol",
+      "test_name": "testReentrantWithdrawal",
+      "reason": "Finding has no reproduction result yet."
+    },
+    {
+      "finding_id": "finding_84449c71f82795487531d68e85aba69626155049",
+      "title": "Potential reentrancy in withdrawAll",
+      "category": "reentrancy",
+      "original_severity": "High",
+      "normalized_severity": "High",
+      "validation_status": "needs_review",
+      "confidence": 0.4,
+      "contract": "src/ProofGuardDemoVault.sol",
+      "function": "withdrawAll",
+      "reproduction_status": null,
+      "poc_file": null,
+      "test_name": null,
+      "reason": "Finding has no reproduction result yet."
+    },
+    {
+      "finding_id": "finding_b0c22d74d4e815616681a3786a4dad185bedac73",
+      "title": "Potential reentrancy in withdrawAll",
+      "category": "reentrancy",
+      "original_severity": "High",
+      "normalized_severity": "High",
+      "validation_status": "needs_review",
+      "confidence": 0.4,
+      "contract": "src/ProofGuardDemoVault.sol",
+      "function": "withdrawAll",
+      "reproduction_status": null,
+      "poc_file": null,
+      "test_name": null,
+      "reason": "Finding has no reproduction result yet."
+    },
+    {
+      "finding_id": "finding_ca12198cfdb24ef6216aa2a3105300551f95907d",
+      "title": "Potential reentrancy in withdrawAll",
+      "category": "reentrancy",
+      "original_severity": "High",
+      "normalized_severity": "High",
+      "validation_status": "needs_review",
+      "confidence": 0.4,
+      "contract": "src/ProofGuardDemoVault.sol",
+      "function": "withdrawAll",
+      "reproduction_status": null,
+      "poc_file": null,
+      "test_name": null,
+      "reason": "Finding has no reproduction result yet."
+    },
+    {
+      "finding_id": "finding_dea82a105ed867c7e1073019ebebca913c254877",
+      "title": "Missing access control on setAdmin",
+      "category": "access_control",
+      "original_severity": "High",
+      "normalized_severity": "High",
+      "validation_status": "needs_review",
+      "confidence": 0.4,
+      "contract": "src/ProofGuardDemoVault.sol",
+      "function": "setAdmin",
+      "reproduction_status": null,
+      "poc_file": null,
+      "test_name": null,
+      "reason": "Finding has no reproduction result yet."
+    }
+  ],
+  "out_of_scope_findings": [],
+  "insufficient_evidence_findings": [],
+  "unsafe_poc_findings": [],
+  "unsupported_findings": [],
+  "limitations": [
+    "This report is generated by an MVP validator pipeline.",
+    "Accepted findings require reproduced evidence, but human review is still recommended.",
+    "Severity normalization uses deterministic heuristics.",
+    "The benchmark is synthetic and not a full security guarantee.",
+    "No blockchain reward or decentralized validator subnet is active yet."
+  ],
+  "notes": [
+    "Findings are grouped by validation status.",
+    "Reproduction evidence is included when available."
+  ]
+}

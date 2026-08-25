@@ -23,6 +23,7 @@ from app.schemas.finding_cluster import (
 )
 from app.schemas.reproduction import ReproductionStatus
 from app.schemas.routing import ProjectRoutingRecord, RoutingStatus
+from app.schemas.scope_validation import ScopeValidationStatus
 from app.schemas.submission import SubmissionRecord, SubmissionStatus
 from app.schemas.validation import DuplicateKind, ValidationDecision, ValidationStatus
 from app.services.deduplication_service import (
@@ -31,9 +32,14 @@ from app.services.deduplication_service import (
     extract_finding_candidate,
 )
 from app.services.finding_service import list_project_findings
-from app.services.node_registry_service import load_node
+from app.services.node_registry_service import load_node, node_supports_category
 from app.services.reproduction_service import load_reproduction_result
+from app.services.scope_validation_service import (
+    load_scope_from_project_workspace,
+    validate_finding_scope,
+)
 from app.services.submission_service import list_project_submissions
+from app.services.submission_service import compute_finding_hash
 from app.services.subnet_router_service import load_routing_record
 from app.services.validation_service import list_validation_decisions
 from app.utils.protocol_serialization import atomic_write_json, protocol_fingerprint
@@ -80,11 +86,12 @@ class FindingClusterStorageError(FindingClusterServiceError):
 class _EligibleSource:
     submission: SubmissionRecord
     finding: Finding
-    validation: ValidationDecision
+    validation: ValidationDecision | None
     reproduction_id: str | None
     reproduced: bool
     operator_id: str
     anchor_finding_id: str
+    root_cause_fingerprint: str
 
 
 def get_finding_clusters_root(protocol_data_root: Path) -> Path:
@@ -132,7 +139,7 @@ def build_finding_cluster_id(
 def build_member_source_payload(
     submission: SubmissionRecord,
     operator_id: str,
-    validation: ValidationDecision,
+    validation: ValidationDecision | None,
     reproduction_id: str | None,
     relation: FindingClusterMemberRelation,
 ) -> dict[str, Any]:
@@ -141,7 +148,7 @@ def build_member_source_payload(
         "finding_id": submission.finding_id,
         "node_id": submission.node_id,
         "operator_id": operator_id,
-        "validation_id": validation.validation_id,
+        "validation_id": validation.validation_id if validation is not None else None,
         "reproduction_id": reproduction_id,
         "submitted_at": submission.submitted_at,
         "relation": relation.value,
@@ -157,10 +164,13 @@ def build_cluster_source_payload(
     root_cause_fingerprint: str,
     canonical_finding_id: str,
     canonical_submission_id: str,
-    final_severity: FindingSeverity,
+    claimed_severity: FindingSeverity,
+    final_validation_status: ValidationStatus | None,
+    final_severity: FindingSeverity | None,
+    validation_authority: FindingClusterValidationAuthority,
     members: list[FindingClusterMember],
 ) -> dict[str, Any]:
-    return {
+    payload = {
         "cluster_version": FINDING_CLUSTER_VERSION,
         "policy_version": FINDING_CLUSTER_POLICY_VERSION,
         "dedup_policy_version": "deterministic_field_similarity_v0",
@@ -171,8 +181,6 @@ def build_cluster_source_payload(
         "root_cause_fingerprint": root_cause_fingerprint,
         "canonical_finding_id": canonical_finding_id,
         "canonical_submission_id": canonical_submission_id,
-        "final_validation_status": ValidationStatus.ACCEPTED.value,
-        "final_severity": final_severity.value,
         "members": [
             {
                 "submission_id": member.submission_id,
@@ -188,6 +196,30 @@ def build_cluster_source_payload(
             for member in members
         ],
     }
+    if validation_authority == FindingClusterValidationAuthority.LEGACY_BACKEND:
+        # Preserve the v1 fingerprint of already-reproduced legacy clusters.
+        payload.update(
+            {
+                "final_validation_status": ValidationStatus.ACCEPTED.value,
+                "final_severity": final_severity.value if final_severity else None,
+            }
+        )
+    else:
+        payload.update(
+            {
+                "claimed_severity": claimed_severity.value,
+                "final_validation_status": (
+                    final_validation_status.value
+                    if final_validation_status is not None
+                    else None
+                ),
+                "final_severity": (
+                    final_severity.value if final_severity is not None else None
+                ),
+                "validation_authority": validation_authority.value,
+            }
+        )
+    return payload
 
 
 def rebuild_finding_clusters_for_task(
@@ -213,14 +245,23 @@ def rebuild_finding_clusters_for_task(
     grouped: dict[tuple[str, str], list[_EligibleSource]] = {}
     for source in eligible:
         grouped.setdefault(
-            (source.submission.category, source.anchor_finding_id), []
+            (source.submission.category, source.root_cause_fingerprint), []
         ).append(source)
 
     clusters: list[FindingCluster] = []
     created = 0
     updated = 0
     unchanged = 0
-    for (category, anchor_id), sources in sorted(grouped.items()):
+    for (category, root_cause_fingerprint), sources in sorted(grouped.items()):
+        anchor_id = min(
+            sources,
+            key=lambda item: (
+                0 if item.reproduced else 1,
+                item.submission.submitted_at,
+                item.finding.finding_id,
+                item.submission.submission_id,
+            ),
+        ).anchor_finding_id
         anchor_finding = findings.get(anchor_id)
         if anchor_finding is None:
             raise FindingClusterInputError(
@@ -229,6 +270,10 @@ def rebuild_finding_clusters_for_task(
         if anchor_finding.category.value != category:
             raise FindingClusterInputError(
                 "Dedup relation cannot cross vulnerability categories"
+            )
+        if build_root_cause_fingerprint(anchor_finding) != root_cause_fingerprint:
+            raise FindingClusterInputError(
+                "Root-cause group does not match its canonical finding"
             )
         cluster, state = _materialize_cluster(
             protocol_data_root,
@@ -318,6 +363,7 @@ def attach_final_validator_consensus(
     validation_consensus_id: str,
     consensus_outcome: str,
     consensus_severity: FindingSeverity | None,
+    consensus_source_fingerprint: str,
 ) -> FindingCluster:
     """Attach new Week 8 authority without rewriting legacy cluster evidence."""
     cluster = load_finding_cluster(
@@ -330,17 +376,43 @@ def attach_final_validator_consensus(
             cluster.final_validation_consensus_id == validation_consensus_id
             and cluster.validator_consensus_outcome == consensus_outcome
             and cluster.validator_consensus_severity == consensus_severity
+            and cluster.validation_resolution_source_fingerprint
+            == consensus_source_fingerprint
         ):
             return cluster
         raise FindingClusterFinalizedError(
             "Finding cluster already references a different finalized validator consensus"
         )
-    updated = cluster.model_copy(
-        update={
+    final_status = {
+        "confirmed": ValidationStatus.ACCEPTED,
+        "rejected": ValidationStatus.REJECTED,
+        "out_of_scope": ValidationStatus.OUT_OF_SCOPE,
+        "insufficient_evidence": ValidationStatus.INSUFFICIENT_EVIDENCE,
+        "unsafe": ValidationStatus.UNSAFE_POC,
+        "unsupported": ValidationStatus.UNSUPPORTED,
+    }.get(consensus_outcome)
+    if final_status is None:
+        raise FindingClusterInputError(
+            "Only resolved validator consensus may be attached to a cluster"
+        )
+    updated = FindingCluster.model_validate(
+        {
+            **cluster.model_dump(),
             "validation_authority": FindingClusterValidationAuthority.VALIDATOR_CONSENSUS,
+            "final_validation_status": final_status,
+            "final_severity": (
+                consensus_severity
+                if final_status == ValidationStatus.ACCEPTED
+                else None
+            ),
             "final_validation_consensus_id": validation_consensus_id,
             "validator_consensus_outcome": consensus_outcome,
-            "validator_consensus_severity": consensus_severity,
+            "validator_consensus_severity": (
+                consensus_severity
+                if final_status == ValidationStatus.ACCEPTED
+                else None
+            ),
+            "validation_resolution_source_fingerprint": consensus_source_fingerprint,
             "updated_at": _utc_now(),
         }
     )
@@ -419,6 +491,7 @@ def _collect_eligible_sources(
     findings: dict[str, Finding],
     validations: dict[str, ValidationDecision],
 ) -> list[_EligibleSource]:
+    scope = load_scope_from_project_workspace(project_workspace)
     assignments = {
         assignment.assignment_id: assignment
         for result in routing.results
@@ -426,6 +499,10 @@ def _collect_eligible_sources(
     }
     candidates: list[_EligibleSource] = []
     for submission in list_project_submissions(protocol_data_root, project_id):
+        if submission.project_id != project_id:
+            raise FindingClusterInputError(
+                "Submission does not belong to the requested project"
+            )
         if submission.routing_id != routing.routing_id:
             continue
         if submission.status in {
@@ -433,7 +510,6 @@ def _collect_eligible_sources(
             SubmissionStatus.DUPLICATE,
             SubmissionStatus.OUT_OF_SCOPE,
             SubmissionStatus.INSUFFICIENT_EVIDENCE,
-            SubmissionStatus.NEEDS_REVIEW,
             SubmissionStatus.UNSAFE,
             SubmissionStatus.UNSUPPORTED,
             SubmissionStatus.PENALIZED,
@@ -454,46 +530,87 @@ def _collect_eligible_sources(
             )
         finding = findings.get(submission.finding_id)
         validation = validations.get(submission.finding_id)
-        if finding is None or validation is None:
-            continue
-        if validation.status != ValidationStatus.ACCEPTED:
-            continue
-        evidence = validation.evidence
-        independent = (
-            evidence.duplicate_kind == DuplicateKind.INDEPENDENT_ROOT_CAUSE
-            and evidence.is_valid_duplicate is True
-            and evidence.is_duplicate is True
-            and bool(evidence.canonical_finding_id)
-        )
-        if evidence.is_duplicate is True and not independent:
-            # Historical duplicate decisions are intentionally not guessed valid.
-            continue
-        if validation.project_id != project_id or validation.finding_id != finding.finding_id:
-            raise FindingClusterInputError("Validation identity does not match finding")
-        if submission.validation_id not in {None, validation.validation_id}:
-            raise FindingClusterInputError("Submission validation reference does not match")
+        if finding is None:
+            raise FindingClusterInputError(
+                "Routed submission references a missing finding"
+            )
+        if compute_finding_hash(project_id, finding) != submission.finding_hash:
+            raise FindingClusterInputError(
+                "Routed submission finding content changed after submission"
+            )
         if finding.project_id != project_id or finding.category.value != submission.category:
             raise FindingClusterInputError("Finding identity does not match submission")
+        scope_result = validate_finding_scope(finding, scope)
+        if validation is not None and (
+            validation.project_id != project_id
+            or validation.finding_id != finding.finding_id
+        ):
+            raise FindingClusterInputError("Validation identity does not match finding")
+        if validation is not None and submission.validation_id not in {
+            None,
+            validation.validation_id,
+        }:
+            raise FindingClusterInputError("Submission validation reference does not match")
+        if validation is not None and validation.status in {
+            ValidationStatus.REJECTED,
+            ValidationStatus.DUPLICATE,
+            ValidationStatus.OUT_OF_SCOPE,
+            ValidationStatus.INSUFFICIENT_EVIDENCE,
+            ValidationStatus.UNSAFE_POC,
+            ValidationStatus.UNSUPPORTED,
+        }:
+            continue
+        evidence = validation.evidence if validation is not None else None
         reproduction = load_reproduction_result(project_workspace, finding.finding_id)
         reproduced = (
             reproduction is not None
             and reproduction.status == ReproductionStatus.REPRODUCED
         )
-        if not reproduced:
+        legacy_accepted = (
+            validation is not None
+            and validation.status == ValidationStatus.ACCEPTED
+            and reproduced
+        )
+        if (
+            not legacy_accepted
+            and scope_result.status != ScopeValidationStatus.IN_SCOPE
+        ):
+            # Candidate admission must satisfy the current preliminary scope.
+            # A genuine legacy ACCEPTED+REPRODUCED source remains readable even
+            # when imported historical fixtures predate strict scope linkage.
             continue
-        if submission.reproduction_id not in {
-            None,
-            reproduction.reproduction_id if reproduction is not None else None,
-        }:
+        independent = (
+            legacy_accepted
+            and evidence is not None
+            and evidence.duplicate_kind == DuplicateKind.INDEPENDENT_ROOT_CAUSE
+            and evidence.is_valid_duplicate is True
+            and evidence.is_duplicate is True
+            and bool(evidence.canonical_finding_id)
+        )
+        if legacy_accepted and evidence is not None and evidence.is_duplicate is True and not independent:
+            # Historical duplicate decisions are intentionally not guessed valid.
+            continue
+        if submission.reproduction_id is not None and (
+            reproduction is None
+            or submission.reproduction_id != reproduction.reproduction_id
+        ):
             raise FindingClusterInputError("Submission reproduction reference does not match")
         node = load_node(protocol_data_root, submission.node_id)
         if node is None or not node.operator_id:
             raise FindingClusterInputError(
                 f"Operator identity is missing for node '{submission.node_id}'"
             )
+        if node.node_type.value not in {"agent", "hybrid"}:
+            raise FindingClusterInputError(
+                "Only agent-capable routed nodes may source finding clusters"
+            )
+        if not node_supports_category(node, submission.category):
+            raise FindingClusterInputError(
+                "Submission category is no longer compatible with its source node"
+            )
         anchor = (
             evidence.canonical_finding_id
-            if independent and evidence.canonical_finding_id
+            if independent and evidence is not None and evidence.canonical_finding_id
             else finding.finding_id
         )
         anchor = _resolve_anchor_finding_id(
@@ -502,17 +619,29 @@ def _collect_eligible_sources(
             findings,
             validations,
         )
+        anchor_finding = findings.get(anchor)
+        if anchor_finding is None:
+            raise FindingClusterInputError(
+                f"Canonical dedup finding '{anchor}' is missing"
+            )
         candidates.append(
             _EligibleSource(
                 submission=submission,
                 finding=finding,
                 validation=validation,
+                # Legacy accepted stores may have dropped the submission-level
+                # reference during their final status transition. Preserve their
+                # reproduced evidence, while keeping a later merely-generated
+                # validator artifact external to immutable cluster membership.
                 reproduction_id=(
-                    reproduction.reproduction_id if reproduction is not None else None
+                    reproduction.reproduction_id
+                    if legacy_accepted and reproduction is not None
+                    else submission.reproduction_id
                 ),
                 reproduced=reproduced,
                 operator_id=node.operator_id,
                 anchor_finding_id=anchor,
+                root_cause_fingerprint=build_root_cause_fingerprint(anchor_finding),
             )
         )
 
@@ -571,13 +700,29 @@ def _materialize_cluster(
     sources: list[_EligibleSource],
 ) -> tuple[FindingCluster, str]:
     canonical_source = _select_canonical_source(anchor_finding.finding_id, sources)
-    severity_value = canonical_source.validation.evidence.normalized_severity
-    try:
-        final_severity = FindingSeverity(severity_value)
-    except (TypeError, ValueError) as exc:
-        raise FindingClusterInputError(
-            "Canonical validator-approved normalized severity is required"
-        ) from exc
+    claimed_severity = canonical_source.finding.severity
+    legacy_authoritative = (
+        canonical_source.reproduced
+        and canonical_source.validation is not None
+        and canonical_source.validation.status == ValidationStatus.ACCEPTED
+    )
+    final_validation_status = (
+        ValidationStatus.ACCEPTED if legacy_authoritative else None
+    )
+    validation_authority = (
+        FindingClusterValidationAuthority.LEGACY_BACKEND
+        if legacy_authoritative
+        else FindingClusterValidationAuthority.PENDING_VALIDATOR_CONSENSUS
+    )
+    final_severity = None
+    if legacy_authoritative:
+        severity_value = canonical_source.validation.evidence.normalized_severity
+        try:
+            final_severity = FindingSeverity(severity_value)
+        except (TypeError, ValueError) as exc:
+            raise FindingClusterInputError(
+                "Canonical validator-approved normalized severity is required"
+            ) from exc
 
     ordered_sources = sorted(
         sources,
@@ -622,7 +767,10 @@ def _materialize_cluster(
         root_cause_fingerprint=root_cause_fingerprint,
         canonical_finding_id=canonical_source.finding.finding_id,
         canonical_submission_id=canonical_source.submission.submission_id,
+        claimed_severity=claimed_severity,
+        final_validation_status=final_validation_status,
         final_severity=final_severity,
+        validation_authority=validation_authority,
         members=members,
     )
     source_fingerprint = protocol_fingerprint(source_payload)
@@ -641,7 +789,10 @@ def _materialize_cluster(
         category=category,
         canonical_finding_id=canonical_source.finding.finding_id,
         canonical_submission_id=canonical_source.submission.submission_id,
+        final_validation_status=final_validation_status,
+        claimed_severity=claimed_severity,
         final_severity=final_severity,
+        validation_authority=validation_authority,
         root_cause_key=root_cause_key,
         root_cause_fingerprint=root_cause_fingerprint,
         members=members,

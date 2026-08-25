@@ -1,0 +1,32 @@
+{
+  "agent_execution_id": "agent_execution_bb87008fb07a4f5ba6152d6a0b830b4a55108891",
+  "agent_execution_version": "agent_execution_v1",
+  "agent_type": "ReentrancyAgent",
+  "agent_version": "reentrancy_static_v1",
+  "attempt_count": 1,
+  "audit_run_id": "audit_run_cc602281b4994b1db77b359d212c5853",
+  "category": "reentrancy",
+  "completed_at": "2026-08-25T00:27:06.733592Z",
+  "created_at": "2026-08-25T00:27:06.715884Z",
+  "duration_ms": 16,
+  "error_code": null,
+  "error_message": null,
+  "executor_type": "local",
+  "finding_count": 1,
+  "finding_ids": [
+    "finding_7b7166f7eaa3109ca2fa1436caef11ab95d8e030"
+  ],
+  "node_id": "8433bed6-bbfb-42d0-a1d8-d14bf9256387",
+  "operator_id": "demo-agent-reentrancy-op-03",
+  "project_id": "962a8d18-d239-4a2d-90d8-b98ed34dafd3",
+  "routing_assignment_id": "assignment_54b2b3dd780158e1c413ab7caf066383",
+  "routing_id": "b5a7816c-bb38-4015-9109-901c667db96d",
+  "source_fingerprint": "ed24ecd0879cbc3f9b06f506211aa5cca682f2d816c5db43d683ac3d3043f7f1",
+  "started_at": "2026-08-25T00:27:06.716840Z",
+  "status": "COMPLETED",
+  "submission_count": 1,
+  "submission_ids": [
+    "67a50de3-1134-463d-813d-632116fd6229"
+  ],
+  "updated_at": "2026-08-25T00:27:06.733592Z"
+}

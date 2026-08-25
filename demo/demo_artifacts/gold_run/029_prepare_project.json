@@ -1,0 +1,12 @@
+{
+  "index": 29,
+  "name": "prepare_project",
+  "method": "POST",
+  "path": "/projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/prepare",
+  "status_code": 200,
+  "response": {
+    "project_id": "962a8d18-d239-4a2d-90d8-b98ed34dafd3",
+    "job": "prepare",
+    "status": "started"
+  }
+}

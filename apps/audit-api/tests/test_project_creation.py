@@ -78,3 +78,28 @@ def test_get_project_scope_returns_parsed_scope(client):
     assert payload["project_name"] == "MiniLendingProtocol"
     assert payload["contracts_in_scope"] == ["src/Vault.sol", "src/OracleRouter.sol"]
 
+
+def test_list_projects_returns_public_metadata_without_internal_workspace(client):
+    first = _create_project(client).json()
+    second = _create_project(client).json()
+
+    response = client.get("/projects")
+
+    assert response.status_code == 200
+    payload = response.json()
+    assert [item["project_id"] for item in payload] == [
+        second["project_id"],
+        first["project_id"],
+    ]
+    assert all("last_error" not in item for item in payload)
+    assert all(not item["workspace_path"].startswith("/") for item in payload)
+
+
+def test_frontend_development_origin_is_allowed_by_cors(client):
+    response = client.get(
+        "/projects",
+        headers={"Origin": "http://localhost:5173"},
+    )
+
+    assert response.status_code == 200
+    assert response.headers["access-control-allow-origin"] == "http://localhost:5173"

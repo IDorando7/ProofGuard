@@ -1,0 +1,16 @@
+{
+  "created_at": "2026-08-25T00:27:46.135823Z",
+  "finalized_at": "2026-08-25T00:27:46.157211Z",
+  "finding_cluster_id": "finding_cluster_78804a9cdfbc12251ebe35dab86bb610cf7d91637f105c4a8a864d5bd231115c",
+  "parent_round_id": null,
+  "project_id": "962a8d18-d239-4a2d-90d8-b98ed34dafd3",
+  "round_number": 1,
+  "round_type": "initial",
+  "round_version": "validation_round_v1",
+  "routing_id": "b5a7816c-bb38-4015-9109-901c667db96d",
+  "source_fingerprint": "052b3fd8b5234079bbea1755f953a8aa979f7ad92db77e87b8e98e8d2eb05dc9",
+  "status": "finalized",
+  "trigger_consensus_id": null,
+  "validation_round_id": "validation_round_382f041865303930e548d1685f8ed29e1903104505444cbafb96a49cc0d76781",
+  "validator_committee_id": "validator_committee_342e2decec10be6b2f9da341db5c7922ce43307b59ed04b43aa4af6f9d9985b6"
+}

@@ -3,6 +3,7 @@ from collections.abc import AsyncGenerator
 
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
+from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.routes_category_performance import router as category_performance_router
 from app.api.routes_audit_runs import router as audit_runs_router
@@ -32,8 +33,15 @@ from app.api.routes_validator_committees import router as validator_committees_r
 from app.api.routes_validator_consensus import router as validator_consensus_router
 from app.api.routes_validator_performance import router as validator_performance_router
 from app.api.routes_validator_rewards import router as validator_rewards_router
+from app.api.routes_demo import router as demo_router
 from app.core.database import init_db
-from app.core.openapi import API_DESCRIPTION, OPENAPI_TAGS, configure_openapi
+from app.core.config import get_settings
+from app.core.openapi import (
+    API_DESCRIPTION,
+    DEMO_OPERATION_DOCS,
+    OPENAPI_TAGS,
+    configure_openapi,
+)
 
 
 @asynccontextmanager
@@ -55,6 +63,14 @@ app = FastAPI(
         "filter": True,
     },
     lifespan=lifespan,
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=get_settings().cors_origins,
+    allow_credentials=False,
+    allow_methods=["GET", "POST", "PATCH", "OPTIONS"],
+    allow_headers=["*"],
 )
 
 
@@ -91,5 +107,12 @@ app.include_router(validator_consensus_router)
 app.include_router(validator_performance_router)
 app.include_router(validator_rewards_router)
 app.include_router(reports_router)
+if get_settings().demo_mode:
+    app.include_router(demo_router)
 
-configure_openapi(app)
+configure_openapi(
+    app,
+    extra_operation_docs=(
+        DEMO_OPERATION_DOCS if get_settings().demo_mode else None
+    ),
+)

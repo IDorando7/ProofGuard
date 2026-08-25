@@ -1,0 +1,31 @@
+{
+  "artifact_refs": [],
+  "audit_event_id": "audit_event_d36e483158c41a8d93270800fa0f6eecb44ae04a4fa497c45259bc4506bb08f6",
+  "audit_run_id": "audit_run_12f18be619dc402f9f489f8a925ddbc9",
+  "category": "access_control",
+  "created_at": "2026-08-24T20:06:51.507366Z",
+  "entity_id": "assignment_72bfbe6d0462bdb6ec77ec8c365449c8",
+  "entity_type": "routing_assignment",
+  "event_level": "INFO",
+  "event_type": "ROUTING_NODE_SELECTED",
+  "event_version": "audit_event_v1",
+  "message": "Routing assignment selected a node.",
+  "metadata": {
+    "assignment_id": "assignment_72bfbe6d0462bdb6ec77ec8c365449c8",
+    "assignment_mode": "shadow",
+    "category_score": 0.0,
+    "membership": "candidate",
+    "position": 1,
+    "routing_id": "01bd7d1c-a333-4643-893c-cb99d329eafb",
+    "selection_reasons": [
+      "Selected for shadow exploration as a candidate member.",
+      "Selected using finalized exploration usage: 0 prior assignments.",
+      "Shadow output is not authoritative during Router v0."
+    ],
+    "selection_type": "exploration"
+  },
+  "node_id": "096f3f8a-0fb0-4d95-9e5c-56cced09bb75",
+  "operator_id": "demo-agent-hybrid-op-01",
+  "sequence_number": 5,
+  "stage": "ROUTING"
+}

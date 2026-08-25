@@ -11,7 +11,11 @@ from pydantic import ValidationError
 
 from app.core.config import get_settings
 from app.schemas.finding import Finding
-from app.schemas.finding_cluster import FindingCluster, FindingClusterMember
+from app.schemas.finding_cluster import (
+    FindingCluster,
+    FindingClusterMember,
+    has_resolved_accepted_cluster_truth,
+)
 from app.schemas.report_quality import (
     REPORT_QUALITY_QUANTUM,
     REPORT_QUALITY_SCHEMA_VERSION,
@@ -500,18 +504,28 @@ def rebuild_task_report_quality_assessments(
     assessments: list[ReportQualityAssessment] = []
     counts = {"created": 0, "updated": 0, "unchanged": 0}
     for cluster in clusters:
+        if not has_resolved_accepted_cluster_truth(cluster):
+            # Bulk payout preparation ignores preserved candidate/rejected audit
+            # records. Direct assessment remains a hard eligibility error.
+            continue
         for member in cluster.members:
-            assessment, operation = assess_report_quality(
-                protocol_data_root,
-                project_workspace,
-                project_id,
-                routing_id,
-                cluster.finding_cluster_id,
-                member.submission_id,
-                ReportQualityAssessmentRequest(
-                    supersede_existing=supersede_changed_finalized
-                ),
-            )
+            try:
+                assessment, operation = assess_report_quality(
+                    protocol_data_root,
+                    project_workspace,
+                    project_id,
+                    routing_id,
+                    cluster.finding_cluster_id,
+                    member.submission_id,
+                    ReportQualityAssessmentRequest(
+                        supersede_existing=supersede_changed_finalized
+                    ),
+                )
+            except ReportQualityEligibilityError:
+                # Week 8 may resolve cluster truth before a protocol-approved
+                # consensus-to-agent report-quality adapter exists. Such reports
+                # stay quality/reward-ineligible instead of being reinterpreted.
+                continue
             assessments.append(assessment)
             counts[operation] += 1
     assessments.sort(key=lambda item: (item.finding_cluster_id, item.submitted_at, item.submission_id))
@@ -809,6 +823,10 @@ def _require_eligible(
     validation: ValidationDecision,
     reproduction: ReproductionResult | None,
 ) -> None:
+    if not has_resolved_accepted_cluster_truth(cluster):
+        raise ReportQualityEligibilityError(
+            "Report quality payout assessment requires resolved accepted cluster truth"
+        )
     if (
         cluster.project_id != submission.project_id
         or cluster.routing_id != submission.routing_id

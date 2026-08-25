@@ -1,0 +1,54 @@
+{
+  "category": "access_control",
+  "contribution_stats": {
+    "accepted_average_contribution_score": 92.0,
+    "accepted_contribution_score_total": 552.0,
+    "accepted_maximum_contribution_score": 92.0,
+    "accepted_minimum_contribution_score": 92.0,
+    "average_contribution_score": 92.0,
+    "maximum_contribution_score": 92.0,
+    "minimum_contribution_score": 92.0,
+    "total_contribution_score": 552.0
+  },
+  "counts": {
+    "accepted_independent_duplicate_submissions": 0,
+    "accepted_unique_submissions": 6,
+    "duplicate_submissions": 0,
+    "insufficient_evidence_submissions": 0,
+    "out_of_scope_submissions": 0,
+    "rejected_submissions": 0,
+    "reproduced_submissions": 6,
+    "reproduction_attempts": 6,
+    "reward_eligible_submissions": 6,
+    "rewarded_submissions": 0,
+    "submission_duplicate_spam": 0,
+    "total_finalized_submissions": 6,
+    "unsafe_submissions": 0,
+    "unsupported_submissions": 0
+  },
+  "created_at": "2026-08-25T00:27:04.118078Z",
+  "first_activity_at": "2026-08-25T00:27:04.066066Z",
+  "last_activity_at": "2026-08-25T00:27:04.112144Z",
+  "node_id": "521d144b-5e3d-43cf-9a84-481365f5a192",
+  "performance_id": "performance_521d144b-5e3d-43cf-9a84-481365f5a192_access_control",
+  "performance_version": "category_performance_v0",
+  "rebuilt_at": "2026-08-25T00:27:04.118078Z",
+  "source_event_ids": [
+    "0f6738f2-7426-49a7-b688-7361ed01a62d",
+    "4f3609f8-9b25-468e-9e0e-22d26b95e09c",
+    "60fbe241-64c6-4e1f-8053-bdd1aae576e5",
+    "75ecb737-113a-42e5-88f3-98e9dbb42fb1",
+    "86bfc719-255e-4809-814e-89398f164ab6",
+    "994ab375-c9b3-410e-8b7f-bf8a664a3d7e"
+  ],
+  "source_fingerprint": "bc0e06174489f3f7e4fa053f97afb94ecf1e6f49bff10b3acbc4ede6e1b52e59",
+  "source_submission_ids": [
+    "25a336d1-d643-43d2-9380-0e428d5ae9ea",
+    "260cc3b6-a996-4b27-ae2c-04d45edb4ef4",
+    "557aae6b-c222-43fe-ba79-ee919107ac63",
+    "a6e5b2ca-191d-4af7-ae33-de1116b0c327",
+    "c861dc39-2b5b-468e-8fd3-8d5be995c0a7",
+    "dc0d31b2-c7af-4dc5-b2c5-6387682de910"
+  ],
+  "updated_at": "2026-08-25T00:27:04.118184Z"
+}

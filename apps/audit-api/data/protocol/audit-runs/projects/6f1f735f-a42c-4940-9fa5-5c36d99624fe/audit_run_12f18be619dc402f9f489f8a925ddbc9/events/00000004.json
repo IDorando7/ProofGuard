@@ -1,0 +1,22 @@
+{
+  "artifact_refs": [],
+  "audit_event_id": "audit_event_93ee97a54846787c44e315f48e7ef2b4dc56f3f7778692c3ea7cadf41b42c0e4",
+  "audit_run_id": "audit_run_12f18be619dc402f9f489f8a925ddbc9",
+  "category": null,
+  "created_at": "2026-08-24T20:06:51.484226Z",
+  "entity_id": "audit_run_12f18be619dc402f9f489f8a925ddbc9",
+  "entity_type": "audit_run",
+  "event_level": "INFO",
+  "event_type": "STAGE_STARTED",
+  "event_version": "audit_event_v1",
+  "message": "Audit stage ROUTING started.",
+  "metadata": {
+    "attempt_count": 1,
+    "progress_current": 0,
+    "progress_total": null
+  },
+  "node_id": null,
+  "operator_id": null,
+  "sequence_number": 4,
+  "stage": "ROUTING"
+}

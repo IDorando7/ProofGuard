@@ -1,0 +1,24 @@
+{
+  "agent_name": "reentrancy_demo_calibration_agent",
+  "attack_path": "A synthetic local caller reaches the calibrated vulnerable path.",
+  "category": "reentrancy",
+  "conditions": "Synthetic calibration input; no external target is contacted.",
+  "confidence": 0.9,
+  "contracts": [
+    "src/HistoricalCalibration.sol"
+  ],
+  "finding_id": "demo_history_reentrancy_2_4",
+  "functions": [
+    "calibratedFunction2_4"
+  ],
+  "impact": "The historical local fixture records a validated protocol impact.",
+  "poc_file": null,
+  "poc_type": "none",
+  "project_id": "proofguard_gold_demo_history_v1",
+  "recommended_fix": "Apply the category-appropriate defensive control.",
+  "reproduction_steps": [],
+  "root_cause": "Deterministic historical authorization or interaction flaw.",
+  "severity": "Medium",
+  "status": "candidate",
+  "title": "Historical calibrated reentrancy finding 2-4"
+}

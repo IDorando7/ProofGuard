@@ -710,6 +710,7 @@ def _ensure_finalization_side_effects(
             validation_consensus_id=consensus.validation_consensus_id,
             consensus_outcome=consensus.consensus_outcome.value,
             consensus_severity=consensus.final_normalized_severity,
+            consensus_source_fingerprint=consensus.source_fingerprint,
         )
 
 

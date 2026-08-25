@@ -1,0 +1,33 @@
+{
+  "index": 85,
+  "name": "validator_reproduction_validator_assignment_2e1215706f4eb26308261f5c37fd8307d5786f76848d8672af5843f8f074c565",
+  "method": "POST",
+  "path": "/projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validator-assignments/validator_assignment_2e1215706f4eb26308261f5c37fd8307d5786f76848d8672af5843f8f074c565/reproduction",
+  "status_code": 200,
+  "response": {
+    "validator_reproduction_id": "validator_reproduction_b42bf6b10b59cae934e85992b8be10b1c7a64c9fafc93bbaf278938d500edff1",
+    "reproduction_protocol_version": "validator_reproduction_v1",
+    "validator_assignment_id": "validator_assignment_2e1215706f4eb26308261f5c37fd8307d5786f76848d8672af5843f8f074c565",
+    "validator_committee_id": "validator_committee_342e2decec10be6b2f9da341db5c7922ce43307b59ed04b43aa4af6f9d9985b6",
+    "project_id": "962a8d18-d239-4a2d-90d8-b98ed34dafd3",
+    "routing_id": "b5a7816c-bb38-4015-9109-901c667db96d",
+    "finding_cluster_id": "finding_cluster_78804a9cdfbc12251ebe35dab86bb610cf7d91637f105c4a8a864d5bd231115c",
+    "validator_node_id": "b5a500c3-12ef-4657-91e2-843f553a4aac",
+    "validator_operator_id": "demo-validator-op-10",
+    "assignment_role": "authoritative",
+    "reproduction_mode": "submitted_poc",
+    "underlying_reproduction_request_id": "validator_reproduction_request_a2c6f815a02ed9114b2cfc93d17c87fcd49706137552d8f292d225e48dc9b7cb",
+    "underlying_reproduction_request_fingerprint": "a9a4fa32495878d69b216d6166bafbcbc46e60a02002cf613623a35ef08d6c75",
+    "underlying_reproduction_result_id": "validator_week3_result_c852ca5d1b9dbb4ccbbbe727686ea457fb4ae318226c6966d7930399e2dd45c8",
+    "underlying_reproduction_result_storage_ref": "reproductions/validator/validator_reproduction_request_a2c6f815a02ed9114b2cfc93d17c87fcd49706137552d8f292d225e48dc9b7cb/reproduction.json",
+    "underlying_reproduction_result_fingerprint": "2c413cc2e8eb3145f37330d341b2996e4aecdaeec10ebfd35e3a46c521509cda",
+    "reproduction_status": "reproduced",
+    "poc_artifact_fingerprint": "8560dfdb45aa30db89a4a7eac8e6c3ebb3f17b7f4a114a57f899e128810c47d9",
+    "environment_fingerprint": "38f4d0f3b9281804bc90e4437b8a6b5a97a1aa08096258acb082c74c04431ca6",
+    "source_revision": "ec0536e20f8c1ef0bb5dbef633e364abe1bb498aa3fbf347475889e84242cc50",
+    "source_snapshot_fingerprint": "ff4ea9682f56433ef49ed00f9f540dd3801541e1e005e58978de2a18378ba026",
+    "source_fingerprint": "199218954e75bda748cb005fc6730d18ae7325bc8225975a2e5d36fc98e69854",
+    "created_at": "2026-08-25T00:27:45.324017Z",
+    "finalized_at": "2026-08-25T00:27:45.490817Z"
+  }
+}

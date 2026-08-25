@@ -10,9 +10,20 @@ from app.schemas.project import (
     ProjectStatusResponse,
 )
 from app.services.job_service import start_prepare_job
-from app.services.project_service import create_project, get_project_or_404, load_project_scope, metadata_response
+from app.services.project_service import (
+    create_project,
+    get_project_or_404,
+    list_projects,
+    load_project_scope,
+    metadata_response,
+)
 
 router = APIRouter(prefix="/projects", tags=["projects"])
+
+
+@router.get("", response_model=list[ProjectMetadataResponse])
+def get_projects(db: Session = Depends(get_db)) -> list[ProjectMetadataResponse]:
+    return [metadata_response(project) for project in list_projects(db)]
 
 
 @router.post("", response_model=ProjectCreateResponse)
@@ -52,4 +63,3 @@ def prepare_project(
     get_project_or_404(db, project_id)
     start_prepare_job(background_tasks, project_id)
     return PrepareJobResponse(project_id=project_id, job="prepare", status="started")
-

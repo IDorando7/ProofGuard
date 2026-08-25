@@ -1,0 +1,73 @@
+{
+  "index": 115,
+  "name": "final_agent_scores_e27510b1-ce19-486a-ad83-7f1e1fa36339",
+  "method": "GET",
+  "path": "/nodes/e27510b1-ce19-486a-ad83-7f1e1fa36339/category-scores",
+  "status_code": 200,
+  "response": [
+    {
+      "score_id": "category_score_e27510b1-ce19-486a-ad83-7f1e1fa36339_reentrancy",
+      "scoring_version": "category_score_v0",
+      "node_id": "e27510b1-ce19-486a-ad83-7f1e1fa36339",
+      "category": "reentrancy",
+      "performance_id": "performance_e27510b1-ce19-486a-ad83-7f1e1fa36339_reentrancy",
+      "performance_source_fingerprint": "f742e3edcab73856f43769475d36fc70dcfe6b11c39751886a0761ecbd44bd64",
+      "components": {
+        "precision": 1.0,
+        "reproduction_rate": 1.0,
+        "uniqueness_rate": 1.0,
+        "contribution_quality": 0.92,
+        "consistency": 1.0,
+        "experience_confidence": 0.6
+      },
+      "weights": {
+        "precision_weight": 0.3,
+        "reproduction_weight": 0.2,
+        "uniqueness_weight": 0.15,
+        "contribution_quality_weight": 0.2,
+        "consistency_weight": 0.1,
+        "experience_weight": 0.05
+      },
+      "weighted_components": {
+        "precision_contribution": 0.3,
+        "reproduction_contribution": 0.2,
+        "uniqueness_contribution": 0.15,
+        "contribution_quality_contribution": 0.184,
+        "consistency_contribution": 0.1,
+        "experience_contribution": 0.03,
+        "positive_total": 0.964
+      },
+      "penalties": {
+        "duplicate_penalty": 0.0,
+        "out_of_scope_penalty": 0.0,
+        "insufficient_evidence_penalty": 0.0,
+        "rejected_penalty": 0.0,
+        "unsafe_penalty": 0.0,
+        "unsupported_penalty": 0.0,
+        "total_penalty": 0.0
+      },
+      "raw_score_before_penalties": 0.964,
+      "raw_score_after_penalties": 0.964,
+      "neutral_baseline": 0.5,
+      "confidence_adjusted_score": 0.7784,
+      "category_score": 0.7784,
+      "score_band": "strong",
+      "finalized_submissions": 6,
+      "accepted_unique_submissions": 6,
+      "source_fingerprint": "f944476cc8b8274f740a27cc2abf4e8373445916483be3fb3514e4f05b330a87",
+      "explanation": [
+        "6 of 6 finalized submissions were accepted and unique, producing precision 1.000000.",
+        "6 of 6 finalized reproduction attempts succeeded, producing reproduction rate 1.000000.",
+        "6 accepted unique submissions, 0 valid independent duplicates, and 0 legacy duplicate outcomes produced uniqueness rate 1.000000.",
+        "Accepted findings had average contribution score 92.000000, producing quality component 0.920000.",
+        "Accepted contribution scores ranging from 92.000000 to 92.000000 produced consistency component 1.000000.",
+        "6 finalized submissions produced experience confidence 0.600000.",
+        "0 submission-spam duplicates plus out-of-scope, insufficient-evidence, rejected, unsafe, and unsupported outcomes produced penalties 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, and 0.000000, for total penalty 0.000000.",
+        "The final category score is 0.778400 with score band strong."
+      ],
+      "calculated_at": "2026-08-25T00:27:04.351659Z",
+      "created_at": "2026-08-25T00:27:04.351659Z",
+      "updated_at": "2026-08-25T00:27:04.351987Z"
+    }
+  ]
+}

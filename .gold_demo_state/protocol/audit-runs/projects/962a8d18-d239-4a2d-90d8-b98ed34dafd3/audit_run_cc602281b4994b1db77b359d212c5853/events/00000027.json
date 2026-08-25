@@ -1,0 +1,28 @@
+{
+  "artifact_refs": [],
+  "audit_event_id": "audit_event_e6cb1f8adbc460535d0109feba9446e31d261106ba5bdde82ea1c9a429aae853",
+  "audit_run_id": "audit_run_cc602281b4994b1db77b359d212c5853",
+  "category": "access_control",
+  "created_at": "2026-08-25T00:27:06.675146Z",
+  "entity_id": "finding_36a1220a1427cb5a5b154b599aee3f1bde4fb06f",
+  "entity_type": "finding",
+  "event_level": "INFO",
+  "event_type": "FINDING_CREATED",
+  "event_version": "audit_event_v1",
+  "message": "Agent candidate finding is available.",
+  "metadata": {
+    "affected_contracts": [
+      "src/ProofGuardDemoVault.sol"
+    ],
+    "affected_functions": [
+      "setAdmin"
+    ],
+    "execution_id": "agent_execution_8c5d253cc09a5579dae435e8e628a9b14262ef96",
+    "finding_id": "finding_36a1220a1427cb5a5b154b599aee3f1bde4fb06f",
+    "reported_severity": "High"
+  },
+  "node_id": "5ac571ca-8245-41e2-aa2b-0f2b98c9f1fe",
+  "operator_id": "demo-agent-access-op-03",
+  "sequence_number": 27,
+  "stage": "EXECUTING_AGENTS"
+}

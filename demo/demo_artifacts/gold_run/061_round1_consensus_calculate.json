@@ -1,0 +1,283 @@
+{
+  "index": 61,
+  "name": "round1_consensus_calculate",
+  "method": "POST",
+  "path": "/projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_5661df4d88d8554ac9322b1702bc772ec197dcb65f1aeeca9991b512f11c0ee6/validation-consensus",
+  "status_code": 201,
+  "response": {
+    "validation_consensus_id": "validation_consensus_839f332b48de3ae18779f349413b668ddc38712d394bb2426992ba1c6e11afa8",
+    "consensus_protocol_version": "validation_consensus_v1",
+    "consensus_policy": {
+      "policy_version": "validator_consensus_policy_v1",
+      "quorum_missing_tolerance": 1,
+      "supermajority_numerator": 2,
+      "supermajority_denominator": 3,
+      "reproduction_required": true
+    },
+    "project_id": "962a8d18-d239-4a2d-90d8-b98ed34dafd3",
+    "routing_id": "b5a7816c-bb38-4015-9109-901c667db96d",
+    "finding_cluster_id": "finding_cluster_5661df4d88d8554ac9322b1702bc772ec197dcb65f1aeeca9991b512f11c0ee6",
+    "validation_round_number": 1,
+    "included_round_ids": [
+      "validation_round_ff8726a6d37f21dd562f39f3ff100965426ae6a737bc50c403418981e3fdc3b7"
+    ],
+    "included_committee_ids": [
+      "validator_committee_88e5713432cd01b0c69517d68169a7582e3645cf13753b08011e86f05c3a1ac6"
+    ],
+    "authoritative_target_size": 5,
+    "valid_authoritative_attestation_count": 5,
+    "quorum_required": 4,
+    "supermajority_required": 4,
+    "lifecycle_status": "calculated",
+    "consensus_outcome": "disputed",
+    "validity_result": {
+      "component_type": "validity",
+      "authoritative_target_size": 5,
+      "valid_response_count": 5,
+      "quorum_required": 4,
+      "supermajority_required": 4,
+      "value_counts": {
+        "accepted": 3,
+        "rejected": 2
+      },
+      "value_evidence": [
+        {
+          "value": "accepted",
+          "count": 3,
+          "operator_ids": [
+            "demo-validator-hybrid-op-01",
+            "demo-validator-hybrid-op-02",
+            "demo-validator-op-01"
+          ],
+          "attestation_ids": [
+            "validation_attestation_16d4c677142f13a6ec92ec4c75971100e2348c15761a46d6f8ab0337b3583ed1",
+            "validation_attestation_1b5ad20b2a521f039e0972d06cc98b4f66489cab540fbddb6f3ce6f14e4bcaf0",
+            "validation_attestation_b6d982499ba3403504bfbc007f0fd8adbfc8046e0ba12c81dffc7c360e2879e4"
+          ],
+          "reproduction_record_ids": []
+        },
+        {
+          "value": "rejected",
+          "count": 2,
+          "operator_ids": [
+            "demo-validator-op-02",
+            "demo-validator-op-03"
+          ],
+          "attestation_ids": [
+            "validation_attestation_565d815bf6a0714844a22a9806f2df6ef1bc3145102621f1499bb6f5261d66d3",
+            "validation_attestation_bdf93c915dcae3c0010c8c97e66e254e6d2d515ddd794f6a7c0c577fdaaabc7e"
+          ],
+          "reproduction_record_ids": []
+        }
+      ],
+      "consensus_reached": false,
+      "consensus_value": null,
+      "supporting_attestation_ids": [],
+      "dissenting_attestation_ids": [
+        "validation_attestation_16d4c677142f13a6ec92ec4c75971100e2348c15761a46d6f8ab0337b3583ed1",
+        "validation_attestation_1b5ad20b2a521f039e0972d06cc98b4f66489cab540fbddb6f3ce6f14e4bcaf0",
+        "validation_attestation_565d815bf6a0714844a22a9806f2df6ef1bc3145102621f1499bb6f5261d66d3",
+        "validation_attestation_b6d982499ba3403504bfbc007f0fd8adbfc8046e0ba12c81dffc7c360e2879e4",
+        "validation_attestation_bdf93c915dcae3c0010c8c97e66e254e6d2d515ddd794f6a7c0c577fdaaabc7e"
+      ],
+      "unresolved_reason": "no_supermajority"
+    },
+    "reproduction_result": {
+      "component_type": "reproduction",
+      "authoritative_target_size": 5,
+      "valid_response_count": 5,
+      "quorum_required": 4,
+      "supermajority_required": 4,
+      "value_counts": {
+        "reproduced": 5
+      },
+      "value_evidence": [
+        {
+          "value": "reproduced",
+          "count": 5,
+          "operator_ids": [
+            "demo-validator-hybrid-op-01",
+            "demo-validator-hybrid-op-02",
+            "demo-validator-op-01",
+            "demo-validator-op-02",
+            "demo-validator-op-03"
+          ],
+          "attestation_ids": [
+            "validation_attestation_16d4c677142f13a6ec92ec4c75971100e2348c15761a46d6f8ab0337b3583ed1",
+            "validation_attestation_1b5ad20b2a521f039e0972d06cc98b4f66489cab540fbddb6f3ce6f14e4bcaf0",
+            "validation_attestation_565d815bf6a0714844a22a9806f2df6ef1bc3145102621f1499bb6f5261d66d3",
+            "validation_attestation_b6d982499ba3403504bfbc007f0fd8adbfc8046e0ba12c81dffc7c360e2879e4",
+            "validation_attestation_bdf93c915dcae3c0010c8c97e66e254e6d2d515ddd794f6a7c0c577fdaaabc7e"
+          ],
+          "reproduction_record_ids": [
+            "validator_reproduction_7664d5a1ae9b68780790279ea1cd578f8f8186c882e88b0aeca0315b81ad3ed7",
+            "validator_reproduction_97733e6fb6c81b158b7d18cc2a510cb30e88b553e846a73d1f9a4d67d11b40e9",
+            "validator_reproduction_ac1321c54265a355336663c296f324b4c23e9cab7645d85364caf4f321db9ee5",
+            "validator_reproduction_ac41ae2cd25264a2dc663ad2166989377af51280135e942dee4aad8d91bcc8c9",
+            "validator_reproduction_ad745b8575a01925b0c5bb0bb458060d522be0ae169ee5fa1ecbc7ce47a3aa17"
+          ]
+        }
+      ],
+      "consensus_reached": true,
+      "consensus_value": "reproduced",
+      "supporting_attestation_ids": [
+        "validation_attestation_16d4c677142f13a6ec92ec4c75971100e2348c15761a46d6f8ab0337b3583ed1",
+        "validation_attestation_1b5ad20b2a521f039e0972d06cc98b4f66489cab540fbddb6f3ce6f14e4bcaf0",
+        "validation_attestation_565d815bf6a0714844a22a9806f2df6ef1bc3145102621f1499bb6f5261d66d3",
+        "validation_attestation_b6d982499ba3403504bfbc007f0fd8adbfc8046e0ba12c81dffc7c360e2879e4",
+        "validation_attestation_bdf93c915dcae3c0010c8c97e66e254e6d2d515ddd794f6a7c0c577fdaaabc7e"
+      ],
+      "dissenting_attestation_ids": [],
+      "unresolved_reason": null
+    },
+    "root_cause_result": {
+      "component_type": "root_cause",
+      "authoritative_target_size": 5,
+      "valid_response_count": 5,
+      "quorum_required": 4,
+      "supermajority_required": 4,
+      "value_counts": {
+        "confirmed": 3,
+        "mismatch": 2
+      },
+      "value_evidence": [
+        {
+          "value": "confirmed",
+          "count": 3,
+          "operator_ids": [
+            "demo-validator-hybrid-op-01",
+            "demo-validator-hybrid-op-02",
+            "demo-validator-op-01"
+          ],
+          "attestation_ids": [
+            "validation_attestation_16d4c677142f13a6ec92ec4c75971100e2348c15761a46d6f8ab0337b3583ed1",
+            "validation_attestation_1b5ad20b2a521f039e0972d06cc98b4f66489cab540fbddb6f3ce6f14e4bcaf0",
+            "validation_attestation_b6d982499ba3403504bfbc007f0fd8adbfc8046e0ba12c81dffc7c360e2879e4"
+          ],
+          "reproduction_record_ids": []
+        },
+        {
+          "value": "mismatch",
+          "count": 2,
+          "operator_ids": [
+            "demo-validator-op-02",
+            "demo-validator-op-03"
+          ],
+          "attestation_ids": [
+            "validation_attestation_565d815bf6a0714844a22a9806f2df6ef1bc3145102621f1499bb6f5261d66d3",
+            "validation_attestation_bdf93c915dcae3c0010c8c97e66e254e6d2d515ddd794f6a7c0c577fdaaabc7e"
+          ],
+          "reproduction_record_ids": []
+        }
+      ],
+      "consensus_reached": false,
+      "consensus_value": null,
+      "supporting_attestation_ids": [],
+      "dissenting_attestation_ids": [
+        "validation_attestation_16d4c677142f13a6ec92ec4c75971100e2348c15761a46d6f8ab0337b3583ed1",
+        "validation_attestation_1b5ad20b2a521f039e0972d06cc98b4f66489cab540fbddb6f3ce6f14e4bcaf0",
+        "validation_attestation_565d815bf6a0714844a22a9806f2df6ef1bc3145102621f1499bb6f5261d66d3",
+        "validation_attestation_b6d982499ba3403504bfbc007f0fd8adbfc8046e0ba12c81dffc7c360e2879e4",
+        "validation_attestation_bdf93c915dcae3c0010c8c97e66e254e6d2d515ddd794f6a7c0c577fdaaabc7e"
+      ],
+      "unresolved_reason": "no_supermajority"
+    },
+    "severity_result": {
+      "component_type": "severity",
+      "authoritative_target_size": 5,
+      "valid_response_count": 3,
+      "quorum_required": 4,
+      "supermajority_required": 4,
+      "value_counts": {
+        "High": 3
+      },
+      "value_evidence": [
+        {
+          "value": "High",
+          "count": 3,
+          "operator_ids": [
+            "demo-validator-hybrid-op-01",
+            "demo-validator-hybrid-op-02",
+            "demo-validator-op-01"
+          ],
+          "attestation_ids": [
+            "validation_attestation_16d4c677142f13a6ec92ec4c75971100e2348c15761a46d6f8ab0337b3583ed1",
+            "validation_attestation_1b5ad20b2a521f039e0972d06cc98b4f66489cab540fbddb6f3ce6f14e4bcaf0",
+            "validation_attestation_b6d982499ba3403504bfbc007f0fd8adbfc8046e0ba12c81dffc7c360e2879e4"
+          ],
+          "reproduction_record_ids": []
+        }
+      ],
+      "consensus_reached": false,
+      "consensus_value": null,
+      "supporting_attestation_ids": [],
+      "dissenting_attestation_ids": [
+        "validation_attestation_16d4c677142f13a6ec92ec4c75971100e2348c15761a46d6f8ab0337b3583ed1",
+        "validation_attestation_1b5ad20b2a521f039e0972d06cc98b4f66489cab540fbddb6f3ce6f14e4bcaf0",
+        "validation_attestation_b6d982499ba3403504bfbc007f0fd8adbfc8046e0ba12c81dffc7c360e2879e4"
+      ],
+      "unresolved_reason": "no_quorum"
+    },
+    "impact_result": {
+      "component_type": "impact",
+      "authoritative_target_size": 5,
+      "valid_response_count": 5,
+      "quorum_required": 4,
+      "supermajority_required": 4,
+      "value_counts": {
+        "rejected": 2,
+        "validated": 3
+      },
+      "value_evidence": [
+        {
+          "value": "rejected",
+          "count": 2,
+          "operator_ids": [
+            "demo-validator-op-02",
+            "demo-validator-op-03"
+          ],
+          "attestation_ids": [
+            "validation_attestation_565d815bf6a0714844a22a9806f2df6ef1bc3145102621f1499bb6f5261d66d3",
+            "validation_attestation_bdf93c915dcae3c0010c8c97e66e254e6d2d515ddd794f6a7c0c577fdaaabc7e"
+          ],
+          "reproduction_record_ids": []
+        },
+        {
+          "value": "validated",
+          "count": 3,
+          "operator_ids": [
+            "demo-validator-hybrid-op-01",
+            "demo-validator-hybrid-op-02",
+            "demo-validator-op-01"
+          ],
+          "attestation_ids": [
+            "validation_attestation_16d4c677142f13a6ec92ec4c75971100e2348c15761a46d6f8ab0337b3583ed1",
+            "validation_attestation_1b5ad20b2a521f039e0972d06cc98b4f66489cab540fbddb6f3ce6f14e4bcaf0",
+            "validation_attestation_b6d982499ba3403504bfbc007f0fd8adbfc8046e0ba12c81dffc7c360e2879e4"
+          ],
+          "reproduction_record_ids": []
+        }
+      ],
+      "consensus_reached": false,
+      "consensus_value": null,
+      "supporting_attestation_ids": [],
+      "dissenting_attestation_ids": [
+        "validation_attestation_16d4c677142f13a6ec92ec4c75971100e2348c15761a46d6f8ab0337b3583ed1",
+        "validation_attestation_1b5ad20b2a521f039e0972d06cc98b4f66489cab540fbddb6f3ce6f14e4bcaf0",
+        "validation_attestation_565d815bf6a0714844a22a9806f2df6ef1bc3145102621f1499bb6f5261d66d3",
+        "validation_attestation_b6d982499ba3403504bfbc007f0fd8adbfc8046e0ba12c81dffc7c360e2879e4",
+        "validation_attestation_bdf93c915dcae3c0010c8c97e66e254e6d2d515ddd794f6a7c0c577fdaaabc7e"
+      ],
+      "unresolved_reason": "no_supermajority"
+    },
+    "final_normalized_severity": null,
+    "dispute_reason_codes": [
+      "validity_disagreement"
+    ],
+    "source_fingerprint": "ea041b5632d019610210f5924c0284d7c291fd57eb6c66dddae31baf6efa6bd2",
+    "calculation_fingerprint": "7fd79216808ecfea4164ddafdae55d550feeb7131a6119429bb25b533410608c",
+    "created_at": "2026-08-25T00:27:43.676252Z",
+    "calculated_at": "2026-08-25T00:27:43.676252Z",
+    "finalized_at": null
+  }
+}

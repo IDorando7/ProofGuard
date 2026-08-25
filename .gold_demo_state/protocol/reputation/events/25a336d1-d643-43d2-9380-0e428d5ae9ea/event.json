@@ -1,0 +1,77 @@
+{
+  "event_id": "4f3609f8-9b25-468e-9e0e-22d26b95e09c",
+  "reputation_version": "reputation_v0",
+  "application_status": "applied",
+  "node_id": "521d144b-5e3d-43cf-9a84-481365f5a192",
+  "submission_id": "25a336d1-d643-43d2-9380-0e428d5ae9ea",
+  "project_id": "proofguard_gold_demo_history_v1",
+  "finding_id": "demo_history_access_control_2_2",
+  "category": "access_control",
+  "validation_id": "bb6b1967-54f9-407d-bffa-74f2cc9ff94f",
+  "reproduction_id": "437d4c38-b173-47ea-9332-695c78c1fc17",
+  "contribution_score_id": "bd043ed3-5776-44fb-98b5-264944bb98f3",
+  "validation_status": "accepted",
+  "reproduction_status": "reproduced",
+  "contribution_score": 92.0,
+  "contribution_eligibility_status": "eligible",
+  "normalized_severity": "Medium",
+  "event_type": "accepted_contribution",
+  "previous_reputation": 0.55,
+  "delta_components": {
+    "base_delta": 0.03,
+    "contribution_bonus": 0.02,
+    "severity_bonus": 0.0,
+    "penalty": 0.0,
+    "total_delta": 0.05
+  },
+  "new_reputation": 0.6,
+  "statistics_delta": {
+    "total_submissions": 1,
+    "accepted_submissions": 1,
+    "rejected_submissions": 0,
+    "duplicate_submissions": 0,
+    "out_of_scope_submissions": 0,
+    "unsafe_submissions": 0
+  },
+  "previous_statistics": {
+    "total_submissions": 1,
+    "accepted_submissions": 1,
+    "rejected_submissions": 0,
+    "duplicate_submissions": 0,
+    "out_of_scope_submissions": 0,
+    "unsafe_submissions": 0
+  },
+  "new_statistics": {
+    "total_submissions": 2,
+    "accepted_submissions": 2,
+    "rejected_submissions": 0,
+    "duplicate_submissions": 0,
+    "out_of_scope_submissions": 0,
+    "unsafe_submissions": 0
+  },
+  "signals": [
+    {
+      "code": "ACCEPTED_BASE",
+      "delta": 0.03,
+      "message": "The submission was accepted and reproduced.",
+      "source": "validation"
+    },
+    {
+      "code": "CONTRIBUTION_SCORE_90_PLUS",
+      "delta": 0.02,
+      "message": "Contribution score is at least 90.",
+      "source": "contribution"
+    },
+    {
+      "code": "NO_SEVERITY_BONUS",
+      "delta": 0.0,
+      "message": "The normalized severity is Medium.",
+      "source": "validation"
+    }
+  ],
+  "reason": "Reputation increased from 0.550000 to 0.600000. The submission was accepted, reproduced, scored 92.00, and normalized as Medium severity.",
+  "source_fingerprint": "2f69ca77726e3b6806a686b04f8b1edd4d5be1ae503c0f09463f1185a423ef0b",
+  "created_at": "2026-08-25T00:27:04.072710Z",
+  "applied_at": "2026-08-25T00:27:04.074055Z",
+  "updated_at": "2026-08-25T00:27:04.074203Z"
+}

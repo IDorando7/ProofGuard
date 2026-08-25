@@ -1,0 +1,41 @@
+{
+  "capacity_adjusted": false,
+  "category": "reentrancy",
+  "created_at": "2026-08-24T19:52:01.464525Z",
+  "decision_id": "membership_decision_3fbe36be142216f0b64fd89844d29c60",
+  "final_status": "candidate",
+  "node_id": "918454cf-1557-4a18-8bcc-9371875d2b3c",
+  "policy_version": "membership_policy_v0",
+  "previous_status": null,
+  "reason_codes": [
+    "eligible_candidate",
+    "insufficient_history"
+  ],
+  "reasons": [
+    "The node qualifies for candidate membership.",
+    "The node has insufficient finalized category history."
+  ],
+  "recommended_status": "candidate",
+  "source_fingerprint": "3fbe36be142216f0b64fd89844d29c6013ee55386f7d753313505fab0548182b",
+  "source_snapshot": {
+    "accepted_unique_submissions": 0,
+    "category_score": 0.0,
+    "category_score_id": "unavailable_category_score_918454cf-1557-4a18-8bcc-9371875d2b3c_reentrancy",
+    "experience_confidence": 0.0,
+    "finalized_submissions": 0,
+    "node_status": "active",
+    "node_supported_categories": [
+      "reentrancy"
+    ],
+    "performance_id": "unavailable_performance_918454cf-1557-4a18-8bcc-9371875d2b3c_reentrancy",
+    "previous_membership_status": null,
+    "recent_unsafe_event_ids": [],
+    "score_band": "insufficient_data",
+    "subnet_maximum_active_nodes": 20,
+    "subnet_minimum_category_score": 0.6,
+    "subnet_minimum_finalized_submissions": 5,
+    "subnet_status": "active",
+    "unsafe_submissions": 0
+  },
+  "subnet_id": "subnet_reentrancy"
+}

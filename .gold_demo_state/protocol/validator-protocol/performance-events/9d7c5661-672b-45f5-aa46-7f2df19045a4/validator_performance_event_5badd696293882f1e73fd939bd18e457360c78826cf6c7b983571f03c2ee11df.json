@@ -1,0 +1,22 @@
+{
+  "assignment_role": "authoritative",
+  "category": "access_control",
+  "event_version": "validator_performance_event_v1",
+  "final_validation_consensus_id": "validation_consensus_c558e32a0ad07f8a4c11b4492ccf2209f2c6cbbdd5f3de522a1a6c0ec6e8dbed",
+  "finalized_at": "2026-08-25T00:27:44.596668Z",
+  "finding_cluster_id": "finding_cluster_5661df4d88d8554ac9322b1702bc772ec197dcb65f1aeeca9991b512f11c0ee6",
+  "impact_correct": null,
+  "operator_id": "demo-validator-hybrid-op-02",
+  "project_id": "962a8d18-d239-4a2d-90d8-b98ed34dafd3",
+  "protocol_compliant": true,
+  "reproduction_correct": true,
+  "root_cause_correct": null,
+  "routing_id": "b5a7816c-bb38-4015-9109-901c667db96d",
+  "severity_correct": null,
+  "source_fingerprint": "e608b01dd6641c68b9291ca42678b92412dca9eb90d747c01ea662744ca70daa",
+  "validation_quality_assessment_id": "validation_quality_assessment_f4da22a564cf17f17a449c09f3cbd35ea23ce67cc0cf4427f11dd5a7faf1a8e0",
+  "validation_quality_score": "0.416667",
+  "validator_node_id": "9d7c5661-672b-45f5-aa46-7f2df19045a4",
+  "validator_performance_event_id": "validator_performance_event_5badd696293882f1e73fd939bd18e457360c78826cf6c7b983571f03c2ee11df",
+  "validity_correct": false
+}

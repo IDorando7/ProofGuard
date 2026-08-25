@@ -1,0 +1,28 @@
+{
+  "artifact_refs": [],
+  "audit_event_id": "audit_event_99407b4c092c3b9e8344435cb9ee0e5cdfff77b953b031f98ffafe1b395e6f20",
+  "audit_run_id": "audit_run_cc602281b4994b1db77b359d212c5853",
+  "category": "reentrancy",
+  "created_at": "2026-08-25T00:27:06.812813Z",
+  "entity_id": "finding_ca12198cfdb24ef6216aa2a3105300551f95907d",
+  "entity_type": "finding",
+  "event_level": "INFO",
+  "event_type": "FINDING_CREATED",
+  "event_version": "audit_event_v1",
+  "message": "Agent candidate finding is available.",
+  "metadata": {
+    "affected_contracts": [
+      "src/ProofGuardDemoVault.sol"
+    ],
+    "affected_functions": [
+      "withdrawAll"
+    ],
+    "execution_id": "agent_execution_8e61fb47e584751651b63b64b19533db6dddc899",
+    "finding_id": "finding_ca12198cfdb24ef6216aa2a3105300551f95907d",
+    "reported_severity": "High"
+  },
+  "node_id": "13bbbb03-c821-4df2-8017-41aed754c8f0",
+  "operator_id": "demo-agent-reentrancy-op-04",
+  "sequence_number": 52,
+  "stage": "EXECUTING_AGENTS"
+}

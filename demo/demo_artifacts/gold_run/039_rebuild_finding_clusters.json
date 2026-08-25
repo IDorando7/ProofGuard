@@ -1,0 +1,163 @@
+{
+  "index": 39,
+  "name": "rebuild_finding_clusters",
+  "method": "POST",
+  "path": "/projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/rebuild",
+  "status_code": 200,
+  "response": {
+    "project_id": "962a8d18-d239-4a2d-90d8-b98ed34dafd3",
+    "routing_id": "b5a7816c-bb38-4015-9109-901c667db96d",
+    "total_clusters": 2,
+    "created_clusters": 2,
+    "updated_clusters": 0,
+    "unchanged_clusters": 0,
+    "clusters": [
+      {
+        "finding_cluster_id": "finding_cluster_5661df4d88d8554ac9322b1702bc772ec197dcb65f1aeeca9991b512f11c0ee6",
+        "cluster_version": "finding_cluster_v1",
+        "policy_version": "root_cause_cluster_v1",
+        "project_id": "962a8d18-d239-4a2d-90d8-b98ed34dafd3",
+        "routing_id": "b5a7816c-bb38-4015-9109-901c667db96d",
+        "category": "access_control",
+        "canonical_finding_id": "finding_6bd6905aba721742783b879563570b204a85f794",
+        "canonical_submission_id": "16014a4d-a000-44ad-83c6-dbe8017b936e",
+        "final_validation_status": null,
+        "claimed_severity": "High",
+        "final_severity": null,
+        "validation_authority": "pending_validator_consensus",
+        "final_validation_consensus_id": null,
+        "validator_consensus_outcome": null,
+        "validator_consensus_severity": null,
+        "validation_resolution_source_fingerprint": null,
+        "root_cause_key": "findingcategoryaccess_control:src/ProofGuardDemoVault.sol:setadmin",
+        "root_cause_fingerprint": "d9a089b32ff6487f184129a085dc37bd618648dc72e978c10541bcbcc82eb004",
+        "members": [
+          {
+            "submission_id": "16014a4d-a000-44ad-83c6-dbe8017b936e",
+            "finding_id": "finding_6bd6905aba721742783b879563570b204a85f794",
+            "node_id": "176e9d08-96b1-4381-a83a-ce0c95429e4b",
+            "operator_id": "demo-agent-access-op-01",
+            "validation_id": "08138f92-8a92-4d9e-9eb1-abf088bdec31",
+            "reproduction_id": null,
+            "submitted_at": "2026-08-25T00:27:06.617788Z",
+            "relation": "canonical",
+            "source_fingerprint": "5fcfcafacd5ccfd05ccf85b32e8b4bae4d070582e3794034b4be3ca1643d6f4d"
+          },
+          {
+            "submission_id": "b4d8bbb4-bebe-411b-8693-0fddfe389e3e",
+            "finding_id": "finding_501d71ccf9b08e7b76a872a9fcec4be5584b10b5",
+            "node_id": "521d144b-5e3d-43cf-9a84-481365f5a192",
+            "operator_id": "demo-agent-access-op-02",
+            "validation_id": "45cdd941-36ad-45ac-9e51-35246c6b427a",
+            "reproduction_id": null,
+            "submitted_at": "2026-08-25T00:27:06.645790Z",
+            "relation": "independent_duplicate",
+            "source_fingerprint": "ae3455dcb87fe9df1a5abb9726924f4b0c679036ed9a84c265e7dc6681e60480"
+          },
+          {
+            "submission_id": "7b755542-32c1-48d0-a796-994f3d9942d0",
+            "finding_id": "finding_36a1220a1427cb5a5b154b599aee3f1bde4fb06f",
+            "node_id": "5ac571ca-8245-41e2-aa2b-0f2b98c9f1fe",
+            "operator_id": "demo-agent-access-op-03",
+            "validation_id": "62744fbe-1f71-425c-a7fb-d87ff0ba0147",
+            "reproduction_id": null,
+            "submitted_at": "2026-08-25T00:27:06.674070Z",
+            "relation": "independent_duplicate",
+            "source_fingerprint": "4896c5f38d16c1e14dff285106be57e27f9d19516c7723f2c854504e36632927"
+          },
+          {
+            "submission_id": "98db4580-b229-4e6d-a01e-11fa6b300e4c",
+            "finding_id": "finding_dea82a105ed867c7e1073019ebebca913c254877",
+            "node_id": "36657ae9-4111-4eb0-a420-b24f5195af21",
+            "operator_id": "demo-agent-access-op-04",
+            "validation_id": "a5fbe335-e992-46e5-a2af-e43197993551",
+            "reproduction_id": null,
+            "submitted_at": "2026-08-25T00:27:06.700105Z",
+            "relation": "independent_duplicate",
+            "source_fingerprint": "412a6de9c299b2c024ce1013607d209142e85efce092dc33286c64fa4e8bbd44"
+          }
+        ],
+        "report_count": 4,
+        "distinct_operator_count": 4,
+        "status": "open",
+        "source_fingerprint": "29fd40dc99159c9048852f3f8c119d248d86f56f5995455675144ed1c163823c",
+        "created_at": "2026-08-25T00:27:08.593609Z",
+        "updated_at": "2026-08-25T00:27:08.593609Z",
+        "finalized_at": null
+      },
+      {
+        "finding_cluster_id": "finding_cluster_78804a9cdfbc12251ebe35dab86bb610cf7d91637f105c4a8a864d5bd231115c",
+        "cluster_version": "finding_cluster_v1",
+        "policy_version": "root_cause_cluster_v1",
+        "project_id": "962a8d18-d239-4a2d-90d8-b98ed34dafd3",
+        "routing_id": "b5a7816c-bb38-4015-9109-901c667db96d",
+        "category": "reentrancy",
+        "canonical_finding_id": "finding_7b7166f7eaa3109ca2fa1436caef11ab95d8e030",
+        "canonical_submission_id": "67a50de3-1134-463d-813d-632116fd6229",
+        "final_validation_status": null,
+        "claimed_severity": "High",
+        "final_severity": null,
+        "validation_authority": "pending_validator_consensus",
+        "final_validation_consensus_id": null,
+        "validator_consensus_outcome": null,
+        "validator_consensus_severity": null,
+        "validation_resolution_source_fingerprint": null,
+        "root_cause_key": "findingcategoryreentrancy:src/ProofGuardDemoVault.sol:withdrawall",
+        "root_cause_fingerprint": "24506f3beecda154105cf39545fbcbccfd2a6f8e1764f0b1cfd91ba0f33e5cea",
+        "members": [
+          {
+            "submission_id": "67a50de3-1134-463d-813d-632116fd6229",
+            "finding_id": "finding_7b7166f7eaa3109ca2fa1436caef11ab95d8e030",
+            "node_id": "8433bed6-bbfb-42d0-a1d8-d14bf9256387",
+            "operator_id": "demo-agent-reentrancy-op-03",
+            "validation_id": "b2ac1b47-453a-4540-ac61-ed2511f39364",
+            "reproduction_id": null,
+            "submitted_at": "2026-08-25T00:27:06.726880Z",
+            "relation": "canonical",
+            "source_fingerprint": "5854330ce73e24ca622314fd97dcef549150e4ce022665309147f1239e948f41"
+          },
+          {
+            "submission_id": "0446a9f6-2804-47f8-8f08-02149021686d",
+            "finding_id": "finding_84449c71f82795487531d68e85aba69626155049",
+            "node_id": "d8253257-0781-4036-8260-740b049f526f",
+            "operator_id": "demo-agent-reentrancy-op-01",
+            "validation_id": "6f7098b6-8c02-4a98-b494-d74f1e810226",
+            "reproduction_id": null,
+            "submitted_at": "2026-08-25T00:27:06.757216Z",
+            "relation": "independent_duplicate",
+            "source_fingerprint": "ddc05be02951c9bc00c5a7daf3543e8f931b3f8b74643f508e1e09b3bce794d3"
+          },
+          {
+            "submission_id": "5d77a244-090d-407c-9a7a-c44eef966b91",
+            "finding_id": "finding_b0c22d74d4e815616681a3786a4dad185bedac73",
+            "node_id": "e27510b1-ce19-486a-ad83-7f1e1fa36339",
+            "operator_id": "demo-agent-reentrancy-op-02",
+            "validation_id": "50094145-7714-4191-9465-5997f935e530",
+            "reproduction_id": null,
+            "submitted_at": "2026-08-25T00:27:06.784820Z",
+            "relation": "independent_duplicate",
+            "source_fingerprint": "e8e616e857b0e42c3700ba257404f5c9ba34868fc170e2c9df54d24728215088"
+          },
+          {
+            "submission_id": "c0ee51a1-3e48-4317-929c-5f88c613929c",
+            "finding_id": "finding_ca12198cfdb24ef6216aa2a3105300551f95907d",
+            "node_id": "13bbbb03-c821-4df2-8017-41aed754c8f0",
+            "operator_id": "demo-agent-reentrancy-op-04",
+            "validation_id": "24558db6-5131-4c05-b193-6c7ba5962b40",
+            "reproduction_id": null,
+            "submitted_at": "2026-08-25T00:27:06.811712Z",
+            "relation": "independent_duplicate",
+            "source_fingerprint": "d22c0fbf1d9b743f26f8016f3c0924b6398020615b6c55f59f074d4c704a6c38"
+          }
+        ],
+        "report_count": 4,
+        "distinct_operator_count": 4,
+        "status": "open",
+        "source_fingerprint": "e6aef1ab0873764ac57a57f18328b30705455d7fb109e3decbdb5090b36e0662",
+        "created_at": "2026-08-25T00:27:08.596663Z",
+        "updated_at": "2026-08-25T00:27:08.596663Z",
+        "finalized_at": null
+      }
+    ]
+  }
+}

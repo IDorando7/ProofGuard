@@ -40,6 +40,8 @@ class Settings(BaseModel):
     data_dir: Path = Path("data/audits")
     protocol_data_dir: Path = Path("data/protocol")
     sqlite_path: Path = Path("data/audit_api.sqlite3")
+    cors_origins: list[str] = ["http://localhost:5173", "http://127.0.0.1:5173"]
+    demo_mode: bool = False
     task_reward_configuration_version: str = TASK_REWARD_CONFIGURATION_VERSION
     task_reward_pool: TaskRewardPoolConfig = TaskRewardPoolConfig()
     report_quality_configuration_version: str = REPORT_QUALITY_CONFIGURATION_VERSION
@@ -85,6 +87,14 @@ def get_settings() -> Settings:
     data_dir = Path(os.getenv("AUDIT_API_DATA_DIR", "data/audits"))
     protocol_data_dir = Path(os.getenv("AUDIT_API_PROTOCOL_DATA_DIR", "data/protocol"))
     sqlite_path = Path(os.getenv("AUDIT_API_SQLITE_PATH", "data/audit_api.sqlite3"))
+    cors_origins = [
+        origin.strip()
+        for origin in os.getenv(
+            "AUDIT_API_CORS_ORIGINS",
+            "http://localhost:5173,http://127.0.0.1:5173",
+        ).split(",")
+        if origin.strip()
+    ]
     task_reward_pool = TaskRewardPoolConfig(
         miner_share=os.getenv("AUDIT_API_TASK_REWARD_MINER_SHARE", "0.70"),
         validator_share=os.getenv("AUDIT_API_TASK_REWARD_VALIDATOR_SHARE", "0.20"),
@@ -130,6 +140,8 @@ def get_settings() -> Settings:
         data_dir=data_dir,
         protocol_data_dir=protocol_data_dir,
         sqlite_path=sqlite_path,
+        cors_origins=cors_origins,
+        demo_mode=os.getenv("PROOFGUARD_DEMO_MODE", "0"),
         task_reward_configuration_version=os.getenv(
             "AUDIT_API_TASK_REWARD_CONFIGURATION_VERSION",
             TASK_REWARD_CONFIGURATION_VERSION,
