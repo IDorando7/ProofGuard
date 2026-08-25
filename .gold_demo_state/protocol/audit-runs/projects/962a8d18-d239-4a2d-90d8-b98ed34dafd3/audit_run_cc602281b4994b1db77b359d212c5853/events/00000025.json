@@ -1,0 +1,22 @@
+{
+  "artifact_refs": [],
+  "audit_event_id": "audit_event_a80145f8b5900671b0c3068905011b1b81dc870a5bdcab0d164fd7fe84b87812",
+  "audit_run_id": "audit_run_cc602281b4994b1db77b359d212c5853",
+  "category": null,
+  "created_at": "2026-08-25T00:27:06.657988Z",
+  "entity_id": "audit_run_cc602281b4994b1db77b359d212c5853",
+  "entity_type": "audit_run",
+  "event_level": "INFO",
+  "event_type": "STAGE_PROGRESS",
+  "event_version": "audit_event_v1",
+  "message": "2 of 8 node assignments completed.",
+  "metadata": {
+    "attempt_count": 1,
+    "progress_current": 2,
+    "progress_total": 8
+  },
+  "node_id": null,
+  "operator_id": null,
+  "sequence_number": 25,
+  "stage": "EXECUTING_AGENTS"
+}

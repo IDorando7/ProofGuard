@@ -1,0 +1,52 @@
+{
+  "category": "access_control",
+  "contribution_stats": {
+    "accepted_average_contribution_score": 81.0,
+    "accepted_contribution_score_total": 405.0,
+    "accepted_maximum_contribution_score": 81.0,
+    "accepted_minimum_contribution_score": 81.0,
+    "average_contribution_score": 81.0,
+    "maximum_contribution_score": 81.0,
+    "minimum_contribution_score": 81.0,
+    "total_contribution_score": 405.0
+  },
+  "counts": {
+    "accepted_independent_duplicate_submissions": 0,
+    "accepted_unique_submissions": 5,
+    "duplicate_submissions": 0,
+    "insufficient_evidence_submissions": 0,
+    "out_of_scope_submissions": 0,
+    "rejected_submissions": 0,
+    "reproduced_submissions": 5,
+    "reproduction_attempts": 5,
+    "reward_eligible_submissions": 5,
+    "rewarded_submissions": 0,
+    "submission_duplicate_spam": 0,
+    "total_finalized_submissions": 5,
+    "unsafe_submissions": 0,
+    "unsupported_submissions": 0
+  },
+  "created_at": "2026-08-25T00:27:04.175221Z",
+  "first_activity_at": "2026-08-25T00:27:04.131640Z",
+  "last_activity_at": "2026-08-25T00:27:04.171437Z",
+  "node_id": "5ac571ca-8245-41e2-aa2b-0f2b98c9f1fe",
+  "performance_id": "performance_5ac571ca-8245-41e2-aa2b-0f2b98c9f1fe_access_control",
+  "performance_version": "category_performance_v0",
+  "rebuilt_at": "2026-08-25T00:27:04.175221Z",
+  "source_event_ids": [
+    "2a132789-3e80-4127-8e59-d42c5ff10269",
+    "2bc051eb-f8bc-44fe-86ff-54054b3e9e6f",
+    "a310a42e-a4c4-4e22-a274-534efff621fe",
+    "a507a00d-87b7-460a-9860-02e93c8aea10",
+    "b8733059-8249-4c32-acff-86fb1bbf8357"
+  ],
+  "source_fingerprint": "16c76d229b42acfb12fcf8ddb4e62b268e1ae55a9a7ad5c0fed160ffc79247d8",
+  "source_submission_ids": [
+    "1c102d6a-8351-427c-a7e6-317d24b86848",
+    "874dce97-3254-4725-b3ff-8e00ec9e6cdc",
+    "aa583efd-a948-49f5-9d59-555d0516d9fd",
+    "b1420088-1504-48fc-b8e7-84b02fdf7ede",
+    "bc55fed6-b0ec-416d-b253-fdce53f380b9"
+  ],
+  "updated_at": "2026-08-25T00:27:04.175315Z"
+}

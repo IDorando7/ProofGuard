@@ -1,0 +1,25 @@
+{
+  "display_name": "Demo Reentrancy Agent 04",
+  "public_key": null,
+  "supported_categories": [
+    "reentrancy"
+  ],
+  "description": "Synthetic demo discovery node",
+  "node_id": "13bbbb03-c821-4df2-8017-41aed754c8f0",
+  "node_type": "agent",
+  "operator_id": "demo-agent-reentrancy-op-04",
+  "status": "active",
+  "reputation_score": 0.5,
+  "statistics": {
+    "total_submissions": 0,
+    "accepted_submissions": 0,
+    "rejected_submissions": 0,
+    "duplicate_submissions": 0,
+    "out_of_scope_submissions": 0,
+    "unsafe_submissions": 0
+  },
+  "status_reason": "Node registered.",
+  "created_at": "2026-08-25T00:27:03.834891Z",
+  "updated_at": "2026-08-25T00:27:03.834891Z",
+  "status_updated_at": "2026-08-25T00:27:03.834891Z"
+}

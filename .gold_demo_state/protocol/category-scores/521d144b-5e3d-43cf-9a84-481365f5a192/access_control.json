@@ -1,0 +1,64 @@
+{
+  "accepted_unique_submissions": 6,
+  "calculated_at": "2026-08-25T00:27:04.120277Z",
+  "category": "access_control",
+  "category_score": 0.7784,
+  "components": {
+    "consistency": 1.0,
+    "contribution_quality": 0.92,
+    "experience_confidence": 0.6,
+    "precision": 1.0,
+    "reproduction_rate": 1.0,
+    "uniqueness_rate": 1.0
+  },
+  "confidence_adjusted_score": 0.7784,
+  "created_at": "2026-08-25T00:27:04.120277Z",
+  "explanation": [
+    "6 of 6 finalized submissions were accepted and unique, producing precision 1.000000.",
+    "6 of 6 finalized reproduction attempts succeeded, producing reproduction rate 1.000000.",
+    "6 accepted unique submissions, 0 valid independent duplicates, and 0 legacy duplicate outcomes produced uniqueness rate 1.000000.",
+    "Accepted findings had average contribution score 92.000000, producing quality component 0.920000.",
+    "Accepted contribution scores ranging from 92.000000 to 92.000000 produced consistency component 1.000000.",
+    "6 finalized submissions produced experience confidence 0.600000.",
+    "0 submission-spam duplicates plus out-of-scope, insufficient-evidence, rejected, unsafe, and unsupported outcomes produced penalties 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, and 0.000000, for total penalty 0.000000.",
+    "The final category score is 0.778400 with score band strong."
+  ],
+  "finalized_submissions": 6,
+  "neutral_baseline": 0.5,
+  "node_id": "521d144b-5e3d-43cf-9a84-481365f5a192",
+  "penalties": {
+    "duplicate_penalty": 0.0,
+    "insufficient_evidence_penalty": 0.0,
+    "out_of_scope_penalty": 0.0,
+    "rejected_penalty": 0.0,
+    "total_penalty": 0.0,
+    "unsafe_penalty": 0.0,
+    "unsupported_penalty": 0.0
+  },
+  "performance_id": "performance_521d144b-5e3d-43cf-9a84-481365f5a192_access_control",
+  "performance_source_fingerprint": "bc0e06174489f3f7e4fa053f97afb94ecf1e6f49bff10b3acbc4ede6e1b52e59",
+  "raw_score_after_penalties": 0.964,
+  "raw_score_before_penalties": 0.964,
+  "score_band": "strong",
+  "score_id": "category_score_521d144b-5e3d-43cf-9a84-481365f5a192_access_control",
+  "scoring_version": "category_score_v0",
+  "source_fingerprint": "ba80bbc3cdb423515270afe2b3f785f570c1113b6af63669e4802cb2acd3ea46",
+  "updated_at": "2026-08-25T00:27:04.120775Z",
+  "weighted_components": {
+    "consistency_contribution": 0.1,
+    "contribution_quality_contribution": 0.184,
+    "experience_contribution": 0.03,
+    "positive_total": 0.964,
+    "precision_contribution": 0.3,
+    "reproduction_contribution": 0.2,
+    "uniqueness_contribution": 0.15
+  },
+  "weights": {
+    "consistency_weight": 0.1,
+    "contribution_quality_weight": 0.2,
+    "experience_weight": 0.05,
+    "precision_weight": 0.3,
+    "reproduction_weight": 0.2,
+    "uniqueness_weight": 0.15
+  }
+}

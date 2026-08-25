@@ -1,0 +1,32 @@
+{
+  "index": 6,
+  "name": "register_demo-agent-reentrancy-op-01",
+  "method": "POST",
+  "path": "/nodes",
+  "status_code": 201,
+  "response": {
+    "display_name": "Demo Reentrancy Agent 01",
+    "public_key": null,
+    "supported_categories": [
+      "reentrancy"
+    ],
+    "description": "Synthetic demo discovery node",
+    "node_id": "d8253257-0781-4036-8260-740b049f526f",
+    "node_type": "agent",
+    "operator_id": "demo-agent-reentrancy-op-01",
+    "status": "active",
+    "reputation_score": 0.5,
+    "statistics": {
+      "total_submissions": 0,
+      "accepted_submissions": 0,
+      "rejected_submissions": 0,
+      "duplicate_submissions": 0,
+      "out_of_scope_submissions": 0,
+      "unsafe_submissions": 0
+    },
+    "status_reason": "Node registered.",
+    "created_at": "2026-08-25T00:27:03.826990Z",
+    "updated_at": "2026-08-25T00:27:03.826990Z",
+    "status_updated_at": "2026-08-25T00:27:03.826990Z"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "command": [
+    "forge",
+    "test",
+    "--match-test",
+    "testUnauthorizedSetAdmin"
+  ],
+  "created_at": "2026-08-25T00:27:44.288146Z",
+  "duration_ms": 181,
+  "error_message": null,
+  "finding_id": "finding_6bd6905aba721742783b879563570b204a85f794",
+  "poc_file": "test/ProofGuardAccessControl.t.sol",
+  "project_id": "962a8d18-d239-4a2d-90d8-b98ed34dafd3",
+  "reproduction_id": "validator_week3_result_3da7807b809b6777d5ca6116b2690841466c6626f7dde3cefdad7077b4b6c1b5",
+  "safety_notes": [],
+  "status": "reproduced",
+  "stderr": "",
+  "stdout": "Compiling 2 files with Solc 0.8.20\nSolc 0.8.20 finished in 11.08ms\nCompiler run successful!\n\nRan 1 test for test/ProofGuardAccessControl.t.sol:ProofGuardAccessControlTest\n[PASS] testUnauthorizedSetAdmin() (gas: 581687)\nSuite result: ok. 1 passed; 0 failed; 0 skipped; finished in 309.25µs (125.03µs CPU time)\n\nRan 1 test suite in 4.02ms (309.25µs CPU time): 1 tests passed, 0 failed, 0 skipped (1 total tests)\n",
+  "test_name": "testUnauthorizedSetAdmin",
+  "updated_at": "2026-08-25T00:27:44.470517Z"
+}

@@ -1,0 +1,29 @@
+{
+  "accepted_unique_submissions": 0,
+  "administrative_lock": false,
+  "category": "reentrancy",
+  "category_score": 0.0,
+  "category_score_id": "unavailable_category_score_096f3f8a-0fb0-4d95-9e5c-56cced09bb75_reentrancy",
+  "category_score_source_fingerprint": null,
+  "exploration_assignments": 0,
+  "finalized_submissions": 0,
+  "joined_at": "2026-08-24T19:52:01.464525Z",
+  "last_assigned_at": null,
+  "last_decision_id": "membership_decision_eabca167abd91bfd9b41a3f1ca78ac24",
+  "last_evaluated_at": "2026-08-24T19:52:01.464525Z",
+  "membership_source_fingerprint": "eabca167abd91bfd9b41a3f1ca78ac24ccbd1173a6694a60e2521518a3119d5c",
+  "membership_version": "subnet_membership_v0",
+  "node_id": "096f3f8a-0fb0-4d95-9e5c-56cced09bb75",
+  "performance_id": "unavailable_performance_096f3f8a-0fb0-4d95-9e5c-56cced09bb75_reentrancy",
+  "policy_version": "membership_policy_v0",
+  "rank": null,
+  "status": "candidate",
+  "status_reason": "The node qualifies for candidate membership.; The node has insufficient finalized category history.",
+  "status_reason_codes": [
+    "eligible_candidate",
+    "insufficient_history"
+  ],
+  "status_updated_at": "2026-08-24T19:52:01.464525Z",
+  "subnet_id": "subnet_reentrancy",
+  "updated_at": "2026-08-24T19:52:01.464525Z"
+}

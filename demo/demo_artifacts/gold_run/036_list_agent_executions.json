@@ -1,0 +1,269 @@
+{
+  "index": 36,
+  "name": "list_agent_executions",
+  "method": "GET",
+  "path": "/projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/audit-runs/audit_run_cc602281b4994b1db77b359d212c5853/agent-executions",
+  "status_code": 200,
+  "response": {
+    "audit_run_id": "audit_run_cc602281b4994b1db77b359d212c5853",
+    "total": 8,
+    "agent_executions": [
+      {
+        "agent_execution_id": "agent_execution_6c5f93a341132057fed7d33b09a76a454262b8dd",
+        "agent_execution_version": "agent_execution_v1",
+        "audit_run_id": "audit_run_cc602281b4994b1db77b359d212c5853",
+        "project_id": "962a8d18-d239-4a2d-90d8-b98ed34dafd3",
+        "routing_id": "b5a7816c-bb38-4015-9109-901c667db96d",
+        "routing_assignment_id": "assignment_3c743afc4af291ce84f7fd1bfba2f124",
+        "node_id": "176e9d08-96b1-4381-a83a-ce0c95429e4b",
+        "operator_id": "demo-agent-access-op-01",
+        "category": "access_control",
+        "executor_type": "local",
+        "agent_type": "AccessControlAgent",
+        "agent_version": "access_control_static_v1",
+        "status": "COMPLETED",
+        "attempt_count": 1,
+        "started_at": "2026-08-25T00:27:06.607972Z",
+        "completed_at": "2026-08-25T00:27:06.624704Z",
+        "duration_ms": 16,
+        "finding_ids": [
+          "finding_6bd6905aba721742783b879563570b204a85f794"
+        ],
+        "submission_ids": [
+          "16014a4d-a000-44ad-83c6-dbe8017b936e"
+        ],
+        "finding_count": 1,
+        "submission_count": 1,
+        "error_code": null,
+        "error_message": null,
+        "source_fingerprint": "3c0da51da89ecb06ff54ca94b9735eb6c96f57b79f8d5514b0e977c2dd8194a4",
+        "created_at": "2026-08-25T00:27:06.606980Z",
+        "updated_at": "2026-08-25T00:27:06.624704Z"
+      },
+      {
+        "agent_execution_id": "agent_execution_0da8f198248c49601fcca83b79e1b882ac7e21d6",
+        "agent_execution_version": "agent_execution_v1",
+        "audit_run_id": "audit_run_cc602281b4994b1db77b359d212c5853",
+        "project_id": "962a8d18-d239-4a2d-90d8-b98ed34dafd3",
+        "routing_id": "b5a7816c-bb38-4015-9109-901c667db96d",
+        "routing_assignment_id": "assignment_86c6ffeea0e931ae8055a2c0c73c4e6b",
+        "node_id": "36657ae9-4111-4eb0-a420-b24f5195af21",
+        "operator_id": "demo-agent-access-op-04",
+        "category": "access_control",
+        "executor_type": "local",
+        "agent_type": "AccessControlAgent",
+        "agent_version": "access_control_static_v1",
+        "status": "COMPLETED",
+        "attempt_count": 1,
+        "started_at": "2026-08-25T00:27:06.690490Z",
+        "completed_at": "2026-08-25T00:27:06.707034Z",
+        "duration_ms": 16,
+        "finding_ids": [
+          "finding_dea82a105ed867c7e1073019ebebca913c254877"
+        ],
+        "submission_ids": [
+          "98db4580-b229-4e6d-a01e-11fa6b300e4c"
+        ],
+        "finding_count": 1,
+        "submission_count": 1,
+        "error_code": null,
+        "error_message": null,
+        "source_fingerprint": "43194cdc704d7f486d50a215115ba16177d922f55051a21ef26c1c47d1bc5615",
+        "created_at": "2026-08-25T00:27:06.689615Z",
+        "updated_at": "2026-08-25T00:27:06.707034Z"
+      },
+      {
+        "agent_execution_id": "agent_execution_347262a42a82e6bb405f6f7daf1e5cba8cd8f387",
+        "agent_execution_version": "agent_execution_v1",
+        "audit_run_id": "audit_run_cc602281b4994b1db77b359d212c5853",
+        "project_id": "962a8d18-d239-4a2d-90d8-b98ed34dafd3",
+        "routing_id": "b5a7816c-bb38-4015-9109-901c667db96d",
+        "routing_assignment_id": "assignment_7dfa8e6a5f34934cf28cbcbcbc23da9c",
+        "node_id": "521d144b-5e3d-43cf-9a84-481365f5a192",
+        "operator_id": "demo-agent-access-op-02",
+        "category": "access_control",
+        "executor_type": "local",
+        "agent_type": "AccessControlAgent",
+        "agent_version": "access_control_static_v1",
+        "status": "COMPLETED",
+        "attempt_count": 1,
+        "started_at": "2026-08-25T00:27:06.636250Z",
+        "completed_at": "2026-08-25T00:27:06.652729Z",
+        "duration_ms": 16,
+        "finding_ids": [
+          "finding_501d71ccf9b08e7b76a872a9fcec4be5584b10b5"
+        ],
+        "submission_ids": [
+          "b4d8bbb4-bebe-411b-8693-0fddfe389e3e"
+        ],
+        "finding_count": 1,
+        "submission_count": 1,
+        "error_code": null,
+        "error_message": null,
+        "source_fingerprint": "b6482376f2eb1c432e28d29bff72bd0bb38de990004fca129e79a5006e031883",
+        "created_at": "2026-08-25T00:27:06.635253Z",
+        "updated_at": "2026-08-25T00:27:06.652729Z"
+      },
+      {
+        "agent_execution_id": "agent_execution_8c5d253cc09a5579dae435e8e628a9b14262ef96",
+        "agent_execution_version": "agent_execution_v1",
+        "audit_run_id": "audit_run_cc602281b4994b1db77b359d212c5853",
+        "project_id": "962a8d18-d239-4a2d-90d8-b98ed34dafd3",
+        "routing_id": "b5a7816c-bb38-4015-9109-901c667db96d",
+        "routing_assignment_id": "assignment_66604a445edf9ebe129e35dcc73152d3",
+        "node_id": "5ac571ca-8245-41e2-aa2b-0f2b98c9f1fe",
+        "operator_id": "demo-agent-access-op-03",
+        "category": "access_control",
+        "executor_type": "local",
+        "agent_type": "AccessControlAgent",
+        "agent_version": "access_control_static_v1",
+        "status": "COMPLETED",
+        "attempt_count": 1,
+        "started_at": "2026-08-25T00:27:06.663196Z",
+        "completed_at": "2026-08-25T00:27:06.680828Z",
+        "duration_ms": 17,
+        "finding_ids": [
+          "finding_36a1220a1427cb5a5b154b599aee3f1bde4fb06f"
+        ],
+        "submission_ids": [
+          "7b755542-32c1-48d0-a796-994f3d9942d0"
+        ],
+        "finding_count": 1,
+        "submission_count": 1,
+        "error_code": null,
+        "error_message": null,
+        "source_fingerprint": "0b7cc649455ae39d626c600d6b845d7f1a746c58d1892060e9902e58f0fcd339",
+        "created_at": "2026-08-25T00:27:06.662036Z",
+        "updated_at": "2026-08-25T00:27:06.680828Z"
+      },
+      {
+        "agent_execution_id": "agent_execution_8e61fb47e584751651b63b64b19533db6dddc899",
+        "agent_execution_version": "agent_execution_v1",
+        "audit_run_id": "audit_run_cc602281b4994b1db77b359d212c5853",
+        "project_id": "962a8d18-d239-4a2d-90d8-b98ed34dafd3",
+        "routing_id": "b5a7816c-bb38-4015-9109-901c667db96d",
+        "routing_assignment_id": "assignment_327ab0f01e587ddb232133cb83058b64",
+        "node_id": "13bbbb03-c821-4df2-8017-41aed754c8f0",
+        "operator_id": "demo-agent-reentrancy-op-04",
+        "category": "reentrancy",
+        "executor_type": "local",
+        "agent_type": "ReentrancyAgent",
+        "agent_version": "reentrancy_static_v1",
+        "status": "COMPLETED",
+        "attempt_count": 1,
+        "started_at": "2026-08-25T00:27:06.801079Z",
+        "completed_at": "2026-08-25T00:27:06.818658Z",
+        "duration_ms": 17,
+        "finding_ids": [
+          "finding_ca12198cfdb24ef6216aa2a3105300551f95907d"
+        ],
+        "submission_ids": [
+          "c0ee51a1-3e48-4317-929c-5f88c613929c"
+        ],
+        "finding_count": 1,
+        "submission_count": 1,
+        "error_code": null,
+        "error_message": null,
+        "source_fingerprint": "a46897e0567de023ba5bf0c3b2ad75b929889848bee0e3ea9662a00812fe7f3f",
+        "created_at": "2026-08-25T00:27:06.800162Z",
+        "updated_at": "2026-08-25T00:27:06.818658Z"
+      },
+      {
+        "agent_execution_id": "agent_execution_bb87008fb07a4f5ba6152d6a0b830b4a55108891",
+        "agent_execution_version": "agent_execution_v1",
+        "audit_run_id": "audit_run_cc602281b4994b1db77b359d212c5853",
+        "project_id": "962a8d18-d239-4a2d-90d8-b98ed34dafd3",
+        "routing_id": "b5a7816c-bb38-4015-9109-901c667db96d",
+        "routing_assignment_id": "assignment_54b2b3dd780158e1c413ab7caf066383",
+        "node_id": "8433bed6-bbfb-42d0-a1d8-d14bf9256387",
+        "operator_id": "demo-agent-reentrancy-op-03",
+        "category": "reentrancy",
+        "executor_type": "local",
+        "agent_type": "ReentrancyAgent",
+        "agent_version": "reentrancy_static_v1",
+        "status": "COMPLETED",
+        "attempt_count": 1,
+        "started_at": "2026-08-25T00:27:06.716840Z",
+        "completed_at": "2026-08-25T00:27:06.733592Z",
+        "duration_ms": 16,
+        "finding_ids": [
+          "finding_7b7166f7eaa3109ca2fa1436caef11ab95d8e030"
+        ],
+        "submission_ids": [
+          "67a50de3-1134-463d-813d-632116fd6229"
+        ],
+        "finding_count": 1,
+        "submission_count": 1,
+        "error_code": null,
+        "error_message": null,
+        "source_fingerprint": "ed24ecd0879cbc3f9b06f506211aa5cca682f2d816c5db43d683ac3d3043f7f1",
+        "created_at": "2026-08-25T00:27:06.715884Z",
+        "updated_at": "2026-08-25T00:27:06.733592Z"
+      },
+      {
+        "agent_execution_id": "agent_execution_dd6e2e8153f7c3d61b272c839ea65c7b1e46cba5",
+        "agent_execution_version": "agent_execution_v1",
+        "audit_run_id": "audit_run_cc602281b4994b1db77b359d212c5853",
+        "project_id": "962a8d18-d239-4a2d-90d8-b98ed34dafd3",
+        "routing_id": "b5a7816c-bb38-4015-9109-901c667db96d",
+        "routing_assignment_id": "assignment_dbfe52f4f3a4120eb781dce0b1b37a92",
+        "node_id": "d8253257-0781-4036-8260-740b049f526f",
+        "operator_id": "demo-agent-reentrancy-op-01",
+        "category": "reentrancy",
+        "executor_type": "local",
+        "agent_type": "ReentrancyAgent",
+        "agent_version": "reentrancy_static_v1",
+        "status": "COMPLETED",
+        "attempt_count": 1,
+        "started_at": "2026-08-25T00:27:06.745488Z",
+        "completed_at": "2026-08-25T00:27:06.765025Z",
+        "duration_ms": 19,
+        "finding_ids": [
+          "finding_84449c71f82795487531d68e85aba69626155049"
+        ],
+        "submission_ids": [
+          "0446a9f6-2804-47f8-8f08-02149021686d"
+        ],
+        "finding_count": 1,
+        "submission_count": 1,
+        "error_code": null,
+        "error_message": null,
+        "source_fingerprint": "9f2770e5f5fdaf71aebd46c5803f60d437eba5a0d52dd4080f4c80de914a352c",
+        "created_at": "2026-08-25T00:27:06.744296Z",
+        "updated_at": "2026-08-25T00:27:06.765025Z"
+      },
+      {
+        "agent_execution_id": "agent_execution_507eba67fbbff85e55fe1247ff5605bc18e84f91",
+        "agent_execution_version": "agent_execution_v1",
+        "audit_run_id": "audit_run_cc602281b4994b1db77b359d212c5853",
+        "project_id": "962a8d18-d239-4a2d-90d8-b98ed34dafd3",
+        "routing_id": "b5a7816c-bb38-4015-9109-901c667db96d",
+        "routing_assignment_id": "assignment_e6e858cf094c8af20f785866f240c9ca",
+        "node_id": "e27510b1-ce19-486a-ad83-7f1e1fa36339",
+        "operator_id": "demo-agent-reentrancy-op-02",
+        "category": "reentrancy",
+        "executor_type": "local",
+        "agent_type": "ReentrancyAgent",
+        "agent_version": "reentrancy_static_v1",
+        "status": "COMPLETED",
+        "attempt_count": 1,
+        "started_at": "2026-08-25T00:27:06.774771Z",
+        "completed_at": "2026-08-25T00:27:06.791574Z",
+        "duration_ms": 16,
+        "finding_ids": [
+          "finding_b0c22d74d4e815616681a3786a4dad185bedac73"
+        ],
+        "submission_ids": [
+          "5d77a244-090d-407c-9a7a-c44eef966b91"
+        ],
+        "finding_count": 1,
+        "submission_count": 1,
+        "error_code": null,
+        "error_message": null,
+        "source_fingerprint": "aeda0036594bc1ea13c8c9c87c952f6c84addce9392c514dccd81c3e176a8343",
+        "created_at": "2026-08-25T00:27:06.773807Z",
+        "updated_at": "2026-08-25T00:27:06.791574Z"
+      }
+    ]
+  }
+}

@@ -14,8 +14,9 @@ Fluxul principal este:
 1. creează și pregătește un proiect de audit;
 2. înregistrează nodurile și subneturile care participă la audit;
 3. trimite finding-urile descoperite și calculează contribuțiile;
-4. reproduce și validează finding-urile;
-5. generează raportul final și procesează reputația și recompensele.
+4. îngheață clustere candidate ca unități de lucru pentru validatori;
+5. reproduce independent, atestă și stabilește adevărul prin consens;
+6. numai apoi procesează calitatea, reputația și recompensele eligibile.
 
 Toate răspunsurile și corpurile cererilor sunt validate folosind schemele afișate
 în secțiunea **Schemas**. Endpointurile care modifică starea pot întoarce `400`
@@ -34,7 +35,7 @@ OPENAPI_TAGS = [
     {"name": "routing", "description": "Calcularea și consultarea rutării unui audit către subneturi și noduri."},
     {"name": "submissions", "description": "Trimiterea finding-urilor descoperite de noduri către protocol."},
     {"name": "contributions", "description": "Calcularea contribuției și eligibilității pentru recompensă."},
-    {"name": "finding-clusters", "description": "Gruparea deterministă a rapoartelor validate după cauza vulnerabilității."},
+    {"name": "finding-clusters", "description": "Gruparea deterministă și înghețarea rapoartelor candidate după cauza vulnerabilității; clusterul nu reprezintă singur adevăr validat."},
     {"name": "report-quality", "description": "Evaluarea deterministă și auditabilă a calității fiecărui raport dintr-un cluster."},
     {"name": "reproduction", "description": "Încărcarea și executarea controlată a demonstrațiilor Proof of Concept."},
     {"name": "validation", "description": "Validarea finding-urilor și stocarea deciziilor de validare."},
@@ -61,6 +62,11 @@ OPERATION_DOCS: dict[tuple[str, str], tuple[str, str]] = {
     ("GET", "/health"): (
         "Verifică starea serviciului",
         "Confirmă că API-ul este pornit și poate răspunde la cereri.",
+    ),
+
+    ("GET", "/projects"): (
+        "Listează proiectele de audit",
+        "Returnează metadatele publice ale proiectelor, de la cel mai recent, fără a expune conținutul sau căile interne ale workspace-ului.",
     ),
 
     # Week 8 validator committee selection
@@ -694,19 +700,19 @@ OPERATION_DOCS: dict[tuple[str, str], tuple[str, str]] = {
     # Finding clusters
     ("POST", "/projects/{project_id}/routing/{routing_id}/finding-clusters/rebuild"): (
         "Reconstruiește clusterele de vulnerabilități",
-        "Materializează determinist cauzele unice din submission-uri rutate și validate, fără a calcula recompense.",
+        "Materializează determinist unități candidate din submission-uri rutate, valide structural și compatibile cu scope-ul, fără a cere reproducere sau a declara adevăr final.",
     ),
     ("POST", "/projects/{project_id}/routing/{routing_id}/finding-clusters/finalize"): (
         "Finalizează clusterele unei rutări",
-        "Îngheață snapshoturile de cauză-rădăcină eligibile înainte de evaluarea economică Day 4, fără a distribui recompense.",
+        "Îngheață membership-ul și fingerprint-ul sursă pentru munca validatorilor; FINALIZED descrie snapshot-ul, nu acceptarea vulnerabilității.",
     ),
     ("GET", "/projects/{project_id}/routing/{routing_id}/finding-clusters"): (
         "Listează clusterele unei rutări",
-        "Returnează cauzele unice și rapoartele membre pentru execuția de audit indicată.",
+        "Returnează cauzele unice, membrii și separat starea autorității de validare, inclusiv adevărul încă nerezolvat.",
     ),
     ("GET", "/projects/{project_id}/routing/{routing_id}/finding-clusters/{finding_cluster_id}"): (
         "Citește un cluster de vulnerabilitate",
-        "Returnează clusterul derivat identificat în cadrul proiectului și rutării.",
+        "Returnează snapshot-ul derivat și distinge membership-ul înghețat de rezultatul final al consensului.",
     ),
     ("GET", "/submissions/{submission_id}/finding-cluster"): (
         "Găsește clusterul unui submission",
@@ -738,7 +744,7 @@ OPERATION_DOCS: dict[tuple[str, str], tuple[str, str]] = {
     # Reproduction
     ("POST", "/projects/{project_id}/findings/{finding_id}/poc"): (
         "Încarcă un Proof of Concept",
-        "Validează și stochează fișierul PoC pentru finding, apoi marchează reproducerea ca generată.",
+        "Validează și stochează fișierul PoC și identificatorul opțional de test, apoi marchează artefactul ca generat fără a pretinde că a fost reprodus.",
     ),
     ("POST", "/projects/{project_id}/findings/{finding_id}/reproduction/run"): (
         "Rulează reproducerea unui finding",
@@ -787,10 +793,22 @@ OPERATION_DOCS: dict[tuple[str, str], tuple[str, str]] = {
 }
 
 
-def configure_openapi(app: FastAPI) -> None:
+DEMO_OPERATION_DOCS: dict[tuple[str, str], tuple[str, str]] = {
+    ("POST", "/demo/bootstrap"): (
+        "Pregătește rețeaua locală pentru Gold Demo",
+        "Înregistrează runtime-urile locale ale agenților demo și reconstruiește istoricul, scorurile și membership-ul derivate; endpointul există numai cu PROOFGUARD_DEMO_MODE=1.",
+    ),
+}
+
+
+def configure_openapi(
+    app: FastAPI,
+    extra_operation_docs: dict[tuple[str, str], tuple[str, str]] | None = None,
+) -> None:
     """Completează schema generată de FastAPI cu documentația operațiilor."""
 
     default_openapi: Callable[[], dict[str, Any]] = app.openapi
+    operation_docs = {**OPERATION_DOCS, **(extra_operation_docs or {})}
 
     def documented_openapi() -> dict[str, Any]:
         schema = default_openapi()
@@ -801,7 +819,7 @@ def configure_openapi(app: FastAPI) -> None:
             for path, operations in paths.items()
             for method in operations
         }
-        documented_operations = set(OPERATION_DOCS)
+        documented_operations = set(operation_docs)
 
         missing = schema_operations - documented_operations
         stale = documented_operations - schema_operations
@@ -813,7 +831,7 @@ def configure_openapi(app: FastAPI) -> None:
                 details.append(f"documentație fără endpoint: {_format_operations(stale)}")
             raise RuntimeError("Schema OpenAPI și documentația nu sunt sincronizate; " + "; ".join(details))
 
-        for (method, path), (summary, description) in OPERATION_DOCS.items():
+        for (method, path), (summary, description) in operation_docs.items():
             operation = paths[path][method.lower()]
             operation["summary"] = summary
             operation["description"] = description

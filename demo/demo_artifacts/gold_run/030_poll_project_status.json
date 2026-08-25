@@ -1,0 +1,12 @@
+{
+  "index": 30,
+  "name": "poll_project_status",
+  "method": "GET",
+  "path": "/projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/status",
+  "status_code": 200,
+  "response": {
+    "project_id": "962a8d18-d239-4a2d-90d8-b98ed34dafd3",
+    "status": "preparing",
+    "last_error": null
+  }
+}

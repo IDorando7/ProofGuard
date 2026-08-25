@@ -1,0 +1,121 @@
+{
+  "index": 10,
+  "name": "bootstrap_gold_demo_network",
+  "method": "POST",
+  "path": "/demo/bootstrap",
+  "status_code": 200,
+  "response": {
+    "bootstrap_version": "gold_demo_bootstrap_v1",
+    "historical_submission_count": 36,
+    "runtime_node_ids": [
+      "13bbbb03-c821-4df2-8017-41aed754c8f0",
+      "176e9d08-96b1-4381-a83a-ce0c95429e4b",
+      "36657ae9-4111-4eb0-a420-b24f5195af21",
+      "521d144b-5e3d-43cf-9a84-481365f5a192",
+      "5ac571ca-8245-41e2-aa2b-0f2b98c9f1fe",
+      "8433bed6-bbfb-42d0-a1d8-d14bf9256387",
+      "d8253257-0781-4036-8260-740b049f526f",
+      "e27510b1-ce19-486a-ad83-7f1e1fa36339",
+      "node_local_access",
+      "node_local_reentrancy"
+    ],
+    "categories": [
+      {
+        "category": "access_control",
+        "active_members": 3,
+        "candidate_members": 1,
+        "probation_members": 0,
+        "nodes": [
+          {
+            "node_id": "176e9d08-96b1-4381-a83a-ce0c95429e4b",
+            "operator_id": "demo-agent-access-op-01",
+            "category": "access_control",
+            "runtime_type": "AccessControlAgent",
+            "history_profile": "established_strong",
+            "category_score": 0.8283,
+            "finalized_submissions": 7,
+            "membership_status": "active"
+          },
+          {
+            "node_id": "521d144b-5e3d-43cf-9a84-481365f5a192",
+            "operator_id": "demo-agent-access-op-02",
+            "category": "access_control",
+            "runtime_type": "AccessControlAgent",
+            "history_profile": "established_proven",
+            "category_score": 0.7784,
+            "finalized_submissions": 6,
+            "membership_status": "active"
+          },
+          {
+            "node_id": "5ac571ca-8245-41e2-aa2b-0f2b98c9f1fe",
+            "operator_id": "demo-agent-access-op-03",
+            "category": "access_control",
+            "runtime_type": "AccessControlAgent",
+            "history_profile": "established_developing",
+            "category_score": 0.7185,
+            "finalized_submissions": 5,
+            "membership_status": "active"
+          },
+          {
+            "node_id": "36657ae9-4111-4eb0-a420-b24f5195af21",
+            "operator_id": "demo-agent-access-op-04",
+            "category": "access_control",
+            "runtime_type": "AccessControlAgent",
+            "history_profile": "cold_start_exploration",
+            "category_score": 0.0,
+            "finalized_submissions": 0,
+            "membership_status": "candidate"
+          }
+        ]
+      },
+      {
+        "category": "reentrancy",
+        "active_members": 3,
+        "candidate_members": 1,
+        "probation_members": 0,
+        "nodes": [
+          {
+            "node_id": "d8253257-0781-4036-8260-740b049f526f",
+            "operator_id": "demo-agent-reentrancy-op-01",
+            "category": "reentrancy",
+            "runtime_type": "ReentrancyAgent",
+            "history_profile": "established_strong",
+            "category_score": 0.8283,
+            "finalized_submissions": 7,
+            "membership_status": "active"
+          },
+          {
+            "node_id": "e27510b1-ce19-486a-ad83-7f1e1fa36339",
+            "operator_id": "demo-agent-reentrancy-op-02",
+            "category": "reentrancy",
+            "runtime_type": "ReentrancyAgent",
+            "history_profile": "established_proven",
+            "category_score": 0.7784,
+            "finalized_submissions": 6,
+            "membership_status": "active"
+          },
+          {
+            "node_id": "8433bed6-bbfb-42d0-a1d8-d14bf9256387",
+            "operator_id": "demo-agent-reentrancy-op-03",
+            "category": "reentrancy",
+            "runtime_type": "ReentrancyAgent",
+            "history_profile": "established_developing",
+            "category_score": 0.7185,
+            "finalized_submissions": 5,
+            "membership_status": "active"
+          },
+          {
+            "node_id": "13bbbb03-c821-4df2-8017-41aed754c8f0",
+            "operator_id": "demo-agent-reentrancy-op-04",
+            "category": "reentrancy",
+            "runtime_type": "ReentrancyAgent",
+            "history_profile": "cold_start_exploration",
+            "category_score": 0.0,
+            "finalized_submissions": 0,
+            "membership_status": "candidate"
+          }
+        ]
+      }
+    ]
+  }
+}

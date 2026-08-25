@@ -1,0 +1,20 @@
+{
+  "assigned_at": "2026-08-25T00:27:44.937081Z",
+  "assignment_role": "authoritative",
+  "assignment_version": "validator_assignment_v1",
+  "attested_at": "2026-08-25T00:27:45.503384Z",
+  "category": "reentrancy",
+  "expires_at": null,
+  "finding_cluster_id": "finding_cluster_78804a9cdfbc12251ebe35dab86bb610cf7d91637f105c4a8a864d5bd231115c",
+  "project_id": "962a8d18-d239-4a2d-90d8-b98ed34dafd3",
+  "routing_id": "b5a7816c-bb38-4015-9109-901c667db96d",
+  "seat_index": 3,
+  "source_fingerprint": "8c659afafa58c0e78d1542d676074b0abd3d8d5944d169f74d19bbfc8084370b",
+  "status": "attested",
+  "updated_at": "2026-08-25T00:27:45.503384Z",
+  "validation_round": 1,
+  "validator_assignment_id": "validator_assignment_2e1215706f4eb26308261f5c37fd8307d5786f76848d8672af5843f8f074c565",
+  "validator_committee_id": "validator_committee_342e2decec10be6b2f9da341db5c7922ce43307b59ed04b43aa4af6f9d9985b6",
+  "validator_node_id": "b5a500c3-12ef-4657-91e2-843f553a4aac",
+  "validator_operator_id": "demo-validator-op-10"
+}

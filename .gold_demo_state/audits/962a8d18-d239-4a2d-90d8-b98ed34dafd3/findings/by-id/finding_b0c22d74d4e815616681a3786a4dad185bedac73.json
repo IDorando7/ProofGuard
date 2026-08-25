@@ -1,0 +1,26 @@
+{
+  "agent_name": "reentrancy_agent",
+  "attack_path": "A receiver can reenter before its balance or reward state is reduced.",
+  "category": "reentrancy",
+  "conditions": null,
+  "confidence": 0.7,
+  "contracts": [
+    "src/ProofGuardDemoVault.sol"
+  ],
+  "finding_id": "finding_b0c22d74d4e815616681a3786a4dad185bedac73",
+  "functions": [
+    "withdrawAll"
+  ],
+  "impact": "Funds or rewards may be withdrawn more than once.",
+  "poc_file": null,
+  "poc_type": "none",
+  "project_id": "962a8d18-d239-4a2d-90d8-b98ed34dafd3",
+  "recommended_fix": "Update state before external calls or protect the function with nonReentrant.",
+  "reproduction_steps": [
+    "Call withdrawAll from a contract with a reentering fallback."
+  ],
+  "root_cause": "External value transfer occurs before internal accounting is updated.",
+  "severity": "High",
+  "status": "candidate",
+  "title": "Potential reentrancy in withdrawAll"
+}

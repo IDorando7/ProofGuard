@@ -1,0 +1,12 @@
+{
+  "agent_execution_id": "agent_execution_6c5f93a341132057fed7d33b09a76a454262b8dd",
+  "audit_run_id": "audit_run_cc602281b4994b1db77b359d212c5853",
+  "category": "access_control",
+  "entity_id": "16014a4d-a000-44ad-83c6-dbe8017b936e",
+  "entity_type": "submission",
+  "node_id": "176e9d08-96b1-4381-a83a-ce0c95429e4b",
+  "operator_id": "demo-agent-access-op-01",
+  "project_id": "962a8d18-d239-4a2d-90d8-b98ed34dafd3",
+  "routing_assignment_id": "assignment_3c743afc4af291ce84f7fd1bfba2f124",
+  "routing_id": "b5a7816c-bb38-4015-9109-901c667db96d"
+}

@@ -1,0 +1,16 @@
+{
+  "assigned_at": "2026-08-25T00:27:44.939383Z",
+  "category": "reentrancy",
+  "finding_cluster_id": "finding_cluster_78804a9cdfbc12251ebe35dab86bb610cf7d91637f105c4a8a864d5bd231115c",
+  "operator_id": "demo-validator-op-11",
+  "project_id": "962a8d18-d239-4a2d-90d8-b98ed34dafd3",
+  "role": "authoritative",
+  "routing_id": "b5a7816c-bb38-4015-9109-901c667db96d",
+  "source_fingerprint": "7c798fd65986fd4efb619700110e8562a8bc11ceb5400dd2e0726dbfb35c6abb",
+  "usage_event_id": "validator_usage_validator_assignment_757528285554507b3f4d9cd2c210799857251913bf30f2e028604b3536e88005",
+  "usage_version": "validator_assignment_usage_v1",
+  "validation_round": 1,
+  "validator_assignment_id": "validator_assignment_757528285554507b3f4d9cd2c210799857251913bf30f2e028604b3536e88005",
+  "validator_committee_id": "validator_committee_342e2decec10be6b2f9da341db5c7922ce43307b59ed04b43aa4af6f9d9985b6",
+  "validator_node_id": "25eed10f-d870-49f9-acc1-fe8828acb804"
+}

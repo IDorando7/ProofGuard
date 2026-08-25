@@ -1,0 +1,10 @@
+{
+  "consumed_points": "2000.000000",
+  "consumption_version": "reward_pool_consumption_v1",
+  "finalized_at": "2026-08-25T00:27:46.548344Z",
+  "pool_kind": "validator",
+  "reward_cycle_id": "validator_reward_cycle_a152dc3d73e16532b8be83d88866a5b9",
+  "reward_pool_consumption_id": "reward_pool_consumption_57c4967e980fd0dc73e535d10638c53d1e2bf6b327d7a27ff28018ad5359c638",
+  "source_fingerprint": "57c4967e980fd0dc73e535d10638c53d1e2bf6b327d7a27ff28018ad5359c638",
+  "task_reward_budget_id": "task_reward_budget_deaa492ad06fde97154506c63da4af66"
+}

@@ -1,0 +1,18 @@
+{
+  "finding_id": "demo_history_access_control_1_2",
+  "project_id": "proofguard_gold_demo_history_v1",
+  "status": "reproduced",
+  "poc_file": null,
+  "test_name": null,
+  "command": null,
+  "stdout": "Deterministic local calibration reproduction succeeded.",
+  "stderr": null,
+  "duration_ms": null,
+  "error_message": null,
+  "safety_notes": [
+    "Synthetic local fixture; no external execution."
+  ],
+  "reproduction_id": "c3306720-a575-4cb9-8eca-9aa44b5b8dea",
+  "created_at": "2026-08-25T00:27:04.008911Z",
+  "updated_at": "2026-08-25T00:27:04.009004Z"
+}

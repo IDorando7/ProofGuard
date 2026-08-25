@@ -1,0 +1,27 @@
+{
+  "submission_id": "67a50de3-1134-463d-813d-632116fd6229",
+  "project_id": "962a8d18-d239-4a2d-90d8-b98ed34dafd3",
+  "finding_id": "finding_7b7166f7eaa3109ca2fa1436caef11ab95d8e030",
+  "node_id": "8433bed6-bbfb-42d0-a1d8-d14bf9256387",
+  "node_type": "agent",
+  "agent_name": "ReentrancyAgent",
+  "agent_version": "reentrancy_static_v1",
+  "category": "reentrancy",
+  "finding_hash": "de727496b7dfb6b806d27e9d4bb15836f161e6139b6335a379b22ef43513c0a6",
+  "status": "submitted",
+  "reproduction_id": null,
+  "validation_id": null,
+  "routing_id": "b5a7816c-bb38-4015-9109-901c667db96d",
+  "routing_assignment_id": "assignment_54b2b3dd780158e1c413ab7caf066383",
+  "reward_status": "pending",
+  "metadata": {
+    "audit_run_id": "audit_run_cc602281b4994b1db77b359d212c5853",
+    "agent_execution_id": "agent_execution_bb87008fb07a4f5ba6152d6a0b830b4a55108891",
+    "candidate_fingerprint": "9c1ac48c91d390d25bf22d6cbb34a7f839921b81128f23ee158dfa05e6358ffe"
+  },
+  "submitted_at": "2026-08-25T00:27:06.726880Z",
+  "created_at": "2026-08-25T00:27:06.726880Z",
+  "updated_at": "2026-08-25T00:27:06.726880Z",
+  "status_updated_at": "2026-08-25T00:27:06.726880Z",
+  "status_reason": "Finding submission created."
+}

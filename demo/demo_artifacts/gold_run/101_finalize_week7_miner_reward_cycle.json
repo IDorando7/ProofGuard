@@ -1,0 +1,106 @@
+{
+  "index": 101,
+  "name": "finalize_week7_miner_reward_cycle",
+  "method": "POST",
+  "path": "/projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/task-reward-cycles/week7_task_reward_cycle_edbe00ed5e73e30196533fba9376a55b/finalize",
+  "status_code": 200,
+  "response": {
+    "processing_status": "finalized",
+    "cycle": {
+      "reward_cycle_id": "week7_task_reward_cycle_edbe00ed5e73e30196533fba9376a55b",
+      "cycle_version": "week7_task_reward_cycle_v1",
+      "policy_version": "scalable_multi_agent_reward_v1",
+      "configuration_version": "week7_reward_cycle_config_v1",
+      "policy_snapshot": {
+        "fingerprint_version": "reward_cycle_fingerprint_v1",
+        "week7_cycle_policy_version": "scalable_multi_agent_reward_v1",
+        "week7_cycle_configuration_version": "week7_reward_cycle_config_v1",
+        "task_budget_policy_version": "task_reward_v1",
+        "task_budget_configuration_version": "task_reward_config_v1",
+        "task_reward_pool": {
+          "miner_share": "0.70",
+          "validator_share": "0.20",
+          "protocol_share": "0.10"
+        },
+        "finding_cluster_policy_version": "root_cause_cluster_v1",
+        "report_quality_policy_version": "report_quality_policy_v1",
+        "report_quality_configuration_version": "report_quality_config_v1",
+        "report_quality": {
+          "correctness": "0.35",
+          "poc_quality": "0.25",
+          "root_cause": "0.20",
+          "impact": "0.10",
+          "fix": "0.10"
+        },
+        "task_finding_policy_version": "finding_cluster_value_v1",
+        "task_finding_configuration_version": "task_finding_allocation_config_v1",
+        "task_finding_reward": {
+          "severity_weights": {
+            "critical": "16",
+            "high": "8",
+            "medium": "3",
+            "low": "1",
+            "informational": "0"
+          },
+          "uniqueness": {
+            "coefficient": "0.20",
+            "floor": "0.50"
+          },
+          "default_allocation_scope": "category_isolated"
+        },
+        "task_operator_policy_version": "operator_cluster_payout_v1",
+        "task_operator_configuration_version": "operator_cluster_payout_config_v1",
+        "task_operator_reward": {
+          "duplicates": {
+            "top_k": 5
+          },
+          "chief_finder": {
+            "bonus_percentage": "0.05",
+            "quality_percentage": "0.95",
+            "quality_threshold": "0.80"
+          }
+        },
+        "protocol_quantum": "0.000001",
+        "rounding_policy": "largest_remainder_round_down_v1"
+      },
+      "reward_domain": "client_task",
+      "reward_unit": "protocol_points",
+      "project_id": "962a8d18-d239-4a2d-90d8-b98ed34dafd3",
+      "routing_id": "b5a7816c-bb38-4015-9109-901c667db96d",
+      "routing_source_fingerprint": "eb362a83276633b325d4a1e3b571825a7d1841391cbd835b58a33e6351c8ff08",
+      "task_reward_budget_id": "task_reward_budget_deaa492ad06fde97154506c63da4af66",
+      "task_reward_budget_source_fingerprint": "deaa492ad06fde97154506c63da4af66bc689b74633331263fa0157047e887d3",
+      "status": "finalized",
+      "allocation_scope": "global",
+      "category_weights": {},
+      "total_budget_points": "10000",
+      "miner_pool_points": "7000.000000",
+      "validator_pool_points": "2000.000000",
+      "protocol_pool_points": "1000.000000",
+      "finding_calculation_id": "task_finding_reward_calculation_934a73609c57817c62f69227abfd22b8",
+      "finding_calculation_source_fingerprint": "934a73609c57817c62f69227abfd22b8db3714ffad3fc98686cf5b1ee089f4d3",
+      "operator_calculation_id": "task_operator_reward_calculation_fe9a104cd53eff73224defc50b8acd7f",
+      "operator_calculation_source_fingerprint": "fe9a104cd53eff73224defc50b8acd7f68d9c5df4d4d8b9e81c79b935d2c1427",
+      "distributed_miner_points": "0",
+      "undistributed_miner_points": "7000.000000",
+      "reward_event_count": 0,
+      "rewarded_operator_count": 0,
+      "rewarded_cluster_count": 0,
+      "chief_finder_count": 0,
+      "reward_event_ids": [],
+      "request_fingerprint": "edbe00ed5e73e30196533fba9376a55b06a9357273754d9a64d0d6a4e5b991b3",
+      "calculation_fingerprint": "9373517c42e1f7067dc7cdafb391b1467570472a08a8852ec8fb27137922fe70",
+      "finalization_source_fingerprint": "57488efb430ef56d30f0a168d0dc58ada0b91730506ff6e91621e9ec5e87d02a",
+      "calculation_revision": 1,
+      "superseded_calculation_fingerprints": [],
+      "description": "ProofGuard Gold demo miner reward stream",
+      "created_at": "2026-08-25T00:27:46.445296Z",
+      "updated_at": "2026-08-25T00:27:46.472332Z",
+      "calculated_at": "2026-08-25T00:27:46.459581Z",
+      "finalized_at": "2026-08-25T00:27:46.472332Z"
+    },
+    "reward_events_created": 0,
+    "reward_events_existing": 0,
+    "message": "Week 7 client-task cycle finalized into immutable protocol-point RewardEvents."
+  }
+}

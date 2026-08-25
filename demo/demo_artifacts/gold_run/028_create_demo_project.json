@@ -1,0 +1,22 @@
+{
+  "index": 28,
+  "name": "create_demo_project",
+  "method": "POST",
+  "path": "/projects",
+  "status_code": 200,
+  "response": {
+    "project_id": "962a8d18-d239-4a2d-90d8-b98ed34dafd3",
+    "project_name": "ProofGuard Management Gold Demo",
+    "status": "created",
+    "workspace_path": "962a8d18-d239-4a2d-90d8-b98ed34dafd3",
+    "scope_summary": {
+      "language": "solidity",
+      "framework": "foundry",
+      "contracts_in_scope_count": 1,
+      "attack_categories": [
+        "access_control",
+        "reentrancy"
+      ]
+    }
+  }
+}

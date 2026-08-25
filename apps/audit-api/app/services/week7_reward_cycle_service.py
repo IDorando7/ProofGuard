@@ -11,7 +11,10 @@ from pydantic import ValidationError
 
 from app.core.config import get_settings
 from app.schemas.reward import RewardCycleStatus, RewardDomain
-from app.schemas.finding_cluster import FindingClusterStatus
+from app.schemas.finding_cluster import (
+    FindingClusterStatus,
+    is_finding_cluster_reward_eligible,
+)
 from app.schemas.routing import RoutingStatus
 from app.schemas.task_finding_reward import (
     FindingAllocationScope,
@@ -1064,7 +1067,11 @@ def _verify_current_cycle_sources(
     clusters = list_task_finding_clusters(
         protocol_data_root, cycle.project_id, cycle.routing_id
     )
-    cluster_by_id = {cluster.finding_cluster_id: cluster for cluster in clusters}
+    cluster_by_id = {
+        cluster.finding_cluster_id: cluster
+        for cluster in clusters
+        if is_finding_cluster_reward_eligible(cluster)
+    }
     allocation_by_id = {
         allocation.finding_cluster_id: allocation
         for allocation in day4.cluster_allocations

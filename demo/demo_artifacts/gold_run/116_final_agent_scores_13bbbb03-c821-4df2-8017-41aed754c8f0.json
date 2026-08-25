@@ -1,0 +1,8 @@
+{
+  "index": 116,
+  "name": "final_agent_scores_13bbbb03-c821-4df2-8017-41aed754c8f0",
+  "method": "GET",
+  "path": "/nodes/13bbbb03-c821-4df2-8017-41aed754c8f0/category-scores",
+  "status_code": 200,
+  "response": []
+}

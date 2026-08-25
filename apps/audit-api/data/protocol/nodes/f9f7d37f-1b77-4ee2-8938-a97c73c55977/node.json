@@ -1,0 +1,26 @@
+{
+  "display_name": "Demo Validator 06",
+  "public_key": null,
+  "supported_categories": [
+    "access_control",
+    "reentrancy"
+  ],
+  "description": "Synthetic demo validator operator",
+  "node_id": "f9f7d37f-1b77-4ee2-8938-a97c73c55977",
+  "node_type": "validator",
+  "operator_id": "demo-validator-op-06",
+  "status": "active",
+  "reputation_score": 0.5,
+  "statistics": {
+    "total_submissions": 0,
+    "accepted_submissions": 0,
+    "rejected_submissions": 0,
+    "duplicate_submissions": 0,
+    "out_of_scope_submissions": 0,
+    "unsafe_submissions": 0
+  },
+  "status_reason": "Node registered.",
+  "created_at": "2026-08-24T19:52:01.505201Z",
+  "updated_at": "2026-08-24T19:52:01.505201Z",
+  "status_updated_at": "2026-08-24T19:52:01.505201Z"
+}

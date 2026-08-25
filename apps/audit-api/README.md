@@ -60,6 +60,18 @@ Swagger groups the endpoints by domain and documents every operation, request
 parameter, request body, response model, summary, and description. Use **Try it
 out** in Swagger UI to send requests to the local API.
 
+The executive dashboard in `../../frontend` uses the read-only `GET /projects`
+endpoint to discover existing audit projects. Browser access from the Vite dev
+server is allowed for `http://localhost:5173` and `http://127.0.0.1:5173` by
+default; configure a comma-separated list with `AUDIT_API_CORS_ORIGINS`.
+
+For the local management Gold Demo only, start the API with
+`PROOFGUARD_DEMO_MODE=1`. This conditionally exposes `POST /demo/bootstrap`,
+which registers the seeded specialist nodes in the API process's existing local
+agent registry and creates deterministic historical protocol inputs before
+rebuilding category performance, scores, and memberships. The route is absent
+when demo mode is disabled.
+
 ## Test
 
 ```bash

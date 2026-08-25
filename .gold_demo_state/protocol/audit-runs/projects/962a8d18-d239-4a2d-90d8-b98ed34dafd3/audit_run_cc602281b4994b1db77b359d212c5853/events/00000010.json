@@ -1,0 +1,31 @@
+{
+  "artifact_refs": [],
+  "audit_event_id": "audit_event_0959e75e0505ccd8dafaeffd9a00572cd4fadfad60d35e61a6681a5f5a355e6c",
+  "audit_run_id": "audit_run_cc602281b4994b1db77b359d212c5853",
+  "category": "reentrancy",
+  "created_at": "2026-08-25T00:27:06.585796Z",
+  "entity_id": "assignment_dbfe52f4f3a4120eb781dce0b1b37a92",
+  "entity_type": "routing_assignment",
+  "event_level": "INFO",
+  "event_type": "ROUTING_NODE_SELECTED",
+  "event_version": "audit_event_v1",
+  "message": "Routing assignment selected a node.",
+  "metadata": {
+    "assignment_id": "assignment_dbfe52f4f3a4120eb781dce0b1b37a92",
+    "assignment_mode": "production",
+    "category_score": 0.8283,
+    "membership": "active",
+    "position": 1,
+    "routing_id": "b5a7816c-bb38-4015-9109-901c667db96d",
+    "selection_reasons": [
+      "Selected as active member with category score 0.828300.",
+      "Ranked deterministically by membership tier, category score, confidence, and finalized history.",
+      "Node and subnet are active and source snapshots are consistent."
+    ],
+    "selection_type": "ranked"
+  },
+  "node_id": "d8253257-0781-4036-8260-740b049f526f",
+  "operator_id": "demo-agent-reentrancy-op-01",
+  "sequence_number": 10,
+  "stage": "ROUTING"
+}

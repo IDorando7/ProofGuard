@@ -1,0 +1,13 @@
+{
+  "applied_at": "2026-08-25T00:27:06.556055Z",
+  "assignment_id": "assignment_327ab0f01e587ddb232133cb83058b64",
+  "assignment_mode": "shadow",
+  "category": "reentrancy",
+  "node_id": "13bbbb03-c821-4df2-8017-41aed754c8f0",
+  "project_id": "962a8d18-d239-4a2d-90d8-b98ed34dafd3",
+  "routing_id": "b5a7816c-bb38-4015-9109-901c667db96d",
+  "selection_type": "exploration",
+  "source_fingerprint": "d6276ee77ab58df8bb4ad1d4b75dbd79f5b41cd38ddcb721f3bad4066f0f272e",
+  "subnet_id": "subnet_reentrancy",
+  "usage_event_id": "routing_usage_assignment_327ab0f01e587ddb232133cb83058b64"
+}

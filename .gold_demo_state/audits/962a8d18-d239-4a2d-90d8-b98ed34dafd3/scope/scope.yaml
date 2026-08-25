@@ -1,0 +1,10 @@
+project_name: proofguard-e2e-demo
+language: solidity
+framework: foundry
+
+contracts_in_scope:
+  - src/ProofGuardDemoVault.sol
+
+attack_categories:
+  - access_control
+  - reentrancy

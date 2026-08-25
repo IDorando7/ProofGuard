@@ -1,0 +1,33 @@
+{
+  "index": 23,
+  "name": "register_demo-validator-op-11",
+  "method": "POST",
+  "path": "/nodes",
+  "status_code": 201,
+  "response": {
+    "display_name": "Demo Validator 11",
+    "public_key": null,
+    "supported_categories": [
+      "access_control",
+      "reentrancy"
+    ],
+    "description": "Synthetic demo validator operator",
+    "node_id": "25eed10f-d870-49f9-acc1-fe8828acb804",
+    "node_type": "validator",
+    "operator_id": "demo-validator-op-11",
+    "status": "active",
+    "reputation_score": 0.5,
+    "statistics": {
+      "total_submissions": 0,
+      "accepted_submissions": 0,
+      "rejected_submissions": 0,
+      "duplicate_submissions": 0,
+      "out_of_scope_submissions": 0,
+      "unsafe_submissions": 0
+    },
+    "status_reason": "Node registered.",
+    "created_at": "2026-08-25T00:27:04.529694Z",
+    "updated_at": "2026-08-25T00:27:04.529694Z",
+    "status_updated_at": "2026-08-25T00:27:04.529694Z"
+  }
+}

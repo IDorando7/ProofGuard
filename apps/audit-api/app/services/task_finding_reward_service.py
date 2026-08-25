@@ -10,7 +10,10 @@ from typing import Any
 from pydantic import ValidationError
 
 from app.core.config import get_settings
-from app.schemas.finding_cluster import FindingClusterStatus
+from app.schemas.finding_cluster import (
+    FindingClusterStatus,
+    is_finding_cluster_reward_eligible,
+)
 from app.schemas.reward import RewardDomain
 from app.schemas.routing import RoutingStatus
 from app.schemas.task_finding_reward import (
@@ -190,8 +193,11 @@ def calculate_task_finding_rewards(
             raise TaskFindingRewardStateError(
                 "FindingCluster distinct operator count does not match NodeRegistry"
             )
+    eligible_clusters = [
+        cluster for cluster in clusters if is_finding_cluster_reward_eligible(cluster)
+    ]
     try:
-        values = [value_finding_cluster(cluster, config) for cluster in clusters]
+        values = [value_finding_cluster(cluster, config) for cluster in eligible_clusters]
     except FindingValuationError as exc:
         raise TaskFindingRewardStateError(str(exc)) from exc
     values.sort(key=lambda item: item.finding_cluster_id)

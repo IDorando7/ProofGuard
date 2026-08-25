@@ -1,0 +1,28 @@
+{
+  "assignment_role": "authoritative",
+  "attestation_id": "validation_attestation_69df03fb70ecf43a35ca8b20aceb64bb574767768fb9a439e8cc29a1d31004b4",
+  "attestation_protocol_version": "validation_attestation_v1",
+  "created_at": "2026-08-25T00:27:45.131630Z",
+  "evidence_references": [
+    "finding_cluster_78804a9cdfbc12251ebe35dab86bb610cf7d91637f105c4a8a864d5bd231115c",
+    "validator_assignment_241ea7ea8c27bb6fe13c2ae471809a4b69df1962dcf5f20649bc487133784001",
+    "validator_reproduction_7bb5c540f55d185bba382da9dbf51d128f3c1ee3e68d6a7e7b13795b400ed7a0",
+    "validator_week3_result_c1dec16aa6ec33ff99664dd01686a2c091f307361c6d2f8aefe2230ba6d87df4"
+  ],
+  "finalized_at": "2026-08-25T00:27:45.131630Z",
+  "finding_cluster_id": "finding_cluster_78804a9cdfbc12251ebe35dab86bb610cf7d91637f105c4a8a864d5bd231115c",
+  "impact_decision": "validated",
+  "normalized_severity": "High",
+  "project_id": "962a8d18-d239-4a2d-90d8-b98ed34dafd3",
+  "reason_codes": [],
+  "reproduction_decision": "reproduced",
+  "root_cause_decision": "confirmed",
+  "routing_id": "b5a7816c-bb38-4015-9109-901c667db96d",
+  "source_fingerprint": "e1ab370bf3c85b6b518d0c5a2a4a6865d5a634d19eaf284406e55b35addd373a",
+  "status": "finalized",
+  "validator_assignment_id": "validator_assignment_241ea7ea8c27bb6fe13c2ae471809a4b69df1962dcf5f20649bc487133784001",
+  "validator_node_id": "56d42db2-701f-4b77-8974-3ca93e318b99",
+  "validator_operator_id": "demo-validator-op-04",
+  "validator_reproduction_id": "validator_reproduction_7bb5c540f55d185bba382da9dbf51d128f3c1ee3e68d6a7e7b13795b400ed7a0",
+  "validity_decision": "accepted"
+}

@@ -1,0 +1,31 @@
+{
+  "artifact_refs": [],
+  "audit_event_id": "audit_event_0130f2fcc09a2bb4cf6287df1db1f2e7830cbb7f8814de89260e123922090760",
+  "audit_run_id": "audit_run_cc602281b4994b1db77b359d212c5853",
+  "category": "reentrancy",
+  "created_at": "2026-08-25T00:27:06.592238Z",
+  "entity_id": "assignment_327ab0f01e587ddb232133cb83058b64",
+  "entity_type": "routing_assignment",
+  "event_level": "INFO",
+  "event_type": "ROUTING_NODE_SELECTED",
+  "event_version": "audit_event_v1",
+  "message": "Routing assignment selected a node.",
+  "metadata": {
+    "assignment_id": "assignment_327ab0f01e587ddb232133cb83058b64",
+    "assignment_mode": "shadow",
+    "category_score": 0.0,
+    "membership": "candidate",
+    "position": 4,
+    "routing_id": "b5a7816c-bb38-4015-9109-901c667db96d",
+    "selection_reasons": [
+      "Selected for shadow exploration as a candidate member.",
+      "Selected using finalized exploration usage: 0 prior assignments.",
+      "Shadow output is not authoritative during Router v0."
+    ],
+    "selection_type": "exploration"
+  },
+  "node_id": "13bbbb03-c821-4df2-8017-41aed754c8f0",
+  "operator_id": "demo-agent-reentrancy-op-04",
+  "sequence_number": 12,
+  "stage": "ROUTING"
+}

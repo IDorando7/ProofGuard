@@ -1,0 +1,15 @@
+{
+  "index": 117,
+  "name": "generate_final_report",
+  "method": "POST",
+  "path": "/projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/reports/final",
+  "status_code": 200,
+  "response": {
+    "project_id": "962a8d18-d239-4a2d-90d8-b98ed34dafd3",
+    "markdown_path": "reports/final_report.md",
+    "json_path": "reports/final_report.json",
+    "total_findings": 8,
+    "accepted_count": 0,
+    "message": "Final audit report generated."
+  }
+}

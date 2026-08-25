@@ -1,0 +1,32 @@
+{
+  "category": "reentrancy",
+  "created_at": "2026-08-25T00:27:46.416897Z",
+  "evaluated_at": "2026-08-25T00:27:46.416897Z",
+  "membership_policy": {
+    "active_minimum_resolved": 5,
+    "active_minimum_score": "0.600000",
+    "active_minimum_validity_samples": 3,
+    "active_retention_score": "0.500000",
+    "expert_minimum_reproduction_accuracy": "0.750000",
+    "expert_minimum_reproduction_samples": 3,
+    "expert_minimum_resolved": 10,
+    "expert_minimum_score": "0.800000",
+    "expert_minimum_validity_accuracy": "0.800000",
+    "expert_retention_score": "0.700000",
+    "policy_version": "validator_membership_policy_v1",
+    "probation_minimum_resolved": 3,
+    "probation_minimum_score": "0.400000"
+  },
+  "membership_version": "validator_membership_v1",
+  "operator_id": "demo-validator-op-04",
+  "previous_status": null,
+  "reason_codes": [
+    "building_resolved_history"
+  ],
+  "score_source_fingerprint": "9d17386ca138ca6beea41452d831ceb848c029f17fcdb4394f14efe9908c4fd6",
+  "source_fingerprint": "02aef9bc0bf053926985b7b049efca8703cdbccc21bca13d7e6cd7c1e0373799",
+  "status": "candidate",
+  "validator_category_score_id": "validator_category_score_19f3c5c59da765b5656c16bb21108fae9fecc3d4e0d6de8889735c1a4b8ef720",
+  "validator_membership_id": "validator_membership_12c35af830816e4318b5dc89fdb170d99a1dae429b73664053b97150927499a7",
+  "validator_node_id": "56d42db2-701f-4b77-8974-3ca93e318b99"
+}

@@ -1,0 +1,311 @@
+INFO:     Started server process [100748]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:52104 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52112 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52114 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52114 - "POST /nodes HTTP/1.1" 201 Created
+INFO:     127.0.0.1:52114 - "POST /nodes HTTP/1.1" 201 Created
+INFO:     127.0.0.1:52114 - "POST /nodes HTTP/1.1" 201 Created
+INFO:     127.0.0.1:52114 - "POST /nodes HTTP/1.1" 201 Created
+INFO:     127.0.0.1:52114 - "POST /nodes HTTP/1.1" 201 Created
+INFO:     127.0.0.1:52114 - "POST /nodes HTTP/1.1" 201 Created
+INFO:     127.0.0.1:52114 - "POST /nodes HTTP/1.1" 201 Created
+INFO:     127.0.0.1:52114 - "POST /nodes HTTP/1.1" 201 Created
+INFO:     127.0.0.1:52114 - "POST /demo/bootstrap HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52114 - "GET /subnets/by-category/access_control HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52114 - "GET /subnets/by-category/reentrancy HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52114 - "POST /nodes HTTP/1.1" 201 Created
+INFO:     127.0.0.1:52114 - "POST /nodes HTTP/1.1" 201 Created
+INFO:     127.0.0.1:52114 - "POST /nodes HTTP/1.1" 201 Created
+INFO:     127.0.0.1:52114 - "POST /nodes HTTP/1.1" 201 Created
+INFO:     127.0.0.1:52114 - "POST /nodes HTTP/1.1" 201 Created
+INFO:     127.0.0.1:52114 - "POST /nodes HTTP/1.1" 201 Created
+INFO:     127.0.0.1:52114 - "POST /nodes HTTP/1.1" 201 Created
+INFO:     127.0.0.1:52114 - "POST /nodes HTTP/1.1" 201 Created
+INFO:     127.0.0.1:52114 - "POST /nodes HTTP/1.1" 201 Created
+INFO:     127.0.0.1:52114 - "POST /nodes HTTP/1.1" 201 Created
+INFO:     127.0.0.1:52114 - "POST /nodes HTTP/1.1" 201 Created
+INFO:     127.0.0.1:52114 - "POST /nodes HTTP/1.1" 201 Created
+INFO:     127.0.0.1:52114 - "POST /nodes HTTP/1.1" 201 Created
+INFO:     127.0.0.1:52114 - "POST /nodes HTTP/1.1" 201 Created
+INFO:     127.0.0.1:52114 - "GET /nodes HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52114 - "POST /projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52114 - "POST /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/prepare HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52114 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52114 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52114 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/scope HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52114 - "POST /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/audit-runs HTTP/1.1" 201 Created
+INFO:     127.0.0.1:52114 - "POST /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/audit-runs/audit_run_cc602281b4994b1db77b359d212c5853/start HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52114 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52114 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/audit-runs/audit_run_cc602281b4994b1db77b359d212c5853/agent-executions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52114 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/submissions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52114 - "POST /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/validate-all HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52114 - "POST /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/rebuild HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52114 - "POST /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finalize HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52114 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52114 - "POST /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/findings/finding_6bd6905aba721742783b879563570b204a85f794/poc HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52114 - "POST /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/findings/finding_7b7166f7eaa3109ca2fa1436caef11ab95d8e030/poc HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52114 - "POST /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_5661df4d88d8554ac9322b1702bc772ec197dcb65f1aeeca9991b512f11c0ee6/validator-committees HTTP/1.1" 201 Created
+INFO:     127.0.0.1:52114 - "POST /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validator-committees/validator_committee_88e5713432cd01b0c69517d68169a7582e3645cf13753b08011e86f05c3a1ac6/finalize HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52114 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validator-committees/validator_committee_88e5713432cd01b0c69517d68169a7582e3645cf13753b08011e86f05c3a1ac6/assignments HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37384 - "GET /projects/6e9caa09-06c7-47dd-a08d-314cf85d6089 HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:37396 - "GET /projects/6e9caa09-06c7-47dd-a08d-314cf85d6089/routing/49befefe-487e-444b-b4cc-c8a469591273 HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:37396 - "GET /projects/6e9caa09-06c7-47dd-a08d-314cf85d6089 HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:37384 - "GET /projects/6e9caa09-06c7-47dd-a08d-314cf85d6089/routing/49befefe-487e-444b-b4cc-c8a469591273 HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:37384 - "GET /projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37384 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37396 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/audit-runs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37396 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/submissions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37384 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/task-reward-cycle HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:37400 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validator-reward-cycles HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37396 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37396 - "GET /projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37400 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/audit-runs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37396 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37396 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/submissions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37400 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/task-reward-cycle HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:37384 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validator-reward-cycles HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37396 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37396 - "GET /projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37396 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37384 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/audit-runs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37396 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/submissions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37400 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validator-reward-cycles HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37384 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/task-reward-cycle HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:37396 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37396 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37384 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37384 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/scope HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39262 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/task-rewards/findings/latest HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:39248 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/task-reward-budget HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:37384 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/task-rewards/operators/latest HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:37396 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/audit-runs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39234 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39248 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validator-reward-cycles HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39262 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/task-reward-cycle HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:37384 - "GET /nodes HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37400 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/submissions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37400 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/audit-runs/audit_run_cc602281b4994b1db77b359d212c5853/agent-executions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37396 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_5661df4d88d8554ac9322b1702bc772ec197dcb65f1aeeca9991b512f11c0ee6/validation-quality-assessments HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39248 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_5661df4d88d8554ac9322b1702bc772ec197dcb65f1aeeca9991b512f11c0ee6/validation-consensus HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39234 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_5661df4d88d8554ac9322b1702bc772ec197dcb65f1aeeca9991b512f11c0ee6/validation-disputes HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37400 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_5661df4d88d8554ac9322b1702bc772ec197dcb65f1aeeca9991b512f11c0ee6/validator-committees HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39262 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_5661df4d88d8554ac9322b1702bc772ec197dcb65f1aeeca9991b512f11c0ee6/attestations HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37384 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_5661df4d88d8554ac9322b1702bc772ec197dcb65f1aeeca9991b512f11c0ee6/validator-assignments HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39262 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_78804a9cdfbc12251ebe35dab86bb610cf7d91637f105c4a8a864d5bd231115c/validation-consensus HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37400 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_78804a9cdfbc12251ebe35dab86bb610cf7d91637f105c4a8a864d5bd231115c/validation-disputes HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37384 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_78804a9cdfbc12251ebe35dab86bb610cf7d91637f105c4a8a864d5bd231115c/validation-quality-assessments HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37396 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_78804a9cdfbc12251ebe35dab86bb610cf7d91637f105c4a8a864d5bd231115c/validator-committees HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39234 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_78804a9cdfbc12251ebe35dab86bb610cf7d91637f105c4a8a864d5bd231115c/attestations HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39262 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validator-committees/validator_committee_88e5713432cd01b0c69517d68169a7582e3645cf13753b08011e86f05c3a1ac6/reproductions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39248 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_78804a9cdfbc12251ebe35dab86bb610cf7d91637f105c4a8a864d5bd231115c/validator-assignments HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39248 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39262 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39262 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/scope HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37400 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/task-rewards/findings/latest HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:37384 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/task-reward-budget HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:39248 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/audit-runs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37396 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37384 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validator-reward-cycles HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37400 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/task-reward-cycle HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:39262 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/task-rewards/operators/latest HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:39248 - "GET /nodes HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39234 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/submissions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39234 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/audit-runs/audit_run_cc602281b4994b1db77b359d212c5853/agent-executions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37396 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_5661df4d88d8554ac9322b1702bc772ec197dcb65f1aeeca9991b512f11c0ee6/validation-quality-assessments HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37384 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_5661df4d88d8554ac9322b1702bc772ec197dcb65f1aeeca9991b512f11c0ee6/validation-consensus HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37400 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_5661df4d88d8554ac9322b1702bc772ec197dcb65f1aeeca9991b512f11c0ee6/validation-disputes HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39262 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_5661df4d88d8554ac9322b1702bc772ec197dcb65f1aeeca9991b512f11c0ee6/attestations HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39262 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_78804a9cdfbc12251ebe35dab86bb610cf7d91637f105c4a8a864d5bd231115c/validation-consensus HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39234 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_5661df4d88d8554ac9322b1702bc772ec197dcb65f1aeeca9991b512f11c0ee6/validator-committees HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37400 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_78804a9cdfbc12251ebe35dab86bb610cf7d91637f105c4a8a864d5bd231115c/attestations HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37396 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_78804a9cdfbc12251ebe35dab86bb610cf7d91637f105c4a8a864d5bd231115c/validator-committees HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39234 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_78804a9cdfbc12251ebe35dab86bb610cf7d91637f105c4a8a864d5bd231115c/validation-disputes HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39248 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_5661df4d88d8554ac9322b1702bc772ec197dcb65f1aeeca9991b512f11c0ee6/validator-assignments HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39262 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_78804a9cdfbc12251ebe35dab86bb610cf7d91637f105c4a8a864d5bd231115c/validation-quality-assessments HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37384 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_78804a9cdfbc12251ebe35dab86bb610cf7d91637f105c4a8a864d5bd231115c/validator-assignments HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39248 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validator-committees/validator_committee_88e5713432cd01b0c69517d68169a7582e3645cf13753b08011e86f05c3a1ac6/reproductions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34138 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34142 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34142 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/scope HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34168 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/task-reward-budget HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:34172 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/task-rewards/findings/latest HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:34138 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/audit-runs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34152 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34168 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/task-reward-cycle HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:34172 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validator-reward-cycles HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34142 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/task-rewards/operators/latest HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:34138 - "GET /nodes HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34144 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/submissions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34144 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/audit-runs/audit_run_cc602281b4994b1db77b359d212c5853/agent-executions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34152 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_5661df4d88d8554ac9322b1702bc772ec197dcb65f1aeeca9991b512f11c0ee6/validation-quality-assessments HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34168 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_5661df4d88d8554ac9322b1702bc772ec197dcb65f1aeeca9991b512f11c0ee6/validation-disputes HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34172 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_5661df4d88d8554ac9322b1702bc772ec197dcb65f1aeeca9991b512f11c0ee6/validation-consensus HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34142 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_5661df4d88d8554ac9322b1702bc772ec197dcb65f1aeeca9991b512f11c0ee6/attestations HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34144 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_5661df4d88d8554ac9322b1702bc772ec197dcb65f1aeeca9991b512f11c0ee6/validator-committees HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34144 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_78804a9cdfbc12251ebe35dab86bb610cf7d91637f105c4a8a864d5bd231115c/validation-disputes HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34142 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_78804a9cdfbc12251ebe35dab86bb610cf7d91637f105c4a8a864d5bd231115c/validation-consensus HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34138 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_5661df4d88d8554ac9322b1702bc772ec197dcb65f1aeeca9991b512f11c0ee6/validator-assignments HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34172 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_78804a9cdfbc12251ebe35dab86bb610cf7d91637f105c4a8a864d5bd231115c/attestations HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34144 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_78804a9cdfbc12251ebe35dab86bb610cf7d91637f105c4a8a864d5bd231115c/validation-quality-assessments HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34152 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_78804a9cdfbc12251ebe35dab86bb610cf7d91637f105c4a8a864d5bd231115c/validator-committees HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34168 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_78804a9cdfbc12251ebe35dab86bb610cf7d91637f105c4a8a864d5bd231115c/validator-assignments HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34144 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validator-committees/validator_committee_88e5713432cd01b0c69517d68169a7582e3645cf13753b08011e86f05c3a1ac6/reproductions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34144 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34168 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34168 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/scope HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34142 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/task-rewards/findings/latest HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:34138 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/task-reward-budget HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:34172 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34144 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/audit-runs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34168 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/task-reward-cycle HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:34142 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/task-rewards/operators/latest HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:34138 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validator-reward-cycles HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34172 - "GET /nodes HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34152 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/submissions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34152 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/audit-runs/audit_run_cc602281b4994b1db77b359d212c5853/agent-executions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34142 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_5661df4d88d8554ac9322b1702bc772ec197dcb65f1aeeca9991b512f11c0ee6/validation-consensus HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34168 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_5661df4d88d8554ac9322b1702bc772ec197dcb65f1aeeca9991b512f11c0ee6/validation-disputes HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34144 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_5661df4d88d8554ac9322b1702bc772ec197dcb65f1aeeca9991b512f11c0ee6/validation-quality-assessments HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34138 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_5661df4d88d8554ac9322b1702bc772ec197dcb65f1aeeca9991b512f11c0ee6/attestations HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34152 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_5661df4d88d8554ac9322b1702bc772ec197dcb65f1aeeca9991b512f11c0ee6/validator-committees HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34152 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_78804a9cdfbc12251ebe35dab86bb610cf7d91637f105c4a8a864d5bd231115c/validation-disputes HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34172 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_5661df4d88d8554ac9322b1702bc772ec197dcb65f1aeeca9991b512f11c0ee6/validator-assignments HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34138 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_78804a9cdfbc12251ebe35dab86bb610cf7d91637f105c4a8a864d5bd231115c/validation-consensus HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34144 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_78804a9cdfbc12251ebe35dab86bb610cf7d91637f105c4a8a864d5bd231115c/attestations HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34142 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_78804a9cdfbc12251ebe35dab86bb610cf7d91637f105c4a8a864d5bd231115c/validator-committees HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34168 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_78804a9cdfbc12251ebe35dab86bb610cf7d91637f105c4a8a864d5bd231115c/validator-assignments HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34172 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_78804a9cdfbc12251ebe35dab86bb610cf7d91637f105c4a8a864d5bd231115c/validation-quality-assessments HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34172 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validator-committees/validator_committee_88e5713432cd01b0c69517d68169a7582e3645cf13753b08011e86f05c3a1ac6/reproductions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34172 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34168 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34152 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/task-rewards/findings/latest HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:34168 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/scope HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34138 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/task-reward-budget HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:34172 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/audit-runs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34144 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34168 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/task-reward-cycle HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:34152 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/task-rewards/operators/latest HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:34138 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validator-reward-cycles HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34172 - "GET /nodes HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34142 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/submissions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34142 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/audit-runs/audit_run_cc602281b4994b1db77b359d212c5853/agent-executions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34168 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_5661df4d88d8554ac9322b1702bc772ec197dcb65f1aeeca9991b512f11c0ee6/validation-disputes HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34144 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_5661df4d88d8554ac9322b1702bc772ec197dcb65f1aeeca9991b512f11c0ee6/validation-quality-assessments HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34152 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_5661df4d88d8554ac9322b1702bc772ec197dcb65f1aeeca9991b512f11c0ee6/validation-consensus HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34138 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_5661df4d88d8554ac9322b1702bc772ec197dcb65f1aeeca9991b512f11c0ee6/attestations HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34142 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_5661df4d88d8554ac9322b1702bc772ec197dcb65f1aeeca9991b512f11c0ee6/validator-committees HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34172 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_5661df4d88d8554ac9322b1702bc772ec197dcb65f1aeeca9991b512f11c0ee6/validator-assignments HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34138 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_78804a9cdfbc12251ebe35dab86bb610cf7d91637f105c4a8a864d5bd231115c/validation-consensus HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34168 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_78804a9cdfbc12251ebe35dab86bb610cf7d91637f105c4a8a864d5bd231115c/validator-committees HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34152 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_78804a9cdfbc12251ebe35dab86bb610cf7d91637f105c4a8a864d5bd231115c/attestations HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34142 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_78804a9cdfbc12251ebe35dab86bb610cf7d91637f105c4a8a864d5bd231115c/validation-disputes HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34144 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_78804a9cdfbc12251ebe35dab86bb610cf7d91637f105c4a8a864d5bd231115c/validator-assignments HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34138 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_78804a9cdfbc12251ebe35dab86bb610cf7d91637f105c4a8a864d5bd231115c/validation-quality-assessments HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34138 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validator-committees/validator_committee_88e5713432cd01b0c69517d68169a7582e3645cf13753b08011e86f05c3a1ac6/reproductions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "POST /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validator-assignments/validator_assignment_a428a098472ea090a436bf0b1e7e0e03d94b318768134c92023058a8ea6ddb96/reproduction HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "POST /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validator-assignments/validator_assignment_a428a098472ea090a436bf0b1e7e0e03d94b318768134c92023058a8ea6ddb96/attestations HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "POST /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validator-assignments/validator_assignment_4670c2286213fbe3cd63c9b6c187443a389db9b513c0c35eef8c72ea755d29a4/reproduction HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "POST /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validator-assignments/validator_assignment_4670c2286213fbe3cd63c9b6c187443a389db9b513c0c35eef8c72ea755d29a4/attestations HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "POST /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validator-assignments/validator_assignment_71a0c9d053a807440926a3b2023da556179d1dae95a9d5fa6f916e994fd613cb/reproduction HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "POST /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validator-assignments/validator_assignment_71a0c9d053a807440926a3b2023da556179d1dae95a9d5fa6f916e994fd613cb/attestations HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "POST /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validator-assignments/validator_assignment_ca19ac1d1f33be99d25f9b3e945c61d611981368cc531b50100ff2d7801fdc6a/reproduction HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "POST /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validator-assignments/validator_assignment_ca19ac1d1f33be99d25f9b3e945c61d611981368cc531b50100ff2d7801fdc6a/attestations HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "POST /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validator-assignments/validator_assignment_743282eb34701c432001b78844d83a885fe951ff3e5864a97966cc633dc4d414/reproduction HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "POST /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validator-assignments/validator_assignment_743282eb34701c432001b78844d83a885fe951ff3e5864a97966cc633dc4d414/attestations HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "POST /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validator-assignments/validator_assignment_102598abcd0d294d81dc62f6b15d5de0098225bf7080f48aa6a6156f3bab9e5f/reproduction HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "POST /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validator-assignments/validator_assignment_102598abcd0d294d81dc62f6b15d5de0098225bf7080f48aa6a6156f3bab9e5f/attestations HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validator-committees/validator_committee_88e5713432cd01b0c69517d68169a7582e3645cf13753b08011e86f05c3a1ac6/reproduction-readiness HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_5661df4d88d8554ac9322b1702bc772ec197dcb65f1aeeca9991b512f11c0ee6/attestations HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "POST /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_5661df4d88d8554ac9322b1702bc772ec197dcb65f1aeeca9991b512f11c0ee6/validation-consensus HTTP/1.1" 201 Created
+INFO:     127.0.0.1:59140 - "POST /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validation-consensus/validation_consensus_839f332b48de3ae18779f349413b668ddc38712d394bb2426992ba1c6e11afa8/finalize HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_5661df4d88d8554ac9322b1702bc772ec197dcb65f1aeeca9991b512f11c0ee6/validation-disputes HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "POST /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validation-disputes/validation_dispute_59014e3b633726baf822479b42cc1732002e912430c68e22c6967d29f621ab5b/escalate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "POST /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validator-committees/validator_committee_7943551b4b669442d0489599ab2531a45dcf0e9c950bffb8b6cd7e5b1a2ab5aa/finalize HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validator-committees/validator_committee_7943551b4b669442d0489599ab2531a45dcf0e9c950bffb8b6cd7e5b1a2ab5aa/assignments HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34138 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34144 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "POST /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validator-assignments/validator_assignment_673da65ea118982f9caf49e89a2dd26fc26d9f457c5c2c218dbadb8d871972c7/reproduction HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "POST /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validator-assignments/validator_assignment_673da65ea118982f9caf49e89a2dd26fc26d9f457c5c2c218dbadb8d871972c7/attestations HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34144 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/scope HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34172 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/task-reward-budget HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:34168 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/task-rewards/findings/latest HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:34138 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/audit-runs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34142 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34144 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/task-rewards/operators/latest HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:34172 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/task-reward-cycle HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:34168 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validator-reward-cycles HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34138 - "GET /nodes HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34152 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/submissions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34152 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/audit-runs/audit_run_cc602281b4994b1db77b359d212c5853/agent-executions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34142 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_5661df4d88d8554ac9322b1702bc772ec197dcb65f1aeeca9991b512f11c0ee6/validation-quality-assessments HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34144 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_5661df4d88d8554ac9322b1702bc772ec197dcb65f1aeeca9991b512f11c0ee6/validation-disputes HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34172 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_5661df4d88d8554ac9322b1702bc772ec197dcb65f1aeeca9991b512f11c0ee6/validation-consensus HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34152 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_5661df4d88d8554ac9322b1702bc772ec197dcb65f1aeeca9991b512f11c0ee6/validator-committees HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34142 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_78804a9cdfbc12251ebe35dab86bb610cf7d91637f105c4a8a864d5bd231115c/validator-committees HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34152 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_78804a9cdfbc12251ebe35dab86bb610cf7d91637f105c4a8a864d5bd231115c/validation-consensus HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34168 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_5661df4d88d8554ac9322b1702bc772ec197dcb65f1aeeca9991b512f11c0ee6/attestations HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34138 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_5661df4d88d8554ac9322b1702bc772ec197dcb65f1aeeca9991b512f11c0ee6/validator-assignments HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34152 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_78804a9cdfbc12251ebe35dab86bb610cf7d91637f105c4a8a864d5bd231115c/validation-quality-assessments HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34142 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_78804a9cdfbc12251ebe35dab86bb610cf7d91637f105c4a8a864d5bd231115c/validation-disputes HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34172 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_78804a9cdfbc12251ebe35dab86bb610cf7d91637f105c4a8a864d5bd231115c/attestations HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34144 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_78804a9cdfbc12251ebe35dab86bb610cf7d91637f105c4a8a864d5bd231115c/validator-assignments HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34172 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validator-committees/validator_committee_7943551b4b669442d0489599ab2531a45dcf0e9c950bffb8b6cd7e5b1a2ab5aa/reproductions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34144 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validator-committees/validator_committee_88e5713432cd01b0c69517d68169a7582e3645cf13753b08011e86f05c3a1ac6/reproductions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "POST /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validator-assignments/validator_assignment_6bf6f854b198012d86b6f300edc69cd60b58d8f5dbe39f6b87add107fbd3a582/reproduction HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "POST /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validator-assignments/validator_assignment_6bf6f854b198012d86b6f300edc69cd60b58d8f5dbe39f6b87add107fbd3a582/attestations HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "POST /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validator-assignments/validator_assignment_d138e743afab90104836129fcb4ec9c7bbf37b8e88c72aabd0c085021835d7cf/reproduction HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "POST /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validator-assignments/validator_assignment_d138e743afab90104836129fcb4ec9c7bbf37b8e88c72aabd0c085021835d7cf/attestations HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "POST /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validator-assignments/validator_assignment_2786d1e593208784633217b1f5bc866264339d1cd64b03c92bd2b1328d5a0586/reproduction HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "POST /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validator-assignments/validator_assignment_2786d1e593208784633217b1f5bc866264339d1cd64b03c92bd2b1328d5a0586/attestations HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "POST /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_5661df4d88d8554ac9322b1702bc772ec197dcb65f1aeeca9991b512f11c0ee6/validation-consensus HTTP/1.1" 201 Created
+INFO:     127.0.0.1:59140 - "POST /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validation-consensus/validation_consensus_c558e32a0ad07f8a4c11b4492ccf2209f2c6cbbdd5f3de522a1a6c0ec6e8dbed/finalize HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "POST /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validation-consensus/validation_consensus_c558e32a0ad07f8a4c11b4492ccf2209f2c6cbbdd5f3de522a1a6c0ec6e8dbed/validator-performance/evaluate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "POST /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_78804a9cdfbc12251ebe35dab86bb610cf7d91637f105c4a8a864d5bd231115c/validator-committees HTTP/1.1" 201 Created
+INFO:     127.0.0.1:59140 - "POST /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validator-committees/validator_committee_342e2decec10be6b2f9da341db5c7922ce43307b59ed04b43aa4af6f9d9985b6/finalize HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validator-committees/validator_committee_342e2decec10be6b2f9da341db5c7922ce43307b59ed04b43aa4af6f9d9985b6/assignments HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "POST /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validator-assignments/validator_assignment_241ea7ea8c27bb6fe13c2ae471809a4b69df1962dcf5f20649bc487133784001/reproduction HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "POST /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validator-assignments/validator_assignment_241ea7ea8c27bb6fe13c2ae471809a4b69df1962dcf5f20649bc487133784001/attestations HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "POST /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validator-assignments/validator_assignment_910c74b24c0cc4b6740f61e573c063ce1b686e06495b8bc94aef05bb0ce51ccc/reproduction HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "POST /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validator-assignments/validator_assignment_910c74b24c0cc4b6740f61e573c063ce1b686e06495b8bc94aef05bb0ce51ccc/attestations HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "POST /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validator-assignments/validator_assignment_2e1215706f4eb26308261f5c37fd8307d5786f76848d8672af5843f8f074c565/reproduction HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "POST /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validator-assignments/validator_assignment_2e1215706f4eb26308261f5c37fd8307d5786f76848d8672af5843f8f074c565/attestations HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "POST /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validator-assignments/validator_assignment_757528285554507b3f4d9cd2c210799857251913bf30f2e028604b3536e88005/reproduction HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "POST /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validator-assignments/validator_assignment_757528285554507b3f4d9cd2c210799857251913bf30f2e028604b3536e88005/attestations HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "POST /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validator-assignments/validator_assignment_b1f90b31c6661640e58d6fbf75b1b1f87a8a84fb3aad74b4bffd8d8da481ddfa/reproduction HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "POST /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validator-assignments/validator_assignment_b1f90b31c6661640e58d6fbf75b1b1f87a8a84fb3aad74b4bffd8d8da481ddfa/attestations HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "POST /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validator-assignments/validator_assignment_6c27eecefc3231007451153b8f39bc9a79ffda570a8050a32fc3bf63b1fdddcd/reproduction HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "POST /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validator-assignments/validator_assignment_6c27eecefc3231007451153b8f39bc9a79ffda570a8050a32fc3bf63b1fdddcd/attestations HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "POST /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/finding-clusters/finding_cluster_78804a9cdfbc12251ebe35dab86bb610cf7d91637f105c4a8a864d5bd231115c/validation-consensus HTTP/1.1" 201 Created
+INFO:     127.0.0.1:59140 - "POST /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validation-consensus/validation_consensus_1a8b5a2b978130c2fefb311da27ba3afc20dfef4cfffc1ea733fe389a3a5f090/finalize HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "POST /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validation-consensus/validation_consensus_1a8b5a2b978130c2fefb311da27ba3afc20dfef4cfffc1ea733fe389a3a5f090/validator-performance/evaluate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "POST /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/quality-assessments/rebuild HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "POST /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/task-reward-budgets HTTP/1.1" 201 Created
+INFO:     127.0.0.1:59140 - "POST /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/task-reward-budgets/task_reward_budget_deaa492ad06fde97154506c63da4af66/finalize HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "POST /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/task-reward-cycles HTTP/1.1" 201 Created
+INFO:     127.0.0.1:59140 - "POST /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/task-reward-cycles/week7_task_reward_cycle_edbe00ed5e73e30196533fba9376a55b/calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "POST /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/task-reward-cycles/week7_task_reward_cycle_edbe00ed5e73e30196533fba9376a55b/finalize HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/task-reward-cycles/week7_task_reward_cycle_edbe00ed5e73e30196533fba9376a55b/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "POST /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validator-reward-cycles HTTP/1.1" 201 Created
+INFO:     127.0.0.1:59140 - "POST /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validator-reward-cycles/validator_reward_cycle_a152dc3d73e16532b8be83d88866a5b9/calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "POST /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validator-reward-cycles/validator_reward_cycle_a152dc3d73e16532b8be83d88866a5b9/finalize HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validator-reward-cycles/validator_reward_cycle_a152dc3d73e16532b8be83d88866a5b9/allocations HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validator-reward-cycles/validator_reward_cycle_a152dc3d73e16532b8be83d88866a5b9/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validator-reward-cycles/validator_reward_cycle_a152dc3d73e16532b8be83d88866a5b9/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "GET /nodes/176e9d08-96b1-4381-a83a-ce0c95429e4b/category-scores HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "GET /nodes/521d144b-5e3d-43cf-9a84-481365f5a192/category-scores HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "GET /nodes/5ac571ca-8245-41e2-aa2b-0f2b98c9f1fe/category-scores HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "GET /nodes/36657ae9-4111-4eb0-a420-b24f5195af21/category-scores HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "GET /nodes/8433bed6-bbfb-42d0-a1d8-d14bf9256387/category-scores HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "GET /nodes/d8253257-0781-4036-8260-740b049f526f/category-scores HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "GET /nodes/e27510b1-ce19-486a-ad83-7f1e1fa36339/category-scores HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "GET /nodes/13bbbb03-c821-4df2-8017-41aed754c8f0/category-scores HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "POST /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/reports/final HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/reports/final HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59140 - "GET /projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/reports/final/markdown HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [100748]

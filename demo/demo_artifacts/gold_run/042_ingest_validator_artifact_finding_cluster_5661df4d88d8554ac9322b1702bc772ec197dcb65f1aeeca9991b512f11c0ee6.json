@@ -1,0 +1,16 @@
+{
+  "index": 42,
+  "name": "ingest_validator_artifact_finding_cluster_5661df4d88d8554ac9322b1702bc772ec197dcb65f1aeeca9991b512f11c0ee6",
+  "method": "POST",
+  "path": "/projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/findings/finding_6bd6905aba721742783b879563570b204a85f794/poc",
+  "status_code": 200,
+  "response": {
+    "project_id": "962a8d18-d239-4a2d-90d8-b98ed34dafd3",
+    "finding_id": "finding_6bd6905aba721742783b879563570b204a85f794",
+    "poc_file": "test/ProofGuardAccessControl.t.sol",
+    "test_name": "testUnauthorizedSetAdmin",
+    "stored_path": "repo/test/ProofGuardAccessControl.t.sol",
+    "status": "generated",
+    "message": "PoC stored for reproduction."
+  }
+}

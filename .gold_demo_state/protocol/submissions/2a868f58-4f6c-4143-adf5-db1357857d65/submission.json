@@ -1,0 +1,25 @@
+{
+  "submission_id": "2a868f58-4f6c-4143-adf5-db1357857d65",
+  "project_id": "proofguard_gold_demo_history_v1",
+  "finding_id": "demo_history_reentrancy_3_3",
+  "node_id": "8433bed6-bbfb-42d0-a1d8-d14bf9256387",
+  "node_type": "agent",
+  "agent_name": "reentrancy_demo_calibration_agent",
+  "agent_version": "gold_demo_bootstrap_v1",
+  "category": "reentrancy",
+  "finding_hash": "323f9e297e00b30ef2df8e007652a5aa0cbaab50ba14236a50142fbe029421e1",
+  "status": "accepted",
+  "reproduction_id": "62992637-8c8f-4f53-ba4a-a1980e955f26",
+  "validation_id": "b932b460-3522-4934-856b-ab25cb596e39",
+  "routing_id": null,
+  "routing_assignment_id": null,
+  "reward_status": "pending",
+  "metadata": {
+    "fixture_version": "gold_demo_bootstrap_v1"
+  },
+  "submitted_at": "2026-08-25T00:27:04.388916Z",
+  "created_at": "2026-08-25T00:27:04.388916Z",
+  "updated_at": "2026-08-25T00:27:04.391706Z",
+  "status_updated_at": "2026-08-25T00:27:04.391679Z",
+  "status_reason": "Demo historical validation outcome finalized."
+}

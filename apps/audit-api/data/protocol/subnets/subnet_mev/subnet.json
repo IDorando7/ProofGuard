@@ -1,0 +1,16 @@
+{
+  "category": "mev",
+  "created_at": "2026-08-24T19:52:01.418280Z",
+  "description": null,
+  "exploration_ratio": 0.2,
+  "maximum_active_nodes": 20,
+  "minimum_category_score": 0.6,
+  "minimum_finalized_submissions": 5,
+  "name": "Mev Subnet",
+  "registry_version": "subnet_registry_v0",
+  "status": "active",
+  "status_reason": "Subnet registered.",
+  "status_updated_at": "2026-08-24T19:52:01.418280Z",
+  "subnet_id": "subnet_mev",
+  "updated_at": "2026-08-24T19:52:01.418280Z"
+}

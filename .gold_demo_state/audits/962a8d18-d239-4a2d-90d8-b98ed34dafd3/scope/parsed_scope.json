@@ -1,0 +1,18 @@
+{
+  "project_name": "proofguard-e2e-demo",
+  "language": "solidity",
+  "framework": "foundry",
+  "chain": null,
+  "commit_hash": null,
+  "contracts_in_scope": [
+    "src/ProofGuardDemoVault.sol"
+  ],
+  "contracts_out_of_scope": [],
+  "assets_at_risk": [],
+  "attack_categories": [
+    "access_control",
+    "reentrancy"
+  ],
+  "known_issues": [],
+  "forbidden_actions": []
+}

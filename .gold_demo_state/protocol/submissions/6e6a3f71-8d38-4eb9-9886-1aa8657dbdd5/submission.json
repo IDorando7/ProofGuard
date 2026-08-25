@@ -1,0 +1,25 @@
+{
+  "submission_id": "6e6a3f71-8d38-4eb9-9886-1aa8657dbdd5",
+  "project_id": "proofguard_gold_demo_history_v1",
+  "finding_id": "demo_history_access_control_1_6",
+  "node_id": "176e9d08-96b1-4381-a83a-ce0c95429e4b",
+  "node_type": "agent",
+  "agent_name": "access_control_demo_calibration_agent",
+  "agent_version": "gold_demo_bootstrap_v1",
+  "category": "access_control",
+  "finding_hash": "ad66cc12f75bea46819a48103ff9dc94cd4839f8a7bd772d3e70eb8173e4f8d7",
+  "status": "accepted",
+  "reproduction_id": "141798f5-0abb-4938-bd7c-dc6167e0d327",
+  "validation_id": "64f0240c-1d78-4f91-a7b0-1cba8f799250",
+  "routing_id": null,
+  "routing_assignment_id": null,
+  "reward_status": "pending",
+  "metadata": {
+    "fixture_version": "gold_demo_bootstrap_v1"
+  },
+  "submitted_at": "2026-08-25T00:27:04.039211Z",
+  "created_at": "2026-08-25T00:27:04.039211Z",
+  "updated_at": "2026-08-25T00:27:04.041039Z",
+  "status_updated_at": "2026-08-25T00:27:04.041017Z",
+  "status_reason": "Demo historical validation outcome finalized."
+}

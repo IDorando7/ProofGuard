@@ -1,0 +1,23 @@
+{
+  "artifact_refs": [],
+  "audit_event_id": "audit_event_0648eaca21d7111da7e734b64d830a0997d8b43dba10ae927b090a09e2d9f441",
+  "audit_run_id": "audit_run_cc602281b4994b1db77b359d212c5853",
+  "category": "access_control",
+  "created_at": "2026-08-25T00:27:06.628325Z",
+  "entity_id": "agent_execution_6c5f93a341132057fed7d33b09a76a454262b8dd",
+  "entity_type": "agent_execution",
+  "event_level": "INFO",
+  "event_type": "AGENT_EXECUTION_COMPLETED",
+  "event_version": "audit_event_v1",
+  "message": "Local node agent execution completed.",
+  "metadata": {
+    "duration_ms": 16,
+    "execution_id": "agent_execution_6c5f93a341132057fed7d33b09a76a454262b8dd",
+    "finding_count": 1,
+    "submission_count": 1
+  },
+  "node_id": "176e9d08-96b1-4381-a83a-ce0c95429e4b",
+  "operator_id": "demo-agent-access-op-01",
+  "sequence_number": 19,
+  "stage": "EXECUTING_AGENTS"
+}

@@ -1,0 +1,24 @@
+{
+  "artifact_refs": [],
+  "audit_event_id": "audit_event_5ab8d4a0c19c5ff60d6c57ac1a73aef3b7ebcd0d170a49955b15a8ba82cc4992",
+  "audit_run_id": "audit_run_cc602281b4994b1db77b359d212c5853",
+  "category": "access_control",
+  "created_at": "2026-08-25T00:27:06.649868Z",
+  "entity_id": "b4d8bbb4-bebe-411b-8693-0fddfe389e3e",
+  "entity_type": "submission",
+  "event_level": "INFO",
+  "event_type": "SUBMISSION_CREATED",
+  "event_version": "audit_event_v1",
+  "message": "Protocol submission is available for an agent finding.",
+  "metadata": {
+    "execution_id": "agent_execution_347262a42a82e6bb405f6f7daf1e5cba8cd8f387",
+    "finding_hash": "ed44d9d90507eb22d3ef4cf46604c36b49eba16bcdca95838e4289b2c0881e45",
+    "finding_id": "finding_501d71ccf9b08e7b76a872a9fcec4be5584b10b5",
+    "submission_id": "b4d8bbb4-bebe-411b-8693-0fddfe389e3e",
+    "submission_status": "submitted"
+  },
+  "node_id": "521d144b-5e3d-43cf-9a84-481365f5a192",
+  "operator_id": "demo-agent-access-op-02",
+  "sequence_number": 23,
+  "stage": "EXECUTING_AGENTS"
+}

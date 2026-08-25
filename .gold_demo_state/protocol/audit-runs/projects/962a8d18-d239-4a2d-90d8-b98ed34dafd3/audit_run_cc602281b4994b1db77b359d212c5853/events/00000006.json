@@ -1,0 +1,31 @@
+{
+  "artifact_refs": [],
+  "audit_event_id": "audit_event_0fc9219e231fdb86d68fcaee745cc0f3bbf7b3549ab3bb986d24cb765f4fdff8",
+  "audit_run_id": "audit_run_cc602281b4994b1db77b359d212c5853",
+  "category": "access_control",
+  "created_at": "2026-08-25T00:27:06.570999Z",
+  "entity_id": "assignment_7dfa8e6a5f34934cf28cbcbcbc23da9c",
+  "entity_type": "routing_assignment",
+  "event_level": "INFO",
+  "event_type": "ROUTING_NODE_SELECTED",
+  "event_version": "audit_event_v1",
+  "message": "Routing assignment selected a node.",
+  "metadata": {
+    "assignment_id": "assignment_7dfa8e6a5f34934cf28cbcbcbc23da9c",
+    "assignment_mode": "production",
+    "category_score": 0.7784,
+    "membership": "active",
+    "position": 2,
+    "routing_id": "b5a7816c-bb38-4015-9109-901c667db96d",
+    "selection_reasons": [
+      "Selected as active member with category score 0.778400.",
+      "Ranked deterministically by membership tier, category score, confidence, and finalized history.",
+      "Node and subnet are active and source snapshots are consistent."
+    ],
+    "selection_type": "ranked"
+  },
+  "node_id": "521d144b-5e3d-43cf-9a84-481365f5a192",
+  "operator_id": "demo-agent-access-op-02",
+  "sequence_number": 6,
+  "stage": "ROUTING"
+}

@@ -112,6 +112,29 @@ def test_upload_poc_stores_file_and_returns_status(client):
     assert not Path(payload["stored_path"]).is_absolute()
 
 
+def test_upload_poc_preserves_validator_test_name_without_claiming_reproduction(client):
+    project_id = _create_project(client).json()["project_id"]
+
+    response = client.post(
+        f"/projects/{project_id}/findings/finding-1/poc",
+        json={
+            "poc_filename": "PoC_AccessControl.t.sol",
+            "poc_content": "contract DummyTest {}",
+            "test_name": "testUnauthorizedAccess",
+        },
+    )
+
+    assert response.status_code == 200
+    assert response.json()["status"] == "generated"
+    assert response.json()["test_name"] == "testUnauthorizedAccess"
+    stored = client.get(
+        f"/projects/{project_id}/findings/finding-1/reproduction"
+    )
+    assert stored.status_code == 200
+    assert stored.json()["status"] == "generated"
+    assert stored.json()["test_name"] == "testUnauthorizedAccess"
+
+
 def test_uploading_invalid_poc_filename_returns_400(client):
     project_id = _create_project(client).json()["project_id"]
 
@@ -355,4 +378,3 @@ def _run_completed_reproduction(client, monkeypatch) -> str:
     )
     assert response.status_code == 200
     return project_id
-

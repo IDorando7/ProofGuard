@@ -1,0 +1,16 @@
+{
+  "assigned_at": "2026-08-25T00:27:10.117022Z",
+  "category": "access_control",
+  "finding_cluster_id": "finding_cluster_5661df4d88d8554ac9322b1702bc772ec197dcb65f1aeeca9991b512f11c0ee6",
+  "operator_id": "demo-validator-op-03",
+  "project_id": "962a8d18-d239-4a2d-90d8-b98ed34dafd3",
+  "role": "authoritative",
+  "routing_id": "b5a7816c-bb38-4015-9109-901c667db96d",
+  "source_fingerprint": "b3a765ca3838a82f7af28d9bb0c593a0a02b980861f2028424d1223ddc30cd0f",
+  "usage_event_id": "validator_usage_validator_assignment_743282eb34701c432001b78844d83a885fe951ff3e5864a97966cc633dc4d414",
+  "usage_version": "validator_assignment_usage_v1",
+  "validation_round": 1,
+  "validator_assignment_id": "validator_assignment_743282eb34701c432001b78844d83a885fe951ff3e5864a97966cc633dc4d414",
+  "validator_committee_id": "validator_committee_88e5713432cd01b0c69517d68169a7582e3645cf13753b08011e86f05c3a1ac6",
+  "validator_node_id": "f87f271f-04c0-4197-9f22-d7112e57297b"
+}

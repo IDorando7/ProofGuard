@@ -1,0 +1,36 @@
+{
+  "project_id": "962a8d18-d239-4a2d-90d8-b98ed34dafd3",
+  "finding_id": "finding_36a1220a1427cb5a5b154b599aee3f1bde4fb06f",
+  "status": "needs_review",
+  "confidence": 0.4,
+  "reason": "Finding has no reproduction result yet.",
+  "evidence": {
+    "has_finding": true,
+    "has_reproduction": false,
+    "reproduction_status": null,
+    "has_poc_file": false,
+    "has_stdout": false,
+    "has_stderr": false,
+    "in_scope": true,
+    "is_duplicate": false,
+    "duplicate_of": null,
+    "duplicate_kind": null,
+    "is_valid_duplicate": null,
+    "canonical_finding_id": null,
+    "original_severity": "High",
+    "normalized_severity": "High",
+    "notes": [
+      "Scope validation only checks declared scope constraints.",
+      "It does not validate exploit correctness.",
+      "Deduplication v0 uses deterministic field similarity.",
+      "This does not prove semantic equivalence.",
+      "Severity Normalizer v0 uses deterministic heuristics.",
+      "This does not replace human security review.",
+      "No reproduction result was found for this finding."
+    ]
+  },
+  "validator_name": "validator_pipeline_v0",
+  "validation_id": "62744fbe-1f71-425c-a7fb-d87ff0ba0147",
+  "created_at": "2026-08-25T00:27:08.572422Z",
+  "updated_at": "2026-08-25T00:27:08.572911Z"
+}

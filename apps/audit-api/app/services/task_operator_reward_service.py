@@ -11,7 +11,10 @@ from typing import Any
 from pydantic import ValidationError
 
 from app.core.config import get_settings
-from app.schemas.finding_cluster import FindingClusterStatus
+from app.schemas.finding_cluster import (
+    FindingClusterStatus,
+    is_finding_cluster_reward_eligible,
+)
 from app.schemas.report_quality import (
     ReportQualityAssessmentStatus,
 )
@@ -184,12 +187,13 @@ def calculate_task_operator_rewards(
             raise TaskOperatorRewardNotFoundError("Day 4 FindingCluster is missing")
         if (
             cluster.status != FindingClusterStatus.FINALIZED
+            or not is_finding_cluster_reward_eligible(cluster)
             or cluster.source_fingerprint
             != day4_allocation.cluster_source_fingerprint
             or cluster.category != day4_allocation.category
         ):
             raise TaskOperatorRewardStateError(
-                "FindingCluster changed after the Day 4 economic snapshot"
+                "FindingCluster validation or membership changed after the Day 4 economic snapshot"
             )
         reports: list[EligibleReportRewardInput] = []
         exclusions: list[ReportRewardExclusion] = []

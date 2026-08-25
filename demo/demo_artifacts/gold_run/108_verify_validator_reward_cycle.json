@@ -1,0 +1,22 @@
+{
+  "index": 108,
+  "name": "verify_validator_reward_cycle",
+  "method": "GET",
+  "path": "/projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/routing/b5a7816c-bb38-4015-9109-901c667db96d/validator-reward-cycles/validator_reward_cycle_a152dc3d73e16532b8be83d88866a5b9/verify",
+  "status_code": 200,
+  "response": {
+    "reward_cycle_id": "validator_reward_cycle_a152dc3d73e16532b8be83d88866a5b9",
+    "verification_status": "clean_finalized",
+    "ok": true,
+    "source_fingerprint_match": true,
+    "calculation_fingerprint_match": true,
+    "accounting_conserved": true,
+    "work_snapshot_closed": true,
+    "event_set_complete": true,
+    "pool_consumption_consistent": true,
+    "safe_retry_finalize": false,
+    "expected_event_count": 14,
+    "stored_event_count": 14,
+    "errors": []
+  }
+}

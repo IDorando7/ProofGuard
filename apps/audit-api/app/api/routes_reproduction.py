@@ -57,6 +57,7 @@ def upload_poc(
             update={
                 "status": ReproductionStatus.GENERATED,
                 "poc_file": poc_file,
+                "test_name": request.test_name,
                 "safety_notes": [],
                 "error_message": None,
             }
@@ -68,6 +69,7 @@ def upload_poc(
         project_id=project_id,
         finding_id=finding_id,
         poc_file=poc_file,
+        test_name=request.test_name,
         stored_path=f"repo/{poc_file}",
         status=ReproductionStatus.GENERATED.value,
         message="PoC stored for reproduction.",

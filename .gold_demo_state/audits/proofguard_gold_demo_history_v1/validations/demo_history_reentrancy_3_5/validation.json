@@ -1,0 +1,30 @@
+{
+  "project_id": "proofguard_gold_demo_history_v1",
+  "finding_id": "demo_history_reentrancy_3_5",
+  "status": "accepted",
+  "confidence": 0.95,
+  "reason": "Deterministic Gold Demo historical calibration outcome.",
+  "evidence": {
+    "has_finding": true,
+    "has_reproduction": true,
+    "reproduction_status": "reproduced",
+    "has_poc_file": false,
+    "has_stdout": true,
+    "has_stderr": false,
+    "in_scope": true,
+    "is_duplicate": false,
+    "duplicate_of": null,
+    "duplicate_kind": null,
+    "is_valid_duplicate": null,
+    "canonical_finding_id": null,
+    "original_severity": "Informational",
+    "normalized_severity": "Informational",
+    "notes": [
+      "Application-supported synthetic history fixture."
+    ]
+  },
+  "validator_name": "proofguard_demo_calibration_validator",
+  "validation_id": "926c288a-0c7a-46f6-87ad-c70aa6395d6e",
+  "created_at": "2026-08-25T00:27:04.422157Z",
+  "updated_at": "2026-08-25T00:27:04.422157Z"
+}

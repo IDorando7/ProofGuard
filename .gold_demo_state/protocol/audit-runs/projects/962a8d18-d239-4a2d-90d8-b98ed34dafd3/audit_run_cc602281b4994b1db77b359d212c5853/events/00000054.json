@@ -1,0 +1,23 @@
+{
+  "artifact_refs": [],
+  "audit_event_id": "audit_event_02f1559378d63538d4e814cf4d4fabb0a4aecd1502ff661040ffc201abd76108",
+  "audit_run_id": "audit_run_cc602281b4994b1db77b359d212c5853",
+  "category": "reentrancy",
+  "created_at": "2026-08-25T00:27:06.821221Z",
+  "entity_id": "agent_execution_8e61fb47e584751651b63b64b19533db6dddc899",
+  "entity_type": "agent_execution",
+  "event_level": "INFO",
+  "event_type": "AGENT_EXECUTION_COMPLETED",
+  "event_version": "audit_event_v1",
+  "message": "Local node agent execution completed.",
+  "metadata": {
+    "duration_ms": 17,
+    "execution_id": "agent_execution_8e61fb47e584751651b63b64b19533db6dddc899",
+    "finding_count": 1,
+    "submission_count": 1
+  },
+  "node_id": "13bbbb03-c821-4df2-8017-41aed754c8f0",
+  "operator_id": "demo-agent-reentrancy-op-04",
+  "sequence_number": 54,
+  "stage": "EXECUTING_AGENTS"
+}

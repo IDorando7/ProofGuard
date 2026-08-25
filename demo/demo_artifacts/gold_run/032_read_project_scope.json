@@ -1,0 +1,25 @@
+{
+  "index": 32,
+  "name": "read_project_scope",
+  "method": "GET",
+  "path": "/projects/962a8d18-d239-4a2d-90d8-b98ed34dafd3/scope",
+  "status_code": 200,
+  "response": {
+    "project_name": "proofguard-e2e-demo",
+    "language": "solidity",
+    "framework": "foundry",
+    "chain": null,
+    "commit_hash": null,
+    "contracts_in_scope": [
+      "src/ProofGuardDemoVault.sol"
+    ],
+    "contracts_out_of_scope": [],
+    "assets_at_risk": [],
+    "attack_categories": [
+      "access_control",
+      "reentrancy"
+    ],
+    "known_issues": [],
+    "forbidden_actions": []
+  }
+}
